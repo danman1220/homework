@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2016.9.28)  28 SEP 2016 17:46
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=latex 2016.9.28)  28 SEP 2016 18:53
 entering extended mode
  %&-line parsing enabled.
 **AC_Circuits_v2.tex
@@ -103,9 +103,6 @@ Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
 ))
-\c@problem=\count99
-\c@solution=\count100
-
 (./AC_Circuits_v2.aux)
 \openout1 = `AC_Circuits_v2.aux'.
 
@@ -129,34 +126,50 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 14.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-)
-Overfull \hbox (0.49088pt too wide) in paragraph at lines 16--19
-\OT1/cmr/bx/n/12 Problem 1. \OT1/cmr/m/it/12 1.a Con-sider an RLC cir-cuit with
- source volt-age $\OML/cmm/m/it/12 V[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 V[]si
-n\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 !t\OT1/cmr/m/n/12 )$\OT1/cmr/m/it/12 .
- []
+) [1
 
-[1
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./AC_Circuits_v2.aux) ) 
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.90 \\
+       
+? 
+
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.91 \begin
+           {problem}[1.d]
+? 
+[2] (./AC_Circuits_v2.aux) ) 
 Here is how much of TeX's memory you used:
- 1203 strings out of 495062
- 13301 string characters out of 1182644
- 59985 words of memory out of 3000000
- 4415 multiletter control sequences out of 15000+50000
+ 1195 strings out of 495062
+ 13221 string characters out of 1182644
+ 64985 words of memory out of 3000000
+ 4407 multiletter control sequences out of 15000+50000
  11837 words of font info for 46 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 27i,6n,24p,210b,190s stack positions out of 5000i,500n,10000p,200000b,50000s
-</
-usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/t
-exmf-texlive/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texliv
-e/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts/type
-1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
-fonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr
-8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on AC_Circuits_v2.pdf (1 page, 71495 bytes).
+ 27i,12n,24p,218b,193s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type1/public/amsfon
+ts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmex1
+0.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr
+/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf
+-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fon
+ts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/pub
+lic/amsfonts/cm/cmr6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
+cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on AC_Circuits_v2.pdf (2 pages, 108457 bytes).
 PDF statistics:
- 34 PDF objects out of 1000 (max. 8388607)
+ 49 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -2,10 +2,10 @@
 %\usepackage[margin=lin]{geometry}
 \usepackage{amsmath,amsthm,amssymb,amsfonts}
 
-\newtheorem{problem}{Problem}
+\newtheorem*{problem}{Problem}
 
 \theoremstyle{definition}
-\newtheorem{solution}{Solution}
+\newtheorem*{solution}{Solution}
 
 \begin{document}
 
@@ -13,9 +13,10 @@
 \author{Daniel Halmrast}
 \maketitle
 
+%--PROBLEM 1--%
 \begin{problem}[1.a]
-Consider an RLC circuit with source voltage $V_s = V_0 sin(\omega t)$.
-Determine the current $I = I_0 sin(\omega t + \phi)$.
+Consider an RLC circuit with source voltage $V_s = V_0 \sin(\omega t)$.
+Determine the current $I = I_0 \sin(\omega t + \phi)$.
 \end{problem}
 
 \begin{solution}[1.a]
@@ -23,7 +24,79 @@ Our defining differential equation is
 \[
 	V_S = \frac{1}{C}Q(t) + R\frac{dQ}{dt} + L\frac{d^2Q}{dt^2}
 \]
+Or, in more familiar terms of $I$,
+\[
+	V_S = \frac{1}{C}\int_0^t Idt + RI + L\frac{dI}{dt}
+\]
+
+Substituting $I = I_0 \sin(\omega t + \phi)$ and $V_s = V_0 \sin(\omega t)$ we get
+\[
+\begin{aligned}
+	V_0 \sin(\omega t) 
+	& = \frac{1}{C}\int_0^t I_0 \sin(\omega t + \phi)dt + R I_0 \sin(\omega t + \phi)+ L\frac{d}{dt}I_0 \sin(\omega t + \phi)\\
+	& = I_0 \Big[ \frac{-1}{C\omega}\cos(\omega t + \phi) + R \sin(\omega t + \phi) + L\omega \cos(\omega t + \phi)\Big]
+\end{aligned}
+\]
+Using sum of angles identites, we split the RHS into $\sin(\omega t)$ and $\cos(\omega t)$ parts.
+
+\[
+\begin{aligned}
+	V_0 \sin(\omega t) 
+	& = \Big[ I_0R\cos(\phi) + \big(\frac{I_0}{C\omega}-I_0L\omega\big)\sin(\phi) \Big]\sin(\omega t)\\
+	& + \Big[ I_0R\sin(\phi) + \big(I_0L\omega-\frac{I_0}{C\omega}\big)\cos(\phi) \Big]\cos(\omega t)
+\end{aligned}
+\]
+
+Equating the coefficients yields two equations.
+\[
+\begin{aligned}
+V_0 & = I_0R\cos(\phi) + \big(\frac{I_0}{C\omega}-I_0L\omega\big)\sin(\phi)\\
+0   & = I_0R\sin(\phi) + \big(I_0L\omega-\frac{I_0}{C\omega}\big)\cos(\phi)
+\end{aligned}
+\]
+
+The second equation simplifies to
+\[
+R\sin(\phi) = \big(\frac{1}{C\omega}-L\omega\big)\cos(\phi)\\
+\]
+\begin{equation}
+\boxed{\tan(\phi) = \frac{\frac{1}{C\omega}-L\omega}{R}}
+\end{equation}
+This immediately yields the following useful identities
+\begin{equation}
+\sin(\phi) = \frac{\frac{1}{C\omega}-L\omega}{\sqrt{R^2 + (\frac{1}{C\omega}-L\omega)^2}}
+\end{equation}
+
+\begin{equation}
+\cos(\phi) = \frac{R}{\sqrt{R^2 + (\frac{1}{C\omega}-L\omega)^2}}
+\end{equation}
+
+Going back to the first coefficient equality, and using results 2 and 3, we see that
+\[
+\begin{aligned}
+V_0 & = I_0R\cos(\phi) + \big(\frac{I_0}{C\omega}-I_0L\omega\big)\sin(\phi)\\
+    & = I_0 \Big[ R\frac{R}{\sqrt{R^2 + (\frac{1}{C\omega}-L\omega)^2}} + \big(\frac{I_0}{C\omega}-I_0L\omega\big)\frac{\frac{1}{C\omega}-L\omega}{\sqrt{R^2 + (\frac{1}{C\omega}-L\omega)^2}}\Big]\\
+    & = I_0 \Big[\frac{R^2 + \big(\frac{1}{C\omega}-L\omega\big)^2}{\sqrt{R^2 + (\frac{1}{C\omega}-L\omega)^2}}\Big]\\
+\\
+    & = I_0 \sqrt{R^2 + (\frac{1}{C\omega}-L\omega)^2}
+\end{aligned}
+\]
+Therefore
+\begin{equation}
+\boxed{I_0 = \frac{V_0}{(R^2 + (\frac{1}{C\omega}-L\omega)^2)^{\frac{1}{2}}}}
+\end{equation}
+
 \end{solution}
 
+%--PROBLEM 2--%
+\begin{problem}[1.d]
+Solve for the voltage across the capacitor, using $V_C = \frac{Q(t)}{C}$
+\end{problem}
+
+\begin{solution}[1.d]
+
+
+
+\end{solution}
 \end{document}
 
