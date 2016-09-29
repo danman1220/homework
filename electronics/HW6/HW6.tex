@@ -1,0 +1,120 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{graphicx}
+
+\graphicspath{ {images/} }
+
+\newtheorem*{problem}{Problem}
+
+\theoremstyle{definition}
+\newtheorem*{solution}{Solution}
+
+\begin{document}
+
+\title{Electronics Homework 6}
+\author{Daniel Halmrast}
+\maketitle
+
+%--PROBLEM 1--%
+\begin{problem}[2.9]
+A $1H$ inductor carries a current of $500mA$. The wire breaks, and in $10^{-3}s$, the current goes to zero. What happens? 
+\end{problem}[2.9]
+
+\begin{solution}[2.9]
+
+Since $V_L = L\frac{dI}{dt}$, and $\frac{dI}{dt} \approx \frac{\Delta I}{\Delta t}$
+\[
+\begin{aligned}
+\frac{dI}{dt} & \approx \frac{500mA}{10^{-3}s}\\
+V_L & \approx 1H \frac{500mA}{10^{-3}s}
+V_L & \approx 50V
+\end{aligned}
+\]
+So, once the wire breaks, there will be a voltage difference across the inductor of $50V$.
+\end{solution}
+
+
+%--PROBLEM 2--%
+\begin{problem}[2.10]
+Calculate the impedance for a RC circuit in series and in parallel.
+\end{problem}
+
+\begin{solution}[2.10]
+In series, the impedances add together and we get
+\[
+\begin{aligned}
+Z_{tot} & = Z_R + Z_C\\
+        & = R + \frac{-j}{C\omega}\\
+	& = R - \frac{1}{C\omega}j\\
+	& = \sqrt{R^2+(\frac{1}{Cw})^2}e^{\arctan(\frac{1}{RC\omega})}
+\end{aligned}
+\]
+
+In parallel, the impedances follow the parallel law
+\[
+\begin{aligned}
+Z_{tot} & = \frac{Z_RZ_C}{Z_R+Z_C}\\
+        & = \frac{R\frac{-j}{C\omega}}{R + \frac{-j}{C\omega}}\\
+	& = \frac{R\frac{-j}{C\omega}}{\sqrt{R^2+(\frac{1}{Cw})^2}e^{\arctan(\frac{1}{RC\omega})j}}\\
+	& = \tfrac{\frac{R}{C\omega}}{\sqrt{R^2+(\frac{1}{Cw})^2}}e^{(\frac{3\pi}{2} - \arctan(\frac{1}{RC\omega}))j }\\
+	& = \tfrac{\frac{R}{C\omega}}{\sqrt{R^2+(\frac{1}{Cw})^2}}\Big[\cos(\frac{3\pi}{2} - \arctan(\frac{1}{RC\omega})) + j\sin(\frac{3\pi}{2} - \arctan(\frac{1}{RC\omega}))\Big]
+\end{aligned}
+\]
+\end{solution}
+
+%--PROBLEM 3--%
+\begin{problem}[2.11]
+Calculate the impedance for an LRC series circuit and an RL parallel circuit.
+\end{problem}
+
+\begin{solution}[2.11]
+
+Again, we will use the series law to write
+\[
+\begin{aligned}
+Z_{tot} & = Z_R + Z_L + Z_C\\
+	& = R + (L\omega - \frac{1}{C\omega})j\\
+	& = \sqrt{R^2+(L\omega - \frac{1}{Cw})^2}e^{\arctan(\frac{L\omega - \frac{1}{Cw}}{R})}
+\end{aligned}
+\]
+
+For the parallel combination, we see that
+\[
+\begin{aligned}
+Z_{tot} & = \frac{Z_RZ_L}{Z_R+Z_L}\\
+        & = \frac{RL\omega j}{R + L\omega j}\\
+	& = \tfrac{RL\omega}{\sqrt{R^2 + (L\omega)^2}}e^{(\frac{\pi}{2} - \arctan{\frac{L\omega}{R}})}\\
+	& = \tfrac{RL\omega}{\sqrt{R^2 + (L\omega)^2}}\Big[\cos(\frac{\pi}{2} - \arctan{\frac{L\omega}{R}}) + j\sin(\frac{\pi}{2} - \arctan{\frac{L\omega}{R}})\Big]
+\end{aligned}
+\]
+
+\end{solution}
+
+%--PROBLEM 4--%
+\begin{problem}[2.12]
+Calculate the impedence for a $C||(R+L)$ circuit.
+\end{problem}
+
+\begin{solution}[2.12]
+The impedance of $R+L$ is 
+\[
+\begin{aligned}
+Z_{RL} 	& = Z_R + Z_L\\
+	& = R + L\omega j\\
+	& = \sqrt{R^2 + (L\omega)^2}e^{\arctan(\frac{L\omega}{R})}
+\end{aligned}
+\]
+so 
+\[
+\begin{aligned}
+Z_{tot} & = \frac{Z_{RL}Z_C}{Z_{RL} + Z_C}\\
+	& = \frac{(R+L\omega j)(\frac{-j}{C\omega})}{R + (L\omega - \frac{1}{C\omega})j}\\
+	& = \frac{\frac{L}{C} - \frac{R}{C\omega}j}{R + (L\omega - \frac{1}{C\omega})j}\\
+	& = \frac{R}{(C\omega)^2} + \Big[\frac{L-R^2C-CL^2\omega^2}{C^2\omega}\Big]j
+\end{aligned}
+\]
+\end{solution}
+
+
+
+\end{document}
