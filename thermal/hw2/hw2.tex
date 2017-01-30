@@ -1,0 +1,148 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Thermal Physics} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 2: 1.17, 1.18, 1.21 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\section*{Problem 1.17}
+\subsection*{Part A}
+Problem: For each temperature, calculate the second term in the Virial expansion
+$\frac{B(T)}{\frac{V}{n}}$ for $N_2$ at atmospheric pressure.
+\\
+\\
+Solution:
+\\
+\begin{tabular}{l | l | l}
+\textbf{T (K)}  & \textbf{B ($\frac{cm^3}{mol}$)} & \textbf{$\frac{B(T)}{\frac{V}{n}}$}\\
+100             & -160          & $-0.0194$\\
+200             & -35           & $-0.00213$\\
+300             & -4.2          & $-1.71*10^{-4}$\\
+400             & 9.0           & $2.74*10^{-4}$\\
+500             & 16.9          & $4.119*10^{-4}$\\
+600             & 21.3          & $4.33*10^{-4}$
+\end{tabular}
+\\
+Since the expansion term is so small, this shows the ideal gas law is quite valid for high
+temperature $N_2$.
+
+\subsection*{Part B}
+As the molecules get close to each other (low temperature), the intermolecular forces will
+begin to cause attraction between the molecules. This attraction will \emph{lessen} the
+pressure of the gas compared to the ideal gas law prediction.
+
+\subsection*{Part C}
+By direct computation:
+\[
+\begin{aligned}
+(P+\frac{an^2}{V^2})(V-nb) &= nRT\\
+(P+\frac{an^2}{V^2})(1-\frac{nb}{V})V &= nRT\\
+(P+\frac{an^2}{V^2})V &= nRT\left(1-\frac{nb}{V}\right)^{-1}\\
+(P+\frac{an^2}{V^2})V &= nRT\left(1-\frac{nb}{V} + b^2\frac{n^2}{V^2}\right)\\
+PV + \frac{an^2}{V}   &= nRT\left(1-\frac{nb}{V} + b^2\frac{n^2}{V^2}\right)\\
+PV                    &= nRT\left(1-\frac{nb}{V} + b^2\frac{n^2}{V^2} - \frac{an}{VRT}\right)\\
+PV &= nRT\left(1-(b+\frac{a}{RT})\frac{n}{V} + b^2\frac{n^2}{V^2}\right)
+\end{aligned}
+\]
+
+\subsection*{Part D}
+Using values of $a=1.31*10^8$ and $b=48.5$ (Found using the data for temperatures 400 and 500 kelvin),
+the graph of $B(T)$ looks like a $\frac{1}{x}$ graph that reaches valid ($|B(T)| < 100$) values past about
+100 kelvin, so the ideal gas law will hold quite well for 100k and above tempearatures.
+
+\section*{Problem 1.18}
+We know that the rms speed of a molecule at a temperature is given by the equation
+\[
+\sqrt{\frac{3kT}{m}}
+\]
+Which, for molecular nitrogen ($N_2$, $m=4.7*10^{-26}kg$), yields
+\[
+v_{rms} = 514\frac{m}{s}
+\]
+
+
+\section*{Problem 1.21}
+Since the overall speed of the hailstones is $15\frac{m}{s}$, and it hits at a $45^{\circ}$ angle,
+the $v_x$ component of the velocity will be $\frac{15}{\sqrt{2}}\frac{m}{s}\approx 10.6$.
+
+Thus, the momentum imparted to the window pane is $2p=2mv=2*0.002kg*10.6\frac{m}{s} = 0.042 \frac{kg*m}{s}$.
+The force imparted to the window is $\frac{\Delta p}{\Delta t}$ where $\frac{1}{\Delta t}$ is the
+frequency of arrival, at 30 times per second. Thus, $F = 0.042*30 = 1.26 N$, and
+$P = \frac{F}{A} = 2.54 Pa$.
+
+Compare this to the atmospheric pressure $P_{atm} = 1.013*10^5$, and you will see the hailstones
+exert a miniscule ($0.002\%$) pressure on the window compared to the atmosphere.
+
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
