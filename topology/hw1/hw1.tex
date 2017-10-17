@@ -1,0 +1,300 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Topology} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 1 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+\section*{Problem 1}
+Prove that $U$ is open if and only if for all $x$ in $U$, there exists some neighborhood
+$U_x$ such that $x\in U_x\subseteq U$.
+\\
+\begin{proof}
+(=>)
+Assume $U$ is open. If $U=\emptyset$, the proposition is vacuously true. So, suppose $U$ is
+nonempty. Then, for each $x\in U$, the open set $U$ satisfies $x\in U\subseteq U$. Thus,
+this half of the proof is complete.
+
+(<=)
+Now, assume that for each $x\in U$, there exists $U_x$ open such that $x\in U_x\subseteq U$.
+Then, $U$ can be written as the union
+\[
+U = \bigcup_{x\in U} U_x
+\]
+This is easily seen by verifying that, since each $x$ is in some $U_x$, $U\subseteq \bigcup_x U_x$
+and since each $U_x\subseteq U$, $\bigcup_x U_x \subseteq U$.
+
+Thus, $U$ is the union of open sets, and is open.
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+\section*{Problem 2}
+Prove that, for a product space $X\times Y$, the projection $\pi_x:X\times Y\to X$ is
+an open map.
+\\
+\begin{proof}
+Let $U = \bigcup_{\alpha\in I} V_{\alpha}\times W_{\alpha}$ be an arbitrary open set
+in $X\times Y$, with $V_{\alpha}$ open in $X$, and $W_{\alpha}$ open in $Y$.
+
+Then, 
+\[
+\begin{aligned}
+\pi_x(U) &= \pi_x(\cup_{\alpha}V_{\alpha}\times W_{\alpha}\\
+        &= \cup_{\alpha}\pi_x(V_{\alpha}\times W_{\alpha})\\
+        &= \cup_{\alpha}V_{\alpha}
+\end{aligned}
+\]
+which is the union of open sets, and is open in $X$.
+\end{proof}
+
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+\section*{Problem 3}
+Show that, for $A\subset X$ and $B\subset Y$, the identity $\overline{A\times B} = \overline{A}\times\overline{B}$
+holds.
+\\
+\begin{proof}
+($\subseteq$)
+Let $(a,b)\in\overline{A\times B}$ be an element of the closure. Then, by the definition of
+closure, there exists some net $(a_{\alpha},b_{\alpha})$ that converges to $(a,b)$ with each
+$(a_{\alpha},b_{\alpha})\in A\times B$. Now, since the projection maps $\pi_x$ and $\pi_y$
+are continuous, they preserve nets. Thus, we have
+\[
+\begin{aligned}
+\pi_x(a_{\alpha},b_{\alpha})&\to\pi_x(a,b)\\
+a_{\alpha}&\to a
+\end{aligned}
+\]
+and since each $a_{\alpha}\in A$, $a\in \overline{A}$. Similarly in the second coordinate, we have
+$b\in \overline{B}$. Thus, $(a,b)\in\overline{A}\times\overline{B}$.
+
+($\supseteq$) 
+Let $(a,b)\in \overline{A}\times\overline{B}$. In particular, this means that $a\in\overline{A}$ and
+$b\in\overline{B}$. Then, by definition of closure, there exists a net $a_{\alpha}\to a$ and $b_{\beta}\to b$
+such that for all $\alpha$, $a_{\alpha}\in A$ and for all $\beta$, $b_{\beta}\in B$.
+Then, the net $(a_{\alpha},b_{\beta})\to (a,b)$ is such that each $(a_{\alpha},b_{\beta})\in A\times B$,
+so $(a,b)\in\overline{A\times B}$.
+
+(Note that the net $(a_{\alpha},b_{\beta})$ is still a net, if the indexing space is taken to be
+the product of the indexing space of $\alpha$ and $\beta$ with the directed order 
+\[
+(\alpha_1,\beta_1) > (\alpha_2,\beta_2)\iff \alpha_1 > \alpha_2 \textrm{and } \beta_1 > \beta_2
+\]
+.)
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+\section*{Problem 4}
+Prove that, for $A,B\subset X$, then $\overline{A\cup B} = \overline{A}\cup\overline{B}$.
+\\
+\begin{proof}
+($\subseteq$)
+Let $x\in \overline{A\cup B}$. Then, there is some net $x_{\alpha}\to x$ for $x_{\alpha}\in A\cup B$.
+Now, this net is either frequently in $A$, or frequently in $B$ (or possibly both). Suppose
+ $x_{\alpha}$ frequently be in $A$. Then, consider the subnet $x_{\alpha_{\beta}}$
+of elements of $x_{\alpha}$ that are in $A$. This subnet also converges to $x$, so $x\in\overline{A}$.
+Similarly, if $x_{\alpha}$ is frequently in $B$, then $x\in\overline{B}$. Thus, $x$ is either
+in $\overline{A}$ or $\overline{B}$, that is, $x\in\overline{A}\cup\overline{B}$.
+
+($\supseteq$)
+Let $x\in\overline{A}\cup\overline{B}$. Suppose $x\in\overline{A}$. Then, there exists a net
+$x_{\alpha}\to x$ such that $x_{\alpha}\in A$ for all $\alpha$. In particular, $x_{\alpha}\in A\cup B$
+for all $\alpha$, so $x\in\overline{A\cup B}$, since it is the limit of a net in $A\cup B$. 
+By exactly the same argument, if $x\in\overline{B}$, then $x\in\overline{A\cup B}$.
+\end{proof}
+
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+\section*{Problem 5}
+Show that for a collection $A_{\alpha}$ of subsets of $X$, then 
+$\bigcup_{\alpha}\overline{A_{\alpha}}\subseteq\overline{\bigcup_{\alpha}A_{\alpha}}$,
+but equality does not necessarily hold.
+\\
+\begin{proof}
+First, let $x\in\bigcup_{\alpha}\overline{A_{\alpha}}$. In particular, $x$ is in some $\overline{A_{x}}$.
+So, let $x_{\gamma}\to x$ be a net in $A_x$. Then, $x_{\gamma}\in \bigcup_{\alpha}A_{\alpha}$ for all $\gamma$. So,
+since $x_{\gamma}\to x$, $x\in\overline{\bigcup_{\alpha}A_{\alpha}}$.
+\\
+\\
+Now, for a counterexample to equality, consider the collection
+\[
+A_n = \{\frac{1}{n}\} \subset \mathbb{R}
+\]
+Now, $\overline{A_n} = A_n$ for each $n$, since they are all closed, so $\bigcup_n \overline{A_n} = \bigcup_n A_n$.
+However, $0$ is a limit point of $\bigcup_n A_n$, so it is in the closure $\overline{\bigcup_n A_n}$. But $0$
+is not in $\bigcup_n \overline{A_n}$. Thus, 
+$\bigcup_{\alpha}\overline{A_{\alpha}}\neq\overline{\bigcup_{\alpha}A_{\alpha}}$,
+
+\end{proof}
+
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+\section*{Problem 6}
+Show that the product $X\times Y$ of two Hausdorff spaces $X$ and $Y$ is Hausdorff.
+\\
+\begin{proof}
+For this proof, we will use the unique limits definition of the Hausdorff condition.
+That is, a space is Hausdorff if and only if convergent nets in the space have unique limits.
+
+Suppose for a contradiction that $X\times Y$ is not Hausdorff. Then, there exists some
+net $(x_{\alpha},y_{\alpha})$ that has two or more limits. Let $(x_1,y_1),(x_2,y_2)$ be two
+such distinct limits.
+
+Since these points are distinct, either $x_1\neq x_2$, or $y_1\neq y_2$. Suppose $x_1\neq x_2$.
+Then, the projection map gives us
+\[
+\begin{aligned}
+\pi_x(x_{\alpha},y_{\alpha})&\to(x_1,y_1)
+\implies x_{\alpha}&\to x_1
+\end{aligned}
+\]
+However, by a similar argument, it can be shown that $x_{\alpha}\to x_2$. Since $x_1 \neq x_2$,
+the net $x_{\alpha}$ does not have unique limits in $X$, which is a contradiction to $X$ being Hausdorff.
+
+If $x_1 = x_2$, then it must be that $y_1\neq y_2$, and by a similar argument to the one above,
+one reaches a contradiction on $Y$ being Hausdorff.
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 7
+%----------------------------------------------------------------------------------------
+\section*{Problem 7}
+Show that $X$ is Hausdorff if and only if the diagonal in $X\times X$ is closed.
+\\
+\begin{proof}
+For this proof, we will use the separation definition of the Hausdorff condition.
+
+(=>)
+Suppose $X$ is Hausdorff, and let $x,y\in X$ be distinct points. Now, let $U,V\subset X$ open
+such that $x\in U$, $y\in V$, and $U\cap V = \emptyset$. Then, the open set
+$U\times V\subset X\times X$ does not intersect the diagonal, but contains $(x,y)$.
+
+Since this can be done for any point $(x,y)$ not on the diagonal, the complement of the diagonal
+is open (by the result from problem 1) and thus the diagonal is closed.
+
+(<=)
+Suppose $X$ is such that the diagonal is closed. In particular, this means that the
+complement to the diagonal is open. Let $x,y\in X$ with $x\neq y$. Then, the point
+$(x,y)$ is not on the diagonal, and there must be some basic open set $U\times V$ containing
+$(x,y)$ that does not intersect the diagonal. In particular, this means that $U$ and $V$
+are disjoint, since if they shared an element $x_0\in U$ and $x_0\in V$, then $(x_0,x_0)\in U\times V$
+which is a point on the diagonal contained in $U\times V$, a contradiction.
+
+Since $(x,y)\in U\times V$, this means that $x\in U$ and $y\in V$ for disjoint open $U$ and $V$.
+
+This separation can be done for any pair of points in $X$, so $X$ is Hausdorff.
+\end{proof}
+
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 8
+%----------------------------------------------------------------------------------------
+\section*{Problem 8}
+Define $\partial A = \overline{A}\cap\overline{A^c}$. Show that $\overline{A} = \textrm{Int}(A)\cup\partial A$.
+\\
+\begin{proof}
+This proof will be done by simple equation chasing.
+\[
+\begin{aligned}
+\textrm{Int}(A)\cup\partial A &= \textrm{Int}(A)\cup(\overline{A}\cap\overline{A^c})\\
+        &=(\textrm{Int}(A) \cup \overline{A})\cap(\textrm{Int}(A) \cup\overline{A^c})\\
+        &=\overline{A}\cap X\\
+        &= \overline{A}
+\end{aligned}
+\]
+Now, the second line is obtained by simple set theory logic.
+The third line equality can be seen to be true by an easy argument. First, observe
+that $\textrm{Int}(A) \subset \overline{A}$ since $\textrm{Int}(A)\subset A \subset\overline{A}$ by
+definition. Thus, 
+\[
+\textrm{Int}(A)\cup\overline{A} = \overline{A}
+\]
+For the second half,
+observe that 
+\[
+\textrm{Int}(A)^c = (\bigcup_{U\subset A} U)^c = \bigcap_{A^c\subset U^c}U^c = \overline{A^c}
+\]
+so that 
+\[
+\textrm{Int}(A)\cup\overline{A^c} = \overline{A^c}^c\cup\overline{A^c} = X
+\]
+The result follows immediately.
+\end{proof}
+
+\end{document}

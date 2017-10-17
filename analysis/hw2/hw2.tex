@@ -1,0 +1,450 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\A}{\mathscr{A}}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 2\\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+\section*{Problem 1}
+Prove that the push-forward measure is a measure.
+\\
+\begin{proof}
+Let $(\A_1,\Omega_1)$ and $(\A_2,\Omega_2)$ be measurable spaces, and let $\mu:\A_1\to\R^+$
+be a measure on $\A_1$. Furthermore, let $f:\Omega_1\to\Omega_2$ be a measurable function.
+Then, the \em push forward measure \em $f_*\mu$ on $\A_2$ is defined as:
+\[
+f_*\mu(E) = \mu(f^{-1}(E)) \textrm{for } E\in\A_2
+\]
+
+Now, let's verify that such a construction is actually a measure. To do this, we will
+check the nullity of the empty set with respect to the measure, and the 
+$\sigma$-additivity of the measure.
+
+To check the nullity of the empty set, we can directly compute its measure.
+\[
+\begin{aligned}
+f_*\mu(\emptyset)   &= \mu(f^{-1}(\emptyset))\\
+                    &= \mu(\emptyset)\\
+                    &=0
+\end{aligned}
+\]
+Thus, the measure respects the nullity of the empty set.
+
+To check the $\sigma$-additivity of the measure, let $\{E_i\}$ be a countable
+collection of disjoint measurable subsets of $\Omega_2$ (That is, $E_i\in\A_2\forall i$).
+Then, the measure of the union can be calculated directly:
+\[
+\begin{aligned}
+f_*\mu\left(\bigcup_{i=1}^{\infty}E_i\right) &= \mu\left(f^{-1}\left(\bigcup_{i=1}^{\infty} E_i\right)\right)\\
+        &=\mu\left(\bigcup_{i=1}^{\infty} f^{-1}(E_i)\right)\\
+        &=\bigcup_{i=1}^{\infty} \mu\left(f^{-1}(E_i)\right)\\
+        &=\bigcup_{i=1}^{\infty} f_*\mu(E_i)\\
+\end{aligned}
+\] 
+In this calculation, we used two important facts about inverse images. First, the inverse
+image preserves unions, which let us pass the union through the inverse image in line 2.
+Second, the inverse image preserves intersections, which guaranteed that the collection
+$\{f^{-1}(E_i)\}$ remained disjoint to establish equality in line 3.
+
+Thus, the push-forward measure satisfies the two measure axioms, and is a measure as
+desired.
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+\section*{Problem 2}
+Calculate, for measurable sets $A$ and $B$ with measure $\mu$, the measures:
+\[
+\begin{aligned}
+\mu(A\setminus B)\\
+\mu(A\Delta B)
+\end{aligned}
+\]
+\\
+\begin{proof}
+First, let's find $\mu(A\setminus B)$. This can be calculated directly using the identity
+$(A\setminus B) \cup B = A\cup B$ (this identity is easily seen to be true by chasing
+basic set theory definitions). Thus,
+\[
+\begin{aligned}
+\mu((A\setminus B) \cup B &= \mu(A\cup B)\\
+\mu(A\setminus B) + \mu(B) &= \mu(A\cup B)\\
+\mu(A\setminus B) &= \mu(A\cup B) - \mu(B)
+\end{aligned}
+\]
+Here, we use the fact that $A\setminus B$ and $B$ are disjoint from each other to
+split the measure on line 2. Note that this identity only holds if $\mu(A\cup B)$ and
+$\mu(B)$ are not both of infinite measure, so that subtraction can be performed. 
+
+Second, let's calculate $\mu(A\Delta B)$. For this, we will use the identity
+$A\Delta B = (A\setminus B)\cup (B\setminus A)$. It should be observed that the sets
+$A\setminus B$ and $B\setminus A$ are disjoint from each other. Now, by direct calculation:
+\[
+\begin{aligned}
+\mu(A\Delta B)  &= \mu((A\setminus B)\cup (B\setminus A))\\
+                &= \mu(A\setminus B) + \mu(B\setminus A)\\
+                &= \mu(A\cup B) - \mu(B) + \mu(A\cup B) - \mu(A)\\
+                &= 2\mu(A\cup B) - \mu(B) - \mu(A)
+\end{aligned}
+\]
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+\section*{Problem 3}
+For a measure $\mu$ on $\A$, show that the countable union of null sets is a null set.
+\\
+\begin{proof}
+Let $\{E_i\}$ be a countable collection of null sets (that is, $\mu(E_i)=0\ \forall i$).
+Then we have the following:
+\[
+\begin{aligned}
+\mu\left(\bigcup_{i=1}^{\infty} E_i\right) &\leq \sum{i=1}^{\infty}\mu(E_i)\\
+        &= \sum_{i=1}^{\infty}0\\
+        &= 0
+\end{aligned}
+\]
+Furthermore, since the measure is positive, we have
+$\mu\left(\bigcup_{i=1}^{\infty} E_i\right) \geq 0$.
+Thus, the measure of the union is bounded above and below by zero, so it must be equal
+to zero, as desired.
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+\section*{Problem 4}
+For $\mu$ a Borel measure on $\R$, with $\mu(\R)<\infty$, define the function
+\[
+\begin{aligned}
+f_{\mu}&: \R\to\R\\
+f_{\mu}(t)&=\mu((-\infty,t]))
+\end{aligned}
+\]
+
+\subsection*{Part a}
+Prove that $f_{\mu}$ is nondecreasing.
+\\
+\begin{proof}
+Let $t\in\R$, and let $\Delta t$ be some positive number. Then:
+\[
+\begin{aligned}
+f_{\mu}(t+\Delta t) &= \mu((-\infty,t+\Delta t])\\
+                    &\geq \mu((-\infty,t])\\
+                    &= f_{\mu}(t)
+\end{aligned}
+\]
+as desired. Here we used the fact that $(-\infty,t] \subset (-\infty,t+\Delta t]$ and that,
+for sets $A$ and $B$ such that $A\subset B$, the inequality
+\[
+\mu(A) \leq \mu(B)
+\]
+holds.
+\end{proof}
+
+\subsection*{Part b}
+Find $f_{\mu}(a) - f_{\mu}(b)$.
+\\
+\begin{proof}
+Without loss of generality, let $a>b$. (Note that $f_{\mu}(a) - f_{\mu}(b) = -(f_{\mu}(b) - f_{\mu}(a))$,
+so in the case $a<b$, the result will be the negative of the case for $a>b$).
+
+With this assumption, we have:
+\[
+\begin{aligned}
+f_{\mu}(a) - f_{\mu}(b) &= \mu((-\infty, a]) - \mu((-\infty, b])\\
+                        &= \mu((-\infty, a]\cup(-\infty,b]) - \mu((-\infty,b])\\
+                        &= \mu((-\infty, a]\setminus (-\infty,b])\\
+                        &= \mu((b,a])
+\end{aligned}
+\]
+Here, line 3 was obtained by using the identity for the measure of $A\setminus B$ from
+problem 2 above.
+\end{proof}
+
+\subsection*{Part c}
+Prove that $f_{\mu}$ is continuous from the right.
+\\
+\begin{proof}
+Let $\{x_i\}$ be a monotonically decreasing sequence with limit $x_i\to t$.
+In particular, since $(-\infty,t]\subset (-\infty,x_i]$ for all $i$, the monotonicity
+of the measure guarantees that $f_{\mu}(t)\leq f_{\mu}(x_i)$ for all $i$. Thus, the
+sequence $\{f_{\mu}(x_i)\}$ is bounded below by $f_{\mu}(t)$.
+
+Now, let $\epsilon > 0$  be arbitrary, and choose an $N$ such that for all $n>N$, $x_n < t+\epsilon$.
+Since $(-\infty,x_n]\subset(-\infty,t+\epsilon]$, the monotonicity of the measure gives us
+the fact that $f_{\mu}(x_n)\leq f_{\mu}(t)$.
+
+Thus, we have that for all $\epsilon > 0$ and for all $n>N$, the inequality
+\[
+f_{\mu}(t)\leq f_{\mu}(x_n)\leq f_{\mu}(t+\epsilon)
+\]
+Thus, $f_{\mu}(x_i)\to f_{\mu}(t)$ as desired.
+\end{proof}
+
+\subsection*{Part d}
+Give an example of a $\mu$ for which $f_{\mu}$ is not continuous.
+\\
+\begin{proof} %TODO proof or example?
+Consider the $\delta$-measure centered at $0$ on $\R$. Then for all $\epsilon > 0$,
+$f_{\mu}(0-\epsilon) = \mu((-\infty,-\epsilon]) = 0$, but $f_{\mu}(0) = \mu((-\infty,0])=1$.
+Clearly, $f_{\mu}$ is not continuous, as desired.
+\end{proof}
+
+\subsection*{Part e}
+Find $\lim_{t\to -\infty}f_{\mu}(t)$ and $\lim_{t\to\infty}f_{\mu}(t)$.
+\\
+\begin{proof}
+For this proof, we will use the fact that every subsequence of a convergent sequence is
+also convergent and converges to the same limit. In particular, for a sequence $\{t_i\}$
+diverging to $+\infty$ such that $f_{\mu}(t_i)\to C$ for some $C$, there exists
+a monotonically increasing subsequence $\{t_{i_j}\}$ such that $f_{\mu}(t_{i_j})\to C$ as
+well. Without loss of generality, then, we will let $t$ monotonically increase when 
+computing the limits.
+
+First, we compute $\lim_{t\to -\infty}f_{\mu}(t)$. This can be formulated as
+\[
+\begin{aligned}
+\lim_{t\to \infty}f_{\mu}(-t) &= lim_{t\to \infty}\mu((-\infty,-t])\\
+        &= \mu\left(\lim_{t\to\infty}(-\infty,-t]\right)\\
+        &= \mu(\emptyset)\\
+        &= 0
+\end{aligned}
+\]
+Here, we used the fact that the measure preserves limits (Notes part 1, section 23) to
+establish equality in line 2, also observing that the sets $A_t = (-\infty,-t]$ are monotonic
+($A_{t+\alpha}\subset A_t$ for positive $\alpha$). It is also clear that the limit is 
+the empty set, since for each $x\in\R$, there is some $t<x$, and $x\not\in A_t$ which
+implies $x$ is not in the limit.
+
+Now, lets compute $\lim_{t\to\infty}f_{\mu}(t)$. This will use the same fact about measures
+(preserving limits).
+\[
+\begin{aligned}
+\lim_{t\to\infty}f_{\mu}(t) &= \lim_{t\to\infty}\mu((-\infty, t])\\
+        &= \mu(\lim_{t\to\infty}(-\infty,t])\\
+        &= \mu(\R)
+\end{aligned}
+\]
+It is easy to see the sequence of sets $A_t = (-\infty,t]$ is a monotonically increasing
+sequence, so the limit preservation property of measures holds. Furthermore, their limit
+is easily seen to be all of $\R$, since for each $x\in\R$, there is some $t>x$, and thus
+$x\in A_t$, so $x$ is also in the limit.
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+\section*{Problem 5}
+Show that the ``infinity-detecting'' function defined as
+\[
+\mu(E) = 
+\begin{cases}
+0 &\textrm{if } E \textrm{ is finite}\\
+\infty &\textrm{else}
+\end{cases}
+\]
+on a countable set $\Omega$ is additive, but not $\sigma$-additive.
+\\
+\begin{proof}
+To show additivity, let $\{E_i\}_{i=1}^n$ be a finite collection of disjoint sets of $\Omega$.
+If all $E_i$ are finite, then their union is finite, and the function $\mu$ is trivially
+additive.
+\[
+\begin{aligned}
+\mu\left(\bigcup_{i=1}^n E_i\right) &= 0\\
+                                    &= \sum_{i=1}^n 0\\
+                                    &= \sum_{i=1}^n \mu(E_i)
+\end{aligned}
+\]
+Now suppose there is some $E_j$ infinite. Then,
+\[
+\begin{aligned}
+\mu\left(\bigcup_{i=1}^n E_i\right) &= \infty\\
+                                    &= \mu(E_j) + \sum_{i\neq j}^n \mu(E_i)\\
+                                    &= \sum_{i=1}^n \mu(E_i)
+\end{aligned}
+\]
+Where here we used the convention that $\infty + C = \infty$ for any $C$ finite or $C=\infty$.
+
+However, this function is not $\sigma$-additive. To see this, note that
+\[
+\mu(\Omega) = \infty
+\]
+But 
+\[
+\Omega = \bigcup_{x\in\Omega}\{x\}
+\]
+and 
+\[
+\sum_{x\in\Omega}\mu(\{x\}) = \sum 0 = 0
+\]
+Thus,
+\[
+\begin{aligned}
+\mu\left(\bigcup_{x\in\Omega}\{x\}\right)   &= \infty\\
+                                            &\neq 0\\
+                                            &= \sum_{x\in\Omega}\mu(\{x\})
+\end{aligned}
+\]
+and $\mu$ is not $\sigma$-additive.
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+\section*{Problem 6}
+Prove that the conditional probability measure, induced by some measure $\mu$ on $\Omega$
+with $\mu(\Omega) = 1$ and for some $\Gamma$, $\mu(\Gamma)$ positive and finite, given by
+\[
+\nu(E) = \frac{\mu(E\cap\Gamma)}{\mu(\Gamma)}
+\]
+is a measure.
+\\
+\begin{proof}
+To show this is a measure, we will show it respects the nullity of the empty set, and that
+it is $\sigma$-additive.
+
+To verify the nullity of the empty set, we compute $\nu(\emptyset)$ directly.
+\[
+\begin{aligned}
+\nu(\emptyset)  &= \frac{\mu(\emptyset\cap\Gamma)}{\mu(\Gamma)}\\
+                &= \frac{\mu(\emptyset)}{\mu(\Gamma)}\\
+                &= \frac{0}{\mu(\Gamma)}\\
+                &= 0
+\end{aligned}
+\]
+
+Now, let's verify $\sigma$-additivity. Let $\{E_i\}$ be a countable collection
+of disjoint subsets of $\Omega$. Then, we can directly verify that
+\[
+\begin{aligned}
+\nu\left(\bigcup_{i=1}^{\infty} E_i\right)  &= \frac{\mu\left(\left(\bigcup_{i=1}^{\infty} E_i\right)\cap\Gamma\right)}{\mu(\Gamma)}\\
+            &=\frac{\mu\left(\left(\bigcup_{i=1}^{\infty} E_i\cap\Gamma\right)\right)}{\mu(\Gamma)}\\
+            &=\frac{\sum_{i=1}^{\infty} \mu(E_i\cap\Gamma)}{\mu(\Gamma)}\\
+            &=\sum_{i=1}^{\infty}\nu(E_i)
+\end{aligned}
+\]
+Thus, $\nu$ is $\sigma$-additive, and is a measure as desired.
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 7
+%----------------------------------------------------------------------------------------
+\section*{Problem 7}
+Let $\Omega$ be an uncountable set, and let the $\sigma$-algebra $\A$ be the set of all
+subsets $E\subset\Omega$ such that either $E$ or $E^c$ is at most countable, and define
+$\mu(E) = 0$ if $E$ is countable, and $\mu(E) = 1$ if $E^c$ is countable. Prove that $\mu$
+is a measure.
+\\
+\begin{proof}
+To show this is a measure, we will show it respects the nullity of the empty set, and that
+it is $\sigma$-additive.
+
+By the definition of the measure (along with the convention that $\emptyset$ is a finite
+set), $\mu(\emptyset) = 0$
+
+Now, let $\{E_i\}$ be a disjoint collection of measurable subsets of $\Omega$. Before
+proceeding, it is key to note that at most one of these will be uncountable. To see this,
+suppose both $E_i$ and $E_j$ are uncountable (with countable complement). In particular,
+$E_i\not\subset (E_j)^c$ and vice versa, since $(E_j)^c$ is countable, but $E_i$ is
+uncountable. Thus, they cannot be disjoint.
+
+So, suppose none of $E_i$ are uncountable. Then,
+\[
+\begin{aligned}
+\mu\left(\bigcup_{i=1}^{\infty} E_i\right)  &= 0\\
+                                            &= \sum_{i=1}^{\infty} 0\\
+                                            &= \sum_{i=1}^{\infty} \mu(E_i)\\
+\end{aligned}
+\]
+as desired.
+
+Instead, suppose some $E_j$ is uncountable. Then,
+\[
+\begin{aligned}
+\mu\left(\bigcup_{i=1}^{\infty} E_i\right)  &= 1\\
+                                            &= 1 + \sum_{i\neq j}^{\infty} 0
+                                            &= \mu(E_j) + \sum_{i\neq j}^{\infty} \mu(E_i)\\
+                                            &= \sum_{i=1}^{\infty} \mu(E_i)
+\end{aligned}
+\]
+as desired.
+
+\end{proof}
+%----------------------------------------------------------------------------------------
+\end{document}

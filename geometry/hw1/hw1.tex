@@ -1,0 +1,395 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Differential Geometry} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 1\\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\section*{Problem 1}
+Show that the line with two origins is not Hausdorff, but is locally Euclidean and is
+second countable.
+\\
+\begin{proof}
+The line with two origins is defined as the quotient of $\mathbb{R}_a\coprod\mathbb{R}_b$ by
+the equivalence relation $(x, a) \sim (x, b)$ for $x \neq 0$ (the notation $(x,a)$ indicates,
+for example, the point $x$ on the line $\mathbb{R}_a$. For convenience, an interval will be
+represented similarly as, for example, $((c,d),a)$ for the interval $(c,d)$ in $\mathbb{R}_a$).
+
+To show this space is locally Euclidean, consider any point $[x]$ on the line with two
+origins. if $[x] \neq 0_a, 0_b$, then $[x]$ has a neighborhood $[((x-\epsilon,
+x+\epsilon),a)] \cong (x-\epsilon, x+\epsilon)$ which does not intersect the origins, and
+is homeomorphic to the same interval in $\mathbb{R}$.  If $[x]$ is equal to $0_a$ or $0_b$
+(without loss of generality, let $[x] = 0_a$), then the neighborhood $[(-1,1),a)] \cong
+(-1,1)$ is homeomorphic to that interval in $\mathbb{R}$.  Thus, each point has a
+neighborhood homeomorphic to an open interval in $\mathbb{R}$ and the line with two
+origins is locally Euclidean.
+
+To see this space is second countable, consider the canonical projection map $\pi :
+\mathbb{R}\coprod\mathbb{R} \to \mathbb{R}\coprod\mathbb{R}/{\sim}$ given by $\pi(x) =
+[x]$. This projection is an open map. To see this, consider a general basic open set
+$((c,d),a)$ or $((c,d),b)$. For $(c,d)$ such that $0\not\in(c,d)$, the interval projects
+to $(c,d)$, which is open. Now, without loss of generality, consider an interval
+$((c,d),a)$ containing $0$. This projects to the set $(c,0)\cup\{0_a\}\cup(0,d)$. This set
+can easily be seen to be open in the quotient by checking its inverse image is open. Thus,
+since $\pi$ maps basic open sets to open sets, $\pi$ is an open map. Noting also that
+$\pi$ is a surjection, we can apply Lemma 1 for quotients (defined in class) to show that
+the quotient is second countable.
+
+Finally, to see this space is not Hausdorff, consider the two origins $0_a$ and $0_b$.
+Each open neighborhood of $0_a$ contains some interval
+$(-\epsilon_a,0)\cup\{0_a\}\cup(0,\epsilon_a)$. Similarly, each neighborhood of $0_b$
+contains some interval $(-\epsilon_b,0)\cup\{0_b\}\cup(0,\epsilon_b)$. These intervals
+intersect, so the neighborhoods of $0_a$ and $0_b$ intersect as well.  Since this holds
+true for all neighborhoods of the origins, the two origins are not seperable by open sets,
+and the line with two origins is not Hausdorff.
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\section*{Problem 2}
+Show that the coproduct of $\mathbb{R}_{\alpha}$ for $\alpha\in I$ with $I$ uncountable
+is locally Euclidean and Hausdorff, but is not second countable.
+\\
+\begin{proof}
+To see that this space is locally Euclidean, consider a point 
+\[
+x \in \coprod_{\alpha\in I}\mathbb{R}_{\alpha}
+\]
+
+Since $x$ is in the coproduct, it is in exactly one of the $\mathbb{R}_{\alpha}$.
+Thus, the neighborhood $\mathbb{R}_{\alpha}$ of $x$ is homeomorphic to $\mathbb{R}$.
+Since this holds for any $x$, the space is locally Euclidean.
+
+Furthermore, consider two points $x,y$ distinct from each other in the coproduct.
+In the case $x\in\mathbb{R}_{\alpha}$ and $y\in\mathbb{R}_{\beta}$ for $\alpha\neq\beta$,
+the open sets $\mathbb{R}_{\alpha}$ and $\mathbb{R}_{\beta}$ separate $x$ and $y$.
+If instead $x$ and $y$ are from the same copy $\mathbb{R}_{\alpha}$, then they are seperable
+in the subspace $\mathbb{R}_{\alpha}$ (since $\mathbb{R}$ is Hausdorff) and are seperable
+in the coproduct.
+
+However, the coproduct is not second countable. Let $\mathscr{B}$ be a basis for the coproduct.
+Then, consider the set of disjoint open sets
+\[
+    \{\mathbb{R}_\alpha | \alpha\in I\}
+\]
+By the definition of a basis, each $\mathbb{R}_{\alpha}$ must contain at least one basis
+element. Furthermore, since each are disjoint from the rest, the basis element is unique.
+Thus, for each $\alpha \in I$, $\mathscr{B}$ must have at least one distinct basis element
+$B_{\alpha}\subset \mathbb{R}_{\alpha}$. Thus, $\mathscr{B}$ must have uncountably many
+elements. Therefore, the coproduct does not admit a countable basis, and is not second
+countable. 
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+\section*{Problem 7}
+Let $\sigma:S^n\setminus\{N\}\to \mathbb{R}^n$ be given as
+\[
+\sigma(x^1, x^2,\ldots,x^n) = \frac{(x^1,\ldots,x^n)}{1-x^{n+1}}
+\]
+And similarly define $\widetilde{\sigma}(x) = -\sigma(-x)$ for $x\in S^n\setminus\{S\}$.
+
+\subsection*{part a}
+Show that $\sigma(x)$ sends a point to the intersection of the $\mathbb{R}^n$ subspace
+and the line from the north pole $N$ through the point $x$.
+\\
+\begin{proof}
+Let $x\in S^n\setminus\{N\}$, and consider the line through $N$ and $x$ parameterized as
+\[
+f(t) = tx + (1-t)N
+\]
+This function intersects the $\mathbb{R}^n$ subspace when the $n+1$ coordinate is zero.
+Now, the $n+1$ coordinate is parameterized as
+\[
+f^{n+1}(t) = tx^{n+1} + (1-t)(1)
+\]
+This is zero when $t=i=t_0=\frac{1}{1-x^{n+1}}$. At this point, the other $n$ coordinates of
+$x$ are given by
+\[
+f^i(t) = tx^i + (1-t)(0)\\
+       = tx^i
+\]
+so
+\[
+f^i(t_0) = \frac{x^i}{1-x^{n+1}}
+\]
+
+Thus, we have recovered $\sigma(x)$ as desired.
+
+Following similar logic for the $\widetilde{\sigma}(x)$ map, we see that the line connecting
+$S$ and $x$ is given by the equation
+\[
+f(t) = tx + (1-t)S
+\]
+Similarly, the point where the $n+1$ coordinate is zero in this equation is given by
+\[
+0=f^{n+1}(t)=tx^{n+1} + (1-t)(-1)
+\]
+which is zero when $t=t_0=\frac{1}{x+1}$. Thus, the point of intersection is
+\[
+f^i(t_0) = \frac{x^i}{1+x^{n+1}}
+\]
+
+Since $\sigma_i(x) = \frac{x^i}{1-x^{n+1}}$, 
+\[
+-\sigma^i(-x) = -\frac{-x^i}{1-(-x^{n+1})} = \frac{x^i}{1+x^{n+1}}
+\]
+which is just $\widetilde{\sigma}(x)$ as desired.
+
+\end{proof}
+
+\subsection*{Part b}
+Show the map $\sigma$ is bijective and compute its inverse.
+\\
+\begin{proof}
+To see that $\sigma$ is injective, observe that $\sigma$ was defined
+qualitatively as the intersection of the target subspace $\mathbb{R}^n$
+with the line uniquely determined by the points $x$ and $N$.
+So, let $x_1$ and $x_2$ be elements of $S^n$ such that $\sigma(x_1) = \sigma(x_2)$.
+Then, consider the line defined through the points $\sigma(x_1)$ and $N$.
+This line crosses the punctured sphere $S^n\setminus\{N\}$ in exactly one location,
+which must be $x_1$, since $\sigma(x_1)$ determined the line, but it also must be $x_2$
+by a similar argument. Thus, $x_1$ = $x_2$.
+
+Surjectivity will be proved by showing that the inverse map has no domain restrictions
+on $\mathbb{R}^n$.
+
+The inverse is given as
+\[
+\sigma^{-1}(u^1,u^2,\ldots,u^n) = \frac{(2u^1,2u^2,\ldots,2u^n,|u|^2-1)}{|u|^2+1}
+\]
+This is easily seen to be the inverse of $\sigma$, since
+\[
+\begin{aligned}
+\sigma(\sigma^{-1}(u^1,\ldots,u^n)) &= \sigma( \frac{(2u^1,2u^2,\ldots,2u^n,|u|^2-1)}{|u|^2+1})\\
+        &=\left(\frac{1}{|u|^2+1}\frac{1}{1-\frac{|u|^2+1}{|u|^2-1}}\right)(2u^1,\ldots,2u^n)\\
+        &=(u^1,\ldots,u^n)
+\end{aligned}
+\]
+Which has no domain restrictions, so $\sigma$ is surjective.
+
+\end{proof}
+
+\subsection*{Part c}
+Compute the transition map, and verify it is $C^{\infty}$.
+\\
+\begin{proof}
+The transition map $\widetilde{\sigma}\circ\sigma^{-1}$ can be seen to be
+\[
+\begin{aligned}
+\widetilde{\sigma}\circ\sigma^{-1} &= \widetilde{\sigma}\left( \frac{(2u^1,2u^2,\ldots,2u^n,|u|^2-1)}{|u|^2+1}\right)\\
+        &= -\sigma\left(\frac{(-2u^1,-2u^2,\ldots,-2u^n,-|u|^2+1)}{|u|^2+1}\right)\\
+        &= -\frac{1}{1-\frac{-|u|^2+1}{|u|^2+1}}\left(-2u^1,\ldots,-2u^n\right)
+\end{aligned}
+\]
+which is clearly smooth, since it is a quotient of smooth functions.
+\end{proof}
+
+\subsection*{Part d}
+Show this structure is compatible with the projection structure defined in the book.
+\\
+\begin{proof}
+To show this, consider the compatibility maps
+\[
+\phi_i\circ\sigma^{-1} = \frac{(2u^1,2u^2,\ldots\hat{u_i},\ldots,2u^n,|u|^2-1)}{|u|^2+1}
+\]
+which is clearly smooth for any $i$. The reverse $\sigma\circ\phi_i^{-1}$ is also clearly
+smooth, so the charts are compatible with each other (Repeat the argument for the south
+pole stereographic projection to attain full compatibility at all points, but the argument
+is the same).
+\end{proof}
+
+\section*{Problem ``Batch 1 Extra"}
+Show that the graph of $|x|$ with the subspace topology from $\mathbb{R}^2$ is a smooth manifold.
+\\
+\begin{proof}
+Consider the projection mapping:
+\[
+\phi(x,|x|) = x
+\]
+
+This is clearly defined for all points in the graph, and is easily seen to be a homeomorphism 
+of the graph with $\mathbb{R}$. Furthermore, since this is a global atlas, no transition maps
+need to be calculated, and the manifold is trivially smooth.
+\end{proof}
+
+\section*{Batch 2 Problem 1}
+Show that a manifold $M$ with a smooth structure has infinitely many such structures.
+\\
+\begin{proof}
+Let $(U_{\alpha}, \phi_{\alpha})$ be an atlas of $M$ such that for all $U_{\alpha},U_{\beta}$
+distinct pairs, the coordinate charts on the intersection $U_{\alpha}\cap U_{\beta}$ do not
+contain the origin of $\mathbb{R}^n$, Let there also be some $U_0$ such that the coordinate
+chart on $U_0$ does contain the origin. Furthermore, we require that each $U_{\alpha}$ map
+by $\phi_{\alpha}$ into the unit ball $\mathbb{B}^n$.
+
+With this construction in place, we construct for each $s>0$ a new differentiable structure
+on $M$ by composing the coordinate charts with the homeomorphism
+\[
+F_s(x) = |x|^{s-1}x
+\]
+from $\mathbb{R}^n$ to itself. Clearly, this is a homeomorphism, but at the origin it fails
+to be smooth in the standard differential structure on $\mathbb{R}^n$.
+
+Now, consider the new atlas $(U_{\alpha},F_s\circ\phi_{\alpha})$. The transition map
+between two charts is $F_s\circ\phi_{\beta}\circ\phi_{\alpha}^{-1}\circ F_s^{-1}$, which is
+smooth away from the origin. Since the intersections were constructed to avoid the origin, the
+transition map is smooth.
+
+However, checking compatibility with some other $t\neq s$ will fail on $U_0$, since the compatibility map
+$F_t\circ\phi_0\circ\phi_0^{-1}\circ F_s^{-1}$ which is not smooth on $U_0$.
+
+Thus, for each $s>0$, we get a distinct differentiable structure on $M$ as desired.
+
+
+\end{proof}
+
+\section*{Batch 2 Problem 2}
+Show that $\mathbb{C}P^n$ is a compact $2n$-manifold.
+\\
+\begin{proof}
+Observe that $\mathbb{C}P^n$ can be constructed as the quotient $S^{2n+1}/\sim$
+with $\sim$ identifying antipodal points (i.e. $x\sim y \iff x = \lambda y$ for some $\lambda\in\mathbb{C}$). 
+Now, the quotient map from $S^{2n+1}$
+(which is compact) to $\mathbb{C}P^n$ is continuous, so the projective space
+$\mathbb{C}P^n$ is compact as well.
+
+Now, let's push forward the differential structure from $S^{2n+1}$ along the quotient map $q$.
+Since $q$ is a local homeomorphism, we can choose a collection of open sets $V_{\alpha}$ in $S^{2n+1}$
+such that $q|_{V_{\alpha}}$ is a homeomorphism, $V_{\alpha}\subset U_{\alpha}$ for some $U_{\alpha}$ in the
+chart $(U_{\alpha},\phi_{\alpha})$, and $q(V_{\alpha})$ covers $\mathbb{C}P^n$.
+Then, the charts on $\mathbb{C}P^n$ is the collection $(q(V_{\alpha}),\phi_{\alpha}\circ q|_{V_{\alpha}}^{-1})$,
+which is clearly a differential structure, as it inherits compatibility from the differential structure on $S^{2n+1}$.
+\end{proof}
+
+\section*{Batch 2 Problem 3}
+Show the map $\widetilde{F}: \mathbb{R}P^n\to\mathbb{R}P^k$ given by $\widetilde{F}([x]) = [F(x)]$ for a
+homogeneous map $F:\mathbb{R}^{n+1}\to\mathbb{R}^{k+1}$ is well-defined and smooth.
+\\
+\begin{proof}
+To show well-definedness of $\widetilde{F}$, consider $[x] = [cx]$ for some nonzero $C$.
+Now, $\widetilde{F}([x]) = [F(x)] = [c^dF(x)] = [F(cx)] = \widetilde{F}([cx])$ as desired.
+
+Now, let's show that $\widetilde{F}$ is smooth. Now, the standard smooth structure on projective
+space is given by $\phi_i([x^1,\ldots,x^{n+1}]) = \frac{1}{x^i}(x^1,\ldots,\hat{x^i},\ldots,x^{n+1})$.
+
+The compatibility map $\phi_i\circ\widetilde{F}\circ\phi_i^{-1}$ is given as
+\[
+\phi_i([F(u^1,\ldots,u^{i-1},1,u^{i+1},\ldots,u^n)])
+\]
+which is the composition of smooth functions, and is easily seen to be smooth.
+\end{proof}
+
+\section*{Batch 2 Problem 4}
+For $\mathbb{R}$ the standard real line, and $\widetilde{\mathbb{R}}$ the real line
+with the structure given by the map $t\mapsto t^3$, $f:\mathbb{R}\to\mathbb{R}$ a smooth
+function:
+\subsection*{Part a}
+Show that $f:\mathbb{R}\to\widetilde{\mathbb{R}}$ is smooth.
+\\
+\begin{proof}
+To show $f$ is smooth, we consider the charts $\phi$ (the standard chart on $\mathbb{R}$ given
+by the identity) and $\psi$ the cubic chart.
+Now, we check that the compatibility map $\psi\circ f\circ\phi^{-1}$ is smooth.
+However, this is just $\psi\circ f\circ\phi^{-1}(t) = (f(t))^3$, which, for $f$ smooth, is a
+smooth function. Thus, $f$ is smooth from $\mathbb{R}\to\widetilde{\mathbb{R}}$.
+\end{proof}
+
+\subsection*{Part b}
+Show that for $f$ such that $f^{(n)}(0) = 0$ for integer $n$ not a multiple of $3$,
+the map $f:\widetilde{\mathbb{R}}\to\mathbb{R}$ is smooth.
+\\
+\begin{proof}
+To show this, we must show that the compatibility map $\phi\circ f\circ\psi^{-1}$ is
+a smooth map, where $\phi$ and $\psi$ are the same as in part a.
+
+This map is
+\[
+F(x) = \phi\circ f\circ\psi^{-1}(x) = f(x^{\frac{1}{3}})
+\]
+for a smooth function $f$. Now, this is differentiable away from zero without issue,
+so consider the derivatives at zero.
+$F'(0) = f'(0)*\frac{1}{3}x^{\frac{-2}{3}}|_{x=0}$ which has problems at zero in the
+second term. But, since $f'(0)=0$, the problems can be ignored. Similarly for higher
+derivatives, terms with an $n^{th}$ derivative of $x^{\frac{1}{3}}$ for $n$ not a multiple
+of three will have problems, but those terms are the ones where $f^{(n)}(0) = 0$.
+So, the overall function $F$ is smooth.
+
+Note that the arguments above show that this derivative condition characterizes the
+functions that are smooth from $\widetilde{\mathbb{R}}\to\mathbb{R}$ as desired.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,3 @@
+# latex compiling intermediates
+**/*.aux
+**/*.log

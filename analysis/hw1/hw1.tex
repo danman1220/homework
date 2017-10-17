@@ -1,0 +1,536 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+%\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm, amssymb} % Math packages
+\usepackage{mathrsfs}
+
+%\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\sigalg}{$\sigma$-algebra }
+\newtheorem*{lemma}{Lemma}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis 201A} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 1 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+\section*{Problem 2}
+\subsection*{Part a}
+Give an example of a sequence of sets where $\liminf_{j\to \infty} E_j \subsetneq \limsup_{j\to\infty} E_j$.
+\\
+\begin{proof}
+Consider the sequence of sets
+\[
+E_j = \begin{cases}
+\{1\} &\mbox{if } j \in 2\mathbb{Z}\\
+\{0\} &\mbox{else}
+\end{cases}
+\]
+For this sequence, since both $1$ and $0$ are in infinitely many $E_j$, 
+\[
+\limsup_{j\to\infty} E_j = \{0,1\}
+\]
+However, there are infinitely many $E_j$ that do not contain $1$, and similarly
+there are infinitely many $E_j$ that do not contain $0$. Therefore, 
+\[
+\liminf_{j\to\infty} E_j = \emptyset
+\]
+\end{proof}
+
+\subsection*{Part b}
+Show the $\limsup$ and $\liminf$ can be defined using set theory operations.
+\\
+\begin{proof}
+The $\limsup E_j$ is defined as the set of all points which belong to infinitely many $E_j$.
+That is, $x \in \limsup E_j \iff \forall k>0, x\in \cup_j E_j$. Or, formally,
+\[
+\limsup E_j = \bigcap_{k=0}^{\infty} (\bigcup_{j>k} E_j)
+\]
+as desired. (i.e. $x$ is in the $\limsup$ if for all $k>0$, there is some $j>k$ for which $x\in E_j$.)
+
+Similarly, the $\liminf$ is defined as the set of all points which belong to all but finitely many $E_j$.
+That is, for each $x$ in the $\liminf$, there exist some $k > 0$ such that $x\in E_j \forall j>k$.
+Formally,
+\[
+\liminf E_j = \bigcup_{k=1}^{\infty} ( \bigcap_{j>k} E_j)
+\]
+as desired. (i.e. $x$ is in the $\liminf$ if there exists some $k>0$ such that $x\in E_j$ for all $j>k$)
+\end{proof}
+
+\subsection*{Part c}
+Show that if all $E_j$ are in a $\sigma$ -algebra $\mathcal{A}$, then both limits of $E_j$ are
+in $\mathcal{A}$.
+\\
+\begin{proof}
+Recall that $\mathcal{A}$ is closed under countable unions. Furthermore, we know that
+\[
+\left(\bigcup_{j=1}^{\infty} E_j^c\right)^c = \bigcap_{j=1}^{\infty} \left(E_j^c\right)^c
+\]
+by DeMorgan's Law. Since each $E_j^c$ is in $\mathcal{A}$ (since $\mathcal{A}$ is closed under
+complements), The infinite intersection is also in $\mathcal{A}$.
+
+Therefore, since $\mathcal{A}$ is closed under both countable unions and intersections,
+the $\limsup$ and $\liminf$, which are built from countable unions and intersections,
+are both in $\mathcal{A}$.
+\end{proof}
+
+\subsection*{Part d}
+Suppose that $E_1 \subset E_2 \subset \ldots$. Prove that
+\[
+\limsup_{j\to\infty} E_j = \liminf_{j\to\infty} E_j = \bigcap_j E_j
+\]
+\\
+\begin{proof}
+Observe first that for this particular sequence,
+\[
+\bigcup_{j=n}^{\infty} E_j = E_n
+\]
+and for all $n$,
+\[
+\bigcap_{i=n}^{\infty} E_i = \bigcap_{i=1}^{\infty} E_i
+\]
+
+Now, chasing definitions yields
+\[
+\begin{aligned}
+\limsup E_j &= \bigcap_{j=1}^{\infty}\left(\bigcup_{k=j}^{\infty}E_k\right)\\
+            &= \bigcap_{j=1}^{\infty}\left(E_j\right)
+\end{aligned}
+\]
+as desired.
+
+Similarly,
+\[
+\begin{aligned}
+\liminf E_j &= \bigcup_{j=1}^{\infty}\left(\bigcap_{k=j}^{\infty}E_k\right)\\
+            &= \bigcup_{j=1}^{\infty}\left(\bigcap_{k=1}^{\infty}E_k\right)\\
+            &= \bigcap_{k=1}^{\infty}E_k
+\end{aligned}
+\]
+as desired. The last equality is attained by observing that the components of the
+union are constant with respect to $j$, so the union is just the constant element
+itself.
+\end{proof}
+
+\subsection*{Part e}
+Develop a similar formula for the limits of $E_1 \supset E_2 \supset \ldots$.
+\\
+\begin{proof}
+Consider the sequence of complements of $E_j$, $E_1^c \subset E_1^c \subset \ldots$.
+By the above, this sequence has a limit
+\[
+\limsup E_j^c = \liminf E_j^c = \bigcap_{j=1}^{\infty} E_j^c
+\]
+Taking complements of everything yields
+\[
+\liminf E_j = \limsup E_j = \bigcup_{j=1}^{\infty} E_j
+\]
+as desired.
+
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\section*{Problem 3}
+\subsection*{Part d}
+Let $\{D_1, D_2, \ldots\}$ be a countable disjoint partition of a set $\Omega$.
+Show that the set of countable unions of $D_j$ is a $\sigma$-algebra.
+\\
+\begin{proof}
+Let $\mathcal{A}$ be the described set of countable unions of $D_j$, along with $\emptyset$.
+The countable union $\bigcup_{j=1}^{\infty}D_j = \Omega$ is in $\mathcal{A}$, along with
+$\emptyset$. This fulfills axiom 1.
+
+Furthermore, for any $D_n$, $D_n^c = \bigcup_{j\neq n}^{\infty} D_j$ is a countable union
+of $D_j$ and is in $\mathcal{A}$.
+
+Finally, since each element of $\mathcal{A}$ is a countable union of $D_j$,
+a countable union of elements of $\mathcal{A}$ is a countable union of countable unions
+of $D_j$ which is a countable union, and is in $\mathcal{A}$.
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+\section*{Problem 4}
+\subsection*{Part a}
+Show that the union of two $\sigma$-algebras with the same unit is not necessarily
+a $\sigma$-algebra.
+\\
+\begin{proof}
+Consider the three-point set $\{1,2,3\}$ with $\mathcal{A}_1 = \sigma\left(\{2,3\}\right)$
+and $\mathcal{A}_2 = \sigma\left(\{1,2\}\right)$.
+The union $\mathcal{A}_1 \cup \mathcal{A}_2$ contains $\{1\}$ and $\{3\}$ but not their
+union $\{1,3\}$.
+\end{proof}
+
+\subsection*{Part b}
+Show the intersection of two $\sigma$-algebras is again a $\sigma$-algebra.
+\\
+\begin{proof}
+This is a special case of Part c, which is proved next.
+\end{proof}
+
+\subsection*{Part c}
+Prove that the arbitrary intersection of $\sigma$-algebras is again a $\sigma$-algebra.
+\\
+\begin{proof}
+Let $\mathcal{A}_{\alpha}$ be a collection of $\sigma$-algebras on a set $\Omega$.
+
+First, since each $\mathcal{A}_{\alpha}$ contains $\emptyset$ and $\Omega$, their intersection
+does as well.
+
+Secondly, consider an element $E \in \bigcap_{\alpha} \mathcal{A}_{\alpha}$.
+Since $E$ is in each $\mathcal{A}_{\alpha}$, its complement $E^c$ is in each $\mathcal{A}_{\alpha}$ 
+(since $\mathcal{A}_{\alpha}$ is a $\sigma$-algebra) and thus $E^c$ is in the intersection
+$\bigcap_{\alpha} \mathcal{A}_{\alpha}$.
+
+Finally, consider a countable set of elements $E_i \in \bigcap_{\alpha} \mathcal{A}_{\alpha}$.
+Each of the $E_i$ is in each $\mathcal{A}_{\alpha}$, so their union is also in $\mathcal{A}_{\alpha}$.
+Therefore, their union is also in the intersection $\bigcap_{\alpha} \mathcal{A}_{\alpha}$.
+
+Thus, the intersection $\bigcap_{\alpha} \mathcal{A}_{\alpha}$ satisfies the axioms for
+a $\sigma$-algebra as desired. 
+\end{proof}
+
+\subsection*{Part d}
+Show that the ``subspace" \sigalg given by $\mathscr{A}\cap E$ for $E\subset \Omega$
+is a \sigalg.
+\\
+\begin{proof}
+First, note that $\emptyset = \emptyset \cup E$ and $E = \Omega \cap E$ are in $\mathscr{A}\cap E$.
+
+Now, let $S_E = S \cap E$ be an arbitrary measurable set. Then, the complement $S_E^c = E\setminus (S\cap E)$
+is just $S^c\cap E$, which is also in $\mathscr{A}\cap E$.
+
+Finally, let $(S_i)$ be a sequence of measurable sets in $\mathscr{A}\cap E$. Their union is
+\[
+\bigcup_i S_i = \bigcup_i (E_i\cap E) = (\bigcup_i E_i) \cap E
+\]
+which is measurable.
+
+Thus, the subspace \sigalg satisfies the axioms for a \sigalg as desired.
+
+\end{proof}
+
+\subsection*{Part e}
+Show that the set $\mathscr{A}\times\Xi$ is a \sigalg with unit $\Omega\times\Xi$.
+\\
+\begin{proof}
+Obviously, both $\emptyset = \emptyset\times\Xi$ and $\Omega\times\Xi$ are in the \sigalg.
+
+Now, it is clear that, for some measurable set $S\times\Xi$, the complement $S^c\times\Xi$ is
+also measurable. Similarly, unions will pass to the first component, and be preserved by the
+$\mathscr{A}\times\Xi$ \sigalg.
+
+
+\end{proof}
+
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+\section*{Problem 6}
+\subsection*{Part a}
+For $E\subset\Omega$, find $\sigma_E(E)$, $\sigma_{\Omega}(E)$, $\sigma(\{E,E^c\})$.
+\\
+\\
+$\sigma_E(E) = \{\emptyset, E\}$\\
+$\sigma_{\Omega}(E) = \{\emptyset, E, E^c, \Omega\}$\\
+$\sigma(\{E,E^c\}) = \{\emptyset, E, E^c, \Omega\}$
+
+\subsection*{Part b}
+For a disjoint countable partition $\mathscr{D}$ of $\Omega$, find $\sigma(\mathscr{D})$.
+\\
+\\
+\[
+\sigma(\mathscr{D}) = \{\textrm{unions of elements of }\mathscr{D}\} \cup \{\emptyset\}
+\]
+This can be seen to be a \sigalg. By construction, the union of elements of this \sigalg
+is again an element of the \sigalg.
+
+Furthermore, the complement of an element
+\[
+(\bigcup_i D_i)^c = \bigcap_i D_i^c
+\]
+And since $D_i^c = \cup_{j\neq i} D_j$ is an element of the \sigalg, the countable
+intersection is as well.
+
+Clearly, $\cup_i D_i = \Omega$, and the empty set is in the \sigalg by construction.
+Thus, this \sigalg satisfies the axioms for a \sigalg, and is the smallest such one,
+since countable unions of elements of $\mathscr{D}$ must be included, and this \sigalg
+is exactly the countable union of these elements.
+
+\subsection*{Part c}
+Show that $\sigma(\sigma(\mathscr{C})) = \sigma(\mathscr{C})$ for any collection $\mathscr{C}$
+of subsets.
+\\
+\begin{proof}
+By definition, $\sigma(\mathscr{C})$ is the smallest \sigalg containing $\mathscr{C}$,
+Thus, $\sigma(\mathscr{A}) = \mathscr{A}$ for any \sigalg $\mathscr{A}$.
+
+Letting $\mathscr{A} = \sigma(\mathscr{C})$ yields the desired result.
+\end{proof}
+
+
+\subsection*{Part d}
+Show that 
+\[
+\begin{aligned}
+\sigma(C) &= \sigma\{F | F = E^c \textrm{for } E\in C\}\\
+        &= \sigma\{F | F = \cup_i E_i \textrm{for } E\in C\}
+\end{aligned}
+\]
+\\
+\begin{proof}
+For the first equality, notice that
+\[
+\{F | F = E^c \textrm{for } E\in C\} \subset \sigma(C)
+\]
+Since $\sigma(C)$ must contain the complements of each element of $C$ to be a \sigalg.
+Thus, taking $\sigma$ of both sides yields
+\[
+\sigma(\{F | F = E^c \textrm{for } E\in C\}) \subset \sigma(C)
+\]
+
+For the other direction, note that similarly
+\[
+C \subset \sigma(\{F | F = E^c \textrm{for } E\in C\})
+\]
+and so
+\[
+\sigma(C) \subset \sigma(\{F | F = E^c \textrm{for } E\in C\})
+\]
+as desired.
+
+The second equality can be argued in exactly the same way,
+noting that $\sigma(C)$ contains also the countable union of
+elements of $C$.
+\end{proof}
+
+
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+\section*{Problem 10}
+Let $f: D \to \Omega$ with $(\mathscr{A}, \Omega)$  a $\sigma$-algebra.
+Define $f^{-1}(\mathscr{A}) := \{f^{-1}(E) | E\in \mathscr{A}\}$.
+Show that $f^{-1}(\mathscr{A})$ is a $\sigma$-algebra
+\\
+\begin{proof}
+To show that such a collection is a $\sigma$-algebra, I will show that the 
+collection contains $D$ and $\emptyset$, and that it is closed
+with respect to complements and countable unions.
+
+First, note that $D = f^{-1}(\Omega)$ is in the collection, since $\Omega$
+is in $\mathscr{A}$. Furthermore, $\emptyset = f^{-1}(\emptyset)$ is in the
+collection by a similar argument.
+
+Let $A = f^{-1}(E)$ be an arbitrary element of the collection. Then, the complement
+\[
+A^c = (f^{-1}(E))^c = f^{-1}(E^c)
+\]
+is also in the collection, since $E^c$ is in $\mathscr{A}$. Here, the second equality
+is attained by observing that the preimage map commutes with complementation.
+
+Now, consider a countable set $\{A_i\}_{i=1}^{\infty}$ of elements of $f^{-1}(\mathscr{A})$.
+The union similarly commutes with the preimage map, so the relation
+\[
+\bigcup_i A_i = \bigcup(f^{-1}(E_i)) = f^{-1}(\cup E_i)
+\]
+which is in $f^{-1}(\mathscr{A})$ since the union $\cup E_i$ is in $\mathscr{A}$. 
+
+Thus, $f^{-1}(\mathscr{A})$ is a $\sigma$-algebra.
+\end{proof}
+
+Now, show that the direct image $f(\mathscr{A}) = \{f(E) | E\in\mathscr{A}\}$
+is not generally a $\sigma$-algebra.
+
+\begin{proof}
+A simple counterexample is as follows:
+
+Let $\mathscr{A}$ be the \sigalg $\sigma_{[0,1]}\{[\frac{1}{6}, \frac{5}{6}]\}$
+which is equal to $\{\emptyset, [\frac{1}{6},\frac{5}{6}],[0,\frac{1}{6}) \cup (\frac{5}{6},1],[0,1]\}$
+
+Now, consider the mapping $\sin(\pi x)$ which sends $[0,1]$ to itself.
+The forward image of $[0,\frac{1}{6}) \cup (\frac{5}{6},1]$ is just $(\frac{-1}{2},\frac{1}{2})$
+which does not have a complement that is the forward image of any set in $\mathscr{A}$. So
+$f(\mathscr{A})$ is not a \sigalg.
+\end{proof}
+
+Finally, show that the push forward of a \sigalg is a \sigalg.
+
+\begin{proof}
+Let $S\in f_\#(\mathscr{A})$ for $\mathscr{A}$ a \sigalg on $\Omega$. Then
+consider $S^c$. $f^{-1}(S^c) = (f^{-1}(S)^c$ which is the complement of
+a set in $\mathscr{A}$ and is thus also in $\mathscr{A}$. Therefore, $S^c\in f_\#(\mathscr{A})$.
+
+Now, consider a union of countable $S_i$ for $S_i$ in the push-forward \sigalg.
+$f^{-1}(\bigcup_i S_i) = \bigcup_i f^{-1}(S_i)$ which is a union of things in $\mathscr{A}$
+and is thus in $\mathscr{A}$ as desired.
+
+Thus, the push-forward \sigalg is closed under the operations of a \sigalg, and is
+a \sigalg itself.
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+\section*{Problem 12}
+Show that a function $F:\Omega\to\mathbb{C}$ is measurable if and only if its projection
+functions $Re(F)$ and $Im(F)$ are measurable. Here the \sigalg on $\mathbb{C}$ is the 
+Borel \sigalg, along with the \sigalg on $\mathbb{R}$.
+
+\begin{proof}
+(=>) To show the forward implication, we first prove the following lemma:
+\begin{lemma}
+For $f:X\to Y$ continuous, $f$ is also measurable on the Borel \sigalg of $X$ and $Y$.
+\end{lemma}
+\begin{proof}
+To see this, consider the ``good set"
+\[
+E = \{G | G\in B(Y) \textrm{and } f^{-1}(G)\in B(X)\}
+\]
+Clearly, $\mathscr{T}_Y \subset E$, since any open set in $Y$ is in $B(Y)$, and since
+$f$ is continuous, the inverse image of an open set is open, and is in $B(X)$.
+Note also that $E\subset B(Y)$ by construction.
+
+Now, $E$ is also a \sigalg. To see this, note that it is closed under complements and
+unions, since both $B(Y)$ and the inverse image respect these operations.
+
+So, this leads to the following relation:
+\[
+\sigma(\mathscr{T}_Y) \subset \sigma(E) \subset \sigma(B(Y))
+\]
+which simplifies to
+\[
+B(Y) \subset E \subset B(Y)
+\]
+That is, $E = B(Y)$. In words, each measurable set in $Y$ has an inverse image under $f$
+that is measurable. Thus, $f$ is measurable.
+\end{proof}
+
+Now, the projection functions $Re(z)$ and $Im(z)$ are continuous, so they are measurable.
+Furthermore, the composition of measurable functions is itself measurable. So,
+$Re(F) = Re\circ F$ is measurable, and $Im(F) = Im\circ F$ is also measurable.
+
+(<=)
+To show reverse implication, note that $F(x) = Re(F)(x) + i Im(F)(x)$.
+Let $\Phi: \mathbb{R}^2 \to \mathbb{C}$ such that $\Phi(x,y) = x + i y$.
+Clearly, $\Phi$ is continuous. Therefore, by an obvious generalization of problem 18,
+the composition $\Phi\circ (Re(F), Im(F))$ is also measurable. Thus, $F = \Phi\circ (Re(F), Im(F))$
+is measurable as desired.
+
+\end{proof}
+
+
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 7
+%----------------------------------------------------------------------------------------
+\section*{Problem 18}
+\subsection*{Part ii}
+Prove that for a continuous function $\Phi:\mathbb{R}^2 \to \mathbb{R}$,
+the composition $\Phi\circ(f,g):\Omega\to \mathbb{R}$ is measurable.
+\\
+\begin{proof}
+Note that if the composite function $(f,g)$ is measurable, then this statement reduces to
+part i, and the proof is complete.
+
+So, let's prove that $(f,g)$ is measurable, given $f,g$ are each individually measurable.
+(Note that this construction works for general products of measurable spaces, where the product
+\sigalg is given by $\sigma(\mathscr{A}_1\times\mathscr{A}_2)$. Generally, this says that
+the product measurable space has the universal property of product spaces).
+
+Let $E,F\in B(\mathbb{R})$ be measurable sets, and consider the product $E\times F$. The
+inverse image $(f,g)^{-1}(E\times F) = f^{-1}(E)\cap g^{-1}(F)$ is the intersection of measurable
+sets (since $f$ and $g$ are both individually measurable), and is measurable.
+
+Now, consider the ``good set"
+\[
+\mathscr{E} = \{G | G\in B(\mathbb{R}^2) \textrm{and } (f,g)^{-1}(G) \in \mathscr{A}\}
+\]
+It is clear from above that we have the inclusion relations
+\[
+B(\mathbb{R})\times B(\mathbb{R}) \subset \mathscr{E} \subset B(\mathbb{R}^2)
+\]
+Now, $\mathscr{E}$ is clearly a \sigalg, since both conditions on $\mathscr{E}$ preserve
+complements and unions. Therefore, taking $\sigma$ of the inclusion relations yields:
+\[
+\begin{aligned}
+\sigma(B(\mathbb{R})\times B(\mathbb{R})) &\subset \mathscr{E} &\subset B(\mathbb{R}^2)\\
+\implies B(\mathbb{R}^2) &\subset \mathscr{E} &\subset B(\mathbb{R}^2)
+\end{aligned}
+\]
+
+Thus, $\mathscr{E}$ is actually the whole Borel set $B(\mathbb{R}^2)$, and thus
+$(f,g)$ is a measurable function, as desired.
+\end{proof}
+
+\end{document}
