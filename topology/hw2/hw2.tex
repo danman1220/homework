@@ -47,6 +47,7 @@
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
 
 \newtheorem*{lemma}{Lemma}
@@ -256,11 +257,47 @@ Since $\prod A_{\alpha}$ contains all its limit points, it is closed.
 %----------------------------------------------------------------------------------------
 %	PROBLEM 6
 %----------------------------------------------------------------------------------------
+\section*{Problem 6}
+Let $y\in\prod X_{\alpha}$, and $\{x_n\}$ a sequence of points in $\prod X_{\alpha}$.
+Show that $x_n\to y$ if and only if $\pi_{\alpha}(x_n)\to\pi_{\alpha}(y)$ for all $\alpha$.
+\\
+\begin{proof}
+(=>) For the first direction, assume that $x_n\to y$. Since each $\pi_{\alpha}$ is continuous,
+they preserve limits. Thus, for each $\alpha$, $\pi_{\alpha}(x_n)\to\pi_{\alpha}(y)$ as
+desired.
 
+(<=) For the other direction, let $\{x_n\}$ be such that for all $\alpha$, $\pi_{\alpha}(x_n)\to\pi_{\alpha}(y)$.
+In particular, this means that the filter $\mathscr{F} = \{A\subset \prod X_{\alpha}\ |\ \exists n\in\N:\ x_m\in A\ \forall m>n\}$
+pushes forward along each $\pi_{\alpha}$ to a filter that converges to $\pi_{\alpha}(y)$.
+
+Now, we just need to show that $\mathscr{F}$ converges to $y$ (Equivalently, that $\mathscr{F}$
+contains each neighborhood of $y$). To do so, we will show that each neighborhood of
+$y$ contains an element of $\mathscr{F}$, then since $\mathscr{F}$ is a filter,
+it is closed under supersets and contains each neighborhood of $y$.
+
+So, let $U$ be a neighborhood of $y$. In particular, there exists a basis element
+\[
+B = V_1\times V_2\times \ldots \times V_n\times X\times X\ldots \subset U
+\]
+Now, since the push-forward of $\mathscr{F}$ along each projection is a convergent filter,
+$N_{\alpha}\in\pi_{\alpha *}(\mathscr{F})$ for each neighborhood $N_{\alpha}$of $\pi_{\alpha}(y)$.
+
+In particular, $V_i\in\pi_{\alpha *}(\mathscr{F})$, which means that $\pi^{-1}_{\alpha}(V_i)\in\mathscr{F}$.
+Now, we can write $B$ as
+\[
+B = \bigcap_{i=1}^n \pi_{\alpha}^{-1}(V_i)
+\]
+which is a finite intersection of elements of $\mathscr{F}$, so $B\in\mathscr{F}$. Thus,
+$U\supset B$ is in $\mathscr{F}$ as well. Since $U$ was any neighborhood of $y$, the
+neighborhood filter $\mathscr{N}_y\subset\mathscr{F}$ and $\mathscr{F}\to y$ as desired.
+\end{proof}
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 %	PROBLEM 7
 %----------------------------------------------------------------------------------------
+\section*{Problem 7}
+Let $\R^{\omega}$ be the space of sequences of real numbers, and let $\R^{\infty}$ be
+the space of sequences that are eventually zero. What is $\overline{\R^{\infty}}\subset\R^{\omega}$?
 
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
