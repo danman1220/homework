@@ -1,0 +1,272 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\newtheorem*{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Topology} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 2\\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+\section*{Problem 1}
+Prove that there is an embedding of $X$ into $X\times Y$.
+\\
+\begin{proof}
+For this proof, $\{\bullet\}$ will represent the one-point set.
+
+To start with, we will prove the following lemma:
+\begin{lemma}
+For $X$ any topological space, $X\cong X\times\{\bullet\}$.
+\end{lemma}
+\begin{proof}
+By the definition of the product space, the projection maps
+\[
+\begin{tikzcd}[column sep=tiny]
+ & X\times\{\bullet\} \arrow[ld,"\pi_x"] \arrow[rd, "\pi_{\bullet}" swap]\\
+X & & \{\bullet\}
+\end{tikzcd}
+\]
+exist and are continuous open maps. Now, all we need to show is that $\pi_x$ is
+injective, and it will follow immediately that it is a homeomorphism.
+
+To see this, let $x\in X$ and consider $\pi_x^{-1}(\{x\}) = \{(x,\bullet)\}$. Since
+the inverse image of a singleton is again a singleton, the function is injective.
+
+Thus, $X$ is homeomorphic to $X\times\{\bullet\}$.
+\end{proof}
+
+Now, let $f:\{\bullet\}\to Y$ be a continuous function. Consider the diagram:
+\[
+\begin{tikzcd}[column sep=small, row sep=large]
+ & X \arrow[leftrightarrow]{d}{\cong} & \\
+ &X\times\{\bullet\} \arrow[d, dashed, "id\times f" description] \arrow[bend right=20, swap]{ddl}{id} \arrow[bend left=20]{ddr}{f}& \\
+ &X\times Y \arrow{dl}{\pi_x} \arrow[swap]{dr}{\pi_y} & \\
+X & & Y
+\end{tikzcd}
+\]
+where $id$ and $f$ are the obvious extensions $id(x,\bullet) = id(x) = x$ and $f(x,\bullet) = f(\bullet)$.
+Here, the product map $id\times f$ is continuous by the universal property of products.
+Now, we just need to show that $id\times f$ is injective with a continuous inverse on its image. 
+
+To see that $id\times f$ is injective, consider a point $(id(x),f(\bullet))$ in the image
+of $id\times f$, and consider its preimage:
+\[
+(id\times f)^{-1}(\{(id(x),f(\bullet))\}) = \{(x,\bullet)\}
+\]
+Since the preimage of any singleton is again a singleton, the function $id\times f$ is
+injective.
+
+Now, lets consider the diagram
+\[
+\begin{tikzcd}[column sep=small, row sep=large]
+ &X\times Y \arrow[d, dashed, "\pi_x \times c" description] \arrow[bend right=20, swap]{ddl}{\pi_x} \arrow[bend left=20]{ddr}{c}& \\
+ &X\times \{\bullet\} \arrow{dl}{\pi_x} \arrow[swap]{dr}{pi_{\bullet}} & \\
+X & & \{\bullet\}
+\end{tikzcd}
+\]
+where $c$ is unique constant function from $Y$ to the terminal object $\{\bullet\}$.
+
+Here, the dashed arrow $\pi_x\times c$ is continuous by the universal property of products.
+It is easy to see that $\pi_x\times c|_{(id\times f)(X\times\{\bullet\})}$ is the
+inverse of $id\times f$ on the image of $id\times f$.
+
+Hence, since the inverse of $id\times f$ is continuous, $id\times f$ is an embedding
+of $X\cong X\times \{\bullet\}$ into $X\times Y$.
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+\section*{Problem 2}
+Prove that every open interval in $\R$ is homeomorphic to $\R$.
+\\
+\begin{proof}
+Consider an open interval $(a,b)\subset \R$. It is easy to see that $(a,b)\cong(-1,1)$,
+since the operations of scaling and translation are continuous functions with continuous
+inverses.
+
+Thus, all we need to prove is that $(-1,1)\cong\R$. To see this, consider the function
+\[
+\tan(\frac{\pi}{2} x)
+\]
+defined on $(-1,1)$,
+which is a continuous bijection with continuous inverse. (proofs for the continuity of $\tan$ and $\arctan$
+are easily given by basic analysis arguments, and will not be reproduced here.)
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+\section*{Problem 3}
+Give an example of a function from $\R$ to $\R$ that is continuous at exactly one point.
+\\
+\begin{proof}
+The function
+\[
+\begin{aligned}
+f:\R&\to\R\\
+f(x) &=x\chi_{\Q}(x)
+\end{aligned}
+\]
+is continuous only at zero. To see this, we will use the neighborhood definition of
+continuity. That is, $f$ is continuous at $x$ if for each neighborhood of $f(x)$, its
+preimage contains a neighborhood of $x$.
+
+First, we will prove that $f$ is continuous at zero. It suffices to show that each basic
+open neighborhood of $f(x)$ has a preimage that contains an open neighborhood of $x$.
+So, let $(-\varepsilon,\varepsilon)$ be a basic neighborhood of $f(0)=0$. Then,
+\[
+f^{-1}((-\varepsilon,\varepsilon)) = \R\setminus\Q\cup(-\varepsilon,\varepsilon)
+\]
+which contains $(-\varepsilon,\varepsilon)$ an open neighborhood of $0$ as desired.
+
+Now, let $x \neq 0$. We will show that $f$ is not continuous at $x$. If $x$ is irrational,
+then $f(x) = 0$. Now, choose $\varepsilon$ so that $x\not\in(-\varepsilon,\varepsilon)$.
+Then, by the above calculation, we have
+\[
+f^{-1}((-\varepsilon,\varepsilon)) = \R\setminus\Q\cup(-\varepsilon,\varepsilon)
+\]
+which does not contain any neighborhood of $x$.
+
+If $x$ is rational, then $f(x) = x$. Choose $\varepsilon$ such that $0\not\in V_{\varepsilon}(x)$.
+Then,
+\[
+f^{-1}(V_{\varepsilon}(x)) = V_{\varepsilon}(x)\cap\Q
+\]
+which does not contain any open neighborhood of $x$ (This is easily seen by observing
+that any neighborhood of $x$ must intersect $\R\setminus\Q$, but the inverse image contains
+only rational points).
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+\section*{Problem 4}
+Suppose $Y$ is Hausdorff, and
+\begin{tikzcd}
+X \arrow[shift left]{r}{f} \arrow[shift right]{r}[swap]{g} & Y
+\end{tikzcd}
+are continuous. If $f|_A = g|_A$ for a dense subset $A\subset Y$, prove that
+$f=g$.
+\\
+\begin{proof}
+Let $f$ and $g$ be parallel morphisms that satisfy the assumptions.
+
+Now, let $y\in Y$. Since $A$ is dense, $y\in\overline{A}$, so there exists some
+net $\{y_{\alpha}\}$ such that $y_{\alpha}\in A$ for all $\alpha$ and $y_{\alpha}\to y$.
+In particular, since $Y$ is Hausdorff, this net converges to the unique limit $y$.
+
+By the hypothesis, $f(y_{\alpha}) = g(y_{\alpha})\ \forall\alpha$, and since both $f$
+and $g$ are continuous, they preserve limits. That is $f(y_{\alpha})\to f(y)$ and
+$g(y_{\alpha})\to g(y)$. Since $f(y_{\alpha}) = g(y_{\alpha})$ for all $\alpha$ and 
+limits of nets in $Y$ are unique, they must converge to the same element, and $f(y)=g(y)$.
+
+Since this works for all $y\in Y$, $f=g$.
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+\section*{Problem 5}
+Prove that if $A_{\alpha}$ is a closed subset of $X_{\alpha}$ for all $\alpha$, then
+$\prod A_{\alpha}$ is closed in $\prod X_{\alpha}$.
+\\
+\begin{proof}
+To show that $\prod A_{\alpha}$ is closed, we need to show that it contains its limit points.
+To do so, let $\{a_{\gamma}\}$ be a convergent net in the product $\prod A_{\alpha}$. In
+particular, each of its projections $\pi_{\alpha}(a_\gamma)$ is also a net in $A_{\alpha}$,
+and since $A_{\alpha}$ is closed, this net converges to elements in $A_{\alpha}$.
+
+Thus, each coordinate $\alpha$ of the net $\{a_{\gamma}\}$ converges in $A_{\alpha}$, so
+any limit point must have coordinates in the $A_{\alpha}$ as well. That is, if $a$ is a
+limit point of $\{a_{\gamma}\}$, then for each $\alpha$, $\pi_{\alpha}(a)\in A_{\alpha}$,
+which means that $a\in\prod A_{\alpha}$ as desired.
+
+Since $\prod A_{\alpha}$ contains all its limit points, it is closed.
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 7
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 8
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
