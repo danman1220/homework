@@ -1,0 +1,281 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\sigalg}{$\sigma$-algebra}
+\newcommand{\A}{\mathscr{A}}
+
+\newtheorem*{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 3\\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+\section*{Problem 1}
+\subsection*{Part 1}
+Prove 1.18.ii from the notes.
+\\
+\begin{proof}
+(Copied from homework 1)
+
+Note that if the composite function $(f,g)$ is measurable, then this statement reduces to
+part i, and the proof is complete.
+
+So, let's prove that $(f,g)$ is measurable, given $f,g$ are each individually measurable.
+(Note that this construction works for general products of measurable spaces, where the
+product \sigalg is given by $\sigma(\mathscr{A}_1\times\mathscr{A}_2)$. Generally, this
+says that the product measurable space has the universal property of product spaces).
+
+Let $E,F\in B(\mathbb{R})$ be measurable sets, and consider the product $E\times F$. The
+inverse image $(f,g)^{-1}(E\times F) = f^{-1}(E)\cap g^{-1}(F)$ is the intersection of
+measurable sets (since $f$ and $g$ are both individually measurable), and is measurable.
+
+Now, consider the ``good set''
+\[
+\mathscr{E} = \{G | G\in B(\mathbb{R}^2) \textrm{and } (f,g)^{-1}(G) \in \mathscr{A}\}
+\]
+It is clear from above that we have the inclusion relations
+\[
+B(\mathbb{R})\times B(\mathbb{R}) \subset \mathscr{E} \subset B(\mathbb{R}^2)
+\]
+Now, $\mathscr{E}$ is clearly a \sigalg, since both conditions on $\mathscr{E}$ preserve
+complements and unions. Therefore, taking $\sigma$ of the inclusion relations yields:
+\[
+\begin{aligned}
+\sigma(B(\mathbb{R})\times B(\mathbb{R})) &\subset \mathscr{E} &\subset B(\mathbb{R}^2)\\
+\implies B(\mathbb{R}^2) &\subset \mathscr{E} &\subset B(\mathbb{R}^2)
+\end{aligned}
+\]
+
+Thus, $\mathscr{E}$ is actually the whole Borel set $B(\mathbb{R}^2)$, and thus
+$(f,g)$ is a measurable function, as desired.
+\end{proof}
+
+\subsection*{Part 2}
+Complete 2.6 from the notes.
+
+Describe all measurable functions $f:\N\to[0,\infty]$ that are finite $\mu_c$-almost everywhere in
+the counting measure, and find
+\[
+\int_{\N} f d\mu_c
+\]
+\\
+\begin{proof}
+Note that the only subset of $\N$ with zero measure is $\emptyset$, so if $f$ is finite
+$\mu_c$-almost everywhere, then $f$ is finite on all subsets of $\N$ i.e. $f$ is bounded.
+
+Then, the integral becomes
+\[
+\int_{\N} f d\mu_c = \sum_{i=1}^{\infty} f_i
+\]
+This is clear to see by approximating $f$ with simple functions that converge monotonically
+to $f$. Let 
+\[
+\phi_i = \sum_{j=1}^{i}f_j \chi_{\{j\}}
+\]
+It is clear that $\phi_{i+1}\geq\phi_i$, since $\phi_i(n) = \phi_{i+1}(n)$ for all $n<i$,
+and for $n>i$, we have
+\[
+\begin{aligned}
+\phi_i(n)&=0\\
+        &\leq\phi_{i+1}(n)
+\end{aligned}
+\]
+since $\phi_i > 0$ for all $i$ (definition of simple function).
+
+It's also clear that $\phi_i\to f$ pointwise, since for fixed $x\in\N$, $\phi_{x+j}(x)=f(x)$
+for all $j>0$.
+
+Thus, the monotone convergence theorem tells us that
+\[
+\begin{aligned}
+\lim_{i\to\infty}\int_{\N}\phi_i(x)d\mu_c(x) &= \int_{\N} \lim_{i\to\infty}\phi_i(x)d\mu_c(x)\\
+\lim_{i\to\infty}\sum_{j=1}^{i}f_j \mu_c(\{j\}) &= \int_{\N} f(x) d\mu_c(x)\\
+\sum_{j=1}^{\infty} f_j &= \int_{\N} f(x)d\mu_c(x)\\
+\end{aligned}
+\]
+as desired.
+\end{proof}
+
+\subsection*{Part 3}
+Do the same thing for the $\delta$-measure $\mu_{\delta_p}$ on $\Omega$.
+\\
+\begin{proof}
+Note that any subset that does not contain $p$ has measure zero, Thus, $f$ is finite
+$\mu_{\delta_c}$-almost everywhere if and only if $f(p)$ is finite. This is clear, since
+$\Omega\setminus\{p\}$ has measure zero, so $f$ can do whatever it wants on $\Omega\setminus\{p\}$.
+However, the measure of $\{p\}$ is not zero, so $f$ must be finite on $\{p\}$.
+
+To compute the integral, we first observe the general fact that changing a function on
+a set of measure zero does not change the integral.
+\begin{lemma}
+For measurable functions $f$ and $g$ from a measurable space $\Omega$ such that $f=g$ 
+$\mu$-almost everywhere, $\int f = \int g$.
+\end{lemma}
+\begin{proof}
+\[
+\begin{aligned}
+\int_{\Omega}fd\delta -\int_{\Omega}gd\delta  &= \int_{\Omega} (f - g)d\delta\\
+                                &= \int_{\{x | f(x) = g(x)\}}(f-g)d\delta + \int_{\{x|f(x)\neq f(g)\}}(f-g)d\delta\\
+                                &= \int_{\{x | f(x) = g(x)\}}(0)d\delta + 0\\
+                                &= 0
+\end{aligned}
+\]
+\end{proof}
+Thus, we have that
+\[
+\int_{\Omega} fd\delta = \int_{\Omega}f(p)\chi_{\{p\}}d\delta
+\]
+and the second integral is the integral of a simple function, and is just $f(p)\delta(\{p\}) = f(p)$.
+Thus,
+\[
+\int_{\Omega}fd\delta = f(p)
+\]
+\end{proof}
+
+\subsection*{Part 4}
+Show that the Dirichlet function is measurable, and calculate its integral.
+\\
+\begin{proof}
+The Dirichlet function is defined as the characteristic function on $\Q$. To see this 
+is measurable, observe that $\Q$ is measurable, since it is a countable disjoint union of
+points, which are all measurable.
+
+The integral can easily be seen to be zero, since
+\[
+\begin{aligned}
+\mu(\Q) &= \mu\left(\bigcup_{q\in\Q} \{q\}\right)\\
+        &= \sum_{q\in\Q}\mu(\{q\})\\
+        &= 0
+\end{aligned}
+\]
+So, by the lemma of the previous problem,
+\[
+\int_{\R} \chi_{\Q}d\mu = \int_{\R} 0 d\mu = 0
+\]
+\end{proof}
+
+\subsection*{Part 5}
+Construct a sequence of functions $\{f_n\}$ satisfying the assumptions of Fatou's lemma such that
+\[
+\lim\int f_n \neq \int\lim f_n
+\]
+
+\begin{proof}
+Let $f_n = \chi_{[n,n+1]}$. Then, $\int_{\R}f_nd\mu = 1$ for all $n$, but $f_n(x)\to 0$ for
+all $x$, so $f_n$ converges pointwise to zero, and thus
+\[
+\begin{aligned}
+\lim_{n\to\infty}\int_{\R}f_nd\mu   &= 1\\
+                                    &\neq 0\\
+                                    &=\int_{\R}\lim_{n\to\infty}f_nd\mu
+\end{aligned}
+\]
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+\section*{Problem 2}
+
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 7
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 8
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
