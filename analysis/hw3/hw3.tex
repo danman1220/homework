@@ -244,8 +244,78 @@ all $x$, so $f_n$ converges pointwise to zero, and thus
 %	PROBLEM 2
 %----------------------------------------------------------------------------------------
 \section*{Problem 2}
+\subsection*{Part a}
+Prove that there exists constants $C_1(n), C_2(n)$ such that
+\[
+C_1(n)r^n \leq \lambda^n B_r \leq C_2(n)r^n
+\]
 
+\begin{proof}
+To begin with, we note that the ($\infty$-norm) cube of radius $r$, defined as the set
+\[
+\{(x_1,\ldots,x_n)\in\R^n\ |\ |x_i| < r\ \forall i\}
+\]
+contains the ball $B_r$. Thus, the volume of the cube $V = (2r)^n$ is an upper
+bound for the Lebesgue measure of $B_n$ (this follows from the monotonicity of the measure,
+and the fact that the Lebesgue measure preserves the standard volume of boxes).
 
+Note also that the ($1$-norm) cube of radius $r$, defined as the set
+\[
+\{(x_1\ldots,x_n)\ |\ \sum_{i=1}^n |x_i| < r\}
+\]
+is contained in the ball $B_r$. This is clear, since the furthest away from the origin
+a point in the $1$-cube of radius $r$ can get is when exactly one coordinate is $r$
+with the rest zero. Since this is contained in $B_r$, every other point is as well.
+
+The volume of the $1$-cube of radius $r$ is a bit trickier to compute. We know
+it looks like a cube with diagonal of length $2r$, which leads to a volume of
+$V = (\frac{2r}{\sqrt{n}})^n$ which works as a lower bound for the Lebesgue measure
+for $B_n$ by a dual argument to the one above.
+
+Thus, we have
+\[
+\left(\frac{2}{\sqrt{n}}\right)^nr^n \leq \lambda^n B_n \leq (2)^nr^n
+\]
+so, $C_1(n) = \left(\frac{2}{\sqrt{n}}\right)^n$ and $C_2(n) = 2^n$ function
+as the desired lower and upper bounds.
+\end{proof}
+
+\subsection*{Part b}
+For $k=1,2,\ldots$ and a fixed $A\in(0,1)$, define $I_k = (k,k+\frac{A}{2^k})$.
+Find
+\[
+\lambda^1\left(\bigcup_{k=1}^{\infty}I_k\right)
+\]
+
+\begin{proof}
+To begin with, we note that each $I_k$ is disjoint from any other. This is clear, since
+\[
+\frac{A}{2^k} < 1\ \forall k
+\]
+so
+\[
+k+\frac{A}{2^k} < k+1\ \forall k
+\]
+
+Therefore, by $\sigma$-additivity of $\lambda^1$, we have
+\[
+\lambda^1\left(\bigcup_{k=1}^{\infty}I_k\right) = \sum_{k=1}^{\infty}\lambda^1(I_k)
+\]
+Now, by the definition of the Lebesgue measure, $\lambda^1((k,k+\frac{A}{2^k})) = k+\frac{A}{2^k} - k = \frac{A}{2^k}$.
+So, the sum becomes
+\[
+\begin{aligned}
+\sum_{k=1}^{\infty}\lambda^1(I_k)   &= \sum_{k=1}^{\infty}\frac{A}{2^k}\\
+                                    &= A\sum_{k=1}^{\infty}\frac{1}{2^k}\\
+                                    &= A
+\end{aligned}
+\]
+Thus, 
+\[
+\lambda^1\left(\bigcup_{k=1}^{\infty}I_k\right) = A
+\]
+as desired.
+\end{proof}
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 %	PROBLEM 3
