@@ -316,11 +316,58 @@ Thus,
 \]
 as desired.
 \end{proof}
+
+\subsection*{Part c}
+%TODO do this last
+
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 %	PROBLEM 3
 %----------------------------------------------------------------------------------------
+\section*{Problem 3}
+For a measurable function $f:(\Omega,\A,\mu)\to\R$, with $\mu(\Omega)<\infty$, which
+is finite $\mu$-almost everywhere, prove that
+\[
+\lim_{n\to\infty} \mu(\{|f|> n\}) = 0
+\]
 
+\begin{proof}
+For this problem, let $I(n): \R^{+}\to [0,\mu(\Omega)]$ defined as $I(n) = \mu(\{|f|>n\})$.
+
+Now, suppose for a contradiction that there existed a sequence $k_i\to\infty$ such that
+$I(k_i)\to L$ for some $L\neq 0$. In particular, this would mean that any subsequence
+of $k_i$ would converge to $L$ as well. So, let $\{k_{i_j}\}$ be a monotonically increasing
+subsequence of $\{k_i\}$. In particular, note that $\{|f| > k_{i_j}\}\supset\{|f| > k_{i_{j+1}}\}$,
+so the sequence of subsets being measured by $\mu$ is monotonic as well. In this case,
+we can apply limit theorems to the measure to get that
+\[
+\begin{aligned}
+\lim_{j\to\infty} \mu\{|f| > k_{i_j}\}) &= \mu\left(\lim_{j\to\infty} \{|f| > k_{i_j}\}\right)\\
+                                        &= \mu(\{|f| = \infty\})\\
+                                        &= 0
+\end{aligned}
+\]
+Where the last line is from the fact that $f$ is finite almost everywhere.
+However, $0\neq L$, which is a contradiction.
+
+Thus, if $\{k_i\}$ is a sequence toward infinity such that $\{I(k_i)\}$ converges, it converges
+to zero.
+
+So, suppose for a contradiction that there exists a sequence $\{n_i\}$ such that $\{I(n_i)\}$
+does not converge. In particular, this would imply that there is some neighborhood of zero $N_0$
+such that there is a subsequence $\{n_{i_j}\}$ that is never in $N_0$. However,
+since the target space $[0,\mu(\Omega)]$ is compact, such a subsequence must have a convergent
+sub-subsequence. By the earlier observation, this sub-subsequence must converge to zero. But 
+all of the subsequence $\{n_{i_j}\}$ avoids $N_0$ and thus any sub-subsequence cannot converge
+to zero, a contradiction.
+
+Thus, every sequence $k_i\to\infty$ defines a convergent sequence $I(k_i)$ that converges
+to zero, so the limit 
+\[
+\lim_{n\to\infty} \mu(\{|f|> n\}) = 0
+\]
+as well.
+\end{proof}
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 %	PROBLEM 4
