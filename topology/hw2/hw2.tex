@@ -298,12 +298,81 @@ neighborhood filter $\mathscr{N}_y\subset\mathscr{F}$ and $\mathscr{F}\to y$ as 
 \section*{Problem 7}
 Let $\R^{\omega}$ be the space of sequences of real numbers, and let $\R^{\infty}$ be
 the space of sequences that are eventually zero. What is $\overline{\R^{\infty}}\subset\R^{\omega}$?
+\\
+\begin{proof}
+We will show $\overline{\R^{\infty}} = \R^{\omega}$.
 
+Let $U$ be an open neighborhood of $x\in\R^{\omega}$. In particular, there is a basis element
+\[
+B = V_1\times V_2\times\ldots\times V_n\times \R\times \R\times\ldots
+\]
+such that $x\in B$ and $B\subset U$. We will now show that $B$ intersects nontrivially
+with $\R^{\infty}$.
+
+Consider the element $(\pi_q(x),\pi_2(x),\ldots,\pi_n(x),0,0,\ldots)\in\R^{\infty}$.
+Since $x\in B$, it follows that $\pi_i(x)\in V_i$ for $i=1\ldots n$. Thus, since we also know
+that $0\in\R$, it follows that $(\pi_q(x),\pi_2(x),\ldots,\pi_n(x),0,0,\ldots)\in B$ as well.
+Thus, $B$ intersects $\R^{\infty}$ nontrivially, as desired.
+
+Since every open neighborhood of $x$ intersects $\R^{\infty}$ nontrivally, $x$ is in the closure
+of $\R^{\infty}$ for all $x$ in $\R^{\omega}$ as desired.
+\end{proof}
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 %	PROBLEM 8
 %----------------------------------------------------------------------------------------
+\section*{Problem 8}
+Show that the metric topology is the coarsest topology for which the distance function
+is continuous.
+\\
+\begin{proof}
+First, we show that the distance function is continuous in the metric topology. Let $(X,d)$
+be a metric space, and consider $d:X\times X\to \R^+$. To show that $d$ is  continuous, let
+$V_{\varepsilon}(r)\subset \R$ be a basic open set (with $r$ a positive number), and observe that
+\[
+\begin{aligned}
+d^{-1}(V_{\varepsilon}(r)) &= \{(x,y)\ |\ d(x,y)\in V_{\varepsilon}(r)\}\\
+\end{aligned}
+\]
+Now, let $(x,y)\in d^{-1}(V_{\varepsilon}(r))$, and choose a $\delta$ such that $d(x,y) < r +\varepsilon - \delta$.
+The neighborhood $V_{\frac{\delta}{2}}(x)\times V_{\frac{\delta}{2}}(y)$
+contains $(x,y)$ and is contained in $d^{-1}(V_{\varepsilon}(r))$. This is clear from the triangle
+inequality, since for $(x',y')\in V_{\frac{\delta}{2}}(x)\times V_{\frac{\delta}{2}}(y)$,
+we have
+\[
+\begin{aligned}
+d(x,x') &< \frac{\delta}{2}\\
+d(y,y') &< \frac{\delta}{2}\\
+d(x,y)  &< r+\varepsilon - \delta\\
+\end{aligned}
+\]
+Thus,
+\[
+\begin{aligned}
+d(x',y')    &< d(x',y) + d(y,y')\\
+            &< d(x,y) + d(x,x') + d(y,y')\\
+            &< r+\varepsilon - \delta + \frac{\delta}{2} + \frac{\delta}{2}\\
+            &= r+\varepsilon
+\end{aligned}
+\]
+as desired.
 
+Thus, $d$ is a continuous function in the product topology of $X\times X$.
+
+Now, let $\mathscr{T}$ be any topology for which $d$ is continuous. Fix$\varepsilon > 0$.
+Then,
+\[
+d^{-1}(V_{\varepsilon}) =  \{(x,y)\ |\ d(x,y) < \varepsilon\}
+\]
+is open as well, by continuity of $d$. Then, it follows that, for fixed $x$, the set
+$\{y | d(x,y) < \varepsilon\}$ is open too. 
+(This is clear, since $\{y\ |\ d(x,y) < \varepsilon\}$ is open in $\{x\}\times X$ in the
+subspace topology, and from a previous problem, it is clear that $\{x\}\times X$ is homeomorphic
+to $X$, and thus $V_{\varepsilon}(y)$ is open in $X$).
+However, since this works for all $\varepsilon > 0$
+and $x\in X$, it follows that the metric topology is coarser than $\mathscr{T}$.
+\end{proof}
 %----------------------------------------------------------------------------------------
 
 \end{document}
+
