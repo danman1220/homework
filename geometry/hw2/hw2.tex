@@ -49,6 +49,8 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\C}{\mathbb{C}}
 
+\newcommand{\supp}{\textrm{supp}}
+
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
 %----------------------------------------------------------------------------------------
@@ -199,8 +201,28 @@ Show that for $M$ a nonempty smooth $n$-manifold, with $n\geq 1$, the vector spa
 is infinite dimensional.
 \\
 \begin{proof}
-%TODO show that functions with disjoint support are independent, then build a bunch of
-%bumps.
+Let $\{U_i\}$ be a set of open subsets of $M$ that are all pairwise disjoint, and consider
+the set of $C^{\infty}$ functions $\{f_i\}$ on $M$ such that $\supp(f_i)\subset U_i$.
+Such a construction is done using partitions of unity subordinate to a carefully chosen
+open cover of $M$.
+
+Now, it is easy to see each $f_i$ is linearly independent of the others. To see this,
+suppose for a contradiction that for some $f_0\in\{f_i\}$, $f_0 = \sum_{i\neq 0} a_if_i$.
+Let $x\in\supp(f_0)$. In particular, we have $f_0(x)\neq 0$. However, since the supports
+of $\{f_i\}$ are all pairwise disjoint, it must be that $f_i(x)=0$ for all $f_i\neq f_0$.
+Thus we have
+\[
+\begin{aligned}
+f_0(x)  &= \sum_{i\neq 0}a_if_i(x)\\
+        &= \sum_{i\neq 0}a_i (0)\\
+        &= 0
+\end{aligned}
+\]
+which contradicts the fact that $f_0(x)\neq 0$.
+
+Now, since an arbitrary number of disjoint open sets can be constructed on $M$, it follows
+that there are arbitrarily many linearly independent functions in $C^{\infty}(M)$,
+so it is infinite dimensional.
 \end{proof}
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
@@ -211,13 +233,73 @@ Consider the algebra $C(M)$ of continuous functions on $M$, and observe that a m
 induces a map $f^*:C(N)\to C(M)$ via pre-composition.
 \subsection*{Part a}
 Show that $f^*$ is linear.
+\\
+\begin{proof}
+Let $g,h\in C(N)$, and $\alpha,\beta\in\R$. Now,
+\[
+\begin{aligned}
+f^*(\alpha g+\beta h)(x)    &= (\alpha g + \beta h)\circ f(x)\\
+                            &= \alpha g(f(x) + \beta h(f(x))\\
+                            &= \alpha f^*(g) + \beta f^*(h)
+\end{aligned}
+\]
+Thus, $f^*$ is linear.
+\end{proof}
 
 \subsection*{Part b}
 Show that $f$ is smooth if and only if $f^*(C^{\infty}(N))\subseteq C^{\infty}(M)$.
+\\
+\begin{proof}
+(=>)
+Assume that $f:M\to N$ is smooth. Then, for any $g\in C^{\infty}(N)$, we have
+$f^*(g) = g\circ f$, which is the composition of smooth functions, and thus
+$f^*(g)\in C^{\infty}(M)$. Therefore, $f^*(C^{\infty}(N))\subseteq C^{\infty}(M)$ as desired. 
+
+(<=)
+Now, suppose $f$ is such that $f^*(C^{\infty}(N))\subseteq C^{\infty}(M)$. In particular,
+for any coordinate chart $\phi$ on $N$, we have $f^*(\phi)\in C^{\infty}(M)$. That is,
+for any chart $\psi$ on $M$, we have
+\[
+\begin{aligned}
+\phi\circ f &\in C^{\infty}(M)\\
+\implies \phi\circ f\circ\psi^{-1} &\in C^{\infty}(\R)
+\end{aligned}
+\]
+Since this works for any $\phi$ on $N$ and $\psi$ on $M$, it follows that $f$ is smooth.
+\end{proof}
 
 \subsection*{Part c}
 Given a homeomorphism $f:M\to N$, show that $f$ is a diffeomorphism if and only if
 $f^*$ restricts to an isomorphism $f^*:C^{\infty}(N)\to C^{\infty}(M)$
+\\
+\begin{proof}
+Observe first that since $f$ is a homeomorphism, $f^{-1}$ is well-defined and continuous.
+
+(=>) Suppose $f$ is a diffeomorphism. In particular, this means $f$ and $f^{-1}$ are smooth.
+By the previous result, we have that
+\[
+\begin{aligned}
+f^*(C^{\infty}(N)) &\subseteq C^{\infty}(M)\\
+f^{-1^*}(C^{\infty}(M)) &\subseteq C^{\infty}(N)
+\end{aligned}
+\]
+In particular, we have that $f^*$ and $f^{-1^*}$ are surjective by the following argument.
+
+Let $g\in C^{\infty}(M)$. Then, $f^{-1^*}(g) = g\circ f^{-1} \in C^{\infty}(N)$, and
+$f^*(f^{-1^*}(g) = g\circ f^{-1}\circ f = g$. Thus, $f^*$ is surjective (more specifically,
+$(f^{-1})^* = f^{-1^*}$ on $C^{\infty}(N)$).
+
+By the same argument, $f^{-1^*}$ is surjective and the inverse of $f^*$. Thus,
+$f^*$ is an isomorphism as desired.
+
+(<=)
+Now, suppose $f^*$ restricts to an isomorphism between $C^{\infty}(N)$ and $C^{\infty}(M)$.
+In particular, this means that
+$f^*(C^{\infty}(N)) \subseteq C^{\infty}(M)$, which implies $f$ is smooth. Now, the above
+argument suggests that the same argument for $f^{-1^*} = (f^{-1})^*$ shows that $f^{-1}$ is smooth
+as well. Thus, $f$ and $f^{-1}$ are smooth, and $f$ is a diffeomorphism.
+\end{proof}
+
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 %	PROBLEM 5
