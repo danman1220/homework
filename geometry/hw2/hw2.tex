@@ -1,0 +1,289 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Geometry} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 2\\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+\section*{Problem 2-1}
+For $f$ the Heaviside step function (with $f(0)=1$), show that $\forall x \in\R$, there
+exist smooth charts $(U,\phi)$ around $x$ and $(V,\psi)$ around $f(x)$ such that 
+$\psi\circ f\circ\phi^{-1}$ is smooth as a map from its domain to its image, but $f$ is not
+smooth in a smooth manifold sense.
+\\
+\begin{proof}
+For $x\neq 0$, neighborhoods avoiding zero can be chosen, and identity charts make $f$
+locally smooth. For $x=0$, set $U = (-\epsilon,\epsilon)$, $V = (1-\epsilon,1+\epsilon)$
+and have $\phi_U = \psi_V = \textrm{id}$.
+Then, on $U\cap f^{-1}(V) = [0,\epsilon)$ we have $\psi\circ f\circ\phi^{-1}(x) = 1$
+which is smooth. But this fails the test in proposition 2.5, so $f$ is not smooth in a
+manifold sense.
+\end{proof}
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+\section*{Problem 2-3}
+For each of the following maps, show that the map is smooth via computation through coordinate
+representations.
+\subsection*{Part a}
+The power map $p_n:S^1\to S^1$ defined as $p_n(z) = z^n$.
+\\
+\begin{proof}
+For this problem, we will use two coordinate charts on $S^1$. First, let's parameterize
+the circle by $\theta$, so that the point $\theta$ is identified with $\exp(i\theta)$ in the
+standard embedding of the circle into $\C$. Then, the first coordinate chart will be for
+$\theta\in(0,2\pi)$ given as $\phi(\theta) = \theta$. The second coordinate chart will
+be for $\theta\in(-\pi,\pi)$ (where $2\pi\theta \sim\theta$) given as $\psi(\theta) = \theta$.
+
+Now, the transition maps can easily be verified to be smooth. To see this, let $\theta_0$
+be a point in the intersection of the two charts. Then, if $\theta\in(0,\pi)$, we have
+\[
+\begin{aligned}
+\phi(\theta) &= \theta\\
+\psi(\theta) &= \theta\\
+\end{aligned}
+\]
+Which are easily verified to be smooth and compatible with each other.
+
+Suppose, then, that $\theta\in (\pi,2\pi)$. Then, we have that
+\[
+\begin{aligned}
+\phi(\theta) &= \theta\\
+\psi(\theta) &= \theta - 2\pi
+\end{aligned}
+\]
+With transition charts
+\[
+\begin{aligned}
+\phi\circ\psi^{-1}(\theta) = \theta + 2\pi\\
+\psi\circ\phi^{-1}(\theta) = \theta - 2\pi
+\end{aligned}
+\]
+which are clearly smooth.
+
+Now, we just have to check that the power function, which can be thought of in terms of
+our parameterization as $p_n(\theta) = n\theta (\mod 2\pi)$, is smooth.
+
+So, let's compute some coordinate representations. We have a total of four to check.
+\[
+\begin{aligned}
+\phi\circ p_n\circ\phi^{-1}(\theta) &= n\theta (\mod 2\pi)\\
+\psi\circ p_n\circ\psi^{-1}(\theta) &= n(\theta+2\pi)  (\mod 2\pi)- 2\pi\\
+\phi\circ p_n\circ\psi^{-1}(\theta) &= n(\theta +2\pi) (\mod 2\pi)\\
+\psi\circ p_n\circ\phi^{-1}(\theta) &= n\theta  (\mod 2\pi)- 2\pi
+\end{aligned}
+\]
+Now, addition of a scalar is a smooth operation, so we just have to check that the
+function $p_n$ is smooth as a function of $\theta$. 
+
+Now, we observe that $p_n$ is continuous as a function of $\theta$ by viewing $p_n:[0,2\pi)\to\R$
+as a continuous function $\theta\mapsto n\theta$, and passing through the quotient $\R/{2\pi\Z}$.
+Since the derivative $p_n' = np_{n-1}$ is also of the same form, it is continuous as well,
+and by induction each derivative of $p_n$ is continuous, so $p_n$ is smooth.
+
+Thus, the composition maps defined above are smooth, and $p_n$ is a smooth function from
+$S^1$ to itself.
+\end{proof}
+
+\subsection*{Part b}
+The antipodal map $\alpha:S^n\to S^n$ by $\alpha(x) = -x$.
+\\
+\begin{proof}
+Consider the stereographic projection charts $\sigma$ and $\tilde{\sigma}$, where
+$\tilde{\sigma}(x) = -\sigma(-x)$. Let's compute some coordinate representations:
+\[
+\begin{aligned}
+\sigma\circ\alpha\circ\sigma^{-1}(x) &= \sigma(-\sigma^{-1}(x))\\
+\tilde{\sigma}\circ\alpha\circ\tilde{\sigma}^{-1}(x) &= \tilde{\sigma}(-\tilde{\sigma}^{-1}(x))\\
+\sigma\circ\alpha\circ\tilde{\sigma}^{-1}(x) &= \sigma(-\tilde{\sigma}^{-1}(x))\\
+\tilde{\sigma}\circ\alpha\circ\sigma^{-1}(x) &= \tilde{\sigma}(-\sigma^{-1}(x))
+\end{aligned}
+\]
+Now, these are all compositions of smooth functions, which are smooth as well.
+Thus, the antipodal map is a smooth function. 
+\end{proof}
+
+\subsection*{Part c}
+Show that the map $F:S^3\to S^2$ defined as $F(w,z) = (z\bar{w} + w\bar{z}, iw\bar{z} - iz\bar{w}, z\bar{z} - w\bar{w})$,
+is smooth.
+\\
+\begin{proof}
+To show that this map is smooth, we will show it is smooth in the ambient space $\C^2\setminus\{0\}$
+and $\R^3\setminus\{0\}$. 
+
+Now, $F$ is smooth as a map from the ambient spaces, which is clear when viewing it as a
+map from $\R^4\setminus\{0\}\to\R^3\setminus\{0\}$. Using this, we have that
+\[
+F(x^1,x^2,x^3,x^4) = (2(x^1x^3 + x^2x^4),2(x^2x^3 - x^1x^4), (x^1)^2 + (x^2)^2 - (x^3)^2 - (x^4)^2)
+\] 
+which is clearly smooth. Now, since $F$ is smooth in the ambient space, it must also be smooth
+when restricted to $S^3\subset \C^2$.
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+\section*{Problem 2-7}
+Show that for $M$ a nonempty smooth $n$-manifold, with $n\geq 1$, the vector space $C^{\infty}(M)$
+is infinite dimensional.
+\\
+\begin{proof}
+%TODO show that functions with disjoint support are independent, then build a bunch of
+%bumps.
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+\section*{Problem 2-10}
+Consider the algebra $C(M)$ of continuous functions on $M$, and observe that a map$f:M\to N$
+induces a map $f^*:C(N)\to C(M)$ via pre-composition.
+\subsection*{Part a}
+Show that $f^*$ is linear.
+
+\subsection*{Part b}
+Show that $f$ is smooth if and only if $f^*(C^{\infty}(N))\subseteq C^{\infty}(M)$.
+
+\subsection*{Part c}
+Given a homeomorphism $f:M\to N$, show that $f$ is a diffeomorphism if and only if
+$f^*$ restricts to an isomorphism $f^*:C^{\infty}(N)\to C^{\infty}(M)$
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+\section*{Problem 2-14}
+For $A$ and $B$ disjoint closed subsets of a smooth manifold $M$, show that there
+exists $f\in C^{\infty}$ such that $0\leq f\leq 1$, $f^{-1}(0) = A$, and $f^{-1}(1) = B$.
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+\section*{Problem 3-5}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 7
+%----------------------------------------------------------------------------------------
+\section*{Problem 3-6}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 8
+%----------------------------------------------------------------------------------------
+\section*{Problem 3-7}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 9
+%----------------------------------------------------------------------------------------
+\section*{Problem 3-8}
+For $M$ a smooth manifold, and $p\in M$, let $\mathscr{V}_pM$ be the set of equivalence
+classes of smooth curves starting at $p$ under the relation $\gamma_1 \sim \gamma_2$ if
+for all $f\in C^{\infty}(M)$, $(f\circ\gamma_1)'(0) = (f\circ\gamma_2)'(0)$. Show that
+the map $\Psi:\mathscr{V}_pM\to T_pM$ defined as $\Psi[\gamma] = \gamma'(0)$ is
+well defined and bijective.
+\\
+\begin{proof}
+To begin with, we show that this map is well defined. To do so, let $\gamma_1$ and $\gamma_2$
+be equivalent in the sense defined above. In particular, this means that $d\gamma_1(\partial_t|_0)(f) = d\gamma_2(\partial_t|_0)$
+for all $f$ in $\C^{\infty}(M)$. Thus, since the differentials are functions on $C^{\infty}(M)$
+that are identical for all $f$, we have that $d\gamma_1(\partial_t|_0) = d\gamma_2(\partial_t|_0)$
+which implies $\gamma_1'(0) = \gamma_2'(0)$ as desired.
+
+Now, let's show that this is bijective. To do so, we will first show $\Psi$ is surjective.
+Let $v$ be some vector in $T_pM$. In particular, $v = v^i\frac{\partial}{\partial x^i}|_p$
+for some coordinates $x^i$ centered at $p$. Now, define a curve $\gamma:[0,1]\to M$ as $\gamma^i(t) = tv^i$.
+It is clear that $\gamma'(0) = v$, since 
+$\gamma'^i(0) = v^i$, which implies $\gamma'(0) = v^i\partial_i = v$ as desired.
+
+Second, we will show $\Psi$ is injective. This is immediate from the definition of the 
+equivalence relation, since by the argument for well-definedness if $\gamma_1'(0)=\gamma_2'(0)$,
+then $\gamma_1\sim\gamma_2$.
+
+Thus, $\Psi$ is bijective, as desired.
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 10
+%----------------------------------------------------------------------------------------
+\section*{Problem 3-4}
+Show $TS^1 \cong S^1\times\R$.
+\\
+\begin{proof}
+
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 11
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+\end{document}

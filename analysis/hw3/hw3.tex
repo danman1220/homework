@@ -182,9 +182,9 @@ $\mu$-almost everywhere, $\int f = \int g$.
 \begin{proof}
 \[
 \begin{aligned}
-\int_{\Omega}fd\delta -\int_{\Omega}gd\delta  &= \int_{\Omega} (f - g)d\delta\\
-                                &= \int_{\{x | f(x) = g(x)\}}(f-g)d\delta + \int_{\{x|f(x)\neq f(g)\}}(f-g)d\delta\\
-                                &= \int_{\{x | f(x) = g(x)\}}(0)d\delta + 0\\
+\int_{\Omega}fd\mu -\int_{\Omega}gd\mu  &= \int_{\Omega} (f - g)d\mu\\
+                                &= \int_{\{x | f(x) = g(x)\}}(f-g)d\mu + \int_{\{x|f(x)\neq f(g)\}}(f-g)d\mu\\
+                                &= \int_{\{x | f(x) = g(x)\}}(0)d\mu + 0\\
                                 &= 0
 \end{aligned}
 \]
@@ -318,8 +318,45 @@ as desired.
 \end{proof}
 
 \subsection*{Part c}
-%TODO do this last
+Let $E\subset \R$ be compact with $|E|>0$. Prove that for any $\theta \in (0,1)$,
+there exists some open interval $\Delta\subset \R$ such that
+\[
+|\Delta\cap E| \geq \theta |\Delta|
+\]
 
+\begin{proof}
+Suppose for a contradiction that there existed some $\theta$ such that for all intervals
+$\Delta$, the inequality
+\[
+|\Delta\cap E| < \theta |\Delta|
+\]
+held. In particular, let $\mathscr{O}$ be any open cover of $E$, and let $O$ be the union
+of all $O\in\mathscr{O}$. Then, it is possible to write $O$ as a countable disjoint union of
+open intervals
+\[
+O = \bigcup_{i=1}^{\infty} I_i
+\]
+Now, we have that
+\[
+\begin{aligned}
+|E|         &= |O\cap E|
+            &= |\bigcup_{i=1}^{\infty} (I_i\cap E)|\\
+            &= \sum_{i=1}^{\infty} |I_i\cap E|\\
+            &< \sum_{i=1}^{\infty} \theta|I_i|\\
+            &= \theta\sum_{i=1}^{\infty}|I_i|\\
+            &= \theta|O|
+\end{aligned}
+\]
+Thus, $|E| < \theta|O|$ for $\theta\in(0,1)$ and any $O$ open containing $E$. Thus,
+\[
+|E| < \inf\{|O|\ |\ O\supset E \textrm{ open}\}
+\]
+But Borel-regularity says that
+\[
+|E| = \inf\{|O|\ |\ O\supset E \textrm{ open}\}
+\]
+which is a contradiction as desired.
+\end{proof}
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 %	PROBLEM 3
@@ -374,31 +411,131 @@ as well.
 %----------------------------------------------------------------------------------------
 \section*{Problem 4}
 Let $\{E_n\}$ be a sequence of measurable subsets of $\Omega$ with measure $\mu$, with
-$\sum\mu(E_n) = S$. Find $\lim\sup\mu(E_n)$.
+$\sum\mu(E_n) = S$. Find $\mu\left(\limsup E_n\right)$.
 \\
 \begin{proof}
+We know that $\limsup E_n = \bigcap_{i=0}^{\infty}\left(\bigcup_{j=i}^{\infty}E_j\right)$. 
+Now, consider the sequence $A_i$ such that 
+\[
+A_i = \bigcup_{j=i}^{\infty}E_i
+\]
+which is a monotonic sequence with limit
+\[
+\begin{aligned}
+\lim_{i\to\infty}A_i    &= \bigcap_{i=1}^{\infty}A_i\\
+                        &= \limsup E_n
+\end{aligned}
+\]
+So,
+\[
+\begin{aligned}
+\mu\left(\limsup E_n\right) &= \mu\left(\lim_{i\to\infty}A_i\right)\\
+                            &= \lim_{i\to\infty}\mu(A_i)\\
+\end{aligned}
+\]
+Now, we need to find out what $\mu(A_i)$ looks like.
 
+Consider the fact that
+\[
+\begin{aligned}
+\mu(A_i)    &= \mu\left(\bigcup_{j=i}^{\infty}E_j\right)\\
+            &\leq \sum_{j=i}^{\infty}\mu(E_j)
+\end{aligned}
+\]
+But since the sum $\sum_{n=1}^{\infty}E_n$ converges, its tails must approach zero.
+Thus,
+\[
+\lim_{i=1}^{\infty}\sum_{j=i}^{\infty}\mu(E_j) \to 0
+\]
+so,
+\[
+\begin{aligned}
+\mu\left(\limsup E_n\right) &= \lim_{i\to\infty}\mu(A_i)\\
+                            &\leq \lim_{i\to\infty}\sum_{j=i}^{\infty}\mu(E_j)\\
+                            &\to 0
+\end{aligned}
+\]
+
+Thus, $\mu\left(\limsup E_n\right)= 0$.
 \end{proof}
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 %	PROBLEM 5
 %----------------------------------------------------------------------------------------
+\section*{Problem 5}
+Prove that any continuous function $f:\R\to\C$ is Borel-measurable.
+\\
+\begin{proof}
+This was proved as a lemma in problem set 1. It is copied below.
 
+\begin{lemma}
+For $f:X\to Y$ continuous, $f$ is also measurable on the Borel \sigalg of $X$ and $Y$.
+\end{lemma}
+\begin{proof}
+To see this, consider the ``good set''
+\[
+E = \{G | G\in B(Y) \textrm{and } f^{-1}(G)\in B(X)\}
+\]
+Clearly, $\mathscr{T}_Y \subset E$, since any open set in $Y$ is in $B(Y)$, and since
+$f$ is continuous, the inverse image of an open set is open, and is in $B(X)$.
+Note also that $E\subset B(Y)$ by construction.
+
+Now, $E$ is also a \sigalg. To see this, note that it is closed under complements and
+unions, since both $B(Y)$ and the inverse image respect these operations.
+
+So, this leads to the following relation:
+\[
+\sigma(\mathscr{T}_Y) \subset \sigma(E) \subset \sigma(B(Y))
+\]
+which simplifies to
+\[
+B(Y) \subset E \subset B(Y)
+\]
+That is, $E = B(Y)$. In words, each measurable set in $Y$ has an inverse image under $f$
+that is measurable. Thus, $f$ is measurable.
+\end{proof}
+
+Thus, since $f$ is continuous, it is Borel-measurable as desired.
+\end{proof}
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 %	PROBLEM 6
 %----------------------------------------------------------------------------------------
+\section*{Problem 6}
+Find
+\[
+\int_{[0,1]}\frac{1}{x}d\lambda^1(x)
+\]
+Without using Riemann integration theory.
+\\
+\begin{proof}
+We will show that the integral diverges to infinity.
 
-%----------------------------------------------------------------------------------------
-%----------------------------------------------------------------------------------------
-%	PROBLEM 7
-%----------------------------------------------------------------------------------------
+To do so, let's construct simple functions under $\frac{1}{x}$ such that their integral
+grows without bound.
 
-%----------------------------------------------------------------------------------------
-%----------------------------------------------------------------------------------------
-%	PROBLEM 8
-%----------------------------------------------------------------------------------------
+Let's use the construction of the monotonic increasing sequence of simple functions
+approaching $f$ using dyadic intervals.
 
-%----------------------------------------------------------------------------------------
+We have
+\[
+\phi_N = \sum_{k=2^N+1}^{N2^N} \frac{k-1}{2^N}\chi_{E_k^{(N)}} + N\chi_{\{f \geq N\}}
+\]
+with $E_k^{(N)} = f^{-1}(\Delta_k^{(N)})$.
 
+Now, we know that $\{f\geq N\} = [0,\frac{1}{N}]$ and that
+$E_k^{(N)} = [\frac{2^N}{k},\frac{2^N}{k-1}]$.
+Thus,
+\[
+\begin{aligned}
+\int_{[0,1]}\phi_N(x)d\lambda(x)  &= \sum_{k=2^N+1}^{N2^N} \frac{k-1}{2^N}\mu(E_k^{(N)}) + N\mu(\{f \geq N\})\\
+                                &= \sum_{k=2^N+1}^{N2^N} \frac{k-1}{2^N}\left(\frac{2^N}{k-1}-\frac{2^N}{k}\right) + N\frac{1}{N}\\
+                                &= \sum_{k=2^N+1}^{N2^N} \left(1 - \frac{k-1}{k}\right) + 1\\
+                                &= \sum_{k=2^N+1}^{N2^N} \left(\frac{1}{k} + 1\right)
+\end{aligned}
+\]
+which clearly diverges in the limit.
+Thus, the simple functions below $f$ have unbounded integral, so $f$ must as well.
+\end{proof}
+%----------------------------------------------------------------------------------------
 \end{document}
