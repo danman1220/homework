@@ -408,8 +408,24 @@ case that the pushforward $d\gamma(\partial_t) = \gamma'$ is zero.
 %	PROBLEM 8
 %----------------------------------------------------------------------------------------
 \section*{Problem 3-7}
+Show that the map $\Phi:\mathscr{D}_p\to T_pM$ given by $\Phi(v)(f) = v([f]_p)$ is an
+isomorphism. ($\mathscr{D}_p$ is the vector space of linear derivations of germs of
+functions at $p$).
+\\
+\begin{proof}
+To begin with, we observe that the map $\Phi$ is clearly linear. Furthermore, it is injective. 
+This is clear, since
+if we have that $\Phi(x)(f)=\Phi(y)(f)$ for $x,y$ in $\mathscr{D}_p$ and all $f\in C^{\infty}(M)$,
+then it follows that $x([f]_p) = y([f]_p)$ for all $f$. In particular, it holds for all
+equivalence classes, so $x$ must equal $y$.
 
+$\Phi$ is also clearly surjective. Let $x\in T_pM$. In particular, the linear derivation
+$\tilde{x}$, operating on germs by $\tilde{x}([f]_p) = x(f)$ gets mapped by $\Phi$
+as $\Phi(\tilde{x}) = x$. Now, $\tilde{x}$ is well defined, by a straightforward application
+of Proposition 3.8.
 
+Thus, $\Phi$ is a linear isomorphism, as desired.
+\end{proof}
 
 %----------------------------------------------------------------------------------------
 \pagebreak
@@ -549,16 +565,22 @@ chart:
 \[
 \widetilde{\varphi}(\sigma,x^i\partial_i|_{\sigma}) = (\phi(l_{\theta^{-1}}(\sigma)),x^i)
 \]
+We note that this chart is smooth, since the basis $\partial_i|_{\sigma}$ arises from
+the left-invariant vector field given by $\alpha^{-1}(\partial_i|_e)$, which smoothly varies
+across the manifold.
+
 Now, let's compute the transition map $\widetilde{\varphi}\circ\Phi\circ\widetilde{\phi}^{-1}$.
+For $\sigma$ in the coordinatized neighborhood of $\theta$, we have
 \[
 \begin{aligned}
 \widetilde{\varphi}\circ\Phi\circ\widetilde{\phi}^{-1}(\phi(l_{\theta^{-1}}(\sigma)),x^i) &= \widetilde{\varphi}\circ\Phi(\sigma,x^i\partial_i|_e)\\
                 &=\widetilde{\varphi}(\sigma,dl_{\sigma}(x^i\partial_i|_e))\\
-                &=\widetilde{\varphi}(\sigma,dl_{\sigma\theta^{-1}}(x^i\partial_i|_{\theta}))\\
-                &=(\phi(l_{\theta^{-1}}(\sigma)),dx^i(l_{\sigma\theta^{-1}}(x^i\partial_i|_{\theta}))
+                &=\widetilde{\varphi}(\sigma,(x^i\partial_i|_{\sigma}))\\
+                &=(\phi(l_{\theta^{-1}}(\sigma)),x^i)
 \end{aligned}
 \]
 Which is a smooth function, so $\Phi$ is a diffeomorphism.
+Here, we used the fact that $dl_{\sigma}(\partial_i|_e) = \partial_i|_{\sigma}$.
 
 Therefore, the tangent bundle of a Lie group is trivial.
 Applying this to the special case of $G=S^1$, we have that $TS^1\cong S^1\times\R$ as
@@ -569,6 +591,45 @@ desired.
 %----------------------------------------------------------------------------------------
 %	PROBLEM 11
 %----------------------------------------------------------------------------------------
+\section*{Problem 11}
+Let $F:M\to M$ be the identity function on $M$. Show that, for two coordinate systems
+$\phi = (x_i)$ and $\psi = (y_i)$ of a point $p$, find the change of basis matrix $dF_p$, and
+show that the two charts give rise to compatible charts on the tangent space.
+\\
+\begin{proof}
+To begin with, we note what $dF_p$ does to the basis elements $\partial_{x^j}$.
+Since $F$ is the identity, it must be that each basis element gets sent to itself.
+However, we must now express the basis vector in the $y^i$ coordinate system. To do
+so, we push forward $\partial_{x^j}$ along the $y^i$ coordinate via $dy^i$.
+Thus,
+\[
+\begin{aligned}
+\partial_{x^j} &= dy^i(\partial_{x^j})\partial_{y^i}\\
+                &= \partial_{x^j}(y^i)\partial_{y^i}
+\end{aligned}
+\]
+so the transformation matrix is just $\partial_{x^j}(y^i)$.
 
+Now to show that the charts are smooth in $TM$. To do so, we compute the transition
+chart
+\[
+\tilde{\phi}\circ\tilde{\psi^{-1}}
+\]
+Which is given as,
+\[
+\begin{aligned}
+\tilde{\phi}\circ\tilde{\psi^{-1}}(y(p),dy(v))  &= \tilde{\phi}(p,v)\\
+                                                &= (x(p), dx(v))\\
+\end{aligned}
+\]
+So, we have that
+\[
+\tilde{\phi}\circ\tilde{\psi^{-1}} = (\phi\circ\psi^{-1}, \partial_{x^j}(y^i))
+\]
+which is smooth as desired.
+
+By symmetry of the problem, the reverse transition chart $\tilde{\psi}\circ\tilde{\phi^{-1}}$
+is smooth as well.
+\end{proof}
 %----------------------------------------------------------------------------------------
 \end{document}
