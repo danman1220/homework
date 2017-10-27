@@ -360,7 +360,118 @@ Thus, $\Psi$ is bijective, as desired.
 Show $TS^1 \cong S^1\times\R$.
 \\
 \begin{proof}
+To prove this, we first note that there is a natural group structure on $S^1$ when thought
+of as a subset of $\C^*$, namely the multiplicative structure from $\C^*$. This is clearly
+a Lie group, since the map $(\theta,\phi)\mapsto\theta\phi^{-1}$ is smooth. To see this,
+consider the fact that, in $\C^*$, the map $(z_1,z_2)\mapsto z_1z_2^{-1}$ from $\C^*$ to
+itself is clearly smooth, since multiplication, and inversion are smooth operations.
+Thus, $S^1$ is a Lie group under this operation.
 
+Consider the space $\mathfrak{g}$, the set of all left-invariant vector fields on a Lie group $G$.
+Here, a vector field on a Lie group $G$ is said to be \em left-invariant\em\ if for all $\sigma\in G$,
+we have that 
+\[
+dl_{\sigma}\circ X = X\circ l_{\sigma}
+\]
+for $l_{\sigma}$ the operation of left-multiplication by $\sigma$.
+Clearly, this forms a vector space, with addition and scalar multiplication inherited
+from the tangent spaces. It is clearly closed under these operations, since
+\[
+\begin{aligned}
+(X + Y)\circ l_{\sigma} &= X\circ l_{\sigma} + Y\circ l_{\sigma}\\
+                        &= dl_{\sigma}\circ X + dl_{\sigma}\circ Y\\
+                        &= dl_{\sigma}\circ(X + Y)
+\end{aligned}
+\]
+And, for $r\in\R$,
+\[
+(rX)\circ l_{\sigma} = r(X\circ l_{\sigma}) = r(dl_{\sigma}\circ X) = dl_{\sigma}\circ rX
+\]
+Thus, $\mathfrak{g}$ is a real vector space.
+
+Now, we establish an isomorphism between $\mathfrak{g}$ and
+the tangent space $T_eG$ given by $\alpha:\mathfrak{g}\to T_eG$, $\alpha(X) = X(e)$.
+
+Now, $\alpha$ is clearly linear, so we just need to show it is injective and surjective.
+To see this, let $\alpha(X) = \alpha(Y)$. Then, for each $\theta\in G$, we have
+\[
+\begin{aligned}
+X(\theta)   &= dl_{\theta}X(e)\\
+            &= dl_{\theta}Y(e)\\
+            &= Y(\theta)
+\end{aligned}
+\]
+Thus, $\alpha(X)=\alpha(Y)$ implies that $X=Y$, so $\alpha$ is injective.
+
+To show surjectivity, let $x\in T_eG$. Then, define a vector field $X$ to be $X(\sigma) = dl_{\sigma}(x)$.
+Clearly, $X$ is left-invariant, since for all $\theta,\sigma \in G$, we have
+\[
+X(l_{\sigma}\theta) = X(\theta\sigma) = dl_{\sigma\theta}(x) = dl_{\sigma}dl_{\theta}(x) = dl_{\sigma}X(\theta)
+\]
+Here, we used the functoriality of $d$ to split $dl_{\sigma\theta} = dl_{\sigma}dl_{\theta}$.
+
+Now, it is clear that $\alpha(X) = X(e) = x$, so $\alpha$ is surjective as well.
+Therefore, the tangent space $T_eG$ is isomorphic to the set $\mathfrak{g}$ of left-invariant
+vector fields on $G$. 
+
+This establishes the basic isomorphism we will use. Define $\Phi:G\times T_eG\to TG$
+by 
+\[
+\Phi(\sigma,x) = dl_{\sigma}\alpha^{-1}(x)
+\] 
+That is, for a vector $x\in T_eG$, identify
+it with the left-invariant vector field $X\in\mathfrak{g}$ by $\alpha(X) = x$. Then,
+$\Phi$ takes the tangent vector $x$ and sends it to the tangent vector $X(\sigma)$.
+
+$\Phi$ can be shown to be a smooth bijection. First, we will show it is surjective and
+injective, then we will show it is smooth.
+
+First, let $\Phi(\theta_1,x_1) = \Phi(\theta_2,x_2)$. Clearly, $\theta_1 = \theta_2$, since
+if $\Phi(\theta_1,x_1) = \Phi(\theta_2,x_2)$, then its projections back to $G$ must
+be equal as well. Thus$\theta_1 =\theta_2$.
+Now, let $X_i = \alpha^{-1}(x_i)$. Then, we have that $X_1(\theta)=X_2(\theta)$.
+Since $X_i$ is left-invariant, we must have that
+\[
+X_1(e) = dl_{\theta^{-1}}\circ X_1(\theta) = dl_{\theta^{-1}}\circ X_2(\theta) = X_2(e)
+\]
+So $x_1 = x_2$ and $\Phi$ is injective.
+
+Second, let $(\sigma,x)\in TG$. Clearly, $\Phi(\sigma,x) = X(\sigma) = (\sigma,x)$ by
+the definition of $\Phi$, so $\Phi$ is surjective as well.
+
+Now we can see also that $\Phi$ is smooth. To do so, let's choose a coordinate chart $(U,\phi)$
+centered at $e$ given as $(x_1,\ldots,x_n)$ (which naturally gives a basis for $T_eG$
+as $\{\partial_1|_e,\ldots,\partial_n|_e\}$).
+This chart induces a chart at $\theta$ given on $l_{\theta}(U)$ by $\phi\circ l_{\theta^{-1}}$,
+and induces a basis on $T_{\theta}G$ by pushing forward $\partial_i|_e$ along $dl_{\theta}$
+to get $\partial_i|_{\theta}$.
+
+So, for any $(\theta, x)\in G\times T_eG$, we have the coordinate chart $(l_{\theta}U\times T_eG,\tilde{\phi})$
+given as
+\[
+\widetilde{\phi}(\sigma,x^i\partial_i|_e) = (\phi(l_{\theta^{-1}}(\sigma)), x^i)
+\]
+Recall also that we need a coordinate chart on $TG$, but this is induced from the
+coordinate chart defined above. In particular, (for $\pi$ the standard projection map
+from $TG$ to $G$) on $\pi^{-1}(l_{\theta}(U))$ we have the
+chart:
+\[
+\widetilde{\varphi}(\sigma,x^i\partial_i|_{\sigma}) = (\phi(l_{\theta^{-1}}(\sigma)),x^i)
+\]
+Now, let's compute the transition map $\widetilde{\varphi}\circ\Phi\circ\widetilde{\phi}^{-1}$.
+\[
+\begin{aligned}
+\widetilde{\varphi}\circ\Phi\circ\widetilde{\phi}^{-1}(\phi(l_{\theta^{-1}}(\sigma)),x^i) &= \widetilde{\varphi}\circ\Phi(\sigma,x^i\partial_i|_e)\\
+                &=\widetilde{\varphi}(\sigma,dl_{\sigma}(x^i\partial_i|_e))\\
+                &=\widetilde{\varphi}(\sigma,dl_{\sigma\theta^{-1}}(x^i\partial_i|_{\theta}))\\
+                &=(\phi(l_{\theta^{-1}}(\sigma)),dx^i(l_{\sigma\theta^{-1}}(x^i\partial_i|_{\theta}))
+\end{aligned}
+\]
+Which is a smooth function, so $\Phi$ is a diffeomorphism.
+
+Therefore, the tangent bundle of a Lie group is trivial.
+Applying this to the special case of $G=S^1$, we have that $TS^1\cong S^1\times\R$ as
+desired.
 \end{proof}
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
