@@ -91,7 +91,7 @@ which is smooth. But this fails the test in proposition 2.5, so $f$ is not smoot
 manifold sense.
 \end{proof}
 %----------------------------------------------------------------------------------------
-
+\pagebreak
 %----------------------------------------------------------------------------------------
 %	PROBLEM 2
 %----------------------------------------------------------------------------------------
@@ -156,6 +156,12 @@ and by induction each derivative of $p_n$ is continuous, so $p_n$ is smooth.
 
 Thus, the composition maps defined above are smooth, and $p_n$ is a smooth function from
 $S^1$ to itself.
+
+Alternately, utilizing the Lie group structure of $S^1$ defined in problem 3-4,
+we have that the map $l_{\theta}$, left multiplication by $\theta$, is smooth.
+Since the power map is just repeated application of $l_{\theta}$ to itself,
+it is a composition $n$ times of $l_{\theta}$, and thus is a composition of smooth
+functions and is smooth.
 \end{proof}
 
 \subsection*{Part b}
@@ -190,9 +196,12 @@ map from $\R^4\setminus\{0\}\to\R^3\setminus\{0\}$. Using this, we have that
 F(x^1,x^2,x^3,x^4) = (2(x^1x^3 + x^2x^4),2(x^2x^3 - x^1x^4), (x^1)^2 + (x^2)^2 - (x^3)^2 - (x^4)^2)
 \] 
 which is clearly smooth. Now, since $F$ is smooth in the ambient space, it must also be smooth
-when restricted to $S^3\subset \C^2$.
+when restricted to $S^3\subset \C^2$, since $S^3$ is an embedded submanifold, and $S^2=F(S^3)$
+is also an embedded submanifold. This is clear from the definition of the coordinate charts
+of embedded submanifolds, which are slices of coordinate charts on the ambient space.
 \end{proof}
 %----------------------------------------------------------------------------------------
+\pagebreak
 %----------------------------------------------------------------------------------------
 %	PROBLEM 3
 %----------------------------------------------------------------------------------------
@@ -225,6 +234,7 @@ that there are arbitrarily many linearly independent functions in $C^{\infty}(M)
 so it is infinite dimensional.
 \end{proof}
 %----------------------------------------------------------------------------------------
+\pagebreak
 %----------------------------------------------------------------------------------------
 %	PROBLEM 4
 %----------------------------------------------------------------------------------------
@@ -301,28 +311,108 @@ as well. Thus, $f$ and $f^{-1}$ are smooth, and $f$ is a diffeomorphism.
 \end{proof}
 
 %----------------------------------------------------------------------------------------
+\pagebreak
 %----------------------------------------------------------------------------------------
 %	PROBLEM 5
 %----------------------------------------------------------------------------------------
 \section*{Problem 2-14}
 For $A$ and $B$ disjoint closed subsets of a smooth manifold $M$, show that there
 exists $f\in C^{\infty}$ such that $0\leq f\leq 1$, $f^{-1}(0) = A$, and $f^{-1}(1) = B$.
+\\
+\begin{proof}
+Since $A$ and $B$ are disjoint, there exists an open neighborhood $V$ such
+that $B\subset V$ and $V\cap A=\emptyset$.
+
+Now, let $f_A$ be a function constructed as in theorem 2.29. In particular, it is positive, and
+$f_A^{-1}(0) = A$. Now, construct another function $\psi_B$ to be a smooth bump
+function for $B$ on $V$. In particular, it is positive, $\psi^{-1}(1) = B$ and $\supp(\psi) \subset V$.
+
+Now, consider the function
+\[
+f(x) = \frac{f_A(x) + \psi_B(x)}{f_A(x)+1}
+\]
+which is defined everywhere, since $f_A$ is positive. This function is zero only
+when $f_A$ and $\psi_B$ are identically zero, which is only on $A$ by construction of
+$f_A$, and $f(x) = 1$ only when $f_A(x) + \psi_B(x) = f_A(x) + 1$, or when $\psi_B(x) = 1$,
+which is only on $B$.
+
+Thus, $f$ fulfills the properties desired.
+\end{proof}
 %----------------------------------------------------------------------------------------
+\pagebreak
 %----------------------------------------------------------------------------------------
 %	PROBLEM 6
 %----------------------------------------------------------------------------------------
 \section*{Problem 3-5}
+Let $S^1\subset\R^2$, and let $K=\partial [-1,1]^2\subset\R^2$. Show that there
+is a homeomorphism $F:\R^2\to\R^2$ such that $F(S^1) = K$, but there is no diffeomorphism
+with the same property.
+\\
+\begin{proof}
+To begin with, we show that there exists such a homeomorphism. Define $F$ to be
+the function which moves the point $(x,y)$ along its direction vector in proportion
+to its norm such that one coordinate is $1$. Such a speed can be chosen for each
+direction, and since the distance from $S^1$ to $K$ varies continuously, the speeds
+at which the points move vary continuously as well, and $F$ is a homeomorphism.
+
+Now, we will show that there is no such diffeomorphism. Let $F$ be any homeomorphism that
+sends $S^1$ to $K$. In particular, there exists a neighborhood $U$ of a point $p\in S^1$ 
+such that $F(U)$ maps to a corner $F(p)$ in $K$. Now, consider a centered coordinate system
+at $p$ in $U$, which defines a smooth curve $\gamma$ passing through $p$ at time zero.
+In particular, $F$ maps $\gamma$ to a smooth curve on $K$ passing through the corner $F(p)$
+at time zero.
+
+Let's consider what $F$ does to $\gamma'(0)$.
+\[
+\begin{aligned}
+dF(\gamma'(0)) &= \partial_t|_0 F(\gamma(0))
+\end{aligned}
+\]
+But on the square, we know that (supposing without loss of generality that $F(\gamma)$ moves
+counterclockwise and passes through the first quadrant corner at time zero) the tangent
+vector to $F(\gamma)$ before the corner has a $x$ component of zero, and a nonzero $y$ component,
+but after the corner has a $y$ component of zero, and a nonzero $x$ component. Since
+the velocity vector can never be identically zero, it cannot be continuous at the corner.
+Thus, $F(\gamma)$ is not a smooth curve, which is a contradiction.
+\end{proof}
 %----------------------------------------------------------------------------------------
+\pagebreak
 %----------------------------------------------------------------------------------------
 %	PROBLEM 7
 %----------------------------------------------------------------------------------------
 \section*{Problem 3-6}
+For $z^1, z^2$ in $S^3$, let $\gamma_z:\R\to S^3$ be a curve defined by
+$\gamma_z(t) = (\exp(it)z^1,\exp(it)z^2)$. Show that $\gamma_z$ is a smooth curve whose
+velocity is never zero.
+\\
+\begin{proof}
+To begin with, we observe that $\gamma_z(t) = \exp(it)(z^1,z^2)$. Now, since $\exp(it)$ is
+a smooth function from $\R$ to $S^1$, and $S^1\subset S^3$, and the group operation
+of multiplication on $S^3$ is smooth (since $S^3$ is a Lie group, namely the unit quaternionic
+sphere, with quaternion multiplication as the group operation), the composition 
+(which is just $\exp(it)(z^1,z^2)$)
+is smooth as well.
+
+Now to show that $\gamma'$ is never zero. To do so, let $x,y,u,v$ be coordinates
+on $S^3$. Then, the differential $d\gamma$ is given in matrix form as
+\[
+\partial_t \gamma^i = \left(x\cos(t) - y\sin(t),\ x\sin(t)+y\cos(t),\ u\cos(t) - v\sin(t),\ u\sin(t) + v\cos(t)\right)^T
+\]
+Which, since we have that $x^2 + y^2 = u^2 + v^2 = 1$, it follows that $x$ and $y$ are
+never both identically zero, along with $u$ and $v$. Thus, it is never the 
+case that the pushforward $d\gamma(\partial_t) = \gamma'$ is zero.
+\end{proof}
 %----------------------------------------------------------------------------------------
+\pagebreak
 %----------------------------------------------------------------------------------------
 %	PROBLEM 8
 %----------------------------------------------------------------------------------------
 \section*{Problem 3-7}
+
+
+
 %----------------------------------------------------------------------------------------
+\pagebreak
 %----------------------------------------------------------------------------------------
 %	PROBLEM 9
 %----------------------------------------------------------------------------------------
@@ -353,6 +443,7 @@ then $\gamma_1\sim\gamma_2$.
 Thus, $\Psi$ is bijective, as desired.
 \end{proof}
 %----------------------------------------------------------------------------------------
+\pagebreak
 %----------------------------------------------------------------------------------------
 %	PROBLEM 10
 %----------------------------------------------------------------------------------------
@@ -474,6 +565,7 @@ Applying this to the special case of $G=S^1$, we have that $TS^1\cong S^1\times\
 desired.
 \end{proof}
 %----------------------------------------------------------------------------------------
+\pagebreak
 %----------------------------------------------------------------------------------------
 %	PROBLEM 11
 %----------------------------------------------------------------------------------------
