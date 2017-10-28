@@ -1,0 +1,203 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\newtheorem{lemma}{Lemma}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Topology} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 3\\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+\section*{Problem 1}
+Prove that the 1-norm on $\R^n$ defines a metric on $\R^n$ that is equivalent to the
+standard 2-norm metric on $\R^n$.
+\\
+\begin{proof}
+Let $d_1$ be the metric induced by the 1-norm on $\R^n$. Clearly, $d_1$ is positive definite,
+since it comes from a norm. So, let's show it satisfies the triangle inequality.
+
+In proving the triangle inequality, we first state a general property of norms. The
+so-called triangle inequality of norms is given as
+\[
+|x+y|\leq |x| + |y|
+\]
+which is true for any normed space.
+
+Let $x,y,z$ be distinct points in $\R^n$ with coordinates $x^i,y^i,z^i$.
+Then we have that
+\[
+\begin{aligned}
+d(x,z)  &= \sum_i |x^i-z^i|\\
+        &= \sum_i |x^i-z^i+y^i-y^i|\\
+        &= \sum_i |(x^i-y^i) + (y^i-z^i)|\\
+        &\leq\sum_i |x^i-y^i| + |z^i-y^i|\\
+        &=\sum_i |x^i-y^i| + \sum_i |z^i-y^i|\\
+        &= d(x,y) + d(y,z)
+\end{aligned}
+\]
+and thus the metric satisfies the axioms for a metric.
+
+Now, let's show that the metric is equivalent to the standard 2-norm metric on $\R^n$.
+To do this, we will show that each point in a standard $n$-ball has a 1-norm ball
+contained in the $n$-ball, and vice versa.
+
+So, without loss of generality (via translation) let $B_r(0)$ be the open ball of radius $r$
+around $0$, and let $x\in B_r(0)$. In particular, there is some $\delta>0$ such that
+$d(x,0)<r-\delta$. Now, take $C_{\delta}$ to be the 1-norm ball
+of radius $\delta$.
+Now, if $y\in C_{\delta}$, then we have that
+\[
+\begin{aligned}
+d(x,y)  &= \sum_i|x^i-y^i|\\
+        &< \delta\\
+\implies (\sum_i|x^i-y^i|)^2 &< \delta^2\\
+\implies \sum_i(|x^i-y^i|)^2 &< \delta^2\\
+\implies d_2(x,y) &< \delta
+\implies d_2(y,0) &< d_2(x,0) + d_2(x,y)\\
+                    &< r-\delta + \delta\\
+                    &< r
+\end{aligned}
+\]
+so, the 1-ball of radius $\delta$ is contained in $B_r(0)$ as desired.
+Thus, since each $x\in B_r(0)$ has a neighborhood (in 1-norm) contained in $B_r(0)$,
+$B_r(0)$ is open in the 1-norm topology.
+
+For the other way, we first prove the more general fact about norms on $\R^n$.
+\begin{lemma}
+There exists a constant $C$ such that for all $x\in\R^n$,
+\[
+||x||_1 \leq C||x||_2
+\]
+\end{lemma}
+\begin{proof}
+We first observe the basic fact that, for $x_1,x_2\in\R^+$, we have
+\[
+2x_1x_2\leq x_1^2+x_2^2
+\]
+Now, it follows quickly that
+\[
+\begin{aligned}
+||x||^2 = \left(\sum_{i=1}^n |x_i|\right) &= \sum_{i=1}^n |x_i|^2 + \sum_{i\neq j}2|x_i||x_j|\\
+                                        &\leq \sum_{i=1}^n |x_i|^2 +(n-1)\sum_{i=1}^n|x_i|^2\\
+                                        &= n\sum_{i=1}^n |x_i|^2
+\end{aligned}
+\]
+Thus $\sqrt{n}$ is a constant for which the lemma holds.
+\end{proof}
+Now, since we have a bound on the norms, we can prove that a 1-norm ball is open in the 2-norm.
+To do so, let $\Delta_r(0)$ be the 1-norm ball of radius $r$ at zero, and let
+$x\in\Delta_r(0)$. In particular, we have that there exists a $\delta$ such that 
+$d_1(x,0)<r-\delta$. Now, let $\varepsilon = \frac{\delta}{\sqrt{n}}$, and consider
+the 2-norm ball $V_{\varepsilon}(x)$. Then, we will show that $V_{\epsilon}(x)\subset\Delta_r(0)$.
+To do so, let $y\in V_{\epsilon}(x)$, and observe that
+\[
+\begin{aligned}
+d_1(x,y) &<\sqrt{n}d_2(x,y)\\
+         &<\sqrt{n}\frac{\delta}{\sqrt{n}}\\
+         &=\delta
+\end{aligned}
+\]
+and
+\[
+\begin{aligned}
+d_1(0,y) &\leq d_1(0,x) + d_1(x,y)\\
+          &\leq r-\delta + \delta\\
+            &= r
+\end{aligned}
+\]
+as desired.
+\end{proof}
+%----------------------------------------------------------------------------------------
+\pagebreak
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+\pagebreak
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+\pagebreak
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+\pagebreak
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+\pagebreak
+\end{document}
