@@ -1,0 +1,124 @@
+\documentclass[12pt]{article}
+
+\title{Power Supply Homework 1}
+
+\author{Daniel Halmrast}
+
+\usepackage{amsmath, amsfonts, circuitikz}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Problem 1}
+
+Design an unregulated power supply that will output $12.0$VDC with a maximum ripple of $1\%$
+at an output current of $200$mA.\\
+\\
+
+\subsection{Half-Wave Rectifier}
+The basic design for a half-wave rectifier is
+\begin{center}
+\begin{circuitikz} \draw
+
+(0,0) to [short, *-] (6,0)
+(0,0) to [open, l=$V_{in}$] (0,4)
+to [empty diode, *-] (4,4)
+to [short, -] (6,4)
+
+(6,4) to [R, l=$R_{load}$] (6,0)
+(4,4) to [capacitor, l=$C$] (4,0)
+
+%(8,0) to [open, l=$V_{out}$, right] (8,4)
+;
+\end{circuitikz}
+\end{center}
+
+This will output at a peak voltage equal to $V_{in} - 0.6$V.
+It will have a fractional ripple of $\frac{1}{CR_Lf}$.
+With a desired fractional ripple of $0.01$ on a frequency of $60$Hz at $200$mA,
+$R_L$ will be $\frac{V_{out}}{i_out}=\frac{12.0}{0.2}=60$Ohms.
+\\
+For a fractional ripple of $1\%$, we have
+\[
+\begin{aligned}
+    0.01 & = \frac{1}{C*60*60}\\
+         & \implies C=\frac{1}{0.01*60*60}
+         & = 0.0278F
+\end{aligned}
+\]
+\\
+Thus, with a capacitor of greater value than $C=0.0278F$, the power supply will have the desired properties.
+Since the voltage sees a $0.6V$ drop, an input voltage of $12.6VAC$ is required.
+\subsection{Full-Wave Rectifier Using Center Tap}
+
+In this design, the capacitor sees a similar waveform to the half-wave rectifier, but at double frequency.
+Using this approximation, it is easy to see that the capacitor will only be required to have half the
+capacitance as the first. That is, $C=0.0139F$. Furthermore, the input voltage still only sees one
+diode drop, but the output voltage will be relative to the center of the inductor,
+which will be half of the full $V_p2p$ voltage expected out of the transformer.\\
+
+That is, the transformer should output $12.6V$ on each side, for a total of $25.2VAC$
+expected peak-to-peak voltage.
+
+\subsection{Full-Wave Bridge Rectifier}
+
+This power supply has the same output as the center-tapped full rectifier, but with two diode drops.
+That is, $V_{in}=12.0+1.2=13.2VAC$, and $C=0.0139F$.
+
+\section{Problem 2}
+
+Make a power supply with $+5.0V$ and $-5.0V$ output using a center-tapped transformer.\\
+\\
+It will be easiest to do this by using a half-wave rectifier on each half of the transformer,
+with the positive end recitfying in the normal way, and the negative end rectifying in reverse polarity.
+\\
+Grounding the center tap, the completed circuit design is
+
+\begin{center}
+\begin{circuitikz}\draw
+(0,0) node [anchor=east]{$V_{in}-$}
+(0,8) node [anchor=east]{$V_{in}+$}
+
+(0,8) to [empty diode, *-] (3,8)
+(3,0) to [empty diode, -*] (0,0)
+
+(3,8) to [short, -] (3,7)
+      to [short, -] (2,7)
+      to [capacitor, l=$C$] (2,5)
+      to [short, -] (3,5)
+
+(3,7) to [short, -] (4,7)
+      to [R, l=$R+_{load}$] (4,5)
+      to [short, -] (3,5)
+
+(3,0) to [short, -] (3,1)
+      to [short, -] (2,1)
+(2,3) to [capacitor, l=$C$] (2,1)
+(2,3) to [short, -] (3,3)
+
+(3,1) to [short, -] (4,1)
+(4,3) to [R, l=$R-_{load}$] (4,1)
+(4,3) to [short, -] (3,3)
+
+(3,3) to [short,-] (3,5)
+(3,4) to [short,-*] (5,4)
+(5,4) node[ground] {}
+;
+\end{circuitikz}
+\end{center}
+
+By symmetry, the value of $C$ will be the same for each side. That value will be determined in a
+similar way to Problem 1.1.
+\[
+\begin{aligned}
+V_{ripple} & =\frac{1}{C*R_L *f}\\
+    0.002 & = \frac{1}{C*(\frac{5V}{0.5A})*60Hz}\\
+    C & = \frac{1}{.002*10*60}\\
+        & = 0.833F
+\end{aligned}
+\]
+
+
+\end{document}

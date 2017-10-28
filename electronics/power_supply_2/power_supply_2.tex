@@ -1,0 +1,89 @@
+\documentclass[12pt]{article}
+
+\title{Power Supply Homework 2: The Zener Diode}
+
+\author{Daniel Halmrast}
+
+\usepackage{amsmath, circuitikz}
+
+\begin{document}
+
+\maketitle
+
+Using the parameters $V_{out}, i_{load}, \langle P_z \rangle, I_{zmin}, V_p, f$, solve for the parameters
+$R, C, \Delta V$ in the following circuit.\\
+
+\begin{center}
+\begin{circuitikz}\draw
+
+(0,0) to [short, *-] (2,0)
+      to [capacitor, l=$C$] (2,4)
+      to [short, -*] (0,4)
+
+(2,0) to [short, -] (6,0)
+      to [empty diode, l=$D_z$] (6,4)
+      to [R, l=$R$] (4,4)
+      to [short, -] (2,4)
+
+(6,0) to [short, -] (8,0)
+      to [R, l=$R_{load}$] (8,4)
+      to [short, -] (6,4)
+;
+\draw[dashed] (3,5) -- (3,-1);
+\end{circuitikz}
+\end{center}
+
+Firstly, we concern ourselves with the ripple voltage. We know from earlier analysis that the ripple voltage is given as
+\[
+\Delta V = V_p \frac{1}{CR_{eq}f}
+\]
+It is clear from analysis of the right side that the Thevevin equivalent resistance is just $R$. Thus, we have
+\begin{equation}
+\boxed{\Delta V = V_p \frac{1}{CRf}}
+\end{equation}
+\\
+
+Next,we will analyze the average power requirement. It can be approximated that the average power through the Zemer diode is
+\[
+\langle P_z \rangle = \overline I \overline V
+\]
+Thus,
+\[
+\begin{aligned}
+\overline I & = \frac{\langle P_z \rangle}{V_{out}}\\
+i_{zmax} - \frac{\Delta i_z}{2} & = \frac{\langle P_z \rangle}{V_{out}}
+\end{aligned}
+\]
+
+Since $i_z = i_R -i_l$, and $i_R = \frac{v_r}{R}$, it follows that
+\[
+\begin{aligned}
+\frac{V_p - V_{out}}{R} - i_l - \frac{\Delta i_z}{2} & = \frac{\langle P_z \rangle}{V_{out}}\\
+\frac{V_p - V_{out}}{R} - i_l - \frac{\Delta V}{2R} & = \frac{\langle P_z \rangle}{V_{out}}\\
+V_p - V_{out} - i_lR - \frac{\Delta V}{2} & = \frac{\langle P_z \rangle}{V_{out}}R
+\end{aligned}
+\]
+
+Thus,
+
+\begin{equation}
+\boxed{V_p - V_{out} - \frac{\Delta V}{2} = \Big(\frac{\langle P_z \rangle}{V_{out}} - i_l\Big)R}
+\end{equation}
+\\
+
+Finally, we will analyze the minimum current requirement. Following a similar process to equation (2),
+\[
+\begin{aligned}
+i_{zmin}  & = i_{zmax} - \Delta i\\
+          & = i_{Rmax} - i_l -\Delta i\\
+          & = \frac{V_p - V_{out}}{R} - i_l - \frac{\Delta V}{R}\\
+i_{zmin}R & = V_p - V_{out} - i_lR - \Delta V
+\end{aligned}
+\]
+
+This leads to the final relation
+\begin{equation}
+\boxed{V_p - V_{out} - \Delta V = (i_{zmin} + i_l)R}
+\end{equation}
+
+\end{document}
