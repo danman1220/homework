@@ -212,7 +212,7 @@ For $f(t)$, let's consider the basic open neighborhood $U_t$ in
     which has an inverse image of
     \[
         \begin{aligned}
-            f_i^{-1}(U_t) &= \bigcup_{\delta<\varpsilon}
+            f_i^{-1}(U_t) &= \bigcup_{\delta<\varepsilon}
             f_i^{-1}(V_{\delta}(it))
                         &= \bigcup_{\delta<\varepsilon}V_{\frac{\delta}{i}}(t)
         \end{aligned}
@@ -346,25 +346,123 @@ What is $\overline{\R^{\infty}}$ in the uniform topology on $\R^{\omega}$?
     Therefore, the closure is all sequences that converge to zero in norm.
 \end{proof}
 \subsection*{Munkres Problem 6}
+For $x\in\R^{\omega}$, define
+\[
+    U(x,\epsilon) = \prod_i V_{\epsilon}(x_i)
+\]
+\subsubsection*{Part a}
+Show that $U(x,\epsilon)$ is not equal to the $\epsilon$ ball centered at $x$
+in the uniform topology.
+\\
+\begin{proof}
+This follows immediately from part b.
+\end{proof}
 
+\subsubsection*{Part b}
+Show that $U(x,\epsilon)$ is not open in the uniform topology.
+\\
+\begin{proof}
+    Consider, for $x$ given above, the point
+    \[
+    x' = (x_i + \epsilon - \frac{1}{i})
+    \]
+    Now, $x'\in U(x,\epsilon)$, but we will show that more precisely,
+    $x'\in\partial U$, which means that $U$ contains part of its boundary,
+    and cannot be open.
+
+    We note already that $x'\in U$. Thus, the constant sequence $\{x'\}$
+    converges to $x'$ in $u$. Now, consider the sequence of points
+    \[
+        f(n) = (x'_i +\frac{1}{n}) = (x_i +\epsilon - \frac{1}{i}+\frac{1}{n})
+    \]
+    Which clearly converges to $x'$, but for each $n$, the $n\th$ term is
+    given as $x_n+\epsilon$, which is clearly not in $U$ for that coordinate.
+    Thus, $f$ is a sequence of points outside $U$ converging to $u$, so $x'$
+    is actually on the boundary of $U$.
+
+    Thus, $U$ is not open.
+\end{proof}
+
+\subsubsection*{Part c}
+Show that the $\epsilon$-ball around $x$ is given as
+\[
+    \bigcup_{\delta<\epsilon} U(\delta,x)
+\]
+\\
+\begin{proof}
+To see this, suppose $y$ is such that $d(x,y) < \epsilon$. In particular, there
+    is some number $\delta$ such that each coordinate obeys the inequality
+\[
+    |x_i-y_i| \leq d(x,y) < \delta < \epsilon
+\]
+So, $y$ is in the set $U(\delta,x)\subset\bigcup_{\delta < \epsilon}
+    U(\delta,x)$ and is thus in the $\epsilon$-ball given.
+\end{proof}
 %----------------------------------------------------------------------------------------
 \pagebreak
 %----------------------------------------------------------------------------------------
 %	PROBLEM 3
 %----------------------------------------------------------------------------------------
+\section*{Problem 3}
+Prove that the lower limit topology on $\R$ is first-countable.
+\\
+\begin{proof}
+    Let $x\in\R$, and let $\{q_i\}$ be an enumeration of the positive rationals. 
+    Now, a countable neighborhood basis for $x$ can be given as
+    \[
+        \mathscr{B} = \{[x-q_i, x+q_j)\}_{i,j=0}^{\infty} \cup
+        \{[x,x+q_i\}_{i=0}^{\infty}
+    \]
+    This is easily verified to be a countable neighborhood basis. To see
+    this, let $U$ be any basic neighborhood of $x$. In particular, either
+    $U = [a,b)$ for $a<x<b$, or $U=[x,b)$ for $x<b$. We will show that $U$
+    contains an element of $\mathscr{B}$.
 
+    Suppose $U$ is of the first kind. Then, by the Archimedian property of the
+    reals, we have that there exist two rational numbers$q_1,q_2$ such that
+    $a<x-q_1<x<+q_2<b$. Then, immediately it follows that
+    \[
+        [x-q_1,x+q_2)\subset [a,b)
+    \]
+    as desired.
+
+    Now, suppose $U$ is of the second kind. Then, similarly, there is some $q_3$
+    such that $x<x+q_3<b$. We have immediately that
+    \[
+        [x,x+q_3)\subset [x,b)
+    \]
+    and thus $\mathscr{B}$ is a countable neighborhood basis, as desired.
+\end{proof}
 %----------------------------------------------------------------------------------------
-\pagebreak
 %----------------------------------------------------------------------------------------
 %	PROBLEM 4
 %----------------------------------------------------------------------------------------
+\section*{Problem 4}
+Show that if $p:X\to Y$ is split-epic, then it is a quotient map.
+\\
+\begin{proof}
+We note that a continuous map is a quotient map if and only if it is surjective.
+    Since $p$ is already assumed to be continuous, we need only show it is
+    surjective.
 
+    To do so, let $f$ be the right-inverse of $p$. In particular, we have
+    that for every $y\in Y$, $p\circ f(y) = y$. Thus, for any $y\in Y$, $p(f(y))
+    = y$ and $p$ is a surjection, as required.
+\end{proof}
 %----------------------------------------------------------------------------------------
-\pagebreak
 %----------------------------------------------------------------------------------------
 %	PROBLEM 5
 %----------------------------------------------------------------------------------------
-
+\section*{Problem 5}
+Show that the composition of two quotient maps is a quotient map.
+\\
+\begin{proof}
+Let $p:X\to Y$ and $q:Y\to Z$ be surjective morphisms. This means that for $z\in
+    Z$, there is some $y\in Y$ such that $q(y)=z$. Furthermore, there is some
+    $x\in X$ such that $p(x) = y$. Then $q\circ p (x) = q(p(x)) = q(y) = z$, and
+    since every $z\in Z$ has an element of $X$ that maps to it, $q\circ p$ is a
+    surjection i.e. a quotient map.
+\end{proof}
 %----------------------------------------------------------------------------------------
 \pagebreak
 \end{document}
