@@ -179,6 +179,173 @@ as desired.
 %----------------------------------------------------------------------------------------
 %	PROBLEM 2
 %----------------------------------------------------------------------------------------
+\section*{Problem 2}
+\subsection*{Munkres Problem 4}
+Consider the box, uniform, and product topologies on $\R^{\omega}$.
+\subsubsection*{Part a}
+In which topologies are the following functions continuous?
+\[
+    \begin{aligned}
+        f(t) &= (t,2t,3t,\ldots)\\
+        g(t) &= (t,t,t,\ldots)\\
+        h(t) &= (t,\frac{1}{2}t,\frac{1}{3}t,\ldots)
+    \end{aligned}
+\]
+
+\begin{proof}
+We first note that the universal property of product spaces guarantees that a
+    function $f$ is continuous in the product topology if and only if its
+    component functions $\pi_i\circ f$ are continuous.  Since this is true for
+    all three of $f,g,h$, it follows that they are all continuous in the product
+    topology.
+
+For the remainder of this problem, we will use the pointwise definition of
+    continuity. That is, given a point $x\in\R$, $f$ is convergent at $x$ if and
+    only if for each neighborhood $U$ of $f(x)$, we have that $f^{-1}(U)$
+    contains a neighborhood of $x$.
+
+For $f(t)$, let's consider the basic open neighborhood $U_t$ in
+    $\R^{\omega}$ around $f(t)$ in the uniform topology, which looks like
+    \[
+        U_t = \bigcup_{\delta<\varepsilon} \prod_i V_{\delta}(it)
+    \]
+    which has an inverse image of
+    \[
+        \begin{aligned}
+            f_i^{-1}(U_t) &= \bigcup_{\delta<\varpsilon}
+            f_i^{-1}(V_{\delta}(it))
+                        &= \bigcup_{\delta<\varepsilon}V_{\frac{\delta}{i}}(t)
+        \end{aligned}
+    \]
+    which goes to $\{t\}$ as $i$ goes to infinity. Thus, the inverse image is
+    just $\{t\}$, which cannot contain an open set, so $f$ is not continuous
+    in the uniform topology. Then, since the box topology is finer than
+    the uniform topology, $f$ is not continuous in the box topology either.
+
+    Now, consider $g$, which we will show is continuous in the uniform
+    topology, but not in the box topology.
+
+    To see this, consider in the uniform topology, the neighborhood $U_t$
+    around $g(t)$, which is given as
+    \[
+        U_t = \bigcup_{\delta<\varepsilon} \prod_i V_{\delta}(t)
+    \]
+    Now, the inverse image of this is just
+    \[
+    g^{-1}(U_t) = V_{\varepsilon}(t)
+    \]
+    which is open in $\R$, so $g$ is continuous in the uniform topology.
+
+    However, in the box topology, we have the neighborhood
+    \[
+        U_t = \prod_i V_{\frac{\varepsilon}{i}}(t)
+    \]
+    whose inverse image (as shown above) is just $\{t\}$, so it cannot contain
+    an open set, and $g$ is not continuous in the box topology.
+
+    Now, consider $h$, which is also continuous in the uniform
+    topology, but not in the box topology.
+    
+    To see this, consider again a neighborhood in the uniform topology
+    \[
+        U_t = \bigcup_{\delta<\varepsilon} \prod_i V_{\delta}(\frac{t}{i})
+    \]
+    which has an inverse image of
+    \[
+    h_i^{-1}(U_t) = \bigcup_{\delta<\varepsilon} V_{i\delta}(t)
+    \]
+    and a composite inverse image of
+    \[
+    h^{-1}(U_t) = \bigcup_{\delta<\varepsilon} V_{\delta}(t)
+    \]
+    Which certainly contains an open neighborhood of $t$, so $h$ is open
+    in the uniform topology.
+
+    However, in the box topology, the neighborhood
+    \[
+    U_t = \prod_i V_{\frac{\varepsilon}{i^2}}(\frac{t}{i})
+    \]
+    which has an inverse image of just $\{t\}$, so $h$ is not open in the box
+    topology
+\end{proof}
+
+\subsubsection*{Part b}
+In which topologies do the sequences $w,x,y,z$ (definitions omitted) converge?
+\\
+\begin{proof}
+We note that all sequences converge in each coordinate, so they converge in the
+product topology.
+
+Now, the $w$ sequence does not converge in the uniform topology, since for
+    $\varepsilon = 1$, the open set $\bigcup_{\delta<\varepsilon} V_{\delta}(0)$
+    never eventually contains the sequence, since the terms far enough down the
+    coordinates keep growing. Thus, it does not converge in the box topology
+    either.
+
+    The $x$ sequence does converge in the uniform topology, since for every
+    $\varepsilon>0$, the sequence eventually gets to where every term is below
+    $\frac{1}{n}$ for any $n$, so the sequence eventually fits in the
+    neighborhood
+    \[
+    U_0 = \prod_i V_{\varepsilon}(0)
+    \]
+    However, in the box topology, this sequence does not converge. This is
+    because the neighborhood
+    \[
+        U_0 = \prod_i V_{\frac{1}{i^2}}
+    \]
+    does not eventually contain the sequence. In particular, the $i\th$
+    coordinate of the $i\th$ term in the sequence is always $\frac{1}{i}$,\
+    which is never in $V_{\frac{1}{i^2}}(0)$.
+
+    The $y$ sequence has the same properties as the $x$ sequence described
+    above, so it does converge in the uniform topology. However, since the
+    diagonal elements are always $\frac{1}{i}$, the neighborhood
+    \[
+        U_0 = \prod_i V_{\frac{1}{i^2}}
+    \]
+    never eventually contains the sequence.
+
+    Now, the $z$ sequence does converge in the box topology.
+    To see this, we note that the $z$ sequence lies in the subspace
+    $\R^2\times\prod\{0\}$, which (by an earlier homework assignment) is
+    homeomorphic to $\R^2$. Now, in $\R^2$, the product topology and the
+    box topology coincide, so by the observation that the $z$ sequence converges
+    in the product topology, it must also converge in the box topology and
+    the uniform topology as well.
+\end{proof}
+
+\subsection*{Munkres Problem 5}
+What is $\overline{\R^{\infty}}$ in the uniform topology on $\R^{\omega}$?
+\\
+\begin{proof}
+    We will show that the closure of $\R^{\infty}$ in the uniform topology
+    is the set of all sequences which converge (in norm) to zero. This is clear,
+    since for any sequence $(x_i)$ which did not converge to zero, there must be some
+    $\varepsilon$ such that the sequence is eventually $\varepsilon - \delta$ away from
+    zero.
+    Then, the open neighborhood around $(x_i)$ given as
+    \[
+        U = \bigcup_{\delta<\varepsilon}\prod_i V_{\delta}(x_i)
+    \]
+    will have infinitely many terms whose projections do not intersect zero,
+    but any sequence in $\R^{\infty}$ must eventually be constantly zero, thus
+    will eventually leave the neighborhood.
+
+    However, for any sequence $(y_i)$ that converges to zero, any neighborhood
+    of $(y_i)$ must intersect $\R^{\infty}$. To see this, we consider that
+    since $(y_i)$ converges to zero, for any $\varepsilon$, the sequence
+    $(y_i)$ must eventually be within $\varepsilon$ of zero. Thus, for any
+    neighborhood
+    \[
+        U = \bigcup_{\delta<\varepsilon}\prod V_{\delta}(y_i)
+    \]
+    it must be that for some $N>0$ and for all $n>N$, $V_{\delta}(y_n$
+    intersects zero. Thus, the element $(y_1,\ldots,y_N,0,\ldots)\in\R^{\infty}$
+    is also in $U$.
+    Therefore, the closure is all sequences that converge to zero in norm.
+\end{proof}
+\subsection*{Munkres Problem 6}
 
 %----------------------------------------------------------------------------------------
 \pagebreak

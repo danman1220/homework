@@ -1,0 +1,116 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Thermal Physics} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set: 2.42 3.1 3.3 3.5 3.6\\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEMS
+%----------------------------------------------------------------------------------------
+
+\section*{Problem 2.42}
+\subsection*{Part a}
+The dimensions of G are $\frac{m^3}{kgs^2}$, so the units of $\frac{GM}{c^2}$ will be in meters.
+
+For a black hole of one solar mass, the radius will be about $1500m$.
+
+\subsection*{Part b}
+We know that the entropy for most systems is proportional to the number of particles
+in the system, the entropy of the black hole will be on the order of the number of particles
+used to make it.
+
+\subsection*{Part c}
+We want the number of low-energy photons that sum to the mass of a black hole. That is, the
+total energy of all photons will be $Mc^2$.
+
+The energy of an individual photon with wavelength $\lambda$ is given as $E=\frac{hc}{\lambda}$.
+Set $\lambda$ to $\frac{GM}{c^2}$ to get $E=\frac{hc^3}{GM}$. So, divide $Mc^2$ by the energy
+per photon to get
+\[
+    \begin{aligned}
+        n_{\gamma} &= \frac{Mc^2}{\frac{hc^3}{GM}}\\
+                   &= \frac{GM^2}{hc}
+    \end{aligned}
+\]
+Then, entropy will be
+\[
+    S = Nk = \frac{GM^2}{hc}k
+\]
+
+\subsection*{Part d}
+The entropy of a one solar mass black hole is (via wolfram)
+\[
+    S = 1.45\times 10^{54} \frac{J}{K}
+    \]
+This is a very large value for entropy, which makes sense as the black hole is the
+largest-entropy state for a gravitational system.
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

@@ -1,0 +1,131 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Thermal Physics} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set: 2.18, 2.19 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEMS
+%----------------------------------------------------------------------------------------
+
+\section*{Problem 2.18}
+
+Problem: Show the multiplicity for an Einstein solid is as given.
+\\
+\\
+Solution:
+The multiplicity of an Einstein solid is given as
+\[
+    \Omega(N,q) = \frac{N}{q+N}\frac{(q+N)!}{q!N!}
+\]
+Applying Stirling's approximation yields
+\begin{equation}
+    \begin{aligned}
+        \Omega(N,q) &\approx \frac{N}{q+N} \frac{(q+N)^{q+N}e^{-q-N}\sqrt{2\pi(q+N)}}{q^qe^{-q}\sqrt{2\pi q}N^Ne^{-N}\sqrt{2\pi N}}\\
+                    &\approx \frac{N}{q+N} \frac{(q+N)^{q+N}\sqrt{(q+N)}}{q^q\sqrt{q}N^N\sqrt{2\pi N}}\\
+                    &\approx \frac{\frac{q+N}{q}^q \frac{q+N}{N}^N}{\sqrt{2\pi q (q+N) N^{-1}}}
+    \end{aligned}
+\end{equation}
+
+
+
+
+
+\section*{Problem 2.19}
+Problem: Find the approximate formula for the multiplicity of a two-state paramagnet.
+\\
+\\
+Solution:
+The full formula for the two-state paramagnet is given as
+\begin{equation} \label{eq:1}
+    \Omega(N, N_u) = \frac{N!}{N_d!N_u!}
+\end{equation}
+
+We will use Stirling's approximation, which states:
+\[
+    N! \approx N^Ne^{-N}\sqrt{2\pi N}
+\]
+Which simplifies \ref{eq:1} to
+\begin{equation}
+    \begin{aligned}
+        \Omega(N, N_u) &\approx \frac{N^Ne^{-N}\sqrt{2\pi N}}
+                                {(N_d^{N_d}e^{-N_d}\sqrt{2\pi N_d})(N_u^{N_u}e^{-N_u}\sqrt{2\pi N_u})}\\
+                        &\approx \frac{N^N\sqrt{N}}{N_d^{N_d}N_u^{N_u}\sqrt{2\pi N_dN_u}}\\
+                        &\approx \frac{N^N\sqrt{N}}{N_d^{N_d}(N-N_d)^{N-N_d}\sqrt{2\pi (N - N_d)N_d}}\\
+                        &\approx \left (\frac{N}{N-N_d}\right )^{N-\frac{1}{2}} \left(\frac{(N-N_d)}{N_d}\right)^{N_d}\frac{1}{\sqrt{2\pi N_d}}
+    \end{aligned}
+\end{equation}
+
+Using the approximation $N-N_d \to N$, we get:
+\[
+    \Omega(N, N_d) \approx \left(\frac{N}{N_d}\right)^{N_d}\frac{1}{\sqrt{2\pi N_d}}
+\]
+which is about what we expected.
+%----------------------------------------------------------------------------------------
+
+\end{document}
