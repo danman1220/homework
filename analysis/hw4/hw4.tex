@@ -1,0 +1,184 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\supp}{\textrm{supp}}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 4\\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+\section*{Problem 1}
+For $E\subset\Omega$ measurable, prove the implication
+\[
+\int_E fd\mu = 0\ \forall f\geq 0 \implies \mu(E) = 0
+\]
+
+\begin{proof}
+This follows immediately by letting $f = \chi_E$, and observing that
+\[
+\begin{aligned}
+\int_E \chi_E(x)d\mu(x) &=\int_{\Omega}\chi_E(x)\chi_E(x)d\mu(x)\\
+                        &=\int_{\Omega}\chi_E(x)d\mu(x)\\
+                        &=\mu(E)
+\end{aligned}
+\]
+Which is zero by the hypothesis. Thus, $\mu(E) = 0$ as desired.
+\end{proof}
+%----------------------------------------------------------------------------------------
+\pagebreak
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+\section*{Problem 2}
+For $f\geq 0$ measurable on $\Omega$ with $\mu(\Omega) > 0$, show that
+\[
+\int_{\Omega}f(x)d\mu(x) = 0 \implies [f] = 0
+\]
+(i.e. $f$ is zero $\mu$-almost everywhere).
+\\
+\begin{proof}
+Consider the equivalence class $[f]$ in $L^1(\Omega,\mu)$. In particular,
+since $\int_{\Omega}|f|d\mu =||f||_1 = 0$, we must have that $[f]=0$, which means
+$f$ agrees with the $0$ function $\mu$-almost everywhere. It follows immediately, then,
+that $f$ is zero $\mu$-almost everywhere.
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+\section*{Problem 3}
+Use Fatou's lemma to show that for a sequence $\{f_n\}$ of positive measurable functions,
+the inequality
+\[
+\int_{\Omega}\liminf f_nd\mu \leq \liminf\int_{\Omega} f_nd\mu
+\]
+
+\begin{proof}
+We note first that the inequality is vacuously true if $\liminf\int_{\Omega}f_nd\mu = \infty$.
+
+So, assume that $\liminf\int_{\Omega}f_nd\mu = M$ for some positive number $M$. Then,
+consider the family of subsequences
+\[
+\{f_{n_i}\}_{\epsilon} = \{f_n\ |\ \int_{\Omega} f_nd\mu < M+\epsilon\}
+\]
+Now, for any $\epsilon$, this defines an infinite subsequence, since if the integrals of
+the sequence were not frequently below $M+\epsilon$, then $M+\epsilon$ would be an
+eventual lower bound higher than $M$, which contradicts $M$ being the $\liminf$ of the
+integrals.
+
+Now, we apply Fatou's lemma by observing that for each $f_{n_i}$ we have that
+\[
+\int_{\Omega} f_{n_i}d\mu < M+\epsilon
+\]
+which gives us the upper bound
+\[
+\int_{\Omega}\liminf f_{n_i}d\mu \leq M+\epsilon
+\]
+Now, a basic property of the $\liminf$ is that for a sequence $x_n$ with a subsequence
+$x_{n_i}$,
+\[
+\liminf x_n \leq \liminf x_{n_i}
+\]
+Thus, we also have that
+\[
+\int_{\Omega} \liminf f_nd\mu \leq \int_{\Omega}\liminf f_{n_i} d\mu\leq M+\epsilon
+\]
+However, since this is true for all $\epsilon > 0$, it must be that
+\[
+\int_{\Omega} \liminf f_nd\mu \leq \int_{\Omega}\liminf f_{n_i} d\mu\leq M
+\]
+And by the definition of $M$, we have the desired inequality
+\[
+\int_{\Omega} \liminf f_nd\mu \leq M = \liminf\int_{\Omega}f_nd\mu
+\]
+
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+\pagebreak
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+\section*{Problem 4}
+\subsection*{Notes 2-13}
+Prove that $f\in L^1\implies |f|<\infty$ $\mu$-almost everywhere, and describe the 
+spaces $L^1(\N,\mu_c)$ and $L^1(\Omega,\delta_p$.
+\\
+\begin{proof}
+
+\end{proof}
+\subsection*{Notes 2-12}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+\end{document}
