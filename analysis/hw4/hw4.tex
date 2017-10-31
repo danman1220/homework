@@ -46,6 +46,7 @@
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
 
 \newcommand{\supp}{\textrm{supp}}
@@ -172,13 +173,124 @@ Prove that $f\in L^1\implies |f|<\infty$ $\mu$-almost everywhere, and describe t
 spaces $L^1(\N,\mu_c)$ and $L^1(\Omega,\delta_p$.
 \\
 \begin{proof}
+Let $f\in L^1(\Omega,\mu)$. In particular, we have that $\int_{\Omega}|f|d\mu < \infty$.
+And thus, for every measurable set $E$, we have
+\[
+\int_{\Omega} f = \int_E f + \int_{E^c} f < \infty
+\]
+Which implies that the integral $\int_E fd\mu$ is bounded as well. Thus, $|f|$ cannot
+be $\infty$ on any set of positive measure, since if it were the case
+that $f=\infty$ on some set $E$ with positive measure, the integral
+\[
+\int_E fd\mu
+\]
+would not be bounded.
 
+Now, in an earlier assignment, we proved that for $f:\N\to\R$, $\int_{\N}fd\mu_c = \sum_{i=0}^{\infty}f(i)$.
+Thus, $L^1(\N,\mu_c)$ is just the space $\l^1$ of absolutely convergent sequences.
+
+Similarly, we proved in an earlier assignment that for any $f:\Omega\to\R$ measurable,
+$\int_{\Omega}fd\delta_p = f(p)$. Thus, $[f(x)] = [f(p)(x)] = [f(p)]$. That is, the 
+equivalence class of a function $f$ is just all functions that are bounded at and agree at $p$. So,
+there is exactly one equivalence class for each positive real number, and the norm is just
+\[
+||f(x)||_1 = \int_{\Omega}|f(x)|d\delta_p(x) = |f(p)|
+\]
+which is the usual norm on $\R$. Thus, $L^1(\Omega,\delta_p) \cong \R$.
 \end{proof}
+
 \subsection*{Notes 2-12}
+Prove that the measure $\phi(E) = \int_E fd\mu$ is a measure.
+\\
+\begin{proof}
+First, we observe clearly two things. One, $\phi(\emptyset) = 0$, which follows directly
+from the definition of the integral. Second, $\phi(E)\geq 0$, which follows since $f$ is
+a positive function. Now, all we need to show is $\sigma$-additivity.
+
+To do so, we first observe that there is a monotone sequence of functions $\{\varphi_n\}$
+that converge to $f$. Thus, it follows that
+\[
+\phi(E) = \int_E\lim\varphi_n d\mu = \lim\int_E\varphi_nd\mu = \lim \nu_n(E)
+\]
+Where $\nu_n(E)$ is the weighted measure of the simple function $\phi_n$, given by lemma 3.
+
+Thus, for a sequence $\{E_i\}$ of disjoint measurable subsets, we have
+\[
+\begin{aligned}
+\phi\left(\bigcup_{i=1}^{\infty}E_i\right) &= \lim_{n\to\infty}\nu_n\left(\bigcup_{i=1}^{\infty}E_i\right)\\
+                    &= \lim_{n\to\infty} \sum_{i=1}^{\infty}\nu_n(E_i)\\
+                    &= \sum_{i=1}^{\infty} \lim_{n\to\infty}\nu_n(E_i)\\
+                    &= \sum_{i=1}^{\infty} \phi(E_i)
+\end{aligned}
+\]
+Here, we justify commuting the limit and the sum by observing the following:
+\[
+\lim_n \sum_i \nu_n(E_i) = \lim_n \int_{\N}\nu_n(E_i)d\mu_c(i) = \int_{\N}\lim_n\nu_n(E_i)d\mu_c(i)
+\]
+Which is just a quick application of the monotone convergence theorem on the sequence (in $n$!)
+of monotonic functions $\nu_n':\N\to\R^+$ given as $\nu_n'(i) = \nu_n(E_i)$ which is monotonic
+by the fact that the $\varphi_n$ that define it are monotonic.
+
+Thus, $\phi$ has $\sigma$-additivity.
+
+Moreover, let $g$ be a measurable function. We can show that
+\[
+\int_{\Omega} gd\phi = \int_{\Omega}fgd\mu
+\]
+
+This follows from the fact that $g$ can be approximated as a monotonic sequence $\{\psi_n =\sum_{i=1}^k c^{(n)}_i\phi(E^{(n)}_i)\}$
+of simple functions, and observing that
+\[
+\begin{aligned}
+\int_{\Omega} gd\phi    &= \lim_{n\to\infty} \int_{\Omega} \psi_nd\phi\\
+                        &= \lim_{n\to\infty} \sum_{i=1}^k c^{(n)}_i\phi(E^{(n)}_i)\\
+                        &= \lim_{n\to\infty} \sum_{i=1}^k c^{(n)}_i\int_{\Omega} f\chi_{E_i^{(n)}} d\mu\\
+                        &= \int_{\Omega} f\left(\lim_{n\to\infty}\sum_{i=1}^k c^{(n)}_i\chi_{E_i^{(n)}}d\mu\right)\\
+                        &= \int_{\Omega} fgd\mu
+\end{aligned}
+\]
+\end{proof}
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 %	PROBLEM 5
 %----------------------------------------------------------------------------------------
+\section*{Problem 5}
+Show that for a finite measure $\mu$ and a sequence of measurable functions $f_n$ converging
+to $f$ uniformly, we have that
+\[
+\lim_{n\to\infty}\int_{\Omega}f_nd\mu = \int_{\Omega}fd\mu
+\]
 
+\begin{proof}
+We observe that this equivalence is merely stating that
+\[
+\lim_{n\to\infty}\int_{\Omega} |f_n - f|d\mu = 0
+\]
+
+To see this is true, fix $\epsilon >0$, and let $N$ be large enough so that
+for all $i>N$, we have that $\sup_{x\in\Omega}|f_i(x)-f(x)|<\epsilon$.
+
+Now, the integral $\int_{\Omega}|f_i - f|d\mu$ becomes bounded by
+\[
+int_{\Omega}|f_i - f|d\mu < \int_{\Omega} \epsilon d\mu = \epsilon \mu(\Omega)
+\]
+and since this holds for any epsilon, it must be that
+the limit of the integral $\int_{\Omega}|f_n-f|d\mu$ is zero as well.
+
+However, in this proof, we used the fact that $\mu(\Omega) < \infty$. In general,
+this theorem will not hold. To see this, consider the sequence of functions
+\[
+f_n(x) =
+\begin{cases}
+\frac{1}{2n}, &\textrm{ if } |x|\leq n\\
+0, &\textrm{ else}
+\end{cases}
+\]
+Now, these functions converge uniformly to the zero function, but their integral is always
+1. Thus
+\[
+\lim\int_{\R} f_n(x) dx = \lim 1 = 1 \neq \int_{\R} 0 dx = 0 
+\]
+\end{proof}
 %----------------------------------------------------------------------------------------
 \end{document}
