@@ -1,0 +1,154 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Geometry} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 3\\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+\section*{Problem 1} %Lee 4-5
+\subsection*{Part a}
+Show that the quotient map $\pi: \C^{n+1}\setminus \{0\}\to\C P^n$ is a surjective
+smooth submersion.
+\\
+\begin{proof}
+Surjectivity follows almost immediately from the definition of the map, since any
+equivalence class $[z]$ is mapped to by $\pi(z)$. Now, we must show it is a smooth submersion.
+
+We will do this using the Global Rank Theorem (Theorem 4.14), which states that a surjection
+with constant rank is a smooth submersion.
+
+Now, the coordinate charts on $\C^{n+1}$ are just the standard rectangular coordinates
+\[
+(z^1,\ldots,z^{n+1}) \mapsto (\Re(z^1),\Im(z^1),\ldots,\Re(z^{n+1}),\Im(z^{n+1}))
+\]
+And for each $i\in\{1,\ldots,n+1\}$, we have a local coordinate chart on $\C P^n$ around
+where $z^i$ is not zero, given as
+\[
+(z^1:\ldots:z^i:\ldots:z^{n+1}) \mapsto \frac{1}{z^i}(z^1,\ldots,z^{i-1},z^{i+1},\ldots,z^{n+1})
+\]
+(Here, this coordinate chart actually maps to $\C^n$, which has a global coordinate chart
+as defined above, and the composition then defines a coordinate chart to $\R^{2n}$.)
+
+So now we consider the coordinate representation of $\pi$ around a point $z_0$ for which
+$z_0^i$ is not zero, which (as complex coordinates) is given as
+\[
+\tilde{\pi}(z^1,\ldots,z^i,\ldots,z^{n+1}) = \frac{1}{z^i}(z^1,\ldots,z^{i-1},z^{i+1},\ldots,z^{n+1})
+\]
+This is clearly smooth from $\C^{n+1}\to\C^n$, so $\pi$ is smooth as well.
+Now, let's find what the rank at this point is.
+
+To do so, we compute the Jacobian of $d\pi$. This is given as 
+
+\end{proof}
+
+\subsection*{Part b}
+Show that $\C P^1 \cong S^2$.
+\\
+\begin{proof}
+
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+\section*{Problem 2} %Lee 4-6
+For $M$ a nonempty smooth compact manifold, show that there is no
+smooth submersion $F:M\to\R^k$ for any $k>0$.
+\\
+\begin{proof}
+
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+\section*{Problem 3} %Lee 4-12
+Use the covering map $\varepsilon^2:\R^2\to\mathbb{T}^2$ to show that the immersion $\chi:\R^2\to\R^3$
+descends to a smooth embedding of $\mathbb{T}^2$ into $\R^3$. Specifically, show that $\chi$
+passes to the quotient to define a smooth map $\tilde{\chi}:\mathbb{T}^2\to\R^3$, then show
+that $\tilde{\chi}$ is a smooth embedding whose image is the given surface of revolution.
+\\
+\begin{proof}
+
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
