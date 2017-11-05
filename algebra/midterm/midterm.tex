@@ -1,0 +1,80 @@
+\documentclass[12pt,reqno]{amsart}
+\usepackage{amssymb}
+\usepackage{amscd}
+\usepackage{amsxtra}
+\usepackage[mathscr]{eucal}
+
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{16.5cm}
+\setlength{\topmargin}{0.35cm}
+\setlength{\textheight}{8.5in}
+\renewcommand{\baselinestretch}{1.33}
+
+\pagestyle{plain}
+
+\newcommand{\inv}{^{-1}}
+
+\begin{document}
+\title[]{Math 220A: Midterm Examination\\
+        November 2, 2017\\
+        Daniel Halmrast}
+\maketitle
+\large
+\section*{Problem 1}
+Let $G$ be a non-abelian group of order 26, and let $H\leq G$ with $|H|=13$.
+Prove that each element of $G$ which is not in $H$ is of order 2. Deduce that
+if $a, b$ are elements of $G$ of orders $2$ and $13$ respectively, then
+$aba=b\inv$.
+\\
+\begin{proof}
+    We will first prove that any element in $G$ that is not in $H$ has
+    order 2. We will do this by careful use of the class equation. In
+    particular, letting $G$ act on itself by conjugation (the group action
+    $(g,x)\mapsto gxg\inv$), we have that
+    \[
+        |G| = |Z(G)| + \sum|Orb_G(x)|
+    \]
+    Where $Z(G)$ is the center of $G$, and the sum is taken over
+    representatives of the distinct conjugacy classes (orbits) of $G$.
+    
+    Since $G$ is non-abelian, we know that $|G|\neq|Z(G)|$. Furthermore, since
+    $Z(G)\leq G$, we know that $|Z(G)|$ divides $|G|=26$. Thus, either
+    $|Z(G)| = 13$, $|Z(G)| = 2$,or $|Z(G)| = 1$.
+
+    Suppose that $|Z(G)| = 13$. In particular, $Z(G)$ is a Sylow-13 subgroup
+    of $G$. Furthermore, since $Z(G)$ is fixed by conjugation, the second Sylow
+    theorem tells us that it is the only Sylow-13 subgroup of $G$. Thus,
+    $Z(G) = H$.
+
+    Now, the class equation reads
+    \[
+        |G| = 26 = 13 + \sum|Orb_G(x)|
+    \]
+    Now, the orbit-stabilizer theorem tells us that $|Orb_G(x)| = [G:c_G(x)]$,
+    and Lagrange's theorem tells us that this index divides the order of the
+    group. Thus, we have that for each $x$, $|Orb_G(x)|$ is either $13$ or $2$.
+    However, since the sum must equal 13, at least one term in the sum must be
+    odd. Therefore, the only term in the sum is the single orbit of order $13$.
+
+    This implies that for any $x\not\in Z(G)$ we have that $c_G(x)$ has index
+    $13$, implying that $|c_G(x)| = 2$. This cannot be, however, since each
+    element of the center $Z(G)$ clearly centralizes $x$, so $|c_G(x)|\geq 13|$.
+
+    Thus, $|Z(G)|$ cannot be $13$. So, assume $|Z(G)| = 2$.
+
+    Now, we have a class equation that reads
+    \[
+    |G| = 26 = 2 + \sum|Orb_G(x)|
+    \]
+    In particular, $\sum|Orb_G(x)| = 24$. By the same argument as above, we
+    must have that each orbit is of order $2$ or $13$. However, we cannot
+    have an orbit of order $13$, since that would leave $24-13=11$ for the sum
+    of the orders of the rest of the orbits, and each orbit must have order $2$
+    or $13$, which clearly cannot sum to $11$.
+
+    Thus, we have that each orbit has order $2$, with a stabilizer of index
+    $2$. 
+\end{proof}
+
+\end{document}
