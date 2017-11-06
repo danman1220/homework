@@ -21,7 +21,8 @@
 \begin{document}
 \title[]{Math 220A: Midterm Examination\\
         November 2, 2017\\
-        Daniel Halmrast}
+        Daniel Halmrast\\
+        Time taken: 9 hours}
 \maketitle
 \large
 \section*{Problem 1}
@@ -160,7 +161,10 @@ order $2^r$. Show that for $r>0$, $G$ has a normal subgroup of index $2$.
 \\
 \begin{proof}
     Since $x$ has order $2^r$, by the above argument it is represented by
-    $s$ disjoint $2^r$-cycles, with signature $\textrm{sig}(2^r\textrm{-cycle})^s$.
+    $s$ disjoint $2^r$-cycles, with signature 
+    \[
+        \varepsilon(\rho(x)) = \varepsilon(2^r\textrm{-cycle})^s
+    \]
     Since the signature of a $2^r$-cycle is odd, and $s$ is odd, the signature
     of $\rho(x)$ is odd as well.
 
@@ -168,6 +172,10 @@ order $2^r$. Show that for $r>0$, $G$ has a normal subgroup of index $2$.
     an argument made in homework 1, exactly half of the elements of $G$
     are in $A_{|G|}$. Therefore, the subgroup $G\cap A_{|G|}$ has order
     $\frac{|G|}{2}$, and has index $[G:G\cap A_{|G|}] = 2$ as desired.
+    
+    Furthermore, this subgroup is normal, since conjugation of $\tau\in
+    A_{|G|}$ with any element of $G$ will not change the signature of $\tau$, so
+    it will stay in $A_{|G|}$.
     \\
     \\
     (The argument for $G\cap A_{|G|}$ being exactly half of $G$ is recreated
@@ -235,7 +243,6 @@ By Sylow's second theorem, we know that all of the Sylow-$p$ subgroups of $G$
     previous exercise and thus cannot be trivial or equal to $G$) is normal in
     $G$. To do so, let $\sigma\in A_{n_p}\cap G$. In particular, $\sigma$ is
     even.
-    
     Now, for any $\tau\in G$, the element $\tau\sigma\tau\inv$ has even
     signature, since $\sigma$ is even, and the signature of $\tau$ is equal to
     the signature of $\tau\inv$. Thus, $\tau$ normalizes $\sigma$, and since
@@ -253,7 +260,7 @@ By Sylow's second theorem, we know that all of the Sylow-$p$ subgroups of $G$
 Let $G$ be a group of order $48$. Show that $G$ is not simple.
 \\
 \begin{proof}
-    To begin with, we observe that $48 = 2^4*3$.
+    To begin with, we observe that $48 = 2^4\times3$.
 
     Now, let's consider the Sylow-$2$ subgroups of $G$, along with the action
     of $G$ by conjugation. Now, Sylow's $2^{nd}$ theorem guarantees that all
@@ -265,7 +272,7 @@ Let $G$ be a group of order $48$. Show that $G$ is not simple.
     Furthermore, $N_G(P)$ contains $P$, so it has order at least $2^4$.
     If $|N_G(P)| = |G|$, then $P$ would be normal and $G$ would not be simple.
 
-    So, let $|N_G(P)| = 2^4$. Then $[G:N_G(P)] = 3$, and there are $3$ Sylow-$2$
+    So, it follows that $|N_G(P)| = 2^4$. Then $[G:N_G(P)] = 3$, and there are $3$ Sylow-$2$
     subgroups of $G$. Thus, by the argument from part ii, along with the
     observation that $48$ does not divide $\frac{3!}{2} = 3$, we know that $G$
     is not simple.
@@ -299,5 +306,106 @@ We know from before that the number of Sylow-$p$ subgroups is equal to the index
     of the normalizer of any particular Sylow-$p$ subgroup. Thus, the second
     statement follows immediately from the first.
 
+    We note first that the normalizer of each Sylow-$7$ subgroup has order at
+    least $7$, which means it has index at most $24$. Furthermore, we know that
+    the number of Sylow-$7$ subgroups must be congruent to $1\mod 7$, which
+    limits it to either $8$, $15$, or $22$.
+
+    However, the only one of these that divides the group order is $8$, and
+    since the index of the normalizer (which is the size of the conjugacy class)
+    of a Sylow-$p$ subgroup must divide the order of the group, it must be that
+    $G$ only has $8$ Sylow-$7$ subgroups.
+
+    As stated above, this means that each normalizer has index $8$, and order
+    $21$.
 \end{proof}
+
+\subsection*{Part ii}
+Show that $G$ is isomorphic to a subgroup of $S_8$.
+\\
+\begin{proof}
+Consider the action of $G$ by conjugation on the Sylow-$7$ subgroups of $G$.
+    This defines a homomorphism $\phi:G\to S_8$. Furthermore, since $G$ is
+    simple, and kernels are normal in their group, $\ker \phi$ must be either
+    trivial or the whole group. However, since $G$ acts transitively, it must be
+    that the kernel is trivial. Thus, $\phi$ is monic, and defines an
+    isomorphism onto its image, which is a subgroup of $S_8$ as desired.
+\end{proof}
+
+\subsection*{Part iii}
+Show that $G$ has no elements of order $14$ or $21$.
+\\
+\begin{proof}
+    Suppose for a contradiction that $x^{14} = e$ for some $x\in G$.
+    Now, since $x^2$ generates a subgroup of order $7$, $\langle x^2\rangle = P$
+    is a Sylow-$7$ subgroup of $G$, and thus has a normalizer $N_G(P)$ with
+    order $21$. But, since $\langle x\rangle$ also normalizes $P$, we have
+    \[
+        \langle x\rangle \leq N_G(P)
+    \]
+    which cannot be, since $|x|=14$ does not divide $|N_G(P)| = 21$.
+
+    Suppose, then, that there is some $x\in G$ for which $x^{21}=e$. In
+    particular, the element $x^7$ generates a Sylow-$3$ subgroup, and all of
+    $\langle x\rangle$ normalizes it. But this contradicts part v (proven
+    later without using this result), so such an $x$ cannot exist.
+\end{proof}
+
+\subsection*{Part iv}
+Show that the normalizer of each Sylow-$7$ subgroup contains just $7$ Sylow-$3$
+subgroups.
+\\
+\begin{proof}
+    To begin with, we note that $|N_G(P_7)|=21$, where $P_7$ is a Sylow-$7$
+    subgroup.
+
+    Now, we know that from the perspective of $N_G(P_7)$, we must have for the
+    Sylow-$3$ subgroup $P_3$
+    \[
+        \#(\textrm{Sylow-3 subgroups in $N_G(P_7)$}) = [N_G(P_7):N_G(P_3)]
+    \]
+    which must divide $21$, but must also be at least $3$. That is, the number
+    of Sylow-$3$ subgroups of $N_G(P_7)$ must be either $3$, $7$, or $21$.
+
+    Since we also know that the number of Sylow-$3$ subgroups is congruent
+    to $1\mod 3$, our only option for the number of Sylow-$3$ subgroups is $7$,
+    as desired.
+\end{proof}
+
+\subsection*{Part v}
+Show that $G$ has $28$ Sylow-$3$ subgroups, and the normalizer of each has order
+$6$.
+\\
+\begin{proof}
+We know from the previous result that the number of Sylow-$3$ subgroups of $G$
+    is at least $7$. We also note that the normalizer of each must be of order
+    at least $3$, so the index of the normalizer (equal to the number of
+    Sylow-$3$ subgroups) is at most $2^3\times 7=56$.
+    
+    We also know that this number is congruent to $1\mod 3$,
+    which leaves us with the options $7+3n$ for $n\leq16$. Furthermore, this number
+    must divide the order of the group, which leaves us with the options
+    $7$ and $28$.
+
+    The number of Sylow-$3$ subgroups of $G$ cannot be $7$. To see this, assume
+    that there are only $7$ Sylow-$3$ subgroups. Then, for some Sylow-$7$
+    subgroup $P_7$, we have that all of the Sylow-$3$ subgroups are in
+    $N_G(P_7)$ by the above argument. This means that for any Sylow-$3$ subgroup
+    $P_3$, any $g\in G$, there is some $k\in N_G(P_7)$ such that
+    \[
+        \begin{aligned}
+            gP_3g\inv &= kP_3k\inv\\
+            k\inv gP_3 g\inv k &= P_3
+        \end{aligned}
+    \]
+    which implies that the element $k\inv g=n$ for some $n\in N_G(P_3)$, and
+    $g=kn$, This means that $G$
+    can be written as the product $N_G(P_3)N_G(P_7)$. However, this contradicts
+    $G$ being simple.
+
+    Thus, the number of Sylow-$3$ subgroups is $28$, which implies the index
+    of each normalizer is $28$, and the order of each normalizer is
+    $\frac{168}{28}=6$, as desired.
+\end{proof}
+
 \end{document}
