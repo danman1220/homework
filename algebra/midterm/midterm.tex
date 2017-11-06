@@ -14,6 +14,9 @@
 \pagestyle{plain}
 
 \newcommand{\inv}{^{-1}}
+\newcommand{\N}{\mathbb{N}}
+
+\newtheorem*{statement}{Statement}
 
 \begin{document}
 \title[]{Math 220A: Midterm Examination\\
@@ -40,14 +43,10 @@ $aba=b\inv$.
     
     Since $G$ is non-abelian, we know that $|G|\neq|Z(G)|$. Furthermore, since
     $Z(G)\leq G$, we know that $|Z(G)|$ divides $|G|=26$. Thus, either
-    $|Z(G)| = 13$, $|Z(G)| = 2$,or $|Z(G)| = 1$.
+    $|Z(G)| = 13$, $|Z(G)| = 2$, or $|Z(G)| = 1$.
 
-    Suppose that $|Z(G)| = 13$. In particular, $Z(G)$ is a Sylow-13 subgroup
-    of $G$. Furthermore, since $Z(G)$ is fixed by conjugation, the second Sylow
-    theorem tells us that it is the only Sylow-13 subgroup of $G$. Thus,
-    $Z(G) = H$.
-
-    Now, the class equation reads
+    Suppose that $|Z(G)| = 13$.
+    Then, the class equation reads
     \[
         |G| = 26 = 13 + \sum|Orb_G(x)|
     \]
@@ -59,7 +58,7 @@ $aba=b\inv$.
 
     This implies that for any $x\not\in Z(G)$ we have that $c_G(x)$ has index
     $13$, implying that $|c_G(x)| = 2$. This cannot be, however, since each
-    element of the center $Z(G)$ clearly centralizes $x$, so $|c_G(x)|\geq 13|$.
+    element of the center $Z(G)$ clearly centralizes $x$, so $|c_G(x)|\geq 13$.
 
     Thus, $|Z(G)|$ cannot be $13$. So, assume $|Z(G)| = 2$.
 
@@ -74,7 +73,231 @@ $aba=b\inv$.
     or $13$, which clearly cannot sum to $11$.
 
     Thus, we have that each orbit has order $2$, with a stabilizer of index
-    $2$. 
+    $2$. Now, a basic argument will show that, for $g\in G$, $\textrm{Stab}_G(g)
+    = c_G(g)$, and for $g' = kgk\inv$ for any $k\in g$, $c_G(g') =
+    kc_G(g')k\inv$.
+    That is, $c_G(kgk\inv) = kc_G(g)k\inv$ for any $g,k\in G$.
+
+    Since each orbit has only two elements in it (say, $g$ and $g'=kgk\inv$),
+    it must be that the conjugcacy class of centralizers of $g$ has at most
+    two elements. Since each centralizer has order $13$, it is conjugate to
+    $H$, but since the number of conjugates of $H$ must be equal to $1\mod 13$,
+    it must be that $H$ is the only element of this conjugacy class. Thus,
+    for each $g$ in some orbit, we have that $c_G(g) = H$.
+
+    Suppose that $x\in G$ is in some orbit (with elements $x$ and $x'$).
+    Then, we have that the centralizer of $x$ is $H$. Now, let $k\not\in H$ be
+    arbitrary. Since $k\not\in H$, $kxk\inv =x'$. And since $k$ doesn't
+    centralize $x'$ either, we have that $kx'k\inv = k^2x(k\inv)^2 = x$.
+    
+    Now, the order of $k$ is either trivial, $2$, $13$, or $26$. If the order
+    of $k$ is $1$, then $k=e\in H$ which contradicts $k\not\in H$. If the order
+    of $k$ is $13$, then $\langle k \rangle$ has order $13$, and is then equal
+    to $H$, which contradicts $k\not\in H$. If $k$ has order $26$, then $\langle
+    k\rangle = G$, which cannot be since $G$ is non-abelian.
+    
+    Thus, $|k| = 2$ as desired.
+
+    Suppose instead that $|Z(G)| = 1$. In this case, we must have some
+    orbit of order $13$, along with some orbits of order $2$. In particular,
+    applying the above argument to an orbit of order $2$ completes the argument
+    that each $k\not\in H$ has order $2$ as desired.
+    \\
+    \\
+    Now, let's use this result to prove that for elements $a,b$ in $G$ with
+    $|a|=2$ and $|b|=13$, $aba=b\inv$.
+
+    To do so, we observe that this is equivalent to showing that $(ab)^2 = e$.
+    So, consider the element $ab$. Since $H$ is of prime order, each element of
+    $H$ has order $13$. Thus, $a$ cannot be in $H$. In particular, this means
+    that (since $H$ is cyclic), $ab\not\in H$ as well.
+
+    By the above result, we have that $|ab| = 2$, which implies that
+    $(ab)^2 = e$ as desired.
 \end{proof}
 
+
+\newpage
+
+\section*{Problem 2}
+For any $\sigma\in S_n$, we say $\sigma$ has a cycle type
+$(r_1,\ldots,r_n)$ where each $r_i\in \N\cup\{0\}$, and $\sum_{i=1}^nir_i = n$,
+if $\sigma = \sigma_1\ldots\sigma_k$ where each $\sigma_i$ is disjoint from the
+others, and $r_i$ of them have length $i$.
+
+\subsection*{Part i}
+For $x\in G$, what is the cycle type of $\rho(X)$, where $\rho$ is the canonical
+embedding of $G$ into $S_{|G|}$?
+\\
+\begin{proof}
+    Let $|x| = r$, and let $|G| = rs$ for some $r$ and $s$. Now, we first
+    observe that the map $x\mapsto l(x)\in S_{|G|}$ (where $l(x)$ is left-multiplication by
+    $x$) has trivial kernel, and is thus an isomorphism onto its image.
+    So, this group action is an embedding of $G$ into $S_{|G|}$, and we will
+    identify $l(x)$ with $\rho(x)$.
+
+    Furthermore, consider the subgroup $\langle x\rangle$ of order $r$.
+    Clearly, if $l(x^n)g=g$, then $x^n = e$ and $n=r$. Therefore, for each
+    $g\in G$, it is in a $\langle x\rangle$-orbit of order $r$ (formed by
+    repeated application of $l(x)$). So, each orbit of $\langle x\rangle$ has
+    order $r$. Observing that the orders partition $G$, we have that
+    \[
+        |G| = \sum|Orb(g)|
+    \]
+    where the sum is taken over representatives of distinct orbits. Since 
+    each orbit has order $r$, and $G$ has order $rs$, we must have exactly $s$
+    disjoint orbits.
+
+    So, the cycle decomposition of $x$ has $S$ cycles of length $r$,
+    and has a cycle type of $(0,\ldots,s_{(r)},\ldots,0)$. That is,
+    $r_r = s$ and the rest are zero.
+\end{proof}
+
+\subsection*{Part ii}
+Suppose that a group of order $2^rs$, with $s$ odd, contains an element $x$ of
+order $2^r$. Show that for $r>0$, $G$ has a normal subgroup of index $2$.
+\\
+\\
+\begin{proof}
+    Since $x$ has order $2^r$, by the above argument it is represented by
+    $s$ disjoint $2^r$-cycles, with signature $\textrm{sig}(2^r\textrm{-cycle})^s$.
+    Since the signature of a $2^r$-cycle is odd, and $s$ is odd, the signature
+    of $\rho(x)$ is odd as well.
+
+    Thus, the representation $\rho(x)$ is not an element of $A_{|G|}$, and by
+    an argument made in homework 1, exactly half of the elements of $G$
+    are in $A_{|G|}$. Therefore, the subgroup $G\cap A_{|G|}$ has order
+    $\frac{|G|}{2}$, and has index $[G:G\cap A_{|G|}] = 2$ as desired.
+    \\
+    \\
+    (The argument for $G\cap A_{|G|}$ being exactly half of $G$ is recreated
+    below).
+
+    Let $G$ be a subset of $S_n$, with $G\not\subset A_n$. Then, there is
+    at least one element $\sigma\in G$ that is odd. Now, consider the sets
+    $T_1$ and $T_2$, containing the even and odd permutations of $G$
+    respectively.
+    
+    Clearly, the map from $T_1$ to $T_2$ defined by $\tau\mapsto\sigma\tau$
+    is a bijection of sets, since it is invertible by $\sigma\inv$.
+    Thus, the two sets have the same cardinality, and exactly half the elements
+    of $G$ are even, as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3}
+\subsection*{Part i}
+State Sylow's theorems.
+\\
+\begin{statement}
+Sylow's theorems are as follows:
+
+    For a finite group $G$, and prime $p$ such that $p$ divides $|G|$ and
+    $p^{\alpha}$ is the highest power of $p$ that divides $|G|$, the following
+    hold:
+    \begin{enumerate}
+        \item There exists a subgroup of $G$ with order $p^{\alpha}$. This
+            subgroup is called a Sylow-$p$ subgroup of $G$.
+        \item Every Sylow-$p$ subgroup lies in the same conjugacy class. That
+            is, given two Sylow-$p$ subgroups $P,S$, there exists $g\in G$ such
+            that $P=gSg\inv$.
+        \item The number of Sylow-$p$ subgroups of $G$ is equal to $1\mod p$.
+    \end{enumerate}
+
+\end{statement}
+\subsection*{Part ii}
+Let $G$ be a finite, simple, non-abelian group. Let $p$ be a prime number. Show
+that if $p$ divides $|G|$, then $|G|$ divides $\frac{n_p!}{2}$, where $n_p$ is
+the number of Sylow-$p$ subgroups of $G$.
+\\
+\begin{proof}
+By Sylow's second theorem, we know that all of the Sylow-$p$ subgroups of $G$
+    lie in the same conjugacy class. Now, consider the action of $G$ on this
+    conjugacy class by conjugation
+    \[
+        (g,S)\mapsto gSg\inv
+    \]
+    for $g\in G$ and $S$ a Sylow-$p$ subgroup.
+
+    This action defines a map $\phi:G\to S_{n_p}$.
+    Now, the kernel $\ker(\phi)$ is normal in $G$, so by the fact that $G$ is
+    simple, it must be trivial. (Since the orbit of the action is all of the
+    conjugacy class, the kernel cannot be all of $G$, therefore, it must be just
+    $\{e\}$.)
+
+    Therefore, $\phi$ is injective. In particular, $G$ is isomorphic to a
+    subgroup of $S_{n_p}$, which we will, for ease of notation, identify with
+    $G$.
+    
+    Suppose that $G$ were not a subgroup of $A_{n_p}$. Then, we will show that
+    the subgroup $G\cap A_{n_p}$ (which contains $\frac{|G|}{2}$ elements by the
+    previous exercise and thus cannot be trivial or equal to $G$) is normal in
+    $G$. To do so, let $\sigma\in A_{n_p}\cap G$. In particular, $\sigma$ is
+    even.
+    
+    Now, for any $\tau\in G$, the element $\tau\sigma\tau\inv$ has even
+    signature, since $\sigma$ is even, and the signature of $\tau$ is equal to
+    the signature of $\tau\inv$. Thus, $\tau$ normalizes $\sigma$, and since
+    $\sigma$ and $\tau$ were arbitrary, it follows that all of $G$ normalizes
+    all of $A_{n_p}\cap G$, and thus $A_{n_p}\cap G$ is normal in $G$, which is 
+    a contradiction.
+
+    So, $G$ is a subgroup of $A_{n_p}$, and thus its order must divide the order
+    of $A_{n_p}$.
+
+    Thus, $|G|$ divides $\frac{n_p!}{2}$.
+\end{proof}
+
+\subsection*{Part iii}
+Let $G$ be a group of order $48$. Show that $G$ is not simple.
+\\
+\begin{proof}
+    To begin with, we observe that $48 = 2^4*3$.
+
+    Now, let's consider the Sylow-$2$ subgroups of $G$, along with the action
+    of $G$ by conjugation. Now, Sylow's $2^{nd}$ theorem guarantees that all
+    the Sylow-$2$ subgroups are in the same orbit. Thus, by the orbit-stabilizer
+    theorem, we have that, for $P$ a Sylow-$2$ subgroup,
+    \[
+        \#(\textrm{Sylow-$2$ subgroups}) = |Orb_G(P)|=[G:N_G(P)]
+    \]
+    Furthermore, $N_G(P)$ contains $P$, so it has order at least $2^4$.
+    If $|N_G(P)| = |G|$, then $P$ would be normal and $G$ would not be simple.
+
+    So, let $|N_G(P)| = 2^4$. Then $[G:N_G(P)] = 3$, and there are $3$ Sylow-$2$
+    subgroups of $G$. Thus, by the argument from part ii, along with the
+    observation that $48$ does not divide $\frac{3!}{2} = 3$, we know that $G$
+    is not simple.
+\end{proof}
+
+\subsection*{Part iv}
+Find a group of order 48 that has no normal Sylow-$2$ subgroup.
+\\
+\\
+Consider the dihedral group $D_{24}$, which has $24\times 2=48$ elements. In
+particular, $D_8$ is a subgroup of $D_{24}$ of order $8\times 2=16$, but is not
+normal in $D_{24}$. This can be clearly illustrated by conjugation with the
+smallest rotation in $D_{24}$. If one considers conjugating a reflection by this
+rotation, it is clear that the rotation will set the octagon off-axis, and the
+reflection will be performed off the symmetry axis of the octagon, leading to a
+transformation not in $D_8$.
+
+Thus, $D_8$ is not normal in $D_{24}$, as desired.
+
+\newpage
+
+\section*{Problem 4}
+Let $G$ be a simple group of order $168=2^3\times3\times7$.
+
+\subsection*{part i}
+$G$ has just $8$ Sylow-$7$ subgroups, and the normalizer of each is of order
+$21$.
+\\
+\begin{proof}
+We know from before that the number of Sylow-$p$ subgroups is equal to the index
+    of the normalizer of any particular Sylow-$p$ subgroup. Thus, the second
+    statement follows immediately from the first.
+
+\end{proof}
 \end{document}
