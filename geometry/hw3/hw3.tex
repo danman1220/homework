@@ -1,0 +1,389 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Geometry} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 3\\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+\section*{Problem 1} %Lee 4-5
+\subsection*{Part a}
+Show that the quotient map $\pi: \C^{n+1}\setminus \{0\}\to\C P^n$ is a surjective
+smooth submersion.
+\\
+\begin{proof}
+Surjectivity follows almost immediately from the definition of the map, since any
+equivalence class $[z]$ is mapped to by $\pi(z)$. Now, we must show it is a smooth submersion.
+
+We will do this using the Global Rank Theorem (Theorem 4.14), which states that a surjection
+with constant rank is a smooth submersion.
+
+Now, the coordinate charts on $\C^{n+1}$ are just the standard rectangular coordinates
+\[
+(z^1,\ldots,z^{n+1}) \mapsto (\Re(z^1),\Im(z^1),\ldots,\Re(z^{n+1}),\Im(z^{n+1}))
+\]
+And for each $i\in\{1,\ldots,n+1\}$, we have a local coordinate chart on $\C P^n$ around
+where $z^i$ is not zero, given as
+\[
+(z^1:\ldots:z^i:\ldots:z^{n+1}) \mapsto \frac{1}{z^i}(z^1,\ldots,z^{i-1},z^{i+1},\ldots,z^{n+1})
+\]
+(Here, this coordinate chart actually maps to $\C^n$, which has a global coordinate chart
+as defined above, and the composition then defines a coordinate chart to $\R^{2n}$.)
+
+So now we consider the coordinate representation of $\pi$ around a point $z_0$ for which
+$z_0^i$ is not zero, which (as complex coordinates) is given as
+\[
+\tilde{\pi}(z^1,\ldots,z^i,\ldots,z^{n+1}) = \frac{1}{z^i}(z^1,\ldots,z^{i-1},z^{i+1},\ldots,z^{n+1})
+\]
+This is clearly smooth from $\C^{n+1}\to\C^n$, so $\pi$ is smooth as well.
+Now, let's find what the rank at this point is.
+
+To do so, we compute the Jacobian of $d\pi$, $J_j^k = \partial_j(\tilde{\pi}^k)$.
+This is a somewhat complicated Jacobian, so we consider first the minor to the
+left of the $i^{th}$ column.  On this minor, we have that
+\[
+J_j^k = \frac{1}{z^i}\delta_j^k
+\]
+Which is just $\frac{1}{z^i}*I$ for the $i-1\times i-1$ identity matrix.
+
+Now, to the right of the $i^{th}$ column, we have
+\[
+J_j^k = \frac{1}{z^i}\delta_{(j+1)}^k
+\] 
+And finally, for the $i^{th}$ column itself, we have that
+\[
+J_i^k = \partial_i(\tilde{\pi}^k) = \frac{-1}{z^i}\tilde{\pi}^k
+\]
+So the whole matrix looks like
+\[
+\begin{bmatrix}
+\frac{1}{z^i} & 0   &\ldots &0 &\frac{-z^1}{(z^i)^2} & 0 & \ldots & 0\\
+0 & \frac{1}{z^i}   &\ldots &0 &\frac{-z^2}{(z^i)^2} & 0 & \ldots & 0\\
+\vdots & \vdots     &\ddots &\vdots &\vdots          & \vdots & \ddots & \vdots\\
+0 & 0               &\ldots &\frac{1}{z^i} &\frac{-z^{i-1}}{(z^i)^2} & 0 &\ldots& 0\\
+0 & 0               &\ldots &0 &\frac{-z^{i+1}}{(z^i)^2} & \frac{1}{z^i} &\ldots &0\\
+\vdots &\vdots      &\ddots &\vdots &\vdots                   &\vdots &\ddots &\vdots\\
+0 & 0               &\ldots &0 &\frac{-z^{n+1}}{(z^i)^2} &0 &\ldots &\frac{1}{z^i}\\ 
+\end{bmatrix}
+\]
+Which, since $z^i$ is not zero, has full rank. Thus, since this is true for any point
+in $\C^{n+1}$, it follows that $\pi$ has full rank at every point, and is a smooth submersion.
+\end{proof}
+
+\subsection*{Part b}
+Show that $\C P^1 \cong S^2$.
+\\
+\begin{proof}
+To do this, we will consider the two projection maps
+\[
+\begin{tikzcd}[column sep=small]
+ &S^3 \arrow[swap]{dl}{\pi_1} \arrow{dr}{\pi_2}& \\
+\C P^1 & & S^2
+\end{tikzcd}
+\]
+Given by $\pi_1$ the canonical projection map from $S^3$ to $S^3/{U(1)}$,
+and $\pi_2$ is the Hopf fibration, which was shown to be a smooth surjection in the last
+homework assignment. (Here, we will use the fibration map $\pi_2(z_1,z_2) = (2z_1\overline{z_2},|z_1|^2-|z_2|^2)$).
+
+A small calculation shows that the Hopf fibration is, in fact, a surjective smooth
+submersion, since in rectangular coordinates, we have
+\[
+\pi_2(x,y,w,v) = (2(xw+yv),2(yw-xv),X^2+y^2-v^2-w^2)
+\]
+Which has a differential of
+\[
+d\pi_2 = 2
+\begin{bmatrix}
+w & v & y & x\\
+-v &w &-x & y\\
+x & y &-v &-w
+\end{bmatrix}
+\]
+Which is clearly full rank, and thus surjective.
+
+We note first the fibers of these maps coincide. This is clear since the fiber associated
+with $\pi_1([(z_1,z_2)]) = \{\lambda (z_1,z_2)\}$ for all $\lambda\in U(1)$, which all map to the same
+point via $\pi_2$, since 
+\[
+\begin{aligned}
+\pi_2(\lambda(z_1,z_2)) &= (2\lambda z_1\overline{\lambda z_2},|\lambda z_1|^2-|\lambda z_2|^2)\\
+                        &= (2\lambda\overline{\lambda}z_1\overline{z_2}, |z_1|^2 - |z_2|^2)\\
+                        &= (2z_1\overline{z_2},|z_1|^2-|z_2|^2)
+\end{aligned}
+\]
+Thus, a fiber of $\pi_1$ is a fiber of $\pi_2$.
+
+Now, let's look at the fibers of $\pi_2$. We know that
+\[
+\pi_2^{-1}(z,r) = \{(z_1,z_2)\in S^3\ |\ z_1\overline{z_2} = z,\ |z_1|^2-|z_2|^2 = r\}
+\]
+Now, the last condition, along with the condition that $z_1,z_2\in S^3$, fix the norms of
+$z_1$ and $z_2$. Thus, for any other point $(z_1',z_2')$ in the fiber, we must have
+that $z_1' = \lambda_1 z_1$ and $z_2' = \lambda_2 z_2$ with $\lambda_1,\lambda_2\in U(1)$.
+Furthermore, the restriction
+that $z_1\overline z_2 = z$ forces $\lambda_1 = \lambda_2$. Thus,
+$\pi_1(\pi_2^{-1}(z,r))$, which quotients by $\lambda \in U(1)$, sends the fiber 
+to a single point.
+
+Thus, each smooth surjection is constant on each other's fibers, which gives rise to the
+diffeomorphism
+\[
+\begin{tikzcd}[column sep=small]
+ &S^3 \arrow[swap]{dl}{\pi_1} \arrow{dr}{\pi_2}& \\
+\C P^1 \arrow[dashed, hook, two heads]{rr}{F}& & S^2
+\end{tikzcd}
+\]
+as desired.
+\end{proof}
+%----------------------------------------------------------------------------------------
+\newpage
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+\section*{Problem 2} %Lee 4-6
+For $M$ a nonempty smooth compact manifold, show that there is no
+smooth submersion $F:M\to\R^k$ for any $k>0$.
+\\
+\begin{proof}
+We note two things immediately. First, since $F$ is continuous, its image must be compact 
+(and by the Heine-Borel theorem, must be closed).
+Second, since $F$ is a smooth submersion, it is an open map. Thus, the image of $F$ is open
+in $\R^k$. The only nonempty set in $R^k$ that is both closed and open is $\R^k$ itself,
+but this cannot be the image of $F$, since the image must be compact. So, such an $F$ cannot
+exist.
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+\section*{Problem 3} %Lee 4-12
+Use the covering map $\varepsilon^2:\R^2\to\mathbb{T}^2$ to show that the immersion $\chi:\R^2\to\R^3$
+descends to a smooth embedding of $\mathbb{T}^2$ into $\R^3$. Specifically, show that $\chi$
+passes to the quotient to define a smooth map $\tilde{\chi}:\mathbb{T}^2\to\R^3$, then show
+that $\tilde{\chi}$ is a smooth embedding whose image is the given surface of revolution.
+\\
+\begin{proof}
+We first show that $\chi$ passes smoothly through the quotient by showing it is constant
+on the fibers of $\epsilon^2$. To see this, we observe that $\chi$ is periodic in integer
+multiples of its arguments, and that $\epsilon^2$ is similarly periodic. That is, for
+$(\exp(2\pi i\theta_1),\exp(2\pi i\theta_2)),$ its fiber is just $(n\theta_1,m\theta_2)$.
+But since $\chi$ is periodic, it must map all of this fiber to a point. Thus, $\chi$ is
+constant on the fibers of $\epsilon^2$, and can be passed through the quotient to
+obtain $\tilde{\chi}$ which makes
+\[
+\begin{tikzcd}[column sep=small]
+ &\R^2 \arrow[swap]{dl}{\chi} \arrow[two heads]{dr}{\epsilon^2}& \\
+\R^3 & & \mathbb{T}^2\arrow[dashed]{ll}{\tilde{\chi}}
+\end{tikzcd}
+\]
+commute.
+
+Now, $\tilde{\chi}$ is clearly injective, since $\chi$ is only periodic on the fibers of $\epsilon^2$.
+So, we just need to show that $\tilde{\chi}$ is an immersion, and Proposition 4.22 will
+give us that $\tilde{\chi}$ is an embedding.
+
+To see that $\tilde{\chi}$ is an immersion, we observe the following diagram:
+\[
+\begin{tikzcd}
+T\R^2\arrow[bend right, hook]{rr}{d\chi} \arrow[hook, two heads]{r}{d\epsilon^2} & T\mathbb{T}^2 \arrow{r}{d\tilde{\chi}} & T\R^3\\
+\end{tikzcd}
+\]
+Where $d\epsilon^2$ is locally bijective since $\epsilon^2$ is a covering map, and
+$d\chi$ is injective since $\chi$ is an immersion. Therefore, $d\tilde{\chi}$ must be
+injective, and the result follows immediately.
+\end{proof}
+%----------------------------------------------------------------------------------------
+\newpage
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+\section*{Problem 4} %Lee 4-13
+Let $F:S^2\to\R^4$ by
+\[
+F(x,y,z) = (x^2-y^2,xy,xz,yz)
+\]
+descends along the quotient of $S^2$ by $O(1)$ to a smooth embedding of $\R P^2$ into
+$\R^4$.
+\\
+\begin{proof}
+TO begin with, we cite that the quotient map from $S^2$ to $\R P^2$ is given as a smooth
+covering map from problem 4-10. Thus, we have the following diagram
+\[
+\begin{tikzcd}[column sep=small]
+ &S^2 \arrow[swap]{dl}{F} \arrow{dr}{q}& \\
+\R^4 & & \R P^2
+\end{tikzcd}
+\]
+We note that $F$ is constant on the fibers of $q$ (where we observe that $q^{-1}(\{[x]\}) = \{x,-x\}$)
+since
+\[
+F(-x,-y,-z) = ((-x)^2 - (-y)^2,(-x)(-y),(-x)(-z),(-y)(-z)) = F(x,y,z)
+\]
+Thus, we apply Theorem 4.30 to construct $\tilde{F}$ such that
+\[
+\begin{tikzcd}[column sep=small]
+ &S^2 \arrow[swap]{dl}{F} \arrow{dr}{q}& \\
+\R^4 & & \R P^2\arrow[dashed]{ll}{\tilde{F}}
+\end{tikzcd}
+\]
+commutes.
+
+Now, since $\R P^2$ is compact, it suffices to show that $\tilde{F}$ is an injective
+immersion, and Proposition 4.22 gives us that $\tilde{F}$ is a smooth embedding.
+
+To see that $\Tilde{F}$ is an injective immersion, we first show that $\tilde{F}$ is 
+injective.
+
+A simple diagram chase of
+\[
+\begin{tikzcd}[column sep=small]
+ &S^2 \arrow[swap]{dl}{F} \arrow[two heads]{dr}{q}& \\
+\R^4 & & \R P^2\arrow{ll}{\tilde{F}}
+\end{tikzcd}
+\]
+Will prove this. To do so, let $[x],[y]$ be distinct points in $\R P^2$. Then, by injectivity
+of $q$, it follows that there are points $x,y\in S^2$ such that $q(x) = [x]$ and $q(y) = [y]$.
+Now, since $[x]\neq[y]$, we have that $x\neq -y$. Thus, it is clear that $F(x)\neq F(y)$.
+This can be seen by the following argument.
+
+Suppose $F(x,y,z) = (q,r,s,t)$ for some constants $q,r,s,t$. In particular, we have that
+\[
+\begin{aligned}
+x^2 &= \frac{rs}{t}\\
+y^2 &= \frac{rt}{s}\\
+z^2 &= \frac{st}{r}
+xy  &= r\\
+xz  &= s\\
+yz  &= t 
+\end{aligned}
+\]
+It follows immediately that if $F(x',y',z') = (q,r,s,t)$, then $(x',y',z') = (x,y,z)$ or $-(x,y,z)$.
+
+Thus, $F(x)\neq F(y)$, and we have that
+\[
+\begin{aligned}
+F(x) = \tilde{F}(q(x)) &= \tilde{F}([x])\\
+F(y) &= \tilde{F}([x])\\
+F(x)\neq F(y) \implies \tilde{F}([x])\neq\tilde{F}([y])
+\end{aligned}
+\]
+which shows that $\tilde{F}$ is injective.
+
+Similarly, it is clear that $d\tilde{F}$ is injective. To see this, we note that
+since $q$ is a covering map, it is a local diffeomorphism, and thus $dq$ is locally
+a bijection.
+
+Then, observe the diagram
+\[
+\begin{tikzcd}
+TS^2\arrow[bend right]{rr}{dF} \arrow[hook, two heads]{r}{dq} & T\R P^2 \arrow{r}{d\tilde{F}} & \R^4\\
+\end{tikzcd}
+\]
+Now, a routine calculation of the Jacobian $dF$ shows that it is injective locally,
+which implies by the above diagram (since $dq$ is locally bijective) that $d\tilde{F}$ is
+locally injective. 
+
+Thus, $\tilde{F}$ is an injective smooth immersion from a compact manifold, and is
+a smooth embedding.
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+\newpage
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+\section*{Problem 5}
+
+\subsection*{Part a}
+Show that an immersion between two manifolds of the same dimension is an open mapping.
+\\
+\begin{proof}
+To see this, let $f:M\to N$ be an immersion between $M$ and $N$ of the same dimension $n$,
+and let $U$ be open in $M$.
+
+Now, since $f$ is an immersion, it must be that for each point $x\in U$, there is a neighborhood
+of $x$ contained in $U$ for which the coordinate representative of $f$ is the identity. Thus,
+on that neighborhood, $f$ is an open map. However, since $U$ can be written as the union of such
+neighborhoods, and $f$ respects unions, it follows that $f(U)$ is the union of open sets, and is
+open.
+\end{proof}
+\subsection*{Part b}
+Use this to show there is no immersion from $S^n$ to $\R^n$.
+\\
+\begin{proof}
+Suppose there did exist such an $f:S^n\to\R^n$. Since $f$ is continuous, it must
+map the compact set $S^n$ to a compact set. However, $S^n$ is also open, and $f$ is an open
+map, so the image $f(S^n)$ must also be open. Since there are no open compact sets in $\R^n$,
+such a map cannot exist.
+\end{proof}
+%----------------------------------------------------------------------------------------
+
+\end{document}

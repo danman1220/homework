@@ -1,0 +1,296 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\supp}{\textrm{supp}}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 4\\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+\section*{Problem 1}
+For $E\subset\Omega$ measurable, prove the implication
+\[
+\int_E fd\mu = 0\ \forall f\geq 0 \implies \mu(E) = 0
+\]
+
+\begin{proof}
+This follows immediately by letting $f = \chi_E$, and observing that
+\[
+\begin{aligned}
+\int_E \chi_E(x)d\mu(x) &=\int_{\Omega}\chi_E(x)\chi_E(x)d\mu(x)\\
+                        &=\int_{\Omega}\chi_E(x)d\mu(x)\\
+                        &=\mu(E)
+\end{aligned}
+\]
+Which is zero by the hypothesis. Thus, $\mu(E) = 0$ as desired.
+\end{proof}
+%----------------------------------------------------------------------------------------
+\pagebreak
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+\section*{Problem 2}
+For $f\geq 0$ measurable on $\Omega$ with $\mu(\Omega) > 0$, show that
+\[
+\int_{\Omega}f(x)d\mu(x) = 0 \implies [f] = 0
+\]
+(i.e. $f$ is zero $\mu$-almost everywhere).
+\\
+\begin{proof}
+Consider the equivalence class $[f]$ in $L^1(\Omega,\mu)$. In particular,
+since $\int_{\Omega}|f|d\mu =||f||_1 = 0$, we must have that $[f]=0$, which means
+$f$ agrees with the $0$ function $\mu$-almost everywhere. It follows immediately, then,
+that $f$ is zero $\mu$-almost everywhere.
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+\section*{Problem 3}
+Use Fatou's lemma to show that for a sequence $\{f_n\}$ of positive measurable functions,
+the inequality
+\[
+\int_{\Omega}\liminf f_nd\mu \leq \liminf\int_{\Omega} f_nd\mu
+\]
+
+\begin{proof}
+We note first that the inequality is vacuously true if $\liminf\int_{\Omega}f_nd\mu = \infty$.
+
+So, assume that $\liminf\int_{\Omega}f_nd\mu = M$ for some positive number $M$. Then,
+consider the family of subsequences
+\[
+\{f_{n_i}\}_{\epsilon} = \{f_n\ |\ \int_{\Omega} f_nd\mu < M+\epsilon\}
+\]
+Now, for any $\epsilon$, this defines an infinite subsequence, since if the integrals of
+the sequence were not frequently below $M+\epsilon$, then $M+\epsilon$ would be an
+eventual lower bound higher than $M$, which contradicts $M$ being the $\liminf$ of the
+integrals.
+
+Now, we apply Fatou's lemma by observing that for each $f_{n_i}$ we have that
+\[
+\int_{\Omega} f_{n_i}d\mu < M+\epsilon
+\]
+which gives us the upper bound
+\[
+\int_{\Omega}\liminf f_{n_i}d\mu \leq M+\epsilon
+\]
+Now, a basic property of the $\liminf$ is that for a sequence $x_n$ with a subsequence
+$x_{n_i}$,
+\[
+\liminf x_n \leq \liminf x_{n_i}
+\]
+Thus, we also have that
+\[
+\int_{\Omega} \liminf f_nd\mu \leq \int_{\Omega}\liminf f_{n_i} d\mu\leq M+\epsilon
+\]
+However, since this is true for all $\epsilon > 0$, it must be that
+\[
+\int_{\Omega} \liminf f_nd\mu \leq \int_{\Omega}\liminf f_{n_i} d\mu\leq M
+\]
+And by the definition of $M$, we have the desired inequality
+\[
+\int_{\Omega} \liminf f_nd\mu \leq M = \liminf\int_{\Omega}f_nd\mu
+\]
+
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+\pagebreak
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+\section*{Problem 4}
+\subsection*{Notes 2-13}
+Prove that $f\in L^1\implies |f|<\infty$ $\mu$-almost everywhere, and describe the 
+spaces $L^1(\N,\mu_c)$ and $L^1(\Omega,\delta_p$.
+\\
+\begin{proof}
+Let $f\in L^1(\Omega,\mu)$. In particular, we have that $\int_{\Omega}|f|d\mu < \infty$.
+And thus, for every measurable set $E$, we have
+\[
+\int_{\Omega} f = \int_E f + \int_{E^c} f < \infty
+\]
+Which implies that the integral $\int_E fd\mu$ is bounded as well. Thus, $|f|$ cannot
+be $\infty$ on any set of positive measure, since if it were the case
+that $f=\infty$ on some set $E$ with positive measure, the integral
+\[
+\int_E fd\mu
+\]
+would not be bounded.
+
+Now, in an earlier assignment, we proved that for $f:\N\to\R$, $\int_{\N}fd\mu_c = \sum_{i=0}^{\infty}f(i)$.
+Thus, $L^1(\N,\mu_c)$ is just the space $\l^1$ of absolutely convergent sequences.
+
+Similarly, we proved in an earlier assignment that for any $f:\Omega\to\R$ measurable,
+$\int_{\Omega}fd\delta_p = f(p)$. Thus, $[f(x)] = [f(p)(x)] = [f(p)]$. That is, the 
+equivalence class of a function $f$ is just all functions that are bounded at and agree at $p$. So,
+there is exactly one equivalence class for each positive real number, and the norm is just
+\[
+||f(x)||_1 = \int_{\Omega}|f(x)|d\delta_p(x) = |f(p)|
+\]
+which is the usual norm on $\R$. Thus, $L^1(\Omega,\delta_p) \cong \R$.
+\end{proof}
+
+\subsection*{Notes 2-12}
+Prove that the measure $\phi(E) = \int_E fd\mu$ is a measure.
+\\
+\begin{proof}
+First, we observe clearly two things. One, $\phi(\emptyset) = 0$, which follows directly
+from the definition of the integral. Second, $\phi(E)\geq 0$, which follows since $f$ is
+a positive function. Now, all we need to show is $\sigma$-additivity.
+
+To do so, we first observe that there is a monotone sequence of functions $\{\varphi_n\}$
+that converge to $f$. Thus, it follows that
+\[
+\phi(E) = \int_E\lim\varphi_n d\mu = \lim\int_E\varphi_nd\mu = \lim \nu_n(E)
+\]
+Where $\nu_n(E)$ is the weighted measure of the simple function $\phi_n$, given by lemma 3.
+
+Thus, for a sequence $\{E_i\}$ of disjoint measurable subsets, we have
+\[
+\begin{aligned}
+\phi\left(\bigcup_{i=1}^{\infty}E_i\right) &= \lim_{n\to\infty}\nu_n\left(\bigcup_{i=1}^{\infty}E_i\right)\\
+                    &= \lim_{n\to\infty} \sum_{i=1}^{\infty}\nu_n(E_i)\\
+                    &= \sum_{i=1}^{\infty} \lim_{n\to\infty}\nu_n(E_i)\\
+                    &= \sum_{i=1}^{\infty} \phi(E_i)
+\end{aligned}
+\]
+Here, we justify commuting the limit and the sum by observing the following:
+\[
+\lim_n \sum_i \nu_n(E_i) = \lim_n \int_{\N}\nu_n(E_i)d\mu_c(i) = \int_{\N}\lim_n\nu_n(E_i)d\mu_c(i)
+\]
+Which is just a quick application of the monotone convergence theorem on the sequence (in $n$!)
+of monotonic functions $\nu_n':\N\to\R^+$ given as $\nu_n'(i) = \nu_n(E_i)$ which is monotonic
+by the fact that the $\varphi_n$ that define it are monotonic.
+
+Thus, $\phi$ has $\sigma$-additivity.
+
+Moreover, let $g$ be a measurable function. We can show that
+\[
+\int_{\Omega} gd\phi = \int_{\Omega}fgd\mu
+\]
+
+This follows from the fact that $g$ can be approximated as a monotonic sequence $\{\psi_n =\sum_{i=1}^k c^{(n)}_i\phi(E^{(n)}_i)\}$
+of simple functions, and observing that
+\[
+\begin{aligned}
+\int_{\Omega} gd\phi    &= \lim_{n\to\infty} \int_{\Omega} \psi_nd\phi\\
+                        &= \lim_{n\to\infty} \sum_{i=1}^k c^{(n)}_i\phi(E^{(n)}_i)\\
+                        &= \lim_{n\to\infty} \sum_{i=1}^k c^{(n)}_i\int_{\Omega} f\chi_{E_i^{(n)}} d\mu\\
+                        &= \int_{\Omega} f\left(\lim_{n\to\infty}\sum_{i=1}^k c^{(n)}_i\chi_{E_i^{(n)}}d\mu\right)\\
+                        &= \int_{\Omega} fgd\mu
+\end{aligned}
+\]
+\end{proof}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+\section*{Problem 5}
+Show that for a finite measure $\mu$ and a sequence of measurable functions $f_n$ converging
+to $f$ uniformly, we have that
+\[
+\lim_{n\to\infty}\int_{\Omega}f_nd\mu = \int_{\Omega}fd\mu
+\]
+
+\begin{proof}
+We observe that this equivalence is merely stating that
+\[
+\lim_{n\to\infty}\int_{\Omega} |f_n - f|d\mu = 0
+\]
+
+To see this is true, fix $\epsilon >0$, and let $N$ be large enough so that
+for all $i>N$, we have that $\sup_{x\in\Omega}|f_i(x)-f(x)|<\epsilon$.
+
+Now, the integral $\int_{\Omega}|f_i - f|d\mu$ becomes bounded by
+\[
+int_{\Omega}|f_i - f|d\mu < \int_{\Omega} \epsilon d\mu = \epsilon \mu(\Omega)
+\]
+and since this holds for any epsilon, it must be that
+the limit of the integral $\int_{\Omega}|f_n-f|d\mu$ is zero as well.
+
+However, in this proof, we used the fact that $\mu(\Omega) < \infty$. In general,
+this theorem will not hold. To see this, consider the sequence of functions
+\[
+f_n(x) =
+\begin{cases}
+\frac{1}{2n}, &\textrm{ if } |x|\leq n\\
+0, &\textrm{ else}
+\end{cases}
+\]
+Now, these functions converge uniformly to the zero function, but their integral is always
+1. Thus
+\[
+\lim\int_{\R} f_n(x) dx = \lim 1 = 1 \neq \int_{\R} 0 dx = 0 
+\]
+\end{proof}
+%----------------------------------------------------------------------------------------
+\end{document}
