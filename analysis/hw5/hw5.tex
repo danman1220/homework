@@ -1,0 +1,178 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\theoremstyle{definition}
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 5\\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+\section*{Problem 1}
+Prove the linearity of the general Lebesgue integral for complex-valued functions.
+\\
+\begin{proof}
+To begin with, we prove a sequence of lemmas concerning the linearity of easier functions.
+\begin{lemma}[Linearity of Positive Real Functions]
+For $f,g$ positive, real-valued measurable functions from a measure space $(\Omega,\mu)$,
+the integral is linear with respect to pointwise addition and positive scalar
+multiplication. That is, for $\alpha, \beta \geq 0$,
+\[
+\int_{\Omega} \alpha f + \beta g d\mu = \alpha\int_{\Omega} fd\mu + \beta\int_{\Omega} gd\mu
+\]
+\end{lemma}
+\begin{proof}
+This has been proven in the notes, and will not be replicated here.
+\end{proof}
+
+\begin{lemma}
+For $f$ a positive real-valued measurable function from a measure space $(\Omega,\mu)$,
+the integral respects general scalar multiplication. That is, for $\alpha\in\R$, 
+\[
+\int_{\Omega}\alpha fd\mu = \alpha\int_{\Omega} fd\mu
+\]
+\end{lemma}
+\begin{proof}
+This lemma has already been proven for $\alpha\geq 0$. So, suppose $\alpha < 0$.
+In particular, $-\alpha > 0$, and thus by straightforward application of the definition of
+the Lebesgue integral along with lemma 1, we have
+\[
+\begin{aligned}
+\int_{\Omega}\alpha fd\mu   &= \int_{\Omega}-(-\alpha f)d\mu\\
+                            &= -\int_{\Omega}-\alpha fd\mu\\
+                            &= -(-\alpha)\int_{\Omega} fd\mu\\
+                            &= \alpha\int_{\Omega} fd\mu
+\end{aligned}
+\]
+which is the desired result.
+\end{proof}
+
+\begin{lemma}
+For $f_1,f_2,g_1,g_2$ positive real-valued measurable functions from a measure space
+$(\Omega,\mu)$ such that $f_1-f_2 = g_1-g_2$,
+\[
+\int_{\Omega} f_1d\mu - \int_{\Omega} f_2d\mu = \int_{\Omega} g_1d\mu - \int_{\Omega}g_2d\mu
+\]
+\end{lemma}
+
+\begin{proof}
+This follows immediately from integrating $f_1-f_2$ and $g_1-g_2$, and applying lemma 2
+and lemma 1.
+\end{proof}
+We are now ready to begin the proof of the linearity of the Lebesgue integral.
+
+Let $f$ and $g$ be complex-valued measurable functions from a measure space $(\Omega,\mu)$,
+and let $\alpha,\beta\in\C$. We wish to compute the integral
+\[
+\int_{\Omega}\alpha f + \beta gd\mu
+\]
+Now, letting $f = u_f + iv_f$, and $g = u_g + iv_g$, we have that
+\[
+\begin{aligned}
+\int_{\Omega}\alpha f + \beta gd\mu &= \int_{\Omega}(\Re(\alpha) +i\Im(\alpha))(u_f+iv_f) + (\Re(\beta)+i\Im(\beta))(u_g+iv_g)d\mu\\
+    &=\int_{\Omega}(\Re(\alpha)u_f -\Im(\alpha)v_f + \Re(\beta)u_g -\Im(\beta)v_g) + i(\Re(\alpha)v_f +\Im(\alpha)u_f +\Re(\beta)v_g+\Im(\beta)u_g)d\mu\\
+\end{aligned}
+\]
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 7
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
