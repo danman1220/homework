@@ -94,19 +94,23 @@ This has been proven in the notes, and will not be replicated here.
 \end{proof}
 
 \begin{lemma}
-For $f$ a positive complex-valued measurable function from a measure space $(\Omega,\mu)$,
-the integral respects real scalar multiplication. That is, for $\alpha\in\R$, 
+For $f$ a positive real-valued measurable function from a measure space $(\Omega,\mu)$,
+the integral respects complex scalar multiplication. That is, for $\alpha\in\C$, 
 \[
 \int_{\Omega}\alpha fd\mu = \alpha\int_{\Omega} fd\mu
 \]
 \end{lemma}
 \begin{proof}
-We note first that, for $f = u+iv$ a complex-valued measurable function,
+We note first that for $\alpha=a+ib$, we have
 \[
-\int_{\Omega}\alpha fd\mu = \int_{\Omega}\alpha ud\mu +i\int_{\Omega}\alpha vd\mu
+\begin{aligned}
+\int_{\Omega}\alpha fd\mu   &= \int_{\Omega}(a+ib)fd\mu\\
+                            &= \int_{\Omega}(af +ibf)d\mu\\
+                            &= \int_{\Omega}afd\mu + i\int_{\Omega}bfd\mu
+\end{aligned}
 \]
 So, it suffices to show that the integral of a real-valued function respects real
-scalar multiplication. So, without loss of generality, let $f$ be real.
+scalar multiplication. Without loss of generality, let $\alpha$ be real.
 
 This lemma has already been proven for $\alpha\geq 0$. So, suppose $\alpha < 0$.
 In particular, $-\alpha > 0$, and thus by straightforward application of the definition of
@@ -180,11 +184,15 @@ $(\Omega,\mu)$, and let $\alpha\in\C$. We wish to evaluate
 \int_{\Omega}\alpha fd\mu = \int_{\Omega}\alpha\Re(f)d\mu + i\int_{\Omega}\alpha\Im(f)d\mu
 \]
 for real-valued functions $\Re(f)$ and $\Im(f)$.
-So, it suffices to show that the integral respects complex scalar multiplication against real
-functions, and the general result immediately follows.
 
-However, the real-valued case was already handled in lemma 2, so it follows that the integral
-respects general scalar multiplication.
+By lemma 2, we have
+\[
+\begin{aligned}
+\int_{\Omega}\alpha fd\mu &= \int_{\Omega}\alpha\Re(f)d\mu + i\int_{\Omega}\alpha\Im(f)d\mu\\
+                            &=\alpha\left(\int_{\Omega}\Re(f)d\mu + i\int_{\Omega}\Im(f)d\mu\right)\\
+                            &=\alpha\int_{\Omega}fd\mu
+\end{aligned}
+\]
 
 Thus, the integral is linear, as desired.
 \end{proof}
