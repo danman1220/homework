@@ -94,13 +94,20 @@ This has been proven in the notes, and will not be replicated here.
 \end{proof}
 
 \begin{lemma}
-For $f$ a positive real-valued measurable function from a measure space $(\Omega,\mu)$,
-the integral respects general scalar multiplication. That is, for $\alpha\in\R$, 
+For $f$ a positive complex-valued measurable function from a measure space $(\Omega,\mu)$,
+the integral respects real scalar multiplication. That is, for $\alpha\in\R$, 
 \[
 \int_{\Omega}\alpha fd\mu = \alpha\int_{\Omega} fd\mu
 \]
 \end{lemma}
 \begin{proof}
+We note first that, for $f = u+iv$ a complex-valued measurable function,
+\[
+\int_{\Omega}\alpha fd\mu = \int_{\Omega}\alpha ud\mu +i\int_{\Omega}\alpha vd\mu
+\]
+So, it suffices to show that the integral of a real-valued function respects real
+scalar multiplication. So, without loss of generality, let $f$ be real.
+
 This lemma has already been proven for $\alpha\geq 0$. So, suppose $\alpha < 0$.
 In particular, $-\alpha > 0$, and thus by straightforward application of the definition of
 the Lebesgue integral along with lemma 1, we have
@@ -129,45 +136,281 @@ and lemma 1.
 \end{proof}
 We are now ready to begin the proof of the linearity of the Lebesgue integral.
 
-Let $f$ and $g$ be complex-valued measurable functions from a measure space $(\Omega,\mu)$,
-and let $\alpha,\beta\in\C$. We wish to compute the integral
-\[
-\int_{\Omega}\alpha f + \beta gd\mu
-\]
-Now, letting $f = u_f + iv_f$, and $g = u_g + iv_g$, we have that
+To do this proof, we will consider two cases. The first case will handle additivity,
+and the second case will handle scalar multiplication.
+
+For the first case, let $f=u_f+iv_f$, and $g=u_g+iv_g$ be complex-valued measurable functions.
+Now, it follows immediately that
 \[
 \begin{aligned}
-\int_{\Omega}\alpha f + \beta gd\mu &= \int_{\Omega}(\Re(\alpha) +i\Im(\alpha))(u_f+iv_f) + (\Re(\beta)+i\Im(\beta))(u_g+iv_g)d\mu\\
-    &=\int_{\Omega}(\Re(\alpha)u_f -\Im(\alpha)v_f + \Re(\beta)u_g -\Im(\beta)v_g) + i(\Re(\alpha)v_f +\Im(\alpha)u_f +\Re(\beta)v_g+\Im(\beta)u_g)d\mu\\
+\int_{\Omega} (f+g)d\mu &= \int_{\Omega} ((u_f+iv_f) + (u_g+iv_g))d\mu\\
+                        &= \int_{\Omega} (u_f + u_g)d\mu + i\int_{\Omega}(v_f+v_g)d\mu
 \end{aligned}
 \]
+for real-valued functions $u_f,v_f,u_g,v_g$. So, it suffices to show the integral is
+additive for real-valued functions, and the complex case will follow immediately.
+
+So, assume without loss of generality that $f$ and $g$ are real. It follows directly that,
+since $f=f^+-f^-$ and $g=g^+-g^-$, the equalities
+\[
+\begin{aligned}
+f+g &= (f+g)^+ - (f+g)^-\\
+    &= f^+ + g^+ - f^- - g^-
+\end{aligned}
+\]
+hold. Thus, lemma 3 guarantees that
+\[
+\int_{\Omega}(f+g)^+d\mu - \int_{\Omega}(f+g)^-d\mu = \int_{\Omega}(f^+ + g^+)d\mu -\int_{\Omega}(f^-+g^-)d\mu
+\]
+Putting it all together, we have
+\[
+\begin{aligned}
+\int_{\Omega}(f+g)d\mu  &= \int_{\Omega}(f+g)^+d\mu - \int_{\Omega}(f+g)^-d\mu\\
+                        &= \int_{\Omega}(f^++g^+)d\mu - \int_{\Omega}(f^-+g^-)d\mu\\
+                        &= \int_{\Omega}f^+d\mu + \int_{\Omega}g^+d\mu - \int_{\Omega}f^-d\mu-\int_{\Omega}g^-d\mu\\
+                        &= \int_{\Omega}fd\mu + \int_{\Omega}gd\mu
+\end{aligned}
+\]
+where the equality from the second to the third line is done using lemma 1.
+Thus, the integral respects additivity of complex-valued functions.
+
+For the second case, let $f$ be a complex-valued measurable function from a measure space
+$(\Omega,\mu)$, and let $\alpha\in\C$. We wish to evaluate
+\[
+\int_{\Omega}\alpha fd\mu = \int_{\Omega}\alpha\Re(f)d\mu + i\int_{\Omega}\alpha\Im(f)d\mu
+\]
+for real-valued functions $\Re(f)$ and $\Im(f)$.
+So, it suffices to show that the integral respects complex scalar multiplication against real
+functions, and the general result immediately follows.
+
+However, the real-valued case was already handled in lemma 2, so it follows that the integral
+respects general scalar multiplication.
+
+Thus, the integral is linear, as desired.
 \end{proof}
 
 %----------------------------------------------------------------------------------------
+\newpage
 %----------------------------------------------------------------------------------------
 %	PROBLEM 2
 %----------------------------------------------------------------------------------------
+\section*{Problem 2}
+\subsection*{Part 1}
+Prove the statement in part 3.
+\\
+\begin{proof}
+In particular, we have $\xi_k$ a sequence of partition refinements for which
+\[
+\phi_k = \sum_{I_j}\sup_{x\in I_j}f(x)\chi_{I_j}
+\]
+and
+\[
+\psi_k = \sum_{I_j}\inf_{x\in I_j}f(x)\chi_{I_j}
+\]
+(where $I_j$ is the $j^{th}$ interval in the partition $\xi_k$) converge to the
+upper and lower sums (respectively) with respect to the partition $\xi_k$ as $k\to\infty$.
+We also define $P=\bigcup_{k=1}^{\infty}\xi_k$ to be the set of all endpoints of the partitions $\xi_k$.
 
+Now, we need to show that $f$ continuous at $x_0 \iff \phi(x_0) = f(x_0) = \psi(x_0)$ where
+$\phi_k\to\phi$ and $\psi_k\to\psi$.
+
+($\implies$)
+To see the first implication, we observe that $f$ being continuous at $x_0$ means that
+\[
+\lim_{\delta\to 0}\sup_{x\in V_{\delta}(x_0)}f(x) - \inf_{x\in(V_{\delta}(x_0)}f(x) = 0
+\]
+
+Now, fix $\epsilon > 0$. Since $f$ is continuous, we can choose some $\delta$ such that
+on the interval $(x_0-\delta,x_0+\delta)$, $\sup f -\inf f < \epsilon$. Furthermore,
+we can choose some $k$ for which $x_0\in I_j$ for some interval in the partition $\xi_k$, and
+such that $I_j\subseteq (x_0-\delta,x_0+\delta)$.
+
+It follows immediately, then, that $\phi_k(x_0)-\psi_k(x_0)<\epsilon$, and thus as $k$
+goes to infinity, we have $\phi(x_0)=\psi(x_0)$. And since $\psi_k \leq f\leq \phi_k\ \forall k$, 
+we have $f(x_0) = \psi(x_0) = \phi(x_0)$ as desired.
+
+($\impliedby$)
+For the other direction, assume $f(x_0) = \psi(x_0) = \phi(x_0)$.
+Now, fix $\epsilon >0$. In particular, we can choose an $N>0$ such that for all $k>N$,
+$\phi(x_0)-\psi(x_0) <\epsilon$.
+
+By the definition of $\phi_k$ and $\psi_k$, this means that
+\[
+\sup_{I_j}f - \inf_{I_j} < \epsilon
+\]
+where $I_j$ is the interval of $\xi_k$ that contains $x_0$. So, let $V$ be a $\delta$-neighborhood
+of $x_0$ contained in $I_j$. Then, the variation of $f$ on $V$ is bounded by $\epsilon$, and
+$f$ is continuous at $x_0$.
+\end{proof}
+
+\subsection*{Part 2}
+Prove the statement in part 5.
+\\
+\begin{proof}
+In particular, we need to prove that for a bounded function $f$ with a set of discontinuities
+$E$ with measure zero, $f$ is both Riemann-integrable and Lebesgue-integrable, and that the
+integrals coincide.
+
+Notice that the previous step in the notes establishes that for $f$ a bounded Riemann-integrable function,
+$f$ is also Lebesgue-integrable, and the integrals coincide. Thus, we only have to show
+that $f$ is Riemann-integrable.
+
+To do so, let $M$ be such that $|f|<M$, and let $E$ be the set of discontinuities of $f$.
+Since $\lambda^1(E) = 0$, we can choose a set of disjoint open sets $\{U_i\}$ that cover $E$
+with total measure $\lambda^1(\bigcup_i U_i) < \frac{\epsilon}{4M}$ (This follows from
+the Borel-regularity of the Lebesgue measure). In particular, since the region of integration is
+compact, we can make $\{U_i\}$ finite.
+
+Now, let's attempt to estimate the difference in the upper and lower sums of $\int f$. 
+\[
+\begin{aligned}
+\mathcal{U}(f,P) -\mathcal{L}(f,P)  &= \sum_{i=1}^n (\sup_{x\in I_i}f -\inf_{x\in I_i}f)\Delta x_i\\
+\end{aligned}
+\]
+where the sum is being taken over the subintervals $I_i$ of the partition $P$.
+
+Now, let's split the sum into the intervals that do not intersect $E$, and the intervals
+that do. In particular, we take as our initial partition the set of intervals $U_i$, along
+with the intervals in between them, so that the $U_i$ part of the partition contains every
+element of $E$, and the other part does not.
+\[
+\begin{aligned}
+\mathcal{U}(f,P) -\mathcal{L}(f,P)  &= \sum_{i=1}^m (\sup_{x\in I_i}f -\inf_{x\in I_i}f)\Delta x_i + \sum_{i=1}^{m'}(\sup_{x\in U_i}f -\inf_{x\in U_i}f)\Delta x_i\\
+\end{aligned}
+\]
+Since $f$ is continuous in the first sum, we can refine the partition so that the upper and
+lower sums are within $\frac{\epsilon}{2}$ of each other. Then, using the fact that
+the measure of the union of the $\{U_i\}$ is less than $\frac{\epsilon}{4M}$, we obtain the bound
+\[
+\begin{aligned}
+\mathcal{U}(f,P) -\mathcal{L}(f,P)  &\leq \frac{\epsilon}{2} + 2M\frac{\epsilon}{4M} = \epsilon\\
+\end{aligned}
+\]
+Thus, the upper and lower sums converge to each other, and $f$ is Riemann-integrable as desired.
+\end{proof}
 %----------------------------------------------------------------------------------------
+\newpage
 %----------------------------------------------------------------------------------------
 %	PROBLEM 3
 %----------------------------------------------------------------------------------------
+\section*{Problem 3}
+Prove that the support of $f$ for $f\in L^1(\Omega,\mu)$ is $\sigma$-finite.
+\\
+\begin{proof}
+We shall observe that the sets $E_n = \{f>\frac{1}{n}\}$ are of finite measure, and
+union to the support of $f$.
 
+The fact that $\bigcup_n E_n = \textrm{supp}(f)$ is immediate. All that remains is to
+show that the measure of each of these is finite.
+
+Suppose for a contradiction that for some $n$, $E_n$ has infinite measure. Then,
+we can establish a lower bound for the integral
+\[
+\int_{\Omega}|f|d\mu \geq \int_{E_n}\frac{1}{n}d\mu
+\]
+but since $\mu(E_n)=\infty$, we have that
+\[
+\int_{E_n}\frac{1}{n}d\mu = \frac{1}{n}\mu(E_n) = \infty
+\]
+which cannot be a lower bound for $\int |f|$, since $f\in L^1$.
+
+Thus, each $E_n$ is finite, and the support of $f$ is $\sigma$-finite as desired.
+\end{proof}
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 %	PROBLEM 4
 %----------------------------------------------------------------------------------------
+\section*{Problem 4}
+Show that if $f\in L^1$, then $f$ is finite almost everywhere. Provide an example where
+the converse fails.
+\\
+\begin{proof}
+Suppose for a contradiction that there was a set $E$ of positive measure for which $f=\infty$
+on $E$. Then,
+\[
+\begin{aligned}
+\int_{\Omega}|f|d\mu  &= \int_E|f|d\mu + \int_{E^c}|f|d\mu\\
+                    &= \infty\mu(E) + \int_{E^c}|f|d\mu\\
+                    &=\infty
+\end{aligned}
+\]
+which is a clear contradiction.
 
+However, the function $f(x) = 1$ is finite everywhere, but is not in $L^1$. Hence, the contrapositive
+fails.
+\end{proof}
 %----------------------------------------------------------------------------------------
+\newpage
 %----------------------------------------------------------------------------------------
 %	PROBLEM 5
 %----------------------------------------------------------------------------------------
+\section*{Problem 5}
+Compute
+\[
+\lim_{n\to\infty}\left(\int_0^n (1+\frac{x}{n})^n\exp(-2x)dx\right)
+\]
 
+\begin{proof}
+For this proof, we will first show that the doubly-indexed limit
+\[
+\lim_{n\to\infty}\lim_{i\to\infty}\left(\int_0^n (1+\frac{x}{i})^i\exp(-2x)dx\right)
+\]
+converges. This follows by first observing that inside the integral, we have
+a sequence of functions approaching $\exp(x)\exp(-2x)=\exp(-x)$, which is clearly (eventually)
+dominated by $\frac{1}{x^2}$. Thus, the dominated convergence theorem kicks in, and
+\[
+\begin{aligned}
+\lim_{n\to\infty}\lim_{i\to\infty}\left(\int_0^n (1+\frac{x}{i})^i\exp(-2x)dx\right) &=
+\lim_{n\to\infty}\left(\int_0^n \lim_{i\to\infty}(1+\frac{x}{i})^i\exp(-2x)dx\right)\\
+                &= \lim_{n\to\infty}\left(\int_0^n\exp(-x)dx\right)\\
+                &=\lim_{n\to\infty}(1-\exp(-n))\\
+                &= 1
+\end{aligned}
+\]
+Now, since this doubly-indexed limit converges, it must be the case that the singly-indexed
+limit converges to the same thing. To see this, we note that any doubly-indexed sequence
+$(n,i)$ has the diagonal $(n,n)$ as a subsequence. Thus, since every doubly-indexed sequence
+converges, every singly-indexed sequence converges, so the limit converges as well.
+\end{proof}
 %----------------------------------------------------------------------------------------
+\newpage
 %----------------------------------------------------------------------------------------
 %	PROBLEM 6
 %----------------------------------------------------------------------------------------
+\section*{Problem 6}
+Suppose $f_n\geq0$ is measurable for all $n\in\N$. Furthermore, assume that $f_1\leq f_2\leq\ldots\leq 0$,
+and $f_n(x)\to f(x)$ for each $x\in\Omega$, and that $f_1\in L^1$.
+Prove that
+\[
+\lim_{n\to\infty}\int_{\Omega}f_nd\mu = \int_{\Omega}fd\mu
+\]
+and show that if the condition $f_1\in L^1$ is dropped, that the theorem does not hold in general.
+\\
+\begin{proof}
+We note that every $f_n$ is dominated by $f_1\in L^1$, so it follows immediately from the
+dominated convergence theorem that
+\[
+\lim_{n\to\infty}\int_{\Omega}f_nd\mu = \int_{\Omega}fd\mu
+\]
+as desired.
 
+If one drops the condition that $f_1\in L^1$, then the sequence
+$f_n = \frac{1}{n}$ does not satisfy this theorem.
+
+In particular,
+\[
+\int_{\R}f_nd\mu = \frac{1}{n}\mu(\R)=\infty
+\]
+but
+\[
+f_n(x)\to0\ \forall x
+\]
+and thus
+\[
+\int_{\R}\lim_{n\to\infty} f_nd\mu = \int_{\R}0d\mu = 0
+\]
+which does not agree with $\lim_{n\to\infty}\int_{\R}f_nd\mu=\infty$.
+\end{proof}
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 %	PROBLEM 7
