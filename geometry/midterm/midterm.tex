@@ -22,7 +22,7 @@
 
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 \usepackage[english]{babel} % English language/hyphenation
-\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{amsmath,amsfonts,amsthm, amssymb} % Math packages
 \usepackage{mathrsfs}
 \usepackage{tikz-cd}
 
@@ -275,7 +275,47 @@ $TM$ is orientable.
 %----------------------------------------------------------------------------------------
 %	PROBLEM 3
 %----------------------------------------------------------------------------------------
+\section*{Problem 3}
+Show that for $M$ a smooth manifold, and $S\subset M$ a smooth submanifold, $S$
+is embedded if and only if for every $f\in C^{\infty}(S)$, $f$ has a smooth
+extension to a neighborhood of $S$ in $M$.
+\\
+\begin{proof}
+    ($\implies$)
+    Suppose $S$ is embedded. In particular, this means that each point $s\in S$
+    has a neighborhood $U_s$ on which there is a slice chart $\phi$ of $S$ on
+    $M$. In particular, if $\dim(M)=m$ and $\dim(S)=k$, and $x^i$ are the
+    coordinate functions of $\phi$, then there is a chart on $U_s$ centered at
+    $s$ for which $(x^1,\ldots,x^m)|_S = (x^1,\ldots,x^k,0,\ldots,0)$.
 
+    Now, let $f\in C^{\infty}(S)$. Since $U_s$ has a slice chart, it is possible
+    to extend $f$ locally to a function $\tilde{f}_s\in C^{\infty}(U_s)$ such
+    that $\tilde{f}_s|_S = f$. This is possible through the use of smooth bump
+    functions on the coordinates $m-k$ to $k$. 
+
+    %TODO finish this
+
+    So, choose a countable number of such $U_s$, call them $U_i$, that cover
+    $S$, and let $\Psi = \sum_{i=1}^{\infty}\psi_i$ be a partition of unity
+    subordinate to $\{U_i\}$. Then, the function
+    \[
+        \tilde{f}(x) = \sum_{i=1}^{\infty}\psi_i(x)\tilde{f}_i(x)
+    \]
+    is a smooth extension of $f$ that restricts to $f$. 
+
+    ($\impliedby$)
+    Suppose for the converse that each $f\in C^{\infty}(S)$ had a smooth
+    extension to a neighborhood $U$ of $S$. Now, in particular for each open set
+    $U$ in $S$, we can construct a smooth function $f$ on $S$ for which
+    $\textrm{supp}(f) = U$. This function has a smooth extension $\tilde{f}$ on some
+    $U'\subset M$ for which $\tilde{f}|_U=f$. Furthermore,
+    $\textrm{supp}(\tilde{f})$ is open in $M$, and the intersection
+    \[
+        \textrm{supp}(\tilde{f})\cap S = \textrm{supp}(f)=U
+    \]
+    Thus, each open set in $S$ is the intersection of $S$ with an open set in
+    $M$, and $S$ has the subspace topology, making $S$ an embedding.
+\end{proof}
 %----------------------------------------------------------------------------------------
 \newpage
 %----------------------------------------------------------------------------------------
@@ -287,14 +327,105 @@ Let $M$ be a manifold, and $p\in M$.
 Show that $I_p = \{f\in C^{\infty}(M)\ |\ f(p)=0\}$ is a maximal ideal in $C^{\infty}(M)$.
 \\
 \begin{proof}
+Suppose $I_p\subsetneq I$ for some ideal $I$. In particular, this means that
+    there is some $f\in I$ with $f(p)\neq 0$. Without loss of generality, let
+    $f(p)>0$.
 
+    Now, by theorem 2.29 of Lee, there exists a nonnegative function $g$ for which
+    $g^{-1}(0)=\{p\}$. Since this function vanishes at $p$, it is in the
+    ideal, as well as the function $f+g$. In particular, $f+g > 0$ at every
+    point.
+
+    Thus, the function $\frac{1}{f+g}$ is well-defined, and by the
+    multiplicatively absorbing property of ideals, the function
+    $\frac{1}{f+g}(f+g) = 1$ is in the ideal as well. Since $1$ is the unit,
+    it follows that $I=C^{\infty}(M)$. Thus, $I_p$ is maximal.
+\end{proof}
+
+\subsection*{Part b}
+Show that if $M$ is compact, any maximal ideal in $C^{\infty}(M)$ is of this
+form.
+\\
+\begin{proof}
+Suppose for a contradiction that some maximal ideal $I$ such that at each point
+$p\in M$, there is some $f_p$ such that $f_p\neq 0$.
+
+In particular, this means that there is a neighborhood $U_p$ of $p$ for which
+    $f_p$ is nonzero. The neighborhoods $U_p$ form an open cover of $M$, of
+    which there is a finite subcover $\{U_i\}_{i=1}^n$. Then, the function
+    $F = \sum_{i=1}^n(f_i)^2$ is everywhere nonzero, and in the ideal since $I$ is
+    additively closed. Thus, the function $\frac{F}{F}=1$ is well-defined
+    everywhere, and in the ideal $I$. Thus, $I=C^{\infty}(M)$, which contradicts
+    $I$ being (nontrivially) maximal.
+
+    Thus, for each ideal $I$ in $C^{\infty}(M)$, $I$ must have all functions
+    vanish at at least one point $p$. Considering only the maximal ideals, it
+    must follow that for a maximal ideal $I$, the functions in $I$ vanish at
+    exactly one point $p$, so $I=I_p$. This follows by observing that if
+    functions in $I$ vanished at two points $p$ and $q$, then $I$ would be
+    contained in $I_p$ and $I_q$, and would not be maximal.
+
+    Thus, every maximal ideal in $C^{\infty}(M)$ is of the form $I_p$.
 \end{proof}
 %----------------------------------------------------------------------------------------
 \newpage
 %----------------------------------------------------------------------------------------
 %	PROBLEM 5
 %----------------------------------------------------------------------------------------
+\section*{Problem 5}
+\subsection*{Part a}
+Show that, for a quaternion $q=a+bi+cj+dk$, $|q|^2 = q\bar{q}$ is equal to
+$a^2+b^2+c^2+d^2$. Conclude that $S^3$ can be identified with the unit
+quaternions.
+\\
+\begin{proof}
+This follows from direct computation.
+    \[
+        \begin{aligned}
+            q\bar{q} &= (a+bi+cj+dk)(a-bi-cj-dk)\\
+                    &=a^2-abi-acj-adk+abi-(bi)^2-bcij-bdik\\
+                    &+acj-bcji-(cj)^2-cdjk+adk-bdki-cdkj-(dk)^2\\
+                    &=a^2+b^2+c^2+d^2-bcij-bcji-bdik-bdki-cdjk-cdkj-bdki-bdik\\
+                    &=a^2+b^2+c^2+d^2
+        \end{aligned}
+    \]
+    where the last equality was obtained by observing that $ij=-ji$ and
+    $jk=-kj$.
 
+    Thus, the norm on $\mathbb{H}$ coincides with the norm on $\R^4$, and so
+    the topologies agree. Thus, $S^3$ can be identified with the unit
+    quaternions in an isometric way.
+\end{proof}
+
+\subsection*{Part b}
+Show that $S^3$ is a Lie group with quaternion multiplication.
+\\
+\begin{proof}
+We will first show that the operation of quaternion multiplication is smooth
+    in the ambient space $\R^4\setminus\{0\}\cong\mathbb{H}\setminus\{0\}$, and
+    conclude that since $S^3$ is a closed embedded subgroup of
+    $\mathbb{H}\setminus\{0\}$, it is a Lie group under the same operation.
+
+    We will show that the operation of multiplication is smooth by directly
+    calculating the multiplication in the standard coordinates on $\R^4$.
+
+    So, let $q_1 = (x^1,x^2,x^3,x^4)$ and $q^2=(y^1,y^2,y^3,y^4)$. Then,
+    \[
+        \begin{aligned}
+            q_1q_2 &= (x^1+x^2i+x^3j+x^4k)(y^1+y^2i+y^3j+y^4k)\\
+                    &=x^1y^1 + x^1y^2i + x^1y^3j + x^1y^4k\\
+                    &+x^2y^1i + x^2y^2ii + x^2y^3ij + x^2y^4ik\\
+                    &+x^3y^1j + x^3y^2ji + x^3y^3jj + x^3y^4jk\\
+                    &+x^4y^1k + x^4y^2ki + x^4y^3kj + x^4y^4kk\\
+                    &= x^1y^1 - x^2y^2 - x^3y^3 - x^4y^4\\
+                    &+(x^1y^2 + x^2y^1 + x^3x^4 - x^4x^3)i\\
+                    &+(x^1y^3 - x^2y^4 + x^3y^1 + x^4y^2)j\\
+                    &+(x^1y^4 + x^2y^3 - x^3y^2 + x^4y^1)k
+        \end{aligned}
+    \]
+    which is clearly a smooth operation. Thus, $S^3$ is a Lie group under
+    quaternion multiplication.
+\end{proof}
 %----------------------------------------------------------------------------------------
 
 \end{document}
