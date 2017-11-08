@@ -104,12 +104,14 @@ i\circ\phi^{-1}((x^1,\ldots,\hat{x^i},\ldots,x^{n+1}) &=(y^1,\ldots,y^{n+1})\\
 \end{aligned}
 \]
 and the Jacobian $di$ can be calculated directly using the identity $di_j^k=\partial_j(y^k)$.
-Which gives the matrix (for $j=1,\ldots,i-1,i+1,\ldots,n+1$ and $k=1,\ldots,n$)
+Which gives the matrix (for $j=1,\ldots,i-1,i+1,\ldots,n+1$ and $k=1,\ldots,n+1$)
 \[
 \partial_j(y^k) = \delta_j^k -\frac{1}{\sqrt{1-x^ax_a}}\delta^{ik} x_j
 \]
 Which is clearly injective, since the rows $k\neq i$ are the basis covectors for $\R^n$, and
 thus $\partial_j(y^k)$ has rank $n$ as desired.
+Note that the $i$ index is the (fixed) priveleged index relative to which the chart was taken,
+and is not summed over.
 
 Furthermore, since $S^n$ is compact, and the inclusion is injective, it follows that
 $i$ defines an embedding of $S^n$ into $\R^{n+1}$.
@@ -124,10 +126,9 @@ This follows by direct calculation. To see this, let $v\in T_pS^n$. Then,
 \[
 \begin{aligned}
 di(v) = \partial_jy^kv^j &= \delta_j^kv^j-\frac{1}{\sqrt{1-x^ax_a}}\delta^{ik}x_jv^j\\
-                &= v^k - \frac{x^av_a}{\sqrt{1-x^ax_a}}\delta^{ik}
+                &= (1-\delta^{ik})v^k - \frac{x^av_a}{\sqrt{1-x^ax_a}}\delta^{ik}
 \end{aligned}
 \]
-where it is assumed that $x_av^a$ does not sum over the $i^{th}$ component of $v$.
 
 Recalling earlier that the embedding sends 
 \[
@@ -140,13 +141,16 @@ to
 we can compute the inner product $g_{jk}v^jy^k$ directly.
 \[
 \begin{aligned}
-g_{jk}v^jy^k &= v^kx_k + \delta^{ik}_{ij}v^jy_k\\
+g_{jk}v^jy^k &=v^kx_k + \delta^{ik}_{ij}v^jy_k\\
             &=v^kx_k + v^iy_i\\
             &=v^kx_k -\frac{v^ax_a}{\sqrt{1-x^ax_a}}\sqrt{1-x^ax_a}\\
             &=v^kx_k - v^ax_a\\
             &= 0 
 \end{aligned}
 \]
+Where the contraction $v^kx_k$ omits the $i\th$ index (since it is not defined for 
+$v$ or $x$).
+
 Thus, $di(v)$ is perpendicular to $p$, as desired.
 \end{proof}
 
@@ -165,7 +169,7 @@ d(F|_{S^n})(\gamma'(0)) &= \partial_t|_0 F|_{S^n}(\gamma(t))\\
                         &= dF(\gamma'(0))|_{T_pS^n}
 \end{aligned}
 \]
-Here, the equality from line 2 to line 3 comes from the fact that $F$ maps $S^n$ into $S^m$,
+Here, the equality from line 1 to line 2 comes from the fact that $F$ maps $S^n$ into $S^m$,
 and the equality from line 3 to line 4 comes from the fact that $\gamma'(0)$ started in
 $T_pS^n$ to begin with.
 \end{proof}
@@ -290,12 +294,18 @@ extension to a neighborhood of $S$ in $M$.
 
     Now, let $f\in C^{\infty}(S)$. Since $U_s$ has a slice chart, it is possible
     to extend $f$ locally to a function $\tilde{f}_s\in C^{\infty}(U_s)$ such
-    that $\tilde{f}_s|_S = f$. This is possible through the use of smooth bump
-    functions on the coordinates $m-k$ to $k$. 
+    that $\tilde{f}_s|_S = f$. This is possible by making the function constant
+across the orthogonal complements to the slice chart. That is, given that the
+function is defined on $\R^k\subset \R^m$, extend it to the whole space
+by defining $\tilde{f}(p)$ to be the value of $f$ at the orthogonal projection of
+$p$ onto the subspace $\R^k$.
 
-    %TODO finish this
+    (Note that if $\dim(S)=\dim(M)$, then such extensions cannot be well defined. However,
+    Proposition 5.1 guarantees that $S$ is open in $M$, and $S$ itself is an open
+neighborhood on which $f$ is defined, which is what we wanted to begin with).
 
-    So, choose a countable number of such $U_s$, call them $U_i$, that cover
+    Now that we have local extensions of the function, we use a partition of unity
+to extend them globally. So, choose a countable number of such $U_s$, call them $U_i$, that cover
     $S$, and let $\Psi = \sum_{i=1}^{\infty}\psi_i$ be a partition of unity
     subordinate to $\{U_i\}$. Then, the function
     \[
