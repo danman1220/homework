@@ -1,0 +1,300 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newtheorem*{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Geometry} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Midterm\\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+\section*{Problem 1}
+\subsection*{Part a}
+Use the standard charts on $S^n$ to calculate the matrix representation of $di:T_pS^n\to T_p\R^{n+1}$,
+and show that $di$ is injective, and thus $i$ is an embedding.
+\\
+\begin{proof}
+For this calculation, we will use the chart given by hemisphere projection. That is, the
+domains for the charts will be the open sets $U_i^{\pm}=\{(x^1\ldots,x^{n+1})\ |\ x^i>0 (x^i<0\textrm{resp.})\}$
+with maps
+\[
+\phi_i^{\pm}(x^1,\ldots,x^{n+1}) = (x^1,\ldots,\hat{x^i},\ldots,x^{n+1})
+\]
+Where a hat denotes omission of the variable.
+
+Now, suppose $p\in U_i^+$ (without loss of generality, we take the positive hemisphere
+of $x^i$, but the argument can be repeated exactly with the negative hemisphere as well.)
+and let the coordinate representation of $p$ be
+\[
+\phi(p) = (x^1,\ldots,\hat{x^i},\ldots,x^{n+1})
+\]
+Then, the inclusion map looks like
+\[
+\begin{aligned}
+i\circ\phi^{-1}((x^1,\ldots,\hat{x^i},\ldots,x^{n+1}) &=(y^1,\ldots,y^{n+1})\\
+                        &=(x^1,\ldots,x^{i-1},\sqrt{1-x^ax_a},\ldots,x^{n+1})
+\end{aligned}
+\]
+and the Jacobian $di$ can be calculated directly using the identity $di_j^k=\partial_j(y^k)$.
+Which gives the matrix (for $j=1,\ldots,i-1,i+1,\ldots,n+1$ and $k=1,\ldots,n$)
+\[
+\partial_j(y^k) = \delta_j^k -\frac{1}{\sqrt{1-x^ax_a}}\delta^{ik} x_j
+\]
+Which is clearly injective, since the rows $k\neq i$ are the basis covectors for $\R^n$, and
+thus $\partial_j(y^k)$ has rank $n$ as desired.
+
+Furthermore, since $S^n$ is compact, and the inclusion is injective, it follows that
+$i$ defines an embedding of $S^n$ into $\R^{n+1}$.
+\end{proof}
+
+\subsection*{Part b}
+Show that $T_pS^n$, when identified with $di(T_pS^n)$ is the subspace of $\R^{n+1}$ consisting
+of all vectors perpendicular to the radial vector to $p$.
+\\
+\begin{proof}
+This follows by direct calculation. To see this, let $v\in T_pS^n$. Then,
+\[
+\begin{aligned}
+di(v) = \partial_jy^kv^j &= \delta_j^kv^j-\frac{1}{\sqrt{1-x^ax_a}}\delta^{ik}x_jv^j\\
+                &= v^k - \frac{x^av_a}{\sqrt{1-x^ax_a}}\delta^{ik}
+\end{aligned}
+\]
+where it is assumed that $x_av^a$ does not sum over the $i^{th}$ component of $v$.
+
+Recalling earlier that the embedding sends 
+\[
+p = (x^1,\ldots,\hat{x^i},\ldots,x^{n+1})
+\]
+to 
+\[
+(y^1,\ldots,y^{n+1}) = (x^1,\ldots,x^{i-1},\sqrt{1-x^ax_a},\ldots,x^{n+1})
+\]
+we can compute the inner product $g_{jk}v^jy^k$ directly.
+\[
+\begin{aligned}
+g_{jk}v^jy^k &= v^kx_k + \delta^{ik}_{ij}v^jy_k\\
+            &=v^kx_k + v^iy_i\\
+            &=v^kx_k -\frac{v^ax_a}{\sqrt{1-x^ax_a}}\sqrt{1-x^ax_a}\\
+            &=v^kx_k - v^ax_a\\
+            &= 0 
+\end{aligned}
+\]
+Thus, $di(v)$ is perpendicular to $p$, as desired.
+\end{proof}
+
+\subsection*{part c}
+For $F$ a smooth map from $\R^{n+1}$ to $\R^{m+1}$ such that $F(S^n)\subset S^m$, show
+that $d(F|_{S^n}) = dF|_{T_pS^n}$.
+\\
+\begin{proof}
+To begin with, let $\gamma$ be a curve in $S^n$ such that
+$\gamma(0)=p$ and $\gamma'(0)=v$. Then,
+\[
+\begin{aligned}
+d(F|_{S^n})(\gamma'(0)) &= \partial_t|_0 F|_{S^n}(\gamma(t))\\
+                        &= \partial_t|_0 F(\gamma(t))\\
+                        &= dF(\gamma'(0))\\
+                        &= dF(\gamma'(0))|_{T_pS^n}
+\end{aligned}
+\]
+Here, the equality from line 2 to line 3 comes from the fact that $F$ maps $S^n$ into $S^m$,
+and the equality from line 3 to line 4 comes from the fact that $\gamma'(0)$ started in
+$T_pS^n$ to begin with.
+\end{proof}
+%----------------------------------------------------------------------------------------
+\newpage
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+\section*{Problem 2}
+Show that the tangent bundle $TM$ is always orientable.
+\\
+\begin{proof}
+For this problem, we will use that fact that a manifold is orientable if there exist
+charts such that the coordinate transition maps have a Jacobian of positive determinant.
+
+Before proceeding further, we prove the following lemma:
+
+\begin{lemma}
+Suppose $M$ and $N$ are smooth manifolds. In particular, their product $M\times N$ is a
+smooth manifold. Furthermore, for pairs of coordinates $x_m,y_m$ on $U_m\subset M$ and
+$x_n,y_n$ on $U_n\subset N$, the product coordinates $x=(x_m,x_n)$ and $y=(y_m,y_n)$ are
+smooth coordinates on $U_m\times U_n$, and the Jacobian $J(x\to y)$ is given componentwise.
+That is,
+\[
+J(x\to y) = (J(x_m\to y_m),J(x_n\to y_n))
+\]
+\end{lemma}
+\begin{proof}
+That $M\times N$ is a smooth manifold follows almost immediately by taking products of
+coordinate charts on $M$ and $N$. Now, we have the following diagram:
+\[
+\begin{tikzcd}[column sep=tiny]
+ &                  &M\times N                  &       &\\
+ &                  &U_m\times U_n\arrow[hook]{u}\arrow[dashed, shift right]{ddd}[swap]{x}\arrow[dashed, shift left]{ddd}{y}\arrow[two heads]{dl}\arrow[two heads]{dr}&     &\\
+M& U_m\arrow[hook']{l}\arrow[hook, shift right]{d}[swap]{x_m} \arrow[hook, shift left]{d}{y_m} && U_n\arrow[hook]{r} \arrow[hook, shift right]{d}[swap]{x_n}\arrow[hook,shift left]{d}{y_n} &N\\
+ & \R^m\arrow[hook]{dr} &&\R^n\arrow[hook']{dl} &\\
+    &&\R^{m+n} &&
+\end{tikzcd}
+\]
+which implies that the induced coordinates $x$ and $y$ are smooth.
+Now, let's expand the lower half of the commutative diagram to get the transition maps
+$x_m\to y_m$ and $x_n\to y_n$:
+\[
+\begin{tikzcd}[column sep=tiny]
+\R^m\arrow{dd}[swap]{x_m\to y_m}\arrow[hook]{dr} &&\R^n\arrow{dd}{x_n\to y_n}\arrow[hook]{dl}\\ 
+&\R^{m+n}\arrow[dashed]{dd}[description]{x\to y}\arrow[two heads]{dl}\arrow[two heads]{dr}&\\
+\R^m\arrow[hook]{dr}&&\R^n\arrow[hook']{dl}\\
+&\R^{m+n}
+\end{tikzcd}
+\]
+
+Differentiating this diagram (applying the differential functor) yields:
+\[
+\begin{tikzcd}[column sep=small]
+\R^m\arrow{dd}[swap]{J(x_m\to y_m)}\arrow[hook]{dr} &&\R^n\arrow{dd}{J(x_n\to y_n)}\arrow[hook]{dl}\\ 
+&\R^{m+n}\arrow[dashed]{dd}[description]{J(x\to y)}\arrow[two heads]{dl}\arrow[two heads]{dr}&\\
+\R^m\arrow[hook]{dr}&&\R^n\arrow[hook']{dl}\\
+&\R^{m+n}
+\end{tikzcd}
+\]
+Thus, $J(x\to y)=(J(x_m\to y_m),J(x_n\to y_n))$ as desired.
+\end{proof}
+We are now ready to prove the general result.
+
+So, let $M$ be a smooth manifold with tangent bundle $TM$. Furthermore, for a point $p$,
+suppose there are two coordinate charts $x^i$ and $y^i$ on a neighborhood of $p$. We wish
+to calculate the Jacobian of the induced coordinate transformations on the tangent bundle.
+
+To do so, we first appeal to the fact that $TM$ is locally trivializable. That is, on
+some neighborhood $U$ containing $p$, $\pi^{-1}(U)\cong M\times T_pM$, where $\pi$ is the
+canonical projection of $TM$ onto $M$. In particular, this means that in $\pi^{-1}(U)$,
+we have the coordinate charts $x^i\times dx^i$ and $y^i\times dy^i$. 
+
+Thus, the transition map is just $(x\to y,dx\to dy)$, where $x\to y$ is the transition map
+from the $x$ coordinate system to the $y$ coordinate system, and $dx\to dy$ is the transition
+map from the $\partial_{x}|_p$ coordinate system to the $\partial_y|_p$ coordinate system.
+
+Recall that $dx\to dy$ is simply the Jacobian of the original coordinate transform. That is,
+$dx\to dy = J(x\to y)$.
+Now, from the above lemma, 
+\[
+J(x\to y,dx\to dy) = J(x\to y,J(x\to y)) = (J(x\to y),J(J(x\to y)))
+\]
+It should be clear that $J^2=J$, since the Jacobian of a transformation is linear. Thus,
+we have that
+\[
+J(x\to y, dx\to dy) = (J(x\to y),J(x\to y))
+\]
+
+To calculate the determinant of this, we appeal to the fact that the determinant of
+a linear transformation of the form $(A,B)$ is the product of the determinants of $A$ and $B$.
+Thus,
+\[
+\begin{aligned}
+\det J(x\to y,dx\to dy) &= \det(J(x\to y))\det(J(x\to y))\\
+                        &= \left(\det(J(x\to y))\right)^2
+\end{aligned}
+\]
+Which is always positive.
+
+Since this can be done at any point $p$ in the manifold, we have an atlas for $TM$
+where the determinant of the coordinate transforms is always positive, and thus
+$TM$ is orientable.
+\end{proof}
+%----------------------------------------------------------------------------------------
+\newpage
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+\newpage
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+\section*{Problem 4}
+Let $M$ be a manifold, and $p\in M$.
+\subsection*{Part a}
+Show that $I_p = \{f\in C^{\infty}(M)\ |\ f(p)=0\}$ is a maximal ideal in $C^{\infty}(M)$.
+\\
+\begin{proof}
+
+\end{proof}
+%----------------------------------------------------------------------------------------
+\newpage
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
