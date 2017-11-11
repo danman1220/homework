@@ -1,0 +1,65 @@
+#!/bin/bash
+#----------------------------------------------------------------------------
+# Creates a LaTeX file based on template.tex for a given set of parameters.
+#----------------------------------------------------------------------------
+
+VERSION=0.1
+USAGE="Usage: create_homework -c [class] -d [directory name] -t [hw title] -n [problem count]"
+
+if [ $# == 0 ] ; then
+    echo $USAGE
+    exit 1;
+fi
+
+# Options processing --------------------------------------------------------
+
+while [[ $# -gt 0 ]]
+do
+key="$1"
+
+case $key in
+    -c)
+    CLASS=$2
+    shift   # shift past the argument
+    shift   # shift past the value
+    ;;
+    -d)
+    HWDIR=$2
+    shift
+    shift
+    ;;
+    -t)
+    TITLE=$2
+    shift
+    shift
+    ;;
+    -n)
+    NUMPROBS=$2
+    shift
+    shift
+    ;;
+    *)
+    echo "I do not recognize $1"
+    exit 1
+    ;;
+esac
+done
+
+if [ ! -d $CLASS ]; then
+    echo "Error: $BASEDIR/$CLASS does not exist. Please create it first"
+    exit 1;
+fi
+
+if [ -d $CLASS/$HWDIR ]; then
+    echo "Error: directory $CLASS/$HWDIR already exists! Please specify a new directory"
+    exit 1;
+fi
+ 
+#debugging   
+#echo "Class $CLASS title $TITLE num $NUMPROBS"
+
+# creating the directory -----------------------------------------------------
+
+mkdir $CLASS/$HWDIR
+
+

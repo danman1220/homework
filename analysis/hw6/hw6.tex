@@ -1,0 +1,174 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 6\\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+\section*{Problem 2}
+Show that the closure of the ball $B(a,r)$ is the closed ball $\overline{B}(a,r)=\{x\ |\ |x-a|\leq r\}$
+\\
+\begin{proof}
+Suppose $x$ is in $\overline{B}(a,r)$. Then, consider the sequence
+\[
+(x_n) = (x-a)(1-\frac{1}{n}) + a
+\]
+Clearly, this sequence converges to $x$, and each term is in $B(a,r)$.
+To see this, we observe that
+\[
+\begin{aligned}
+||x_n-a|| &= ||(x-a)(1-\frac{1}{n}) + a - a||\\
+          &= ||x-a||(1-\frac{1}{n}\\
+            &\leq r(1-\frac{1}{n}\\
+            &\leq r
+\end{aligned}
+\]
+Thus, each point in $\overline{B}(a,r)$ is a limit point of $B(a,r)$, and since
+$\overline{B}(a,r)$ is closed, it follows that it is the closure of $B(a,r)$ (since the 
+closure of $B(a,r)$ is the smallest closed set containing it.)
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 5
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 6
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 7
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 8
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 9
+%----------------------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	PROBLEM 10
+%----------------------------------------------------------------------------------------
+\section*{Problem 10}
+Show that $\ell^1$ is not complete in the $\ell^{\infty}$ norm.
+\\
+\begin{proof}
+We will show that the sequence $(x_m)_k = (\frac{1}{m^{1+\frac{1}{k}}})$ converges to
+the function $x_m = \frac{1}{m}$, which is not in $\ell^1$, even though each term in the
+sequence is in $\ell^1$.
+
+To show convergence, we wish to show that the functions
+\[
+f_k(n) = \frac{1}{n^{1+\frac{1}{k}}} 
+\]
+converges uniformly to $f(n)=\frac{1}{n}$.
+
+To do so, we will consider instead the extended functions
+\[
+f_k(x) = x^{1+\frac{1}{k}},\ x\in[0,1]
+\]
+which clearly converges pointwise to $f(x) = x$. Now, since $f$ is defined on a compact
+domain, it must also uniformly converge to $f(x) = x$. Thus, the restriction $f_k(x)|_{\{\frac{1}{n}\}}$
+also converges uniformly to $f(n)=\frac{1}{n}$.
+
+Thus,the sequence of sequences $(x_m)_k$ converges uniformly (in $\ell^{\infty}$) to $(x_m)$ as
+desired. Furthermore, since each $(x_m)_k$ is in $\ell^1$, but $(x_m)$ is not, it follows that
+$\ell^1$ is not complete in the $\ell^{\infty}$ norm.
+\end{proof}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
