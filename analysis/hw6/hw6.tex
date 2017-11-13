@@ -75,8 +75,61 @@
 %----------------------------------------------------------------------------------------
 %	PROBLEM 1
 %----------------------------------------------------------------------------------------
+\section*{Problem 1}
+Prove that in a normed space, a sequence can have at least one strong limit.
+Prove that a strongly convergent sequence is Cauchy.
+\\
+\begin{proof}
+    To begin with, we note that every normed space is necessarily Hausdorff,
+    and that every Hausdorff space has the property that sequences have at most
+    one limit. 
 
+    To see that a normed space is Hausdorff, consider an arbitrary normed space
+    $X$, and two distinct points $x,y$. Now, by the definition of a norm, it
+    must be that $||x-y||>0$. So, let
+    \[
+        ||x-y||=\varepsilon
+    \]
+    Then, the open sets $B(x,\frac{\varepsilon}{2})$ and
+    $B(Y,\frac{\varepsilon}{2})$ separate $x$ and $y$. Thus, normed spaces are
+    Hausdorff.
+
+    Furthermore, it is clear that a sequence converges to at most one limit in
+    Hausdorff spaces. To see this, we recall the topological definition of
+    convergence, which states that a sequence $(x_n)$ converges to $x$ if and
+    only if every neighborhood of $x$ eventually contains the sequence.
+
+    Suppose for a contradiction that $(x_n)$ had two limits, $x$, and $y$.
+    Since $x$ and $y$ are distinct points in a Hausdorff space, there must be
+    some neighborhood $V_x$ of $x$ and $V_y$ of $y$ such that $V_x\cap
+    V_y=\emptyset$.
+
+    However, this contradicts the sequence converging to both $x$ and $y$, since
+    for $(x_n)$ to converge to $x$, it must eventually be in $V_x$, which means
+    it is eventually outside $V_y$, and thus cannot converge to $y$ as well.
+
+    Now, let $(x_n)$ be a convergent sequence in a normed space $X$, and let $x$
+    be its limit. We will show that this sequence is Cauchy.
+
+    To do this, let $\varepsilon>0$ be arbitrary. Now, we know that there exists
+    some $N$ such that for any $n>N$,
+    \[
+        ||x_n - x||<\frac{\varepsilon}{2}
+    \]
+    
+    Furthermore, for any $m,n>N$ we have that
+    \[
+        \begin{aligned}
+            ||x_m-x_n|| &= ||x_m-x+x-x_n||\\
+                        &\leq ||x_m-x|| + ||x_n-x||\\
+                        &\leq \frac{\varepsilon}{2}+\frac{\varepsilon}{2}\\
+                        &=\varepsilon
+        \end{aligned}
+    \]
+    and thus the sequence is Cauchy.
+\end{proof}
 %----------------------------------------------------------------------------------------
+\newpage
 %----------------------------------------------------------------------------------------
 %	PROBLEM 2
 %----------------------------------------------------------------------------------------
@@ -104,9 +157,50 @@ closure of $B(a,r)$ is the smallest closed set containing it.)
 \end{proof}
 
 %----------------------------------------------------------------------------------------
+\newpage
 %----------------------------------------------------------------------------------------
 %	PROBLEM 3
 %----------------------------------------------------------------------------------------
+\section*{Problem 3}
+Prove that for a linear operator $A$ between normed spaces $V,W$, the following
+are equivalent:
+\begin{enumerate}
+    \item $A$ is continuous at every $p\in V$.
+    \item $A$ is continuous at $0_V$.
+    \item $A$ is bounded in the sense that 
+        \[
+            \sup_{||x||=1} ||Ax|| < \infty
+        \]
+    \item $A$ is bounded in the sense that for some $M>0$,
+        \[
+            ||Ax||\leq M||x||
+        \]
+        for all $x\in V$.
+\end{enumerate}
+Furthermore, prove that the set $\mathscr{B}(V,W)$ of the bounded linear
+operators from $V$ to $W$ is a normed space.
+\\
+\begin{proof}
+    ($1\implies 2$)
+    This follows immediately from the statement of $1$.
+
+    ($2\implies 1$)
+    Suppose $A$ is continuous at zero. Now, let $p\in V$. We will show that $A$
+    is continuous at $p$. So, let $\varepsilon>0$ be arbitrary.
+    Since $A$ is continuous at zero, there is some $\delta>0$ such that
+    \[
+        ||x||<\delta\implies||Ax||<\frac{\varepsilon}{2}
+    \]
+    Now, suppose $x$ is such that
+    \[
+    ||x-p||<\delta
+    \]
+    Then, we have that
+    \[
+        \begin{aligned}
+        \end{aligned}
+    \]
+\end{proof}
 
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
