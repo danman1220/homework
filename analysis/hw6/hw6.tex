@@ -277,32 +277,309 @@ operators from $V$ to $W$ is a normed space.
 \section*{Problem 4}
 Suppose that $V,W$ are normed vector spaces, and that $W$ is Banach. Prove that
 $\mathscr{B}(V,W)$ is Banach as well.
+\\
+\begin{proof}
+    To begin with, let $(A_n)$ be a Cauchy sequence in $\mathscr{B}(V,W)$.
+    In particular, for any $\varepsilon >0$, we can find an $N>0$ such that
+    for all $n,m>N$,
+    \[
+        ||A_n-A_m|| < \varepsilon
+    \]
+
+    So, let $x\in V$, and consider the sequence $(A_nx)$. We will show this
+    sequence is Cauchy, and by completeness of $W$, has a limit.
+
+    To see how this sequence is Cauchy, let $\varepsilon >0$, and choose an
+    $N$ such that for all $n,m>N$, $||A_n-A_m||<\frac{\varepsilon}{||x||}$.
+    Then, we have
+    \[
+        \begin{aligned}
+            ||(A_n-A_m)(x)|| &=||A_nx-A_mx||\\
+                            &< \frac{\varepsilon}{||x||}||x||\\
+                            &=\varepsilon
+        \end{aligned}
+    \]
+    Thus, the sequence is Cauchy, and has a limit. Since this can be done
+    for every $x\in V$, we can define $Ax = \lim_{n\to\infty}A_nx$.
+
+    Clearly, $A$ is linear, since the limit respects scalar multiplication and
+    addition. Furthermore, it can be seen that $A$ is bounded. To see this, we
+    observe that
+    \[
+        \begin{aligned}
+            ||Ax|| &= ||\lim_{n\to\infty}A_nx||\\
+                    &=\lim_{n\to\infty}||A_nx||\\
+                    &\leq\lim_{n\to\infty}||A_n||||x||
+        \end{aligned}
+    \]
+    Now, $\lim_{n\to\infty}||A_n||$ is a sequence of real numbers, and can be
+    seen to be Cauchy, since
+    \[
+    |||A_n||-||A_m||| \leq ||A_n-A_m||
+    \]
+    and since $A_n$ is Cauchy in the operator norm, $||A_n-A_m||$ can be
+    bounded, and thus $||A_n||$ is a Cauchy sequence of real numbers, which
+    converges to some $K>0$.
+
+    So, we have
+    \[
+        \begin{aligned}
+            ||Ax|| &\leq \lim_{n\to\infty}||A_n||||x||\\
+                    &= K||x||
+        \end{aligned}
+    \]
+    and thus $A$ is bounded.
+
+    Now, all we have to show is that $\lim A_n = A$. To do this,
+    we fix $\varepsilon > 0$, and consider
+    \[
+        \begin{aligned}
+            ||A-A_n|| &= \sup_{||x||=1} ||(A-A_n)x||\\
+        \end{aligned}
+    \]
+    Now, we will show that $||(A-A_n)x||$ is bounded above by $\varepsilon$ when
+    $n$ is sufficiently large. To see this, let $\varepsilon > 0$, and choose
+    $N$ large enough so that $\forall n,m>N$, $||A_m-A_n||<\frac{\varepsilon}{2}$.
+    Now, we have 
+    \[
+        \begin{aligned}
+            ||(A-A_n)x|| &\leq ||(A-A_m)x|| + ||(A_m-A_n)x||\\
+                        &\leq \frac{\varepsilon}{2} + \frac{\varepsilon}{2}\\
+                        &=\varepsilon
+        \end{aligned}
+    \]
+    where $m$ was chosen via pointwise convergence to make
+    $||(A-A_m)x||<\frac{\varepsilon}{2}$.
+
+    Thus, $\lim_{n\to\infty}A_n = A$ which is in $\mathscr{B}(V,W)$.
+\end{proof}
 %----------------------------------------------------------------------------------------
+\newpage
 %----------------------------------------------------------------------------------------
 %	PROBLEM 5
 %----------------------------------------------------------------------------------------
-
+\section*{Problem 5}
+Show that a subspace $W$ of a Banach space $V$ is Banach if and only if its
+closed.
+\\
+\begin{proof}
+    ($\implies$)
+    Suppose $W$ is a Banach subspace of $V$. In particular, this means that $W$
+    contains its limits, since any convergent sequence in $W$ is Cauchy, and
+    every Cauchy sequence in $W$ converges in $W$. Then, it follows immediately
+    that $W$ is closed.
+    \\
+    \\
+    ($\impliedby$)
+    Suppose $W$ is a closed subspace of $V$. In particular, this means that
+    every convergent sequence in $W$ converges in $W$. So, for any Cauchy
+    sequence in $W$, that sequence converges (since $V$ is Banach), and since
+    $W$ is closed, it must converge in $W$. Thus, $W$ is a Banach space.
+\end{proof}
 %----------------------------------------------------------------------------------------
+\newpage
 %----------------------------------------------------------------------------------------
 %	PROBLEM 6
 %----------------------------------------------------------------------------------------
+\section*{Problem 6}
+Prove that $\ell^1,\ell^{\infty},c_0$ are all Banach spaces.
+\\
+\begin{proof}
+    We know by Riesz-Fischer that any $L^p$ space is a Banach space. Thus,
+    $\ell^1=L^1(\N,\mu_c)$ and $\ell^{\infty} = L^{\infty}(\N,\mu_c)$ are
+    Banach spaces.
 
+    Now, $c_0 \subset \ell^{\infty}$, so if we show that $c_0$ is closed in
+    $\ell^{\infty}$, then $c_0$ is Banach.
+
+    So, let $(f_n)$ be a sequence of points in $c_0$ that converge in
+    $\ell^{\infty}$, with $f = \lim f_n$.
+
+    In particular, we can choose $N_1>0$ such that for all $i>N_1$, $\sup
+    |f_i(n) - f(n)| < \frac{\varepsilon}{2}$. Furthermore, we can choose $N_2>0$
+    such that for all $m>N_2$, $|f_{N_1}(m)|<\frac{\varepsilon}{2}$. Then
+    \[
+        \begin{aligned}
+            |f(m)| &= |f(m)-f_{N_1}(m)+f_{N_1}(m)|\\
+                    &\leq |f(m) - f_{N_1}(m)| + |f_{N_1}(m)|\\
+                    &\leq \frac{\varepsilon}{2}+\frac{\varepsilon}{2}\\
+                    &=\varepsilon
+        \end{aligned}
+    \]
+    Thus, $f$ decays to zero, and therefore $f\in c_0$ as desired.
+\end{proof}
 %----------------------------------------------------------------------------------------
+\newpage
 %----------------------------------------------------------------------------------------
 %	PROBLEM 7
 %----------------------------------------------------------------------------------------
+\section*{Problem 7}
+For $K$ a compact subset of $\R^n$, prove that $C(K)$ under the $\sup$ norm is a
+Banach space.
+\\
+\begin{proof}
+    We note first that the sum of two $C(K)$ functions is again $C(K)$, and that
+    the scalar multiple of a $C(K)$ function is still $C(K)$. This follows
+    almost immediately from basic undergraduate Real analysis arguments.
 
+    Since $C(K)$ is a subset of $L^{\infty}(K)$ (continuous functions on a
+    compact domain are bounded), it follows that the $\sup$ norm, which
+    coincides with the $L^{\infty}$ norm, is a norm on $C(K)$.
+
+    All that is left to show is completeness. For this, we will simply show that
+    the $L^{\infty}$ limit of $C(K)$ functions is again a $C(K)$ function.
+
+    This is clear, however, since (by basic undergraduate Real analysis) the
+    uniform limit of continuous functions is continuous. Since the $\sup$ norm
+    defines uniform convergence, if a sequence $f_n$ of $C(K)$ functions
+    converges in $L^{\infty}$ to $f$, it follows that $f_n$ converges uniformly
+    to $f$, and thus if $f_n\in C(K)$, then $f\in C(K)$ as well.
+
+    Thus, $C(K)$ contains its limits, and is a closed subspace of
+    $L^{\infty}(K)$. So, $C(K)$ is Banach.
+\end{proof}
 %----------------------------------------------------------------------------------------
+\newpage
 %----------------------------------------------------------------------------------------
 %	PROBLEM 8
 %----------------------------------------------------------------------------------------
+\section*{Problem 8}
+Let $S$ be the set of all simple functions in the $L^1$ norm $||\cdot||_1$.
+Prove that $S$ is a normed space. Prove that $\overline{S}=L^1$. Prove that for
+$\R^n$ with the Lebesgue measure, $S$ is not complete. Give an example of a
+measure space for which $S$ is complete.
+\\
+\begin{proof}
+We first show that $S$ is a normed space. Since the $L^1$ norm already satisfies
+    the axioms of a norm, it suffices to show that $S$ is a vector subspace of
+    $L^1$. This is clear, since scaling a simple function by a constant yields
+    another simple function, and addition of two simple functions is again a
+    simple function.
 
+    Now, we wish to show that $\overline{S}=L^1$. To see this, we will show that
+    every $f\in L^1$ is the limit of simple functions with respect to the $L^1$
+    norm.
+
+    So, let $f\in L^1$, and let $f^+, f^-$ be its positive and negative parts.
+    Now, a basic theorem tells us that $f^{\pm} = \lim \phi^{\pm}_n$ for a sequence of
+    monotonically increasing simple functions $\phi_n$, and furthermore
+    \[
+        \lim_{n\to\infty}\int\phi^{\pm}_n = \int f^{\pm}
+    \]
+    Thus, we have that
+    \[
+        \begin{aligned}
+            f &= f^+ - f^-\\
+                &=\lim_{n\to\infty}(\phi^+_n - \phi^-_n)
+        \end{aligned}
+    \]
+    where the limit is taken pointwise. So, let $\phi_n = \phi^+-\phi^-$. Then
+    consider
+    \[
+        \begin{aligned}
+            \int(|f-\phi_n|) &= \int(|f^+-f^-+\phi^+-\phi^-|)\\
+                            &\leq \int |f^+ - \phi^+_n| -\int |f^- - \phi^-_n|\\
+                            &= \int (f^+-\phi^+_n) - \int (f^- - \phi^-_n)\\
+                            &\to 0-0 = 0
+        \end{aligned}
+    \]
+    where the second to last line was obtained by observing that $f^{\pm}\geq
+    \phi^{\pm}_n\ \forall n$, and the last line was obtained by the monotone
+    convergence theorem on the monotonic sequences $\phi^{\pm}_n$.
+    
+    Thus, $||f-\phi_n||_1\to 0$, and thus $f$ is the limit of simple functions.
+    Therefore, each $f\in L^1$ is the limit of simple functions, and since $L^1$
+    is complete, it follows that $\overline{S}=L^1$.
+    \\
+    \\
+    However, for $L^1(\R^n)$, $S\neq L^1$, since the function $f(x) =
+    \exp(-|x|^2)$ (for $x\in\R^n$)is in $L^1$, but is not a simple function. Thus,
+    $\overline{S}\neq S$, and $S$ is not complete.
+    \\
+    \\
+    For an example of a measure space for which $S=L^1$, consider the one-point
+    space $\Omega = \{\bullet\}$ with the counting measure $\mu_c$. Every
+    function from $\Omega$ to $\C$ is just a choice of scalar in $\C$, and is a
+    simple function. Thus, $L^1(\Omega,\mu_c)\subset \textrm{Hom}(\Omega,C) =
+    S$, and thus $S=L^1$, and $S$ is complete.
+\end{proof}
 %----------------------------------------------------------------------------------------
+\newpage
 %----------------------------------------------------------------------------------------
 %	PROBLEM 9
 %----------------------------------------------------------------------------------------
+\section*{Problem 9}
+Find the completion of $C_0(\R)$.
+\\
+\begin{proof}
+    We will show that 
+    \[
+        \overline{C_0(\R)} = S \stackrel{\textrm{def}}{=} \{f\in C(\R)\ |\ \lim_{|x|\to\infty}f(x) = 0\}
+    \]
 
+    To do so, we show that every $f\in S$ is the limit of functions $f_n\in
+    C_0$. So, let $f\in S$, and consider the sequence of functions
+    \[
+        f_n(x) = 
+        \begin{cases}
+            f(x), &\textrm{if }x\in[-n,n]\\
+            f(n)(n+1-x), &\textrm{if }x\in[n,n+1]\\
+            f(-n)(x+n+1), &\textrm{ if}x\in[-n-1,-n]\\
+            0, &\textrm{else}
+        \end{cases}
+    \]
+    which agree with $f$ on the interval $[-n,n]$, and on $[n,n+1]$ and
+    $[-n-1,n]$ decrease linearly to zero.
+
+    Clearly, each $f_n\in C_0$, since their support is contained in
+    $[-n-1,n+1]$. Thus, it suffices to show that $f_n(x)$ converges to $f(x)$
+    uniformly.
+
+    So, let $\varepsilon >0$, and choose $n$ such that $|f(x)|
+    <\frac{\varepsilon}{2}$ for
+    all $|x| > n$.
+
+    Now, consider 
+    \[
+        ||f-f_n||_{\infty} = \sup_x |f_n(x)-f(x)|
+    \]
+    In particular, inside $[-n,n]$, the functions agree and $|f_n(x)-f(x)|=0$.
+    Outside $[-n,n]$ we know that $|f_n(x)| \leq \max(|f(n)|,|f(-n)|)$ since
+    $f_n$ decays monotonically to zero from $f(n)$ and $f(-n)$. By our choice of
+    $n$, we have for $x\not\in[-n,n]$, $|f_n(x)|\leq \frac{\varepsilon}{2}$.
+    To conclude, we have
+    \[
+    \begin{aligned}
+        |f_n(x) - f(x)| &\leq |f_n(x)|+|f(x)|\\
+                        &\leq \frac{\varepsilon}{2} + \frac{\varepsilon}{2}
+    \end{aligned}
+    \]
+    Thus, $\sup_x |f_n(x) - f(x)|$ is bounded by $\varepsilon$, and must decay
+    to zero. So, $f_n$ converges to $f$.
+
+    So, we know that $S\subset \overline{C_0}$. Now, we must show that $S$
+    itself is complete.
+
+    To see this, we observe the basic fact that the uniform limit of functions
+    that decay to zero at infinity is also a function that decays to zero at
+    infinity.
+
+    So, let $f_n$ be a Cauchy sequence of functions in $S$ that converge to some
+    function $f$. We just need to show that $f\in S$. This is clear, however,
+    since 
+    \[
+        \begin{aligned}
+            |f(x)| &= |f(x)-f_n(x)+f_n(x)|\\
+                    &\leq |f(x)-f_n(x)| + |f_n(x)|
+        \end{aligned}
+    \]
+    Which goes to zero as $|x|\to\infty$ since $|f(x)-f_n(x)|\to 0$ as $n\to\infty$, and
+    $|f_n(x)|\to 0 $ as $|x|\to\infty$.
+
+    Thus $S$ is complete, and so $S$ is the completion of $C_0$. 
+\end{proof}
 %----------------------------------------------------------------------------------------
+\newpage
 %----------------------------------------------------------------------------------------
 %	PROBLEM 10
 %----------------------------------------------------------------------------------------
