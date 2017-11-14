@@ -46,7 +46,7 @@ esac
 done
 
 if [ ! -d $CLASS ]; then
-    echo "Error: $BASEDIR/$CLASS does not exist. Please create it first"
+    echo "Error: $CLASS directory does not exist. Please create it first"
     exit 1;
 fi
 
@@ -62,4 +62,20 @@ fi
 
 mkdir $CLASS/$HWDIR
 
+# copy template in -----------------------------------------------------------
 
+cp template.tex $CLASS/$HWDIR/$HWDIR.tex
+
+# modify the template with the specified parameters --------------------------
+
+sed -i "s/<<CLASS>>/$CLASS/g" $CLASS/$HWDIR/$HWDIR.tex
+sed -i "s/<<TITLE>>/$TITLE/g" $CLASS/$HWDIR/$HWDIR.tex
+
+# build the problem template string ------------------------------------------
+
+for i in {1..$NUMPROBS}; do
+    cat problem-template.tex >> $CLASS/$HWDIR/$HWDIR.tex
+done
+
+
+cat "\end{document}" >> $CLASS/$HWDIR/$HWDIR.tex
