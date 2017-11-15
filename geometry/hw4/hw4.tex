@@ -165,9 +165,9 @@ Since $G$ is a Lie group, it follows that $\mu$ is smooth. Now, all that is
     elsewhere? Consider that
     \[
         \begin{aligned}
-            dm|_{(\sigma,\sigma)}(X,Y) &= X|_{\sigma} + Y_{\sigma}\\
+            dm|_{(\sigma,\sigma)}(X,Y) &= X_{\sigma} + Y_{\sigma}\\
                                 &= dl_{\sigma}(X_e + Y_e)\\
-                                &=dl_{\sigma}(dm|_{(e,e)}(X,Y)
+                                &=dl_{\sigma}(dm|_{(e,e)}(X,Y))
         \end{aligned}
     \]
     Thus, $dm|_{(\sigma,\sigma)} = dl_{\sigma}\circ dm|_{(e,e)}$ is the
@@ -327,7 +327,7 @@ We begin by noting that the determinant can be expressed as
     once and then by $I$ the rest of the time, we end up with
     \[
         \begin{aligned}
-        \textrm{lin}(\det(I+tA) &= \sum_{\sigma\in S_n}
+            \textrm{lin}(\det(I+tA)) &= \sum_{\sigma\in S_n}
         \epsilon(\sigma)\sum_{i=1}^m(\prod_{j\neq
         i}I_j^{\sigma(j)})A_i^{\sigma(i)}t\\
             &= \sum_{i=1}^nA_i^it\\
@@ -335,6 +335,8 @@ We begin by noting that the determinant can be expressed as
         \end{aligned}
     \]
     and thus, the derivative at zero is $\textrm{tr}(A)$, as desired.
+    Here, the equality from line 1 to line 2 is made by observing that
+    $I_j^{\sigma(j)}$ is nonzero only when $\sigma(j)=j$, or when $\sigma=id$.
 \end{proof}
 
 \subsection*{Part b}
