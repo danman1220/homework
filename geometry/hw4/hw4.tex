@@ -49,6 +49,8 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
 
+\newcommand{\im}{\textrm{im}}
+
 \newtheorem{lemma}{Lemma}
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
@@ -73,7 +75,7 @@
 \maketitle % Print the title
 
 % Problems
-\section*{Problem 1d} %Lee 5-3
+\section*{Problem 1} %Lee 5-3
 Prove that if any of the following hold for $S$ an immersed submanifold of a
 manifold $M$, then $S$ is embedded:
 \begin{itemize}
@@ -81,20 +83,23 @@ manifold $M$, then $S$ is embedded:
     \item The inclusion map $S\subseteq M$ is proper.
     \item $S$ is compact.
 \end{itemize}
-\\
+
 \begin{proof}
     Suppose $S$ has codimension $0$ in $M$. Then, we must show that $S$ is open
     with respect to $M$, and since every open subset of a manifold with
     codimension zero is an embedded submanifold, $S$ will be embedded.
 
-    %TODO this step
+    From the previous homework, we know that an immersion between two manifolds
+    of the same dimension is an open mapping, so the image of $S$ under the
+    inclusion map must be open. Thus, $S$ is open with respect to $M$, and is an
+    embedded submanifold.
 
     Suppose the inclusion map is proper. Then, by proposition 4.22, since the
-    inclusion map is an injective smooth immersion which is proper, then $S$ is
+    inclusion map is an injective smooth immersion which is proper, $S$ is
     embedded.
 
-    Suppose $S$ is compact. Then, by Proposition 4.22, we know that $S$ is
-    embedded, since the inclusion map is an injective smooth immersion.
+    Suppose $S$ is compact. Then, by Proposition 4.22, since the inclusion map
+    is an injective smooth immersion from a compact set, $S$ is embedded.
 \end{proof}
 
 \newpage
@@ -104,6 +109,285 @@ Show that the image of the curve $\beta:(-\pi,\pi)\to\R^2$ given by
 $\beta(t) = (\sin(2t),\sin(t))$ is not an embedded submanifold.
 \\
 \begin{proof}
+To show that this is not an embedded submanifold, we will show that it does not
+    get the subspace topology from $\R^2$. To see this, we consider the
+    neighborhood $(-1,1)$ of zero, which is open in $\im(\beta)$. In particular,
+    this neighborhood cannot be an intersection of an open set in $\R^2$ with
+    $\im(\beta)$. This is evident, since any neighborhood of zero in $\R^2$ must
+    intersect $\beta(-\pi+\varepsilon)$ and $\beta(\pi-\varepsilon)$ for
+    sufficiently small $\varepsilon$.
 
+    So, since any open set in $\R^2$ containing zero also contains
+    $\beta(\pi-\varepsilon)$ for all $\varepsilon$ sufficiently small, every
+    open neighborhood of $\beta(0)$ in the subspace topology must contain
+    $\beta(\pi-\varepsilon)$ for all sufficiently small $\varepsilon$. Since the
+    neighborhood $\beta(-1,1)$ does not contain $\beta(\pi-\varepsilon)$, it is
+    not open in the subspace topology, and since $(-1,1)$ is open with respect
+    to the manifold structure on $\im(\beta)$, it must be that $\im(\beta)$ is
+    not an embedded submanifold.
 \end{proof}
+
+\newpage
+
+\section*{problem 3} %Lee 5-9
+Show that the boundary of the unit square does not have a topology and a smooth
+structure for which it is an immersed submanifold of $\R^2$.
+\\
+\begin{proof}
+Suppose for a contradiction that the boundary $\partial I^2$ did admit a smooth
+structure for which it is an immersed submanifold. In particular, we know that
+    at the corner $(0,0)$, the tangent space $T_0\partial I^2$ is a
+    one-dimensional subspace of $T_0\R^2\cong\R^2$. So, by Proposition 5.35,
+    there must be a smooth curve $\gamma:(-\varepsilon,\varepsilon)\to\partial
+    I^2$ such that $\gamma(0) = (0,0)$ and $\gamma'(0)\neq 0$. Now, if we write
+    $\gamma(t) = (x(t),y(t))$ we know that $x(t)$ takes a global minimum at
+    $(0,0)$, and thus $x'(0)=0$. Similarly, $y(t)$ attains a global minimum at
+    $(0,0)$, so $y'(0)=0$. However, this contradicts the assertion that
+    $\gamma'(0)\neq 0$, so no such submanifold structure can exist.
+\end{proof}
+
+\newpage
+
+\section*{Problem 4}
+Show that for any Lie group $G$, the multiplication map $\mu:G\times G\to G$ is
+a smooth submersion.
+\\
+\begin{proof}
+Since $G$ is a Lie group, it follows that $\mu$ is smooth. Now, all that is
+    needed to show is that $\mu$ is a submersion.
+
+    From the next problem, we know that
+    \[
+        dm|_{(e,e)}(X,Y) = X+Y
+    \]
+    Now, since every vector can be written as the sum of two vectors (trivially
+    $X=X+0$), it follows that $dm$ is surjective at the identity. But what about
+    elsewhere? Consider that
+    \[
+        \begin{aligned}
+            dm|_{(\sigma,\sigma)}(X,Y) &= X|_{\sigma} + Y_{\sigma}\\
+                                &= dl_{\sigma}(X_e + Y_e)\\
+                                &=dl_{\sigma}(dm|_{(e,e)}(X,Y)
+        \end{aligned}
+    \]
+    Thus, $dm|_{(\sigma,\sigma)} = dl_{\sigma}\circ dm|_{(e,e)}$ is the
+    composition of a surjection and a bijection from
+    $T_{(\sigma,\sigma)}G\times G$ to $T_{\sigma}G$, and is therefore surjective
+    onto $T_{\sigma}G$.
+
+    Thus, the multiplication map defines a smooth map whose differential is
+    everywhere surjective, and is thus a submersion.
+\end{proof}
+
+\newpage
+
+\section*{Problem 5}
+Let $G$ be a Lie group.
+\subsection*{Part a}
+for $m:G\times G\to G$ the multiplication map, show that the differential
+$dm_{(e,e)}$ is given by
+\[
+    dm_{(e,e)}(X,Y) = X+Y
+\]
+
+\begin{proof}
+    Let $s_1$ be the section $s_1:G\to G\times G$ given by $s_1(\tau) =
+    (\tau,e)$, and $s_2$ the section given by $s_2(\tau) = (e,\tau)$.
+    Furthermore, define the isomorphism
+    \[
+        \begin{aligned}
+            \psi: &(T_eG)^2\to T_e(G\times G)\\
+                  &(X,Y) \mapsto ds_1|_eX + ds_2|_eY
+        \end{aligned}
+    \]
+    We note finally that $m\circ s_1 = m\circ s_2 = id_G$, by the definition of
+    the section maps.
+
+    Now, let's calculate $dm|_{(e,e)}(\psi(X,Y))(f)$ for some test function $f$.
+    \[
+        \begin{aligned}
+            dm|_{(e,e)}(\psi(X,Y))(f) &= \psi(X,Y)|_e(f\circ m)\\
+                    &=(ds_1|_eX+ds_2|_eY)(f\circ m)\\
+                    &=ds_1|_eX(f\circ m) + ds_2|_eY(f\circ m)\\
+                    &=X(f\circ m\circ s_1) + Y(f\circ m\circ s_2)\\
+                    &=Xf + Yf\\
+                    &=(X+Y)f
+        \end{aligned}
+    \]
+    Thus, $dm|_{(e,e)}(X,Y)=X+Y$ as desired.
+\end{proof}
+
+\subsection*{Part b}
+Show that the inversion map $i:G\to G$ given by $i(\tau)=\tau^{_1}$ has a
+differential $di|_e(X)=-X$.
+\\
+\begin{proof}
+    We note first that $m(\tau,i(\tau))=e$ for all $\tau$ by the definition of
+    inversion. Thus, differentiating both sides (at the identity) yields
+    \[
+        d(m(\bullet,i(\bullet))) = 0
+    \]
+    but what is the left hand side? Lets denote the function
+    $\tau\mapsto(\tau,i(\tau))$ as $id\times i$. Then, we can
+    use the chain rule to evaluate (for $X\in T_eG$)
+    \[
+        \begin{aligned}
+            d(m\circ id\times i)X &= dm\circ d(id\times i)X\\
+                                &= dm\circ (id\times di)X\\
+                                &= dm(X,di(X))\\
+                                &= X+di(X)\\
+        \end{aligned}
+    \]
+    Now, since it must hold for all $X$ that $d(m\circ id\times i)X =0$,
+    we must have that $X+di(X) =0$, or $di(X) = -X$.
+
+    In this problem, we used the fact that the differential distributes over
+    products of maps, which has been proven in an earlier homework, but follows
+    from the functoriality of the differential and the universal property of
+    products.
+\end{proof}
+
+\newpage
+
+\section*{Problem 6}
+Show that if $G$ is a smooth manifold with a group structure so that the
+multiplication $m:G\times G\to G$ is smooth, then $G$ is a Lie group.
+\\
+\begin{proof}
+For this problem, we only have to show that the inversion map is smooth. To do
+    so, we first show that the map $F:G\times G\to G\times G$ given by
+    \[
+        F(\tau,\sigma)=(\tau,\tau\sigma)
+    \]
+    is a bijective smooth local diffeomorphism, and is thus a diffeomorphism.
+
+    To see this, we note first that $F$ is clearly bijective, since for any
+    $(x,y)\in G\times G$, we have a unique point $(x,x^{-1}y)$ such that
+    $F(x,x^{-1}y) = (x,y)$. Thus, $F$ is bijective.
+
+    Now, we need to show $F$ is smooth. To do this, we observe that $F$ is the
+    composition of smooth functions. Specifically,
+    \[
+        F = (id\times m)\circ (\Delta\times id)
+    \]
+    Where $\Delta:G\to G\times G$ is given by $\Delta(\tau) = (\tau,\tau)$ and
+    is clearly smooth.
+
+    Thus, since $m$, $id$, and $\Delta$ are all smooth, so are their products
+    and compositions, and so $F$ is smooth as well.
+
+    Now, let's show that $dF$ is bijective at the identity. To do this, we will
+    use the earlier decomposition of $F$ to calculate its differential.
+    \[
+        \begin{aligned}
+            dF &= d(id\times m)\circ d(\Delta\times id)\\
+            &= (id\times dm)\circ (d\Delta\times id)\\
+            dF(X,Y) &= (X,X+Y)
+        \end{aligned}
+    \]
+    where the last equality was obtained by observing that $dm(X,Y) = X+Y$ at
+    the identity. Since the map $(X,Y)\mapsto(X,X+Y)$ is bijective, it must be
+    that $dF$ is bijective at the identity.
+
+    Now, since left-multiplication is a diffeomorphism, it follows (by a very
+    similar argument to the one in problem 4) that $dF$ is everywhere bijective.
+    Thus, $F$ is a local diffeomorphism, and since $F$ is bijective, it is also
+    a diffeomorphism.
+
+    Now, the section $s:G\to G\times G$ given by $S(\tau)=(\tau,e)$ is smooth,
+    and thus the composition
+    \[
+        \begin{aligned}
+            \pi_2\circ F^{-1}\circ s\\
+            \tau\mapsto(\tau,e)\mapsto(\tau,\tau^{-1})\mapsto\tau^{-1}
+        \end{aligned}
+    \]
+    is smooth as well, and is equal to $i$, the inversion map. Thus, $i$ is
+    smooth.
+\end{proof}
+
+\newpage
+
+\section*{Problem 7}
+For $\det:GL_n(\R)\to\R$, compute the differential in the following steps:
+\subsection*{Part a}
+Show that
+\[
+    \partial_t|_0 \det(I+tA) = \textrm{tr}(A)
+\]
+for any $A$.
+\\
+\begin{proof}
+We begin by noting that the determinant can be expressed as
+    \[
+        \det(I+tA) = \sum_{\sigma\in
+        S_n}\epsilon(\sigma)\prod_{i=1}^{n}(I+tA)_i^{\sigma(i)}
+    \]
+    Now, if we single out the linear term in the product by multiplying by $tA$
+    once and then by $I$ the rest of the time, we end up with
+    \[
+        \begin{aligned}
+        \textrm{lin}(\det(I+tA) &= \sum_{\sigma\in S_n}
+        \epsilon(\sigma)\sum_{i=1}^m(\prod_{j\neq
+        i}I_j^{\sigma(j)})A_i^{\sigma(i)}t\\
+            &= \sum_{i=1}^nA_i^it\\
+            &=t\textrm{tr}(A)
+        \end{aligned}
+    \]
+    and thus, the derivative at zero is $\textrm{tr}(A)$, as desired.
+\end{proof}
+
+\subsection*{Part b}
+For $X\in GL_n(\R)$ and $B\in T_XGL_n(\R)$, show that
+\[
+    d(\det)_X(B) = \det(X)\textrm{tr}(X^{-1}B)
+\]
+
+\begin{proof}
+For this problem, we will identify $B$ with the derivative of the curve
+    \[
+        \gamma(t) = X+tB
+    \]
+    at zero.
+
+    Then
+    \[
+        \begin{aligned}
+            d(\det)_X(\gamma'(0)) &= \partial_t|_0 \det(\gamma(t))\\
+                            &= \partial_t|_0(\det(X+tB))\\
+                            &= \partial_t|_0(\det(X)\det(I+tX^{-1}B))\\
+                            &= \det(X)\partial_t|_0(\det(I+tX^{-1}B))\\
+                            &= \det(X)\textrm{tr}(x^{-1}B)
+        \end{aligned}
+    \]  
+    as desired. Here we used the identity provided in the problem, stating that
+    $\det(X+tB) = \det(X)\det(I+tX^{-1}B)$.
+\end{proof}
+
+\newpage
+
+\section*{Problem 8}
+Show that the Hopf action of $S^1$ on $S^{2n+1}$ defined by
+\[
+    z\cdot w = zw
+\]
+for $z\in S^1$ and $w\in S^{2n+1}\subset \C^{n+1}$ is a smooth action with
+orbits that are disjoint unit circles in $S^{2n+1}$ that union to all of
+$S^{2n+1}$.
+
+\begin{proof}
+Clearly, this is a smooth map, since it is just complex multiplication, in
+$\C^{n+1}\setminus\{0\}$, which is a Lie group, and thus has smooth
+multiplicative structure.
+
+Furthermore, its orbits are disjoint, since the orbits of any group action are
+disjoint.
+Now, fixing $w\in S^{2n+1}$, we have the orbit of $w$  as the image of the map
+$z\mapsto wz$ for $z\in S^1$. Since left-multiplication by $w$ is an isometric
+    diffeomorphism (since $w$ is of unit length), it follows that $S^1$ is diffeomorphic to its image, which is
+the orbit of $w$. Thus each orbit is a copy of $S^1$. Furthermore, since each
+$w\in S^{2n+1}$ is in its own orbit, it follows that the union of all the orbits
+is $S^{2n+1}$ itself, as desired.
+\end{proof}
+
 \end{document}
