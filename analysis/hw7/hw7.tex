@@ -1,0 +1,310 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\im}{\textrm{im}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 7 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+Show that for a subset $S$ of $V$, and $x\in V$, $d(x,S)=0 \iff
+x\in\overline{V}$.
+\\
+\begin{proof}
+    ($\implies$)
+    Suppose that $d(x,S)=0$. This means that for any $\varepsilon > 0$, there is
+    some $s\in S$ such that $d(x,s)<\varepsilon$.
+    So, for any $\varepsilon$-ball centered at $x$, there is some $s\in S$ in
+    it. Thus, every neighborhood of $x$ intersects $S$, and $x$ is in the
+    closure of $S$.
+    \\
+    \\
+    ($\impliedby$)
+    Suppose that $x\in \overline{S}$. Then, we know that for every $\varepsilon
+    >0$, the $\varepsilon$-ball around $x$ intersects $S$. In other words, for
+    every $\varepsilon >0$, there is some $s\in S$ with $d(x,s)<\varepsilon$.
+    It follows immediately, then, that $d(x,S)=\inf_{s\in S}d(x,s)=0$ as
+    desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 2}
+Show that the $\ell^1$ norm is equivalent to the norm
+\[
+    \|x\| = 2\left|\sum_{n=1}^{\infty}x_n\right| +
+    \sum_{n=2}^{\infty}\left(1+\frac{1}{n}\right)|x_n|
+\]
+\\
+\begin{proof}
+    For the first bound, we note that
+\[
+    \begin{aligned}
+        \|x\| &= 2\left|\sum_{n=1}^{\infty}x_n\right| +
+        \sum_{n=2}^{\infty}\left(1+\frac{1}{n}\right)|x_n|\\
+        &\leq 2\sum_{n=1}^{\infty}|x_n| + \sum_{n=1}^{\infty}2|x_n|\\
+        &= 2\|x_n\|_1 + 2\|x_n\|_1\\
+        &= 4\|x_n\|_1
+\end{aligned}
+\]
+so the new norm is bounded above by the $\ell^1$ norm.
+
+For the other direction, we take a bit more care. We note that
+\[
+    \begin{aligned}
+        \|x\| &= 2\left|\sum_{n=1}^{\infty}x_n\right| +
+    \sum_{n=2}^{\infty}\left(1+\frac{1}{n}\right)|x_n|\\
+            &\geq 2\left|\sum_{n=1}^{\infty}x_n\right| +
+        \sum_{n=2}^{\infty}|x_n|\\
+            &\geq \frac{1}{2}\left|\sum_{n=1}^{\infty}x_n\right| +
+        \sum_{n=2}^{\infty} |x_n|\\
+            &\geq \frac{1}{2}\left||x_1|-\sum_{n=2}^{\infty}|x_n|\right| +
+        \sum_{n=2}^{\infty} |x_n|\\
+            &\geq \frac{1}{2}|x_1| -\frac{1}{2}\sum_{n=2}^{\infty}|x_n| +
+            \sum_{n=2}^{\infty}|x_n|\\
+            &= \frac{1}{2}|x_1| + \frac{1}{2}\sum_{n=2}^{\infty}|x_n|\\
+            &=\frac{1}{2}\|x\|_1
+    \end{aligned}
+\]
+where the inequality from line 3 to line 4 is obtained by using the reverse
+    triangle inequality on the infinite sum.
+
+So the new norm is bounded below by the $\ell^1$ norm, and thus the norms
+    are equivalent.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3}
+Let $V,W$ be normed vector spaces, with $V$ Banach. Let $A\in \mathscr{B}(V,W)$.
+Show that $V/{\ker A}$ is Banach with the quotient norm.
+\\
+\begin{proof}
+    To begin with, we observe that the short exact sequence of continuous linear
+    functions
+    \[
+        \begin{tikzcd}[column sep=small]
+            0\arrow{r} &\ker A \arrow[hook]{r}{i} &V\arrow[two heads]{r}{\pi} &V/{\ker
+            A}\arrow{r} &0 
+        \end{tikzcd}
+    \]
+    exists. This is clearly exact, since for any $a\in \ker A$, $\pi(a) =
+    [0]$, and furthermore, for any $v\in V$ with $\pi(v) = [0]$, we have that
+    $v\in 0+\ker A = \ker A$. Thus, $\im i = \ker \pi$, and the sequence is
+    exact.
+
+    Furthermore, this sequence splits. This follows from the general result that
+    any short exact sequence of vector spaces splits, but a proof for this case
+    will be replicated.
+
+    We construct a retract $r:V\to \ker A$ such that $r\circ i=id$. This is done
+    by first fixing a basis $\mathscr{B}$ for $\ker A$. Then, a basis
+    $\mathscr{B}'$ for $V$ can be chosen so that $\mathscr{B}' =
+    \mathscr{B}\coprod\mathscr{C}$ for some set of vectors $\mathscr{C}$.
+    Then, $r$ can be defined as
+    \[
+        r\left(\sum_{b\in\mathscr{B}}v_b b + \sum_{c\in\mathscr{C}}v_c c\right)
+        = \sum_{b\in\mathscr{B}} v_b b
+    \]
+    which is clearly a linear continuous function. Furthermore, it is clear that
+    $r\circ i = id$ by the definition of $r$. Thus, $r$ defines a retract of
+    $i$, and the sequence splits.
+
+    So, by the splitting lemma, we have that
+    \[
+        \begin{tikzcd}[column sep=small]
+            0\arrow{r} &\ker A \arrow[hook,shift left]{r}{i} &V\arrow[two
+            heads, shift left]{r}{\pi}\arrow[two heads, shift left]{l}{r} &V/{\ker
+            A}\arrow{r}\arrow[hook', shift left]{l}{s} &0 
+        \end{tikzcd}
+    \]
+    where $s$ is a section of $\pi$, and $r$ is a retract of $i$. Thus, we have
+    the continuous injective map $s:V/{\ker A}\to V$.
+
+    Now, let $[x]_n$ be a Cauchy sequence in $V/{\ker A}$. This sequence lifts
+    along $s$ to the sequence $s([x]_n)$ in $V$. Now, since $V$ is complete,
+    and $s$ is continuous, it follows that $s([x]_n)$ is Cauchy in $V$, and
+    we have that $s([x]_n)\to x$ for some $x\in V$. 
+    
+    I now assert that $[x]_n\to\pi(x)$. To see this, we consider (since $\pi$ is
+    continuous) the fact that $\pi(s([x]_n))\to \pi(x)$.
+
+    But since $s$ is a section of $\pi$, it must be that $\pi\circ s=id$, so
+    $\pi(s([x]_n)) = [x]_n \to\pi(x)$ as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 4}
+Suppose $V=X_1\oplus X_2$ and that $X_1$ is finite dimensional. Show that
+the projection operator $P_1:V\to X_1$ is in $\mathscr{B}(V,X_1)$.
+\\
+\begin{proof}
+We will first show that $P_1$ is bounded by using the fact that all norms on
+    finite dimensional vector spaces are equivalent. Equipped with this, and the
+    fact that $X_1\cong V/{X_2}$, we see that
+    \[
+        \begin{aligned}
+            \|P_1x\| &\leq C\|[x]\|_{Q}\\
+                    &= C\inf_{x_2\in X_2}\|x-x_2\|\\
+                    &\leq C\|x-0\|\\
+                    &=C\|x\|
+        \end{aligned}
+    \]
+    Thus, $P_1$ is bounded, and is in $\mathscr{B}(V,X_1)$.
+
+    Now, since $P_2 = I-P_1$, we have that $\|P_2\| = \|I-P_1\|\leq
+    \|I\|+\|P_1\|$, and since $I$ and $P_1$ are bounded, so is $P_2$.
+\end{proof}
+
+\section*{Problem 5}
+For $V$ a normed space, $Y$ a closed subspace of $V$ with finite codimension,
+show that for $\phi\in V'$ with $\phi$ continuous on $Y$, $\phi\in V^*$.
+\\
+\begin{proof}
+    Consider the decomposition $V=Y\oplus V/{Y}$, and let $v=y+x\in V$. Now,
+    we have that
+    \[
+        \begin{aligned}
+            \|\phi(y+x)\| &= \|\phi(y)+\phi(x)\|\\
+                            &\leq \|\phi(y)\|+\|\phi(x)\|
+        \end{aligned}
+    \]
+    now, since $\phi$ is continuous on $Y$, it is bounded on $Y$, so
+    $\|\phi(y)\|$ is bounded. Furthermore, since $V/Y$ is of finite dimension,
+    it follows that $\phi$ is bounded on $V/Y$ as well, so $\|\phi(x)\|$ is
+    bounded too.
+
+    So, we have that
+    \[
+        \begin{aligned}
+            \|\phi(v)\| &\leq \|\phi(y)\| + \|\phi(x)\|\\
+                        &\leq C_1\|y\| + C_2\|x\|\\
+                        &= C_1\|P_1(v)\| + C_2\|P_2(v)\|\\
+                        &\leq (C_1K_1 + C_2K_2)\|v\|
+        \end{aligned}
+    \]
+    where $K_1$ and $K_2$ are the bounds of the projection operators, which
+    exist as a result of problem 4.
+
+    Thus, $\|\phi(x+y)\|$ is bounded as well, and $\phi\in V^*$ as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 6}
+Let $V_1,V_2$ be subspaces of some vector space $L$. Prove that
+$(V_1+V_2)/{V_2}\cong V_1/{V_1\cap V_2}$. Furthermore, prove that if
+$\dim L/{V_1} \leq n_1$ and $\dim L/{V_2}\leq n_2$, then
+$\dim L/{V_1\cap V_2}\leq n_1+n_2$.
+\\
+\begin{proof}
+The first result is a direct restatement of the second isomorphism theorem for
+    Abelian groups. We replicate the proof here:
+    \\
+    Consider the surjective homomorphism $\phi:V_1+V_2\to V_1/{V_1\cap V_2}$
+    as $\phi(v_1+v_2) = [v_1]$ for $v_i\in V_i$. The kernel of this homomorphism
+    is any vector that gets sent to $[0]$, which is precisely the vectors
+    $0+v_2$. It is clear that $0+V_2\subset \ker\phi$. Furthermore, suppose
+    $v=v_1+v_2$ for some $v_1\neq 0$ ($v_1\not\in V_2$). Then,
+    $\phi(v) = [v_1] \neq 0$ since $v_1\not\in V_2$. So, $\ker\phi=V_2$.
+
+    Thus, by the first isomorphism theorem, we have that
+    \[
+        V_1+V_2/{V_2} \cong V_1/{V_1\cap V_2}
+    \]
+    as desired.
+    \\
+    \\
+    We observe first that since $L/{V_2}$ is finite dimensional, so is
+    $V_1+V_2/{V_2}$ since it is a subspace of $L/{V_2}$. And, if $\dim
+    L/{V_2}\leq n_2$, then $\dim V_1+V_2/{V_2}\leq n_2$ as well.
+
+    Now, consider that by the third isomorphism theorem, we have that
+    \[
+        L/{V_1} \cong \frac{L/{(V_1\cap V_2)}}{V_1/{(V_1\cap V_2)}}
+    \]
+    and since both $L/{V_1}$ and $V_1/{(V_1\cap V_2)}\cong V_1+V_2/{V_2}$ are
+    finite dimensional, it must be that $L/{(V_1\cap V_2)}$ is as well.
+    Furthermore, we have that
+    \[
+        \begin{aligned}
+            \dim L/{V_1} &= \dim L/{(V_1\cap V_2)} - \dim V_1/{(V_1\cap V_2)}\\
+            \dim L/{(V_1\cap V_2)} &= \dim L/{V_1} + \dim V_1/{(V_1\cap V_2)}\\
+                                   &\leq n_1 + n_2
+        \end{aligned}
+    \]
+    as desired.
+\end{proof}
+
+\end{document}

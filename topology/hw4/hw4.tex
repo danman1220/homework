@@ -151,15 +151,89 @@ Prove that $X\times X$ is connected if and only if $X$ is.
     In particular, the composition $s_1\circ\pi_1$ is a surjection from
     $X\times X$ onto $\{0,1\}$, and defines a separation of $X\times
     X$. Thus, $X\times X$ is separated.
-
+    \\
+    \\
     ($\impliedby$)
-    Suppose $X\times X$ is not connected. In particular, there exists a
-    continuous surjection $s:X\times X\to\{0,1\}$. Now, for each $x_{\alpha}\in
-    X$, we know that the map $i_{\alpha}:X\to X\times X$ given by
-    $i(x)=(x,x_{\alpha})$ is an embedding of $X$ into $X\times X$. I assert that
-    there exists some $x_0$ for which $s^{-1}(\{0\})\cap X\times\{x_0\}\neq
-    \emptyset$ and $s^{-1}(\{1\})\cap X\times\{x_0\}\neq \emptyset$.
+    Suppose $X$ is connected. We wish to show that any function $f:X\times
+    X\to\{0,1\}$ is constant.
 
+    So, let $f:X\times X\to \{0,1\}$ be a continuous function,
+    Now, since $X$ is connected, and for all $x\in X$, $X\cong \{x\}\times X 
+    \cong X\times \{x\}$, it must be that $f$ is constant on each of these
+    fibers.
+
+    So, for arbitrary, $(x_1,y_1)$ and $(x_2,y_2)$, we have that
+    \[
+        f((x_1,y_1)) = f((x_1,y_2)) = f((x_2,y_2))
+    \]
+    where in each equality we used that $f$ is constant on the fibers
+    $\pi_1^{-1}(x_1)$ and $\pi_2^{-1}(y_2)$.
+
+    Thus, $f$ is constant, and $X\times X$ cannot be separated.
+\end{proof}
+
+\newpage
+
+\section*{Problem 5}
+Suppose that $A_{\alpha}$ are all path connected subspaces of a space $X$, and
+that $\cap A_{\alpha}\neq \emptyset$. Prove that $\cup A_{\alpha}$ is
+path-connected.
+\\
+\begin{proof}
+    Let $x,y$ be distinct points in $\cup A_{\alpha}$. In particular, $x\in A_x$
+    for some $A_x$, and $y\in A_y$ for some $A_y$. Now, let $x_0\in \cap
+    A_{\alpha}$. Then, since $A_x$ is path-connected, there is a path $\gamma_x$
+    from $x$ to $x_0$. Similarly for $y$, there is a path $\gamma_y$ from $y$ to
+    $x_0$. Then, the path $\gamma_x - \gamma_y$ is a continuous path from $x$ to
+    $y$. 
+
+    Since this can be done for any $x,y\in \cup A_{\alpha}$, it follows that
+    $\cup A_{\alpha}$ is path-connected.
+\end{proof}
+
+\section*{Problem 6}
+Prove that $\R^2\setminus \Q^2$ is path-connected.
+\\
+\begin{proof}
+    Let $(x_1,y_1),(x_2,y_2)$ be distinct points in $\R^2\setminus \Q^2$, and
+    without loss of generality, let $x_1\neq x_2$. Now, fix an irrational point
+    $x_0$ such that $x_1<x_0<x_2$, and consider the set $\{x_0\}\times \R\subset
+    \R^2\setminus\Q^2$. Now, this set is clearly uncountable, since it is
+    homeomorphic to $\R$. Furthermore, each point $y$ in $\{x_0\}\times \R$ defines
+    a path in $\R^2$ by taking the straight line from $(x_1,y_1)$ to $(x_0,y)$,
+    then the straight line from $(x_0,y)$ to $(x_2,y_2)$.
+
+    Now, each path must necessarily intersect unique rationals, since if two
+    paths intersected the same rational point (and since they originated from
+    the same position) by linearity they must be the same line.
+
+    So, since there are only countably many rationals, but uncountably many
+    paths defined in this manner, there must be a path that does not intersect
+    any rationals.
+
+    Thus, there is a path in $\R^2\setminus \Q^2$ that connects $(x_1,y_1)$ and
+    $(x_2,y_2)$, and since these points were arbitrary, it must be that
+    $\R^2\setminus \Q^2$ is path-connected, as desired.
+\end{proof}
+
+\section*{Problem 7}
+Prove that every connected open subset of $\R^2$ is path-connected.
+\\
+\begin{proof}
+Suppose that an open subset $U\subset\R^2$ is not
+    path-connected. In particular, let $A_{\alpha}$ be the path-components of
+    $U$. Since $U$ is open as a subset of $\R^2$, it follows that every point of
+    $U$ has an $\varepsilon$-ball around it contained in $U$. Since
+    $\varepsilon$-balls are path-connected in $\R^2$, it follows that for $a\in
+    A_{\alpha}$, the $\varepsilon$-ball around $a$ is contained in $A_{\alpha}$
+    (since $A_{\alpha}$ is a path-component). Thus, since each point in
+    $A_{\alpha}$ has a basic
+    open neighborhood in $A_{\alpha}$, it follows that $A_{\alpha}$ is open.
+
+    Since each path-component is disjoint and open, and they union to $U$, it
+    follows that they form a separation of $U$, and thus $U$ is not connected.
+    
+    Therefore, if $U$ is connected, then $U$ is path-connected.
 \end{proof}
 
 \end{document}
