@@ -1,0 +1,141 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 8 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+\section*{Problem 1}
+Show that $\frac{\sin(x)}{x}$ is not in $L^1((0,\infty),\lambda^1)$.
+\\
+\begin{proof}
+We wish to evaluate
+    \[
+        \int_{(0,\infty)}\frac{|\sin(x)|}{x}d\lambda^1(x)
+    \]
+    and show that it diverges. To do so, we split the integral into half-cycles
+    \[
+        \int_{(0,\infty)}\frac{|\sin(x)|}{x}d\lambda^1(x) = 
+        \sum_{n=0}^{\infty} \int_{(n\pi,(n+1)\pi)}\frac{|\sin(x)|}{x}d\lambda^1(x)
+    \]
+    Now, we know that on each half-cycle,
+    \[
+        \frac{|\sin(x)|}{x} \geq \frac{|\sin(x)|}{(n+1)\pi}
+    \]
+    so we have a lower bound for the integral:
+    \[
+        \sum_{n=0}^{\infty}
+        \int_{(n\pi,(n+1)\pi)}\frac{|\sin(x)|}{x}d\lambda^1(x)\geq
+        \sum_{n=0}^{\infty}
+        \int_{(n\pi,(n+1)\pi)}\frac{|\sin(x)|}{(n+1)\pi}d\lambda^1(x)
+    \]
+    Now, since each half-cycle is either entirely positive or entirely negative,
+    we know that
+    \[
+        \int_{(n\pi,(n+1)\pi)}\frac{|\sin(x)|}{(n+1)\pi}d\lambda^1(x)=
+        \left|\int_{(n\pi,(n+1)\pi)}\frac{\sin(x)}{(n+1)\pi}d\lambda^1(x)\right|
+    \]
+    And finally, we can evaluate the integral directly:
+    \[
+        \begin{aligned}
+        \sum_{n=0}^{\infty}
+        \left|\int_{(n\pi,(n+1)\pi)}\frac{\sin(x)}{(n+1)\pi}d\lambda^1(x)\right|
+            &=
+        \sum_{n=0}^{\infty}
+            \left|\frac{1}{(n+1)\pi}[\cos(x)]_{n\pi}^{(n+1)\pi}\right|\\
+            &=
+        \sum_{n=0}^{\infty}
+            \frac{2}{(n+1)\pi}\\
+            &=\infty
+        \end{aligned}
+    \]
+    Thus, since 
+    \[
+        \int_{(0,\infty)}\frac{|\sin(x)|}{x}d\lambda^1(x)\geq
+        \sum_{n=0}^{\infty}
+        \left|\int_{(n\pi,(n+1)\pi)}\frac{\sin(x)}{(n+1)\pi}d\lambda^1(x)\right|
+        = \infty
+    \]
+    the integral diverges, and $\frac{\sin(x)}{x}$ is not in
+    $L^1((0,\infty),\lambda^1)$.
+\end{proof}
+
+\newpage
+
+\section*{Problem 2}
+Prove that $L^p$ for $1\leqp\leq\infty$ is complete. Note that case $p=1$ has
+already been covered in class.
+\\
+\begin{proof}
+To begin with, let $p<\infty$. 
+\end{proof}
+
+
+\end{document}
