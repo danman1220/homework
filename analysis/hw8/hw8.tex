@@ -130,12 +130,81 @@ We wish to evaluate
 \newpage
 
 \section*{Problem 2}
-Prove that $L^p$ for $1\leqp\leq\infty$ is complete. Note that case $p=1$ has
+Prove that $L^p$ for $1\leq p\leq\infty$ is complete. Note that case $p=1$ has
 already been covered in class.
 \\
 \begin{proof}
 To begin with, let $p<\infty$. 
 \end{proof}
 
+\section*{Problem 3}
+\subsection*{Part 1: Notes 3.11}
+Prove that $\ell^p_n$, $\ell^p$, $1\leq p\leq \infty$ are Banach. Prove that
+$\ell^{p_1}\subset \ell^{p_2}$ for $1\leq p_1\leq p_2\leq \infty$, and that
+\[
+    \|x\|_{p_2}\leq \|x\|_{p_1}
+\]
+
+\begin{proof}
+    We first note that $\ell^p_n$ is isomorphic (as vector spaces) with $\R^n$,
+    by the canonical identification $(x^i)\mapsto (x^i)$ (where $x^i$ is the
+    $i^{th}$ point in the sequence, and the $i^{th}$ component of the vector).
+    Furthermore, since all norms on a finite dimensional vector space are
+    equivalent, the $\ell^p$ norm applied to $\ell^p_n\cong \R^n$ is equivalent
+    to the standard 2-norm on $\R^n$. Now, since $\R^n$ is complete with this
+    norm, it follows that $\ell^p_n$ is complete as well.
+
+    For the case of $\ell^p$, we note that $\ell^p = L^p(\N,2^{\N},\mu_c)$. By
+    Problem 2, we know that $L^p$ spaces are complete, so it follows that
+    $\ell^p$ is complete as well.
+
+    Now, we will prove the norm inequality. Without loss of generality, we will
+    let $(x_n)\in\ell^{p_1}$ such that $\|(x_n)\|_{p_1} = 1$ (i.e. scale the
+    sequence by its norm, which will not change the inequality).
+
+    Now, we wish to show that
+    \[
+        \left(\sum_{n=1}^{\infty}|x_n|^{p_2}\right)^{\frac{1}{p_2}} \leq
+        \left(\sum_{n=1}^{\infty}|x_n|^{p_1}\right)^{\frac{1}{p_1}} (=1)
+    \]
+
+    We observe first that since $\|(x_n\|_{p_1} = 1$ and $p_1\geq 1$, it must be
+    that each $x_n$ is less than $1$. Thus, we have that for each $n$,
+    \[
+        |x_n|^{p_2}\leq |x_n|^{p_1}
+    \]
+    since $p_2 \geq p_1$, and each term $x_n < 1$.
+
+    Thus, we have that
+    \[
+        \begin{aligned}
+            \sum_{n=1}^{\infty}|x_n|^{p_2} &\leq
+            \sum_{n=1}^{\infty}|x_n|^{p_1}\\
+            &= 1\\
+            \implies 
+        \left(\sum_{n=1}^{\infty}|x_n|^{p_2}\right)^{\frac{1}{p_2}} \leq 1
+        \end{aligned}
+    \]
+    as desired.
+
+    Thus, if $(x_n)\in\ell^{p_1}$, we have that
+    $\|(x_n)\|_{p_2}\leq\|(x_n)\|_{p_1} < \infty$, and so $(x_n)$ is in
+    $\ell^{p_2}$ as well. Thus, $\ell^{p_1}\subset\ell^{p_2}$ as desired.
+\end{proof}
+
+\subsection*{Part 2: Notes 3.13}
+Prove that $L^{p_1}(\Omega,\mu)\subset L^{p_2}(\Omega,\mu)$ when
+$\mu(\Omega)<\infty$. To do so, establish the inequality for the average
+integral
+\[
+    \|f\|_{\bar{p_1}} \leq \|f\|_{\bar{p_2}}
+\]
+where the barred norm is the average norm defined in the notes.
+
+Furthermore, prove that this does not hold in the case $\mu(\Omega)=\infty$.
+\\
+\begin{proof}
+
+\end{proof}
 
 \end{document}
