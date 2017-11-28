@@ -134,7 +134,64 @@ Prove that $L^p$ for $1\leq p\leq\infty$ is complete. Note that case $p=1$ has
 already been covered in class.
 \\
 \begin{proof}
-To begin with, let $p<\infty$. 
+To begin with, let $p<\infty$. For this proof, we will show that an absolutely
+    convergent series will converge to a function in $L^p$. So, let $\{f_n\}$ be
+    such that
+    \[
+        \sum_{n=1}^{\infty}\|f_n\|_p = M<\infty
+    \]
+    So, let $g_n = \sum_{k=1}^n |f_k|$. We know by Minkowski's inequality that
+    \[
+        \|g_n\|_p \leq \sum_{k=1}^{n}\|f_n\|_p \leq M
+    \]
+    Now, $g_n$ converges pointwise to some $g$, since it's a monotonically
+    increasing bounded sequence.
+
+    Now, we know that
+    \[
+        \int g_n^p \leq M^p
+    \]
+    and by Fatou's lemma,
+    \[
+        \int g^p \leq M^p
+    \]
+    as well.
+
+    Thus, the series
+    \[
+        \sum_{n=1}^{\infty}|f_n(x)|
+    \]
+    converges pointwise for $\mu$-almost every $x$, so the series
+    \[
+        \sum_{n=1}^{\infty}f_n
+    \]
+    converges pointwise as well. Call the limit $f$.
+    
+    Now, let $s_n(x)$ denote the $n^{th}$ partial sum of
+    $\sum_{n=1}^{\infty}f_n(x)$. We know that $|s_n(x)| \leq g_n(x)$ and
+    thus $|f|(x)\leq g(x)$.
+
+    So, by the dominated convergence theorem, we have that
+    \[
+    \lim \|s_n\|_p =\|\lim s_n\|_p = \|f\|_p
+    \]
+    as desired.
+
+    Now, suppose $p=\infty$. Let $\{f_n\}$ be Cauchy in $L^{\infty}$. Then, we
+    know that for $\mu$-almost every $x$, the sequence $\{f_n(x)\}$ is Cauchy as well, and by
+    the completeness of $\R$, has a limit. Call this pointwise limit $f(x)$.
+
+    Now, we know that $\forall \varepsilon >0$, we have some $N_{\varepsilon}$
+    such that $\forall x$ ($\mu$-almost all $x$),
+    \[
+        |f_k(x) - f_j(x)| < \varepsilon
+    \]
+        for $j,k > N_{\varepsilon}$. Thus, taking a limit as $j$ goes to
+        infinity, we have that
+        \[
+            |f_k(x)-f(x)| < \varepsilon
+        \]
+        for all $x$, as desired.
 \end{proof}
 
 \section*{Problem 3}
@@ -204,7 +261,177 @@ where the barred norm is the average norm defined in the notes.
 Furthermore, prove that this does not hold in the case $\mu(\Omega)=\infty$.
 \\
 \begin{proof}
+We first prove the average norm inequality.
 
+    \[
+    \begin{aligned}
+        \int |u|^{p_1}\frac{1}{\mu(\Omega)}d\mu &\leq \left(\int
+        (|u|^{p_1})^{\frac{p_2}{p_1}}d\mu\right)^{p_1}{p_2}
+        \left(\int
+        (\frac{1}{\mu(\Omega)})^{\frac{p_2}{p_2-p_1}}d\mu\right)^{\frac{p_2-p_1}{p_2}}\\
+        &=\|u\|_{p_2}^{p_1}((\frac{1}{\mu(\Omega)})^{\frac{p_2}{p_2-p_1}}\mu(\Omega))^{\frac{p_2-p_1}{p_2}}\\
+        \implies (\int |u|^{p_1}\frac{1}{\mu(\Omega)}d\mu)^{\frac{1}{p}}
+        &\leq
+        \|u\|_{p_2}(\frac{1}{\mu(\Omega)}\mu(\Omega)^{1-\frac{p_1}{p_2}})^{\frac{1}{p_1}}\\
+        &= \|u\|_{p_2}(\frac{1}{\mu(\Omega)})^{\frac{1}{p_2}}
+    \end{aligned}
+    \]
+    as desired.
+
+    Now, it follows immediately from this inequality that if $\|f\|_{p_2}
+    <\infty$, it must be that $\|f\|_{p_1} < \infty$ as well, and thus $f\in
+    L^{p_2}$ implies $f\in L^{p_1}$.
+
+    However, for the measure space $\Omega = (0,\infty)$ with the Lebesgue
+    measure, this fails. This is clear by considering the function $f(x) =
+    \frac{1}{x^{\frac{1}{p_1}}}$, which is in $L^{p_2}$ since
+    $\frac{1}{x^{\frac{p_2}{p_1}}}$ is integrable ($\frac{p_2}{p_1} > 1$), but
+    $\frac{1}{x}$ is not.
+\end{proof}
+
+\subsection*{Part 3: Notes 3.15}
+Prove that $\textrm{ess sup}f = \inf\{C : f \leq C \mu\textrm{-a.e.}$.
+Prove that $\inf$ can be replaced with $\min$.
+Prove that $\textrm{ess sup}|f| = M \iff |f|\leq M \mu\textrm{-a.e.}, \mu\{f
+>M-\varepsilon\}\neq 0 \forall\varepsilon>0$.
+\\
+\begin{proof}
+    The first statement to be proved follows immediately from the definitions,
+    since the set definition is just a restatement of $\mu\{f>C\} = 0$. Thus,
+    the sets the $\inf$ is taken over are the same, so the $\inf$ itself is the
+    same.
+
+    The second statement follows immediately, since if $M=\inf\{C:
+    \mu\{f>C\}=0\}$, then there is some monotonically decreasing sequence $C_n$ in the set that
+    approaches $M$. Now, we have that $\{f>M\} = \lim \{f>C_n\}$ which is a
+    monotonic limit of sets, which the measure preserves. So,
+    \[
+        \mu\{f>M\} = \lim \mu\{f>C_n\} = \lim 0 = 0
+    \]
+    and thus $M$ is in the set the $\inf$ is taken from.]
+
+    The last statement also follows immediately, since the first property states
+    that $M$ is an essential upper bound for $|f|$, and the second property says
+    that $M$ is the least of such upper bounds. That is, $M$ is the $\inf$ of
+    all upper bounds on $|f|$. This characterizes the essential supremum, so the
+    definitions are equivalent.
+\end{proof}
+
+\subsection*{Part 4: Notes 3.17}
+For a sequence $\{f_n\}$ of measurable functions, prove that
+$\|f_j-f\|_{\infty}\to0$ if and only if $f_j\to f$ uniformly outside a set of
+measure zero.
+\\
+\begin{proof}
+We know that $\forall n>0$, there is some $A_n$ such that $\forall m>A_n$,
+    \[
+        \|f_m-f\|<\frac{1}{n}
+    \]
+    or,
+    \[
+        \mu\{|f_m-f|>\frac{1}{n}\} = 0
+    \]
+    Define $E_{mn} = \{|f_m-f|>\frac{1}{n}\}$. Now, we know that
+    \[
+        \sup|f_m-f| <\frac{1}{n}
+    \]
+    on $\Omega\setminus \bigcup_{m=A_n}^{\infty}E_{mn}$.
+
+    Thus, since $\mu (\bigcup_{n=1}^{\infty}\bigcup_{m=A_n}^{\infty}E_{mn}) =0$,
+    we know that
+    \[
+        \sup|f_n-f|\to 0
+    \]
+    on $\Omega\setminus \bigcup_{n=1}^{\infty}\bigcup_{m=A_n}^{\infty}E_{mn}$,
+    as desired.
+
+    Now, for the other direction, we know that $\sup|f_n-f|\to 0$ on a $\Omega$
+    minus a set $E$ of measure zero, so change $f_n$ and $f$ to be zero on $E$,
+    and thus
+    \[
+        \sup|[f_n]-[f]| \to 0
+    \]
+    on all of $\Omega$, and thus $\|f_j-f\|_{\infty}\to 0$ as desired.
+\end{proof}
+
+\subsection*{Part 5: Notes 3.19}
+Prove Holder and Minkowski inequalities. Prove that $L^{p_2}\subset L^{p_1}$ for
+finite measure spaces. Prove this does not hold for infinite measure spaces.
+\\
+\begin{proof}
+We begin by proving the lemma:
+\begin{lemma}
+For real numbers $a,b$,
+    \[
+        ab \leq \frac{a^p}{p} + \frac{b^{q}}{q}
+    \]
+    for $p,q > 1$.
+\end{lemma}
+    \begin{proof}
+    We know that
+        \[
+            \begin{aligned}
+                ab &= \exp(\log a + \log b)\\
+                    &=\exp\left(\frac{1}{p}\log a^p + \frac{1}{q}\log b^q\right)
+            \end{aligned}
+        \]
+        Now, by the convexity of the exponential, we have that 
+        \[
+            \exp\left(\frac{1}{p}\log a^p + \frac{1}{q}\log b^q\right) \leq
+            \frac{1}{p}\exp(\log a^p) \frac{1}{q}\exp(\log b^q)
+            = \frac{a^p}{p} + \frac{b^q}{q}
+        \]
+        as desired.
+    \end{proof}
+
+    Now, we are ready to prove Holder's inequality.
+
+    Let $f,g\in L^p$, and without loss of generality let $\|f\|_p = \|g\|_q =
+    1$. Now, we have that 
+    \[
+    \begin{aligned}
+        \int |fg|d\mu &\leq \int |\frac{f^p}{p}+\frac{g^q}{q}|d\mu\\
+                    &\leq \frac{1}{p}\int |f^p|d\mu + \frac{1}{q}\int
+                    |g|^qd\mu\\
+                    &= \frac{1}{p} + \frac{1}{q}\\
+                    &= 1\\
+                    &= \|f\|_p \|g\|_q
+    \end{aligned}
+    \]
+    as desired.
+
+    Now, for the $L^{\infty}$ case, we have that
+    \[
+        \int |fg|d\mu \leq \|g\|_{\infty}\int |f|d\mu = \|g\|_{\infty}\|f\|_1
+    \]
+    as desired.
+
+    Now, we prove the Minkowski inequality. To do so, we will use the Holder
+    inequality.
+    \[
+        \begin{aligned}
+            \int |f+g|^pd\mu &= \int |f+g|^{p-1}|f+g|d\mu\\
+            &\leq (\int (|f+g|^{p-1})^{\frac{p}{p-1}}d\mu)^{\frac{p-1}{p}}(\int
+            (|f|+|g|)^pd\mu)^{\frac{1}{p}}\\
+            &\leq \|f+g\|_{p}^{p-1}(\|f\|_p+\|g\|_p)
+        \end{aligned}
+    \]
+    so we have that
+    \[
+        \|f+g\|_p^p \leq \|f+g\|_p^{p-1}(\|f\|_p+\|g\|_p)
+    \]
+    and thus
+    \[
+        \|f+g\|_p \leq \|f\|_p + \|g\|_p
+    \]
+    as desired.
+
+    The case $p=1$ falls out of the triangle inequality, and the linearity of
+    the integral, and the case $p=\infty$ comes from the subadditivity of the
+    supremum.
+
+    The second half of this problem is a restatement of Notes 3.13, which was
+    proved earlier.
 \end{proof}
 
 \end{document}
