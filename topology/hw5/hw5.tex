@@ -135,6 +135,29 @@ Show that for $X$ Hausdorff, $A,B$ disjoint compact subsets of $X$, then there
 exist disjoint open sets $U$ and $V$ containing $A$ and $B$ respectively.
 \\
 \begin{proof}
+Let $a\in A$, and $b\in B$. Since $A$ and $B$ are disjoint, it must be that
+    $a\neq b$. Thus, there exist disjoint open sets $U_{ab},V_{ab}$ such that $a\in
+    U_{ab}$ and $b\in V_{ab}$. Now, since $B$ is compact, the open cover
+    $\mathscr{O}_B = \{V_{ab}\ |\ b\in B\}$ has a finite subcover
+    $\{V_{ab_i}\}_{i=1}^n$. Furthermore, the open set $U_a =
+    \bigcap_{i=1}^nU_{ab_i}$ does not intersect the open set $V_a =
+    \bigcup_{i=1}^nV_{ab_i}$ which covers $B$,
+
+    So, consider the open cover $\mathscr{O}_A = \{U_a\ |\ a\in A\}$. By
+    compactness of $A$, this has a finite subcover $\{U_{a_j}\}_{j=1}^m$. Now,
+    we have that the open set $V = \bigcap_{j=1}^mV_{a_j}$ (which covers $B$, since
+    each $V_a$ covers $B$) does not intersect the open set $U =
+    \bigcup_{j=1}^mU_{a_j}$ which covers $A$.
+
+    Thus, $U$ and $V$ are disjoint open sets containing $A$ and $B$
+    respectively, as desired.
+\end{proof}
+
+\section*{Problem 5}
+Show that for $X$ and $Y$ topological spaces with $Y$ compact, the projection
+$\pi_x:X\times Y\to X$ is a closed map.
+\\
+\begin{proof}
 
 \end{proof}
 
