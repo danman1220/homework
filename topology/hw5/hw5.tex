@@ -158,7 +158,48 @@ Show that for $X$ and $Y$ topological spaces with $Y$ compact, the projection
 $\pi_x:X\times Y\to X$ is a closed map.
 \\
 \begin{proof}
+    Let $C\subset X\times Y$ be closed, and let $C_X = \pi_X(C)$. Now, for $x\in
+    X\setminus C_X$, we know that the slice $\{x\}\times Y$ does not intersect
+    $C$, and thus $\{x\}\times Y\subset X\times Y\setminus C$, which is an open
+    subset of $X\times Y$. Since the slice $\{x\}\times Y$ is contained in this
+    open set, and $Y$ is compact, we have by the tube lemma that there is some
+    neighborhood $U_x$ of $x$ such that $U_x\times Y$ is completely contained in
+    $X\times Y\setminus C$. Therefore, since $U_\times Y\cap C = \emptyset$, it
+    must be that $U_x\cap C_x = \emptyset$ as well. Thus, each point $x$ in the
+    complement of $C_x$ has a neighborhood that is also in the complement of
+    $C_x$, and so the complement of $C_x$ is open, and $C_x$ is closed, as
+    desired.
+\end{proof}
 
+\section*{Problem 6}
+Suppose $Y$ is compact Hausdorff, and $f:X\to Y$ a function of sets. Prove that
+$f$ is continuous if and only if its graph is a closed subset of $X\times Y$.
+\\
+\begin{proof}
+    ($\implies$)
+    Suppose $f$ is continuous. Specifically, we know that for every net $x_{\alpha}$
+    in $X$ that converges to some point $x\in X$, the net $f(x_{\alpha})$
+    in $Y$ converges to $f(x)\in Y$.
+
+    So, consider a net $(x_{\alpha},f(x_{\alpha}))$ in the graph $\{(x,f(x))\ |\
+    x\in X\}$ that converges to some $(x,y)\in X\times Y$. Now, since the
+    projection maps $\pi_x,\pi_y$ are continuous, they preserve nets, so
+    \[
+        \pi_x(x_{\alpha},f(x_{\alpha})) = x_{\alpha} \to \pi_x(x,y)=x
+    \]
+    and
+    \[
+        \pi_y(x<{\alpha},f(x_{\alpha})) = f(x_{\alpha}) \to \pi_y(x,y) = y
+    \]
+    but we know that $f(x_{\alpha})\to f(x)$ by continuity of $f$, and since $Y$
+    is Hausdorff, nets have unique limits, so $y=f(x)$, and the net
+    $(x_{\alpha},f(x_{\alpha}))$ converges to $(x,f(x))\in \{(x,f(x)\ |\ x\in
+    X\}$, and so the graph of $f$ is closed, as desired.
+    \\
+    \\
+    ($\impliedby$)
+    Suppose $f$ is such that its graph $\{(x,f(x))\ |\ x\in X\}\subset X\times
+    Y$ is closed.
 \end{proof}
 
 \end{document}
