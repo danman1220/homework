@@ -1,0 +1,141 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm, amssymb} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Topology} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 5 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+\section*{Problem 1}
+Show that for $(X,\mathscr{T})$ a compact Hausdorff space, any topology
+$\mathscr{T}\subsetneq\mathscr{T}'$ makes $(X,\mathscr{T}')$ no longer compact
+Hausdorff. Furthermore, for $\mathscr{T}'\subsetneq\mathscr{T}$, the space
+$(X,\mathscr{T}')$ is not compact Hausdorff.
+\\
+\begin{proof}
+    For this proof, we will show that for $\mathscr{T},\mathscr{T}'$ topologies
+    on $X$ with $\mathscr{T}\subset\mathscr{T}'$ and the property that $X$ is
+    compact Hausdorff under both these topologies, then they must be equal.
+
+    To do so, we consider the identity function
+    $id:(X,\mathscr{T}')\to(X,\mathscr{T})$, which is continuous since
+    $\mathscr{T}\subset\mathscr{T}'$. Now, for any $C$ closed in
+    $(X,\mathscr{T}')$, since $(X,\mathscr{T}')$ is compact and $id$ is
+    continuous, $id(C)=C$ is compact in $(X,\mathscr{T})$. However, since
+    $(X,\mathscr{T})$ is Hausdorff, $C$ must also be closed. Thus, $id$ is a
+    closed map, and thus a homeomorphism, and the two topologies must be equal.
+\end{proof}
+
+\section*{Problem 2}
+Prove that for compact subsets $A,B$ of $X$, their union $A\cup B$ is compact as
+well.
+\\
+\begin{proof}
+    Let $\mathscr{O}$ be an open cover of $A\cup B$. In particular,
+    $\mathscr{O}$ covers $A$, and has a finite subset $\mathscr{O}_A$ that
+    covers $A$. Similarly, there is a finite subset $\mathscr{O}_B$ that
+    covers $B$. Their union $\mathscr{O}_A\cup\mathscr{O}_B$ covers $A\cup B$,
+    and is finite, as it is the union of finite sets. It is also a subcover,
+    since both $\mathscr{O}_A$ and $\mathscr{O}_B$ are subsets of
+    $\mathscr{O}$. Thus. $\mathscr{O}$ has a finite subcover, and $A\cup B$ is
+    compact as desired.
+\end{proof}
+
+\section*{Problem 3}
+Suppose $A$ is a subset of a metric space. Show that $A$ is compact implies that
+$A$ is closed and bounded. Give an example where the converse does not hold.
+\\
+\begin{proof}
+    Suppose $A$ is a compact subset of a metric space $(X,d)$. Since all metric
+    spaces are Hausdorff, it follows immediately that $A$ is closed (since it is
+    a compact subset of a Hausdorff space).
+
+    Now, fix $x\in A$, and consider the open cover $\mathscr{O} = \{V_n(x)\ |\
+    n\in\N\}$ of balls centered at $x$ with radius $n$. This has a finite
+    subcover, by compactness of $A$. So, let $N$ be the largest radius in the
+    finite subcover. For each $V_m(x)$ in the finite subcover, then, we have
+    that $V_m(x)\subset V_N(x)$. Thus, since the subcover covers $A$, it follows
+    that $V_N(x)$ covers $A$, and thus $A$ is bounded.
+
+    For an example where the converse fails, consider the metric space
+    $(\R,d_{LA})$ of the real numbers with the discrete (Los Angeles) metric.
+    The set $\R$ itself is closed and bounded (since everything is at most
+    distance $1$ away from any particular point), but is clearly not compact,
+    since it is an uncountable discrete set of points.
+\end{proof}
+
+\section*{Problem 4}
+Show that for $X$ Hausdorff, $A,B$ disjoint compact subsets of $X$, then there
+exist disjoint open sets $U$ and $V$ containing $A$ and $B$ respectively.
+\\
+\begin{proof}
+
+\end{proof}
+
+\end{document}
