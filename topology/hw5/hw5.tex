@@ -198,8 +198,37 @@ $f$ is continuous if and only if its graph is a closed subset of $X\times Y$.
     \\
     \\
     ($\impliedby$)
-    Suppose $f$ is such that its graph $\{(x,f(x))\ |\ x\in X\}\subset X\times
-    Y$ is closed.
+    Suppose $f$ is not continuous. That is, suppose there exists some net
+    $x_{\alpha}$ in $X$ converging to some $L\in X$ such that
+    $f(x_{\alpha})$ does not converge to $f(L)$.
+
+    Now, consider the net $(x_{\alpha},f(x_{\alpha}))$ in $X\times Y$. In
+    particular, consider the projection $\pi_y((x_{\alpha},f(x_{\alpha}))) =
+    f(x_{\alpha})$. Since $Y$ is compact, it follows that this net has a
+    convergent subnet $f(x_{\alpha_{\beta}})\to y$ for some $y\in Y$.
+
+    Now, in the product space, we have the net
+    \[
+        (x_{\alpha_{\beta}}, f(x_{\alpha_{\beta}}))
+    \]
+    which converges in the first coordinate to some subset $L'\subset L$, and in
+    the second coordinate to $y$. Now, suppose $y\not\in f(L)$. Then, we have
+    that
+    \[
+        (x_{\alpha_{\beta}}, f(x_{\alpha_{\beta}}))\to L'\times \{y\}
+    \]
+    but since $y\not\in f(L)$, it follows that
+    \[
+        L'\times \{y\}\not\subset \{(x,f(x))\ |\ x\in X\}
+    \]
+    and thus the graph is not closed.
+
+    Now, suppose that $y\in f(L)$. Then, it follows that, since
+    $f(x_{\alpha})\not\to f(L)$, there is some subnet $f(x_{\alpha_{\gamma}})$
+    for which $y$ is not an accumulation point. In particular, this subnet has a
+    convergent sub-subnet which does not converge to $y$. Applying the argument
+    above to this sub-subnet yields a net in the graph that does not converge in
+    the graph, as desired.
 \end{proof}
 
 \end{document}
