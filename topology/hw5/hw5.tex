@@ -107,6 +107,8 @@ well.
     compact as desired.
 \end{proof}
 
+\newpage
+
 \section*{Problem 3}
 Suppose $A$ is a subset of a metric space. Show that $A$ is compact implies that
 $A$ is closed and bounded. Give an example where the converse does not hold.
@@ -164,12 +166,14 @@ $\pi_x:X\times Y\to X$ is a closed map.
     subset of $X\times Y$. Since the slice $\{x\}\times Y$ is contained in this
     open set, and $Y$ is compact, we have by the tube lemma that there is some
     neighborhood $U_x$ of $x$ such that $U_x\times Y$ is completely contained in
-    $X\times Y\setminus C$. Therefore, since $U_\times Y\cap C = \emptyset$, it
+    $X\times Y\setminus C$. Therefore, since $U_x\times Y\cap C = \emptyset$, it
     must be that $U_x\cap C_x = \emptyset$ as well. Thus, each point $x$ in the
     complement of $C_x$ has a neighborhood that is also in the complement of
     $C_x$, and so the complement of $C_x$ is open, and $C_x$ is closed, as
     desired.
 \end{proof}
+
+\newpage
 
 \section*{Problem 6}
 Suppose $Y$ is compact Hausdorff, and $f:X\to Y$ a function of sets. Prove that
@@ -199,7 +203,7 @@ $f$ is continuous if and only if its graph is a closed subset of $X\times Y$.
     \\
     ($\impliedby$)
     Suppose $f$ is not continuous. That is, suppose there exists some net
-    $x_{\alpha}$ in $X$ converging to some $L\in X$ such that
+    $x_{\alpha}$ in $X$ converging to some $L\subset X$ such that
     $f(x_{\alpha})$ does not converge to $f(L)$.
 
     Now, consider the net $(x_{\alpha},f(x_{\alpha}))$ in $X\times Y$. In
