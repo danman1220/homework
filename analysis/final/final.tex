@@ -49,7 +49,7 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
 
-\newtheorem{lemma}{Lemma}
+\newtheorem*{lemma}{Lemma}
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
 %----------------------------------------------------------------------------------------
@@ -71,6 +71,11 @@
 \begin{document}
 
 \maketitle % Print the title
+
+Signature:
+\\
+\\
+\\
 
 \section*{Problem 1}
 For every $n\in\N$, let $\mu_n$ be a measure on $(\Omega,\mathscr{A})$ with
@@ -101,17 +106,104 @@ $\mu(\Omega)=1$.
         \end{aligned}
     \]
     as desired.
-
+    \\
+    \\
     Next, we note that since each $\mu_n$ is a measure, $\mu_n(E)\geq 0$ for all
     $E\in\mathscr{A}$. Thus, since both $\mu_n(E)$ and $2^n$ are greater than
     zero for each $n$, it must be that 
     \[
         \mu(E) = \sum_{n=1}^{\infty}\frac{\mu_n(E)}{2^n} \geq 0
     \]
+    as desired.
+    \\
+    \\
+    To show that $\mu$ is countably additive, we first prove the following lemma:
+    \begin{lemma}
+        For a doubly indexed sequence $\{a_{ij}\}$ of positive numbers,
+        \[
+            \sum_{i=1}^{\infty}\sum_{j=1}^{\infty}a_{ij} =
+            \sum_{j=1}^{\infty}\sum_{i=1}^{\infty}a_{ij}
+        \]
+        provided that either sum converges.
+    \end{lemma}
+    \begin{proof}
+        We note first that $a_{ij}$ can be thought of as a function from
+        $\N\times \N$ to $\R$. 
+        
+        Now, Tonelli's theorem tells us that for any positive function
+        $f:\Omega\times\Sigma\to\R$ on the product space $\Omega\times\Sigma$
+        of $\sigma$-finite measure spaces $(\Omega,\mathscr{A},\mu)$ and
+        $(\Sigma,\mathscr{B},\nu)$ such that $f$ is measurable with respect to
+        $\mathscr{A}\otimes\mathscr{B}$, we have that
+        \[
+            \int_{\Omega}\left(\int_{\Sigma}f(x,y)d\nu(y)\right)d\mu(x) =
+            \int_{\Sigma}\left(\int_{\Omega}f(x,y)d\mu(x)\right)d\nu(y)
+        \]
 
-    To show that $\mu$ is additive, let $\{E_j\}_{j=1}^{\infty}$ be a countable
-    collection of disjoint measurable sets.
+        Now, consider the case where $\Omega = \Sigma = \N$, $\mathscr{A} =
+        \mathscr{B} = 2^{\N}$, and $\mu = \nu = \mu_c$ the counting measure.
+        The function $a_{ij}$ from $\N\times\N\to\R$ is positive (by
+        hypothesis), and is measurable on $2^{\N}\otimes 2^{\N} =
+        2^{\N\times\N}$, since every function is measurable with respect to this
+        $\sigma$-algebra. Thus, applying Tonelli's theorem yields
+        \[
+            \begin{aligned}
+                \sum_{i=1}^{\infty}\left(\sum_{j=1}^{\infty}a_{ij}\right) &=
+                \int_{\N}\left(\int_{\N}a_{ij}d\mu_c(j)\right)d\mu_c(i)\\
+                &= \int_{\N}\left(\int_{\N}a_{ij}d\mu_c(i)\right)d\mu_c(j)\\
+                &=\sum_{j=1}^{\infty}\left(\sum_{i=1}^{\infty}a_{ij}\right)
+            \end{aligned}
+        \]
+        as desired.
+    \end{proof}
+    Equipped with this result, we now prove that $\mu$ is countably additive.
+    To do so, let $\{E_j\}_{j=1}^{\infty}$ be a countable collection of disjoint
+    measurable sets. Now, we know by the fact that each $\mu_n$ is a measure
+    that
+    \[
+        \mu_n\left(\bigcup_{j=1}^{\infty}E_j\right) = \sum_{j=1}^{\infty}\mu_n(E_j)
+    \]
+    Thus, we have
+    \[
+        \begin{aligned}
+            \mu\left(\bigcup_{j=1}^{\infty}E_j\right) &=
+            \sum_{n=1}^{\infty}\frac{1}{2^n}\mu_n\left(\bigcup_{j=1}^{\infty}E_j\right)\\
+            &=\sum_{n=1}^{\infty}\sum_{j=1}^{\infty}\frac{1}{2^n}\mu_n(E_j)
+        \end{aligned}
+    \]
+    We apply the above lemma to get
+    \[
+        \begin{aligned}
+            \sum_{n=1}^{\infty}\sum_{j=1}^{\infty}\frac{1}{2^n}\mu_n(E_j)
+            &= \sum_{j=1}^{\infty}\sum_{n=1}^{\infty}\frac{1}{2^n}\mu_n(E_j)\\
+            &=\sum_{j=1}^{\infty}\mu(E_j)
+        \end{aligned}
+    \]
+    as desired.
+    \\
+    \\
+    Finally, we wish to show that $\mu(\Omega) = 1$. This follows from direct
+    computation (observing that $\mu_n(\Omega)=1$ for all $n$):
+    \[
+        \begin{aligned}
+            \mu(\Omega) &= \sum_{n=1}^{\infty}\frac{\mu_n(\Omega)}{2^n}\\
+            &= \sum_{n=1}^{\infty}\frac{1}{2^n}\\
+            &= \frac{1}{1-\frac{1}{2}}-1\\
+            &=1
+        \end{aligned}
+    \]
+    as desired. Here, we used the standard formula for a geometric series
+    \[
+        \sum_{n=1}^{\infty}a^n = \frac{1}{1-a}-1
+    \]
+    for $0<a<1$.
 \end{proof}
 
+\newpage
 
+\section*{Problem 2}
+Suppose $\mu(\Omega)<\infty$. Prove that
+\[
+    \lim_{p\to\infty} \|f\|_{L^p} = \|f\|_{L^{\infty}}
+\]
 \end{document}
