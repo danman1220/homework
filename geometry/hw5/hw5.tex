@@ -1,0 +1,142 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Geometry} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 5 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+
+\section*{Problem 1} %Lee 8-10
+Let $M$ be the open submanifold of $\R^2$ with both coordinates positive, and
+define $F:M\to M$ as $F(x,y) = (xy,\frac{y}{x})$. Show that $F$ is a
+diffeomorphism, and compute $dFX$ and $dFY$ for
+\[
+    \begin{aligned}
+        X &= x\partial_x + y\partial_y\\
+        Y &= y\partial_x
+    \end{aligned}
+\]
+
+\begin{proof}
+To begin with, we observe that so long as $x\neq 0$, $F$ is in fact smooth.
+    Furthermore, it has an inverse
+    \[
+        F^{-1}(x,y) = (\sqrt{\frac{x}{y}},\sqrt{xy})
+    \]
+    which is also smooth on $M$, and defined for all of $M$.
+    
+    Furthermore, we can calculate its Jacobian:
+    \[
+        J(F) = dF =
+        \begin{bmatrix}
+            y & x\\
+            \frac{-y}{x^2} & \frac{1}{x}
+        \end{bmatrix}
+    \]
+    which expresses $dF$ in the coordinates $\partial_x,\partial_y$ at every
+    point.
+
+    Now, we calculate $dF(X)$:
+    \[
+        \begin{aligned}
+            dF(X) &= dF(x\partial_x + y\partial_y)\\
+                &= xdF(\partial_x) + ydF(\partial_y)\\
+                &= x(y\partial_x - \frac{y}{x^2}\partial_y) + y(x\partial_x +
+                \frac{1}{x}\partial_y)\\
+                &= xy\partial_x - \frac{y}{x}\partial_y + yx\partial_x
+                +\frac{y}{x}\partial_y\\
+                &= 2xy\partial_x
+        \end{aligned}
+    \]
+    and $dF(Y)$:
+    \[
+        \begin{aligned}
+            dF(Y) &= dF(x\partial_y)\\
+                  &= xdF(\partial_y)\\
+                  &= x(x\partial_x + \frac{1}{x}\partial_y)\\
+                  &=x^2\partial_x + \partial_y
+        \end{aligned}
+    \]
+\end{proof}
+
+\section*{Problem 2} %Lee 8-15
+Let $M$ be a smooth manifold, $S\subseteq M$ an embedded submanifold. Given
+$X\in\mathcal{X}(S)$, show that there is a smooth vector field $Y$ on a
+neighborhood of $S$ in $M$ such that $X=Y|_S$. Show that every such vector field
+extends to all of $M$ if and only if $S$ is properly embedded.
+\\
+\begin{proof}
+%TODO write this
+\end{proof}
+
+\section*{Problem 3} %Lee 8-18
+%TODO write this
+
+\end{document}
