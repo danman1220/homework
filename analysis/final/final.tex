@@ -308,10 +308,20 @@ Suppose $\mu(\Omega)<\infty$. Prove that
     \[
         \begin{aligned}
             \|f\|_{L^p} &= \left(\int_{\Omega}|f|^pd\mu\right)^{\frac{1}{p}}\\
-                        &\geq \left(\int_{|f|>M}Md\mu\right)^{\frac{1}{p}}\\
-                        &= \left(M\mu(\{f>M\})\right)^{\frac{1}{p}}\\
-                        &= M^{\frac{1}{p}}(\mu(\{|f|>M\}))^{\frac{1}{p}}
+                        &\geq \left(\int_{|f|>M}M^pd\mu\right)^{\frac{1}{p}}\\
+                        &= \left(M^p\mu(\{f>M\})\right)^{\frac{1}{p}}\\
+                        &= M(\mu(\{|f|>M\}))^{\frac{1}{p}}
         \end{aligned}
     \]
+    We know already that $\lim_{p\to\infty}(\mu(\{|f|>M\}))^{\frac{1}{p}} = 1$,
+    so it follows that
+    \[
+        \lim_{p\to\infty}\|f\|_{L^p} \geq M(1) = M
+    \]
+    Since $M$ was arbitrary, it follows that
+    \[
+        \lim_{p\to\infty}\|f\|_{L^p} = \infty
+    \]
+    as desired.
 \end{proof}
 \end{document}
