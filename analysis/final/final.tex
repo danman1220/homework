@@ -206,4 +206,112 @@ Suppose $\mu(\Omega)<\infty$. Prove that
 \[
     \lim_{p\to\infty} \|f\|_{L^p} = \|f\|_{L^{\infty}}
 \]
+
+\begin{proof}
+    We note first that the trivial case of $\|f\|_{L^{\infty}} = 0$ is clear,
+    since 
+    \[
+        \begin {aligned}
+        \|f\|_{L^{\infty}}=0 &\implies f = 0\ \mu-\textrm{almost everywhere}\\
+                            &\implies \|f\|_{L^p}=0\ \forall p\\
+                            &\implies \lim_{p\to\infty}\|f\|_{L^p} = 0
+\end{aligned}
+    \]
+    Therefore, for the rest of this problem, it is assumed that
+    $\|f\|_{L^{\infty}}>0$.
+
+
+    Suppose first that $\|f\|_{L^{\infty}} < \infty$. Then, we are free to scale
+    $f$ so that $\|f\|_{L^{\infty}}=1$. (This is clear, since
+    \[
+        \lim_{p\to\infty}\|cf\|_{L^p} = c\lim_{p\to\infty}\|f\|_{L^p}
+    \]
+    so
+    \[
+        \lim_{p\to\infty}\|cf\|_{L^p} = \|cf\|_{L^{\infty}}
+        \iff
+        \lim_{p\to\infty}\|f\|_{L^p} = \|f\|_{L^{\infty}}
+    \]
+    and so multiplying $f$ by a constant will not change the equality.)
+
+    So, without loss of generality, let $\|f\|_{L^{\infty}} = 1$.
+    We will show first that
+    \[
+        \lim_{p\to\infty}\|f\|_{L^p} \leq 1
+    \]
+    To do so, we consider the altered function
+    \[
+        \tilde{f}(x) = \begin{cases}
+            f(x), &\textrm{if } f(x) \leq \|f\|_{L^\infty}\\
+            0, &\textrm{if } f(x) > \|f\|_{L^\infty}
+        \end{cases}
+    \]
+    Now, we know that $\mu\{|f| > \|f\|_{L^{\infty}}\} = 0$ by the definition of
+    the $L^{\infty}$ norm, so it follows that $\tilde{f}$ and $f$ differ only on
+    a set of measure zero, and thus are in the same equivalence class in $L^p$
+    for all $p$.
+
+    Now, we have that $\tilde{f} \leq \|f\|_{L^{\infty}} = 1$, and thus
+    $\tilde{f}^p\leq 1$ for all $p\geq 1$. Therefore,
+    \[
+        \begin{aligned}
+            \int_{\Omega}|\tilde{f}(x)|^pd\mu &\leq \int_{\Omega}1d\mu\\
+                                            &=\mu(\Omega)\\
+        \end{aligned}
+    \]
+    which implies that
+    \[
+        \begin{aligned}
+        \|f\|_{L^p} &=
+        \left(\int_{\Omega}|\tilde{f}(x)|^pd\mu\right)^{\frac{1}{p}}\\
+            &\leq (\mu(\Omega))^{\frac{1}{p}}
+        \end{aligned}
+    \]
+    and for $\mu(\Omega)<\infty$, we have that
+    $\lim_{p\to\infty}(\mu(\Omega))^{\frac{1}{p}} = 1$.
+    Thus,
+    \[
+        \lim_{p\to\infty}\|f\|_{L^p} \leq 1
+    \]
+    as desired.
+
+    Now, we wish to show the reverse. That is, we wish to show that
+    \[
+        \lim_{p\to\infty}\|f\|_{L^p} \geq \|f\|_{L^{\infty}}
+    \]
+    To do so, we consider the set $\{|f|>1-\epsilon\}$, which has positive
+    measure for every $\epsilon>0$ by the fact that $\|f\|_{L^{\infty}} = 1$.
+    Thus, we know that
+    \[
+        \begin{aligned}
+            \|f\|_{L^p} &=\left(\int_{\Omega}|f|^pd\mu\right)^{\frac{1}{p}}\\
+                        &\geq
+                        \left(\int_{|f|>1-\epsilon}|1-\epsilon|^pd\mu\right)^{\frac{1}{p}}\\
+                        &=((1-\epsilon)\mu(\{|f|>1-\epsilon\}))^{\frac{1}{p}}
+        \end{aligned}
+    \]
+    Since $\lim_{p\to\infty}((1-\epsilon)\mu(\{|f|>1-\epsilon\}))^{\frac{1}{p}}
+    = 1$, it follows that
+    \[
+        \lim_{p\to\infty}\|f\|_{L^p} \geq 1
+    \]
+    as desired.
+
+    Thus, for $\|f\|_{L^{\infty}} < \infty$, we have that
+    \[
+        \lim_{p\to\infty}\|f\|_{L^p} = \|f\|_{L^{\infty}}
+    \]
+    as desired.
+
+    So, suppose $\|f\|_{L^{\infty}} = \infty$. That is, for each $M>0$,
+    $\mu(\{|f|>M\})>0$. Thus,
+    \[
+        \begin{aligned}
+            \|f\|_{L^p} &= \left(\int_{\Omega}|f|^pd\mu\right)^{\frac{1}{p}}\\
+                        &\geq \left(\int_{|f|>M}Md\mu\right)^{\frac{1}{p}}\\
+                        &= \left(M\mu(\{f>M\})\right)^{\frac{1}{p}}\\
+                        &= M^{\frac{1}{p}}(\mu(\{|f|>M\}))^{\frac{1}{p}}
+        \end{aligned}
+    \]
+\end{proof}
 \end{document}
