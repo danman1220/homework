@@ -328,6 +328,177 @@ Suppose $\mu(\Omega)<\infty$. Prove that
 \newpage
 
 \section*{Problem 3}
+For $n\in\N$, define the $n^{th}$ truncation of a positive measurable function
+$f$ to be
+\[
+    f_n(x) = \begin{cases}
+        f(x), &f(x)\leq n\\
+        n, &f(x)\geq n
+    \end{cases}
+\]
+Prove that 
+\[
+    f\in L^1 \iff \sup_n \|f_n\|_{L^1} < \infty
+\]
 
+\begin{proof}
+We show first that $f_n$ converges pointwise to $f$. This is clear, since
+    for $x$ such that $f(x)<\infty$, there is some $N$ for which $f(x)<N$, and
+    thus $\forall m>N, f_m(x) = f(x)$ by the definition of $f_n(x)$.
+    Furthermore, if $f(x)=\infty$, then it follows that $\forall n, f(x)>n$ and
+    thus $f_n(x) = n$, which tends to infinity as $n$ goes to infinity. Thus,
+    \[
+        \lim_{n\to\infty}f_n(x) = f(x)\ \forall x
+    \]
+
+    Furthermore, the sequence $\{f_n\}$ is monotonically increasing. To see
+    this, we consider three cases:
+    \\
+    First, suppose $x$ is such that $f(x) \leq n$. In that case,
+    \[
+        f_n(x) =
+        f_{n+1}(x) = f(x)
+    \]
+    and thus $f_n(x)\leq f_{n+1}(x)$.
+    \\
+    Second, suppose $x$ is such that $n<f(x)\leq n+1$. In this case, we have
+    that
+    \[
+        \begin{aligned}
+            f_n(x) &= n\\
+                    &<f(x)\\
+                    &=f_{n+1}(x)
+        \end{aligned}
+    \]
+    and so $f_n(x)\leq f_{n+1}(x)$.
+    \\
+    Finally, suppose $x$ is such that $n+1<f(x)$. In this case, we have that
+    \[
+        \begin{aligned}
+            f_n(x) &= n\\
+                    &< n+1\\
+                    &=f_{n+1}(x)
+        \end{aligned}
+    \]
+    and so $f_n(x)<f_{n+1}(x)$ as desired.
+
+    It follows, then, that
+    \[
+        \|f_n\|_{L^1}\leq\|f_{n+1}\|_{L^1}
+    \]
+    for all $n$, since the $L^1$ norm (the integral) preserves orders on
+    positive functions. Therefore,
+    \[
+        \sup_n\|f_n\|_{L^1} = \lim_{n\to\infty}\|f_n\|_{L^1}
+        =\lim_{n\to\infty}\int_{\Omega}f_nd\mu
+    \]
+    applying the monotone convergence theorem yields
+    \[
+        \begin{aligned}
+            \sup_n\|f_n\|_{L^1} &= \lim_{n\to\infty}\int_{\Omega}f_nd\mu\\
+                                &=\int_{\Omega}\lim_{n\to\infty}f_nd\mu\\
+                                &=\int_{\Omega}fd\mu\\
+                                &=\|f\|_{L^1}
+        \end{aligned}
+    \]
+    as desired. Note that this holds even if $\|f\|_{L^1} = \infty$ by the
+    monotone convergence theorem.
+
+    Thus, $f\in L^1$ precisely when $\sup_n\|f_n\|_{L^1}<\infty$, as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 4}
+Let $f$ be a measurable function on $(\Omega,\mathscr{A},\mu)$ which is finite
+$\mu$-almost everywhere, and let $\mu(\Omega)<\infty$. Define
+\[
+    E_n = \{x\in\Omega\ |\ n-1\leq |f(x)|< n\}
+\]
+for $n\in\N$.
+
+Prove that $f\in L^1 \iff \sum_{n=1}^{\infty}n\mu(E_n)<\infty$.
+\\
+\\
+\begin{proof}
+    To begin with, we alter the function $f$ on the set $\{x\ |\ f(x)=\infty\}$
+    to be identically zero on that set. Thus, the new altered function (which we
+    will continue to denote as $f$) is finite everywhere. Since $f$ was only
+    altered on a set of measure zero, this will not affect either side of the
+    equality we are trying to prove.
+
+    We begin by showing that $\|f\|_{L^1}\leq \sum_{n=1}^{\infty}E_n$.
+    To do so, we construct the function
+    \[
+        \phi(x) = \sum_{n=1}^{\infty}n\chi_{E_n}(x)
+    \]
+    Now, it is clear by the definition of $E_n$ that each $x\in\Omega$ belongs to
+    exactly one $E_n$. Furthermore, for $x\in E_n$, we have that
+    \[
+        |f(x)| < n = \phi(x)
+    \]
+    Thus, $\phi(x) \geq |f(x)|$ for all $x$.
+
+    It follows (since integrals preserve inequalities of positive functions)
+    that
+    \[
+        \begin{aligned}
+            \|f\|_{L^1} &= \int_{\Omega}|f|d\mu\\
+                                &< \int_{\Omega}\phi d\mu
+                                &=\int_{\Omega}\sum_{n=1}^{\infty}n\chi_{E_n}
+                                d\mu\\
+                                &=\sum_{n=1}^{\infty}n\mu(E_n)
+        \end{aligned}
+    \]
+    Thus, $\|f\|_{L^1} < \sum_{n=1}^{\infty}n\mu(E_n)$, and so
+    \[
+        \sum_{n=1}^{\infty}n\mu(E_n) <\infty \implies \|f\|_{L^1}<\infty
+    \]
+    as desired.
+    \\
+    \\
+    Now, we will show that $\|f\|_{L^1} \geq \sum_{n=1}^{\infty}(n-1)\mu(E_n)$.
+    To do so, we define
+    \[
+        \psi(x) = \sum_{n=1}^{\infty}(n-1)\chi_{E_n}(x)
+    \]
+    Clearly, we have that for $x\in E_n$,
+    \[
+        |f(x)| \geq n-1 = \psi(x)
+    \]
+    and since this holds for all $x$, we have that $|f| \geq \psi$. Thus, since
+    integrals preserve inequalities of positive functions,
+    \[
+        \begin{aligned}
+            \|f\|_{L^1} &= \int_{\Omega}|f|d\mu\\
+                        &\geq \int_{\Omega}\psi d\mu\\
+                        &=\sum_{n=1}^{\infty}(n-1)\mu(E_n)\\
+                        &=\sum_{n=1}^{\infty}n\mu(E_n) -
+                        \sum_{n=1}^{\infty}\mu(E_n)
+        \end{aligned}
+    \]
+    Now, since the $E_n$ sets partition $\Omega$, we have that
+    \[
+        \begin{aligned}
+            \sum_{n=1}^{\infty}\mu(E_n) &=
+            \mu\left(\bigcup_{n=1}^{\infty}E_n\right)\\
+            &=\mu(\Omega)
+        \end{aligned}
+    \]
+    so it follows that
+    \[
+        \begin{aligned}
+            \|f\|_{L^1} &\geq \sum_{n=1}^{\infty}n\mu(E_n) - \mu(\Omega)\\
+            \implies \|f\|_{L^1}+\mu(\Omega) &\geq \sum_{n=1}^{\infty}n\mu(E_n)
+        \end{aligned}
+    \]
+    Now, since $\mu(\Omega)$ is finite, it is clear that
+    \[
+        \|f\|_{L^1} < \infty \implies \sum_{n=1}^{\infty}n\mu(E_n)
+    \]
+    as desired.
+
+    Thus, $f\in L^1 \iff \sum_{n=1}^{\infty}n\mu(E_n) < \infty$ as desired.
+\end{proof}
 
 \end{document}
