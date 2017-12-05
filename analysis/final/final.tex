@@ -83,7 +83,7 @@ $\mu_n(\Omega)=1$. For every $E\in\mathscr{A}$, define
 \[
     \mu(E) = \sum_{n=1}^{\infty}\frac{\mu_n(E)}{2^n}
 \]
-Give a careful proof that $\mu$ is a measure on $(\omega,\mathscr{A})$ with
+Give a careful proof that $\mu$ is a measure on $(\Omega,\mathscr{A})$ with
 $\mu(\Omega)=1$.
 \\
 \begin{proof}
@@ -124,7 +124,6 @@ $\mu(\Omega)=1$.
             \sum_{i=1}^{\infty}\sum_{j=1}^{\infty}a_{ij} =
             \sum_{j=1}^{\infty}\sum_{i=1}^{\infty}a_{ij}
         \]
-        provided that either sum converges.
     \end{lemma}
     \begin{proof}
         We note first that $a_{ij}$ can be thought of as a function from
@@ -239,7 +238,13 @@ Suppose $\mu(\Omega)<\infty$. Prove that
     \[
         \lim_{p\to\infty}\|f\|_{L^p} \leq 1
     \]
-    To do so, we consider the altered function
+    and then that
+    \[
+        \lim_{p\to\infty}\|f\|_{L^p} \geq 1
+    \]
+
+    First, we prove that $\lim_{p\to\infty}\|f\|_{L^p} \leq 1$. To do so, we
+    consider the altered function
     \[
         \tilde{f}(x) = \begin{cases}
             f(x), &\textrm{if } f(x) \leq \|f\|_{L^\infty}\\
@@ -251,7 +256,7 @@ Suppose $\mu(\Omega)<\infty$. Prove that
     a set of measure zero, and thus are in the same equivalence class in $L^p$
     for all $p$.
 
-    Now, we have that $\tilde{f} \leq \|f\|_{L^{\infty}} = 1$, and thus
+    So, we have that $\tilde{f} \leq \|f\|_{L^{\infty}} = 1$, and thus
     $\tilde{f}^p\leq 1$ for all $p\geq 1$. Therefore,
     \[
         \begin{aligned}
@@ -274,10 +279,11 @@ Suppose $\mu(\Omega)<\infty$. Prove that
         \lim_{p\to\infty}\|f\|_{L^p} \leq 1
     \]
     as desired.
-
-    Now, we wish to show the reverse. That is, we wish to show that
+    \\
+    \\
+    Next, we prove that
     \[
-        \lim_{p\to\infty}\|f\|_{L^p} \geq \|f\|_{L^{\infty}}
+        \lim_{p\to\infty}\|f\|_{L^p} \geq 1
     \]
     To do so, we consider the set $\{|f|>1-\epsilon\}$, which has positive
     measure for every $\epsilon>0$ by the fact that $\|f\|_{L^{\infty}} = 1$.
@@ -287,11 +293,16 @@ Suppose $\mu(\Omega)<\infty$. Prove that
             \|f\|_{L^p} &=\left(\int_{\Omega}|f|^pd\mu\right)^{\frac{1}{p}}\\
                         &\geq
                         \left(\int_{\{|f|>1-\epsilon\}}|1-\epsilon|^pd\mu\right)^{\frac{1}{p}}\\
-                        &=((1-\epsilon)\mu(\{|f|>1-\epsilon\}))^{\frac{1}{p}}
+                        &=((1-\epsilon)^p\mu(\{|f|>1-\epsilon\}))^{\frac{1}{p}}\\
+                        &=(1-\epsilon)(\mu(\{|f|>1-\epsilon\}))^{\frac{1}{p}}
         \end{aligned}
     \]
-    Since $\lim_{p\to\infty}((1-\epsilon)\mu(\{|f|>1-\epsilon\}))^{\frac{1}{p}}
+    Since $\lim_{p\to\infty}(\mu(\{|f|>1-\epsilon\}))^{\frac{1}{p}}
     = 1$, it follows that
+    \[
+        \lim_{p\to\infty}\|f\|_{L^p} \geq (1-\varepsilon)(1)
+    \]
+    and since this holds for any $\epsilon>0$, it follows that
     \[
         \lim_{p\to\infty}\|f\|_{L^p} \geq 1
     \]
@@ -303,8 +314,8 @@ Suppose $\mu(\Omega)<\infty$. Prove that
     \]
     as desired.
 
-    So, suppose $\|f\|_{L^{\infty}} = \infty$. That is, for each $M>0$,
-    $\mu(\{|f|>M\})>0$. Thus,
+    Suppose instead that $\|f\|_{L^{\infty}} = \infty$. That is, for each $M>0$,
+    $\mu(\{|f|>M\})>0$. It follows that
     \[
         \begin{aligned}
             \|f\|_{L^p} &= \left(\int_{\Omega}|f|^pd\mu\right)^{\frac{1}{p}}\\
@@ -342,17 +353,18 @@ Prove that
 \]
 
 \begin{proof}
-We show first that $f_n$ converges pointwise to $f$. This is clear, since
-    for $x$ such that $f(x)<\infty$, there is some $N$ for which $f(x)<N$, and
+We observe first that $f_n$ converges pointwise to $f$. This is clear, since
+    for each $x$ such that $f(x)<\infty$, there is some $N$ for which $f(x)<N$, and
     thus $\forall m>N, f_m(x) = f(x)$ by the definition of $f_n(x)$.
-    Furthermore, if $f(x)=\infty$, then it follows that $\forall n, f(x)>n$ and
+    Furthermore, for each $x$ such that $f(x)=\infty$, it follows that $\forall n, f(x)>n$ and
     thus $f_n(x) = n$, which tends to infinity as $n$ goes to infinity. Thus,
     \[
         \lim_{n\to\infty}f_n(x) = f(x)\ \forall x
     \]
 
-    Furthermore, the sequence $\{f_n\}$ is monotonically increasing. To see
+    The sequence $\{f_n\}$ is also monotonically increasing. To see
     this, we consider three cases:
+    \\
     \\
     First, suppose $x$ is such that $f(x) \leq n$. In that case,
     \[
@@ -360,6 +372,7 @@ We show first that $f_n$ converges pointwise to $f$. This is clear, since
         f_{n+1}(x) = f(x)
     \]
     and thus $f_n(x)\leq f_{n+1}(x)$.
+    \\
     \\
     Second, suppose $x$ is such that $n<f(x)\leq n+1$. In this case, we have
     that
@@ -371,6 +384,7 @@ We show first that $f_n$ converges pointwise to $f$. This is clear, since
         \end{aligned}
     \]
     and so $f_n(x)\leq f_{n+1}(x)$.
+    \\
     \\
     Finally, suppose $x$ is such that $n+1<f(x)$. In this case, we have that
     \[
@@ -427,24 +441,24 @@ Prove that $f\in L^1 \iff \sum_{n=1}^{\infty}n\mu(E_n)<\infty$.
     altered on a set of measure zero, this will not affect either side of the
     equality we are trying to prove.
 
-    We begin by showing that $\|f\|_{L^1}\leq \sum_{n=1}^{\infty}E_n$.
+    We begin by showing that $\|f\|_{L^1}\leq \sum_{n=1}^{\infty}n\mu(E_n)$.
     To do so, we construct the function
     \[
         \phi(x) = \sum_{n=1}^{\infty}n\chi_{E_n}(x)
     \]
     Now, it is clear by the definition of $E_n$ that each $x\in\Omega$ belongs to
-    exactly one $E_n$. Furthermore, for $x\in E_n$, we have that
+    exactly one $E_n$. Furthermore, for $x\in E_n$,
     \[
         |f(x)| < n = \phi(x)
     \]
-    Thus, $\phi(x) \geq |f(x)|$ for all $x$.
+    Thus, $|f(x)| < \phi(x)$ for all $x$.
 
     It follows (since integrals preserve inequalities of positive functions)
     that
     \[
         \begin{aligned}
             \|f\|_{L^1} &= \int_{\Omega}|f|d\mu\\
-                                &< \int_{\Omega}\phi d\mu
+                                &< \int_{\Omega}\phi d\mu\\
                                 &=\int_{\Omega}\sum_{n=1}^{\infty}n\chi_{E_n}
                                 d\mu\\
                                 &=\sum_{n=1}^{\infty}n\mu(E_n)
@@ -477,7 +491,7 @@ Prove that $f\in L^1 \iff \sum_{n=1}^{\infty}n\mu(E_n)<\infty$.
                         \sum_{n=1}^{\infty}\mu(E_n)
         \end{aligned}
     \]
-    Now, since the $E_n$ sets partition $\Omega$, we have that
+    Now, since the sets $E_n$ partition $\Omega$, we have that
     \[
         \begin{aligned}
             \sum_{n=1}^{\infty}\mu(E_n) &=
@@ -494,11 +508,145 @@ Prove that $f\in L^1 \iff \sum_{n=1}^{\infty}n\mu(E_n)<\infty$.
     \]
     Now, since $\mu(\Omega)$ is finite, it is clear that
     \[
-        \|f\|_{L^1} < \infty \implies \sum_{n=1}^{\infty}n\mu(E_n)
+        \|f\|_{L^1} < \infty \implies \sum_{n=1}^{\infty}n\mu(E_n) < \infty
     \]
     as desired.
 
     Thus, $f\in L^1 \iff \sum_{n=1}^{\infty}n\mu(E_n) < \infty$ as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 5}
+Let $D_A$ be a dense subset of a normed space $X$ with norm $\|\cdot\|_1$. Let
+$Y$ be a Banach space with norm $\|\cdot\|_2$, and let $A$ be a linear operator
+with domain $D_A$ and codomain $Y$ such that for some $C<\infty$,
+\[
+    \|Ax\|_2 \leq C\|x\|_1\ \forall x\in D_A 
+\]
+Prove that there exists a unique linear bounded operator $\tilde{A}:X\to Y$ such
+that $\tilde{A}|_{D_A} = A$. Give an estimate for $\|\tilde{A}\|$.
+\\
+\\
+\begin{proof}
+    To begin with, we note that for each $x\in X$, there exists
+    some sequence $\{x_k\}$ in $D_A$ that converges to $x$ (since $D_A$ is dense
+    in $X$). So, define a candidate function $\tilde{A}$ to be
+    \[
+        \tilde{A}(x) = \lim_{k\to\infty}A(x_k)
+    \]
+    where $\{x_k\}$ is some sequence converging to $x$.
+
+    Now, we must prove that such an $\tilde{A}$ is well-defined, linear,
+    bounded, and unique.
+    \\
+    \\
+    To show that $\tilde{A}$ is well-defined, we need to show that
+    $\lim_{k\to\infty}A(x_k)$ exists for every convergent sequence $x_k\to x$,
+    and that such a limit does not depend upon the choice of convergent sequence
+    chosen.
+
+    So, let $\{x_k\}$ be a sequence in $D_A$ such that $x_k\to x$ for $x\in X$.
+    Now, we know that $\{x_k\}$ is Cauchy, since it converges. Since $A$ is
+    bounded, it follows that the sequence $A(x_k)$ is Cauchy as well. To see
+    this, fix $\epsilon>0$, and choose an $N$ such that
+    $\|x_m-x_n\|_1<\frac{\epsilon}{C}$ for all $m,n >N$. Then, we have that
+    for all $m,n >N$,
+    \[
+        \begin{aligned}
+            \|Ax_m -Ax_n\|_2 &= \|A(x_m-x_n)\|_2\\
+                            &\leq C\|x_m-x_n\|_1\\
+                            &<C\frac{\epsilon}{C}\\
+                            &=\epsilon
+        \end{aligned}
+    \]
+    Thus, $\|Ax_m-Ax_n\|_2 < \epsilon$ for all $m,n>N$, so $\{Ax_k\}$ is a Cauchy
+    sequence. Since $Y$ is complete, this sequence must have a limit, and so the
+    limit $\lim_{k\to\infty}Ax_k$ is well defined.
+
+    Suppose, then, that both $\{x_k\}$ and $\{y_k\}$ both converge to $x$.
+    Then, we have that
+    \[
+        \begin{aligned}
+            \|Ax_k-Ay_k\|_2 &= \|A(x_k-y_k)\|_2\\
+                        &\leq C\|x_k-y_k\|_1\\
+                        &= C\|(x_k-x) + (x-y_k)\|_1\\
+                        &\leq C(\|x_k-x\|_1 + \|y_k-x\|_1)
+        \end{aligned}
+    \]
+    and since both $\|x_k-x\|_1$ and $\|y_k-x\|_1$ go to zero as $k$ goes to
+    infinity, it follows that $\|Ax_k -Ay_k\|_2$ goes to zero as well.
+    Thus,
+    \[
+        \lim_{k\to\infty}Ax_k = \lim_{k\to\infty}Ay_k
+    \]
+    and so $\tilde{A}(x)$ is well defined.
+    \\
+    \\
+    Next, we wish to show $\tilde{A}$ is linear.
+    To do so, consider $\tilde{A}(\alpha x + \beta y)$ for $\alpha,\beta\in\R$
+    and $x,y\in X$.
+    Now, if $\{x_k\}$ is a sequence converging to $x$, and $\{y_k\}$ is a
+    sequence converging to $y$, we can define the sequence $\{\alpha x_k + \beta
+    y_k\}$, which converges to $\alpha x + \beta y$ by algebraic limit theorems.
+    Thus, we have that
+    \[
+        \begin{aligned}
+            \tilde{A}(\alpha x+\beta y) &= \lim_{k\to\infty}A(\alpha x_k +\beta
+            y_k)\\
+            &=\lim_{k\to\infty}(\alpha Ax_k + \beta Ay_k)\\
+            &=\alpha\lim_{k\to\infty}Ax_k + \beta\lim_{k\to\infty}Ay_k\\
+            &=\alpha\tilde{A}x + \beta\tilde{A}y
+        \end{aligned}
+    \]
+    and so $\tilde{A}$ is linear.
+    \\
+    \\
+    Next, we wish to show that $\tilde{A}$ is bounded. To do so, we note two
+    important properties of limits. First, limits preserve orderings (by the
+    Order Limit Theorem), and second, limits pass through norms (by the
+    continuity of the norm).
+    
+    Then, we have that
+    \[
+        \begin{aligned}
+            \|\tilde{A}x\|_2 &= \|\lim_{k\to\infty}Ax_k\|_2\\
+                    &=\lim_{k\to\infty}\|Ax_k\|_2\\
+                    &\leq\lim_{k\to\infty}C\|x_k\|_1\  &(\textrm{since
+                    }\|Ax_k\|_2\leq C\|x_k\|_1)\\
+                    &=C\|\lim_{k\to\infty}x_k\|_1\\
+                    &=C\|x\|_1
+        \end{aligned}
+    \]
+    and so $\|\tilde{A}x\|_2\leq C\|x\|_1$ for all $x$, and $\tilde{A}$ is bounded,
+    as desired.
+    \\
+    \\
+    Finally, we show that such a $\tilde{A}$ is unique. Suppose that $A'$ were
+    some other bounded linear extension of $A$. Now, since both $\tilde{A}$ and
+    $A'$ are linear and bounded, they are continuous. Namely, they preserve
+    limits. So, for each $x\in X$, let $\{x_k\}$ be a sequence in $D_A$
+    converging to $x$. Now, since $A'$ and $\tilde{A}$ agree on $D_A$, we have
+    that
+    \[
+        \tilde{A}x_k = A'x_k
+    \]
+    for all $x_k$. Then, taking the limit of both sides yields
+    \[
+        \tilde{A}x = \lim_{k\to\infty}\tilde{A}x_k = \lim_{k\to\infty}A'x_k =
+        A'x
+    \]
+    and so $\tilde{A}$ and $A'$ agree for all $x\in X$, and thus $\tilde{A}=A'$.
+    Thus, such an extension is unique.
+    \\
+    \\
+    Finally, we observed in the proof of boundedness that $\|Ax\|_2\leq C\|x\|_1$
+    for all $x$. Thus, it follows immediately by the definition of operator norm
+    that
+    \[
+        \|A\|_{X\to Y} \leq C
+    \]
+    which provides an estimate for the operator norm of $A$.
 \end{proof}
 
 \end{document}
