@@ -24,6 +24,7 @@
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
 \usepackage{mathrsfs}
+\usepackage{tikz-cd}
 
 \usepackage[margin=1in]{geometry}
 
@@ -85,13 +86,13 @@ diffeomorphism, and compute $dFX$ and $dFY$ for
 \]
 
 \begin{proof}
-To begin with, we observe that so long as $x\neq 0$, $F$ is in fact smooth.
+    To begin with, we observe that so long as $x\neq 0$, $F$ is in fact smooth.
     Furthermore, it has an inverse
     \[
         F^{-1}(x,y) = (\sqrt{\frac{x}{y}},\sqrt{xy})
     \]
     which is also smooth on $M$, and defined for all of $M$.
-    
+
     Furthermore, we can calculate its Jacobian:
     \[
         J(F) = dF =
@@ -133,11 +134,168 @@ neighborhood of $S$ in $M$ such that $X=Y|_S$. Show that every such vector field
 extends to all of $M$ if and only if $S$ is properly embedded.
 \\
 \begin{proof}
-%TODO write this
-    %lemma 5-34 for part 2
+    Recall that a vector field $X\in\mathcal(X)(S)$ is a linear derivation of
+    the algebra $C^{\infty}(M)$ over $\R$. That is, $X$ is a linear map
+    $X:C^{\infty}(M)\to C^{\infty}(M)$ such that
+    \[
+        X(fg) = X(f)g + fX(g)
+    \]
+
+    Now, from an earlier assignment, we know that for $S\subseteq M$ an embedded
+    submanifold of a manifold $M$, we have the existence of extensions of
+    $C^{\infty}$ functions on $S$ to $C^{\infty}$ functions on the neighborhood
+    $U\subseteq M$ of $S$. That is, the restriction function $r:C^{\infty}(U)\to
+    C^{\infty}(S)$ has a section $e:C^{\infty}(S)\to C^{\infty}(U)$ such that
+    $r\circ e = id$. Thus, we have the following diagram:
+    \[
+        \begin{tikzcd}
+            C^{\infty}(S)\arrow{r}{X} &C^{\infty}(S)\arrow{d}{e}\\
+            C^{\infty}(U)\arrow{u}{r} &C^{\infty}(U)
+        \end{tikzcd}
+    \]
+    Now, we define $Y$ to be the linear map $Y:C^{\infty}(U)\to C^{\infty}(U)$
+    that makes the diagram commute. That is:
+    \[
+        \begin{tikzcd}
+            C^{\infty}(S)\arrow{r}{X} &C^{\infty}(S)\arrow{d}{e}\\
+            C^{\infty}(U)\arrow{u}{r}\arrow[dashed]{r}{Y} &C^{\infty}(U)
+        \end{tikzcd}
+    \]
+    We note that such a $Y$ is not unique, since the extension $e$ is not
+    uniquely defined. In fact, all extensions differ by an element of
+    $C^{\infty}(U)/{C^{\infty}(S)}$.
+
+    $Y$ is clearly linear, since it is the composition of linear arrows, so all
+    that we need to show is that $Y$ is a derivation. First, we observer that
+    since $e$ is a section of $r$, it follows that $X\circ r = r\circ Y$. That
+    is, the diagram
+    \[
+        \begin{tikzcd}
+            C^{\infty}(S)\arrow{r}{X} &C^{\infty}(S)\arrow[shift left]{d}{e}\\
+            C^{\infty}(U)\arrow{u}{r}\arrow[dashed]{r}{Y}
+            &C^{\infty}(U)\arrow[shift left]{u}{r}
+        \end{tikzcd}
+    \]
+    commutes. We note also that the restriction map $r$ is multiplicative. That
+    is, $r(fg) = r(f)r(g)$. 
+
+    Let $f,g\in
+    C^{\infty}(U)$. We calculate
+    \[
+        \begin{aligned}
+            Y(fg) &= e\circ X\circ r(fg)\\
+                    &= e\circ X(r(f)r(g))\\
+                    &= e(X(r(f))r(g) + r(f)X(r(g)))\\
+                    &= e(r(Y(f))r(g) +r(f)r(Y(g))\\
+                    &= (e\circ r)(Y(f)g + fY(g))
+        \end{aligned}
+    \]
+    so if $e\circ r$ is the identity on $Y(f)g + fY(g)$, then $Y$ is a
+    derivation. However, we recall that $e$ is only unique up to a factor of
+    $C^{\infty}(U)/{C^{\infty}(S)}$. So, for each $f\in C^{\infty}(U)$, we
+    define $e_f$... %TODO finish
 \end{proof}
 
 \section*{Problem 3} %Lee 8-18
 %TODO write this
+
+\section*{Problem 4} %Lee 8-19
+Show that $\R^3$ is a Lie algebra with the cross product.
+\\
+\begin{proof}
+    The cross product is, by definition, bilinear, so it suffices to check that the
+    cross product satisfies the Jacobi identity.
+
+    We proceed to calculate the Jacobi identity directly. Now, we know that
+    \[
+        ((A\times B)\times C)^i = \epsilon^i_{jk}\epsilon^j_{mn}A^mB^nC^k
+    \]
+    where $\epsilon^i_{jk}$ is the Levi-Civita symbol.
+    So
+    \[
+        \begin{aligned}
+            ((A\times B)\times C + (B\times C)\times A + (C\times A)\times B)^i &=
+            \epsilon^i_{jk}\epsilon^j_{mn}(A^kB^mC^n + B^kC^mA^n + C^kA^mB^n)\\
+            &=T^i_{kmn}V^{kmn}
+        \end{aligned}
+    \]
+    where $T^i_{kmn}= \epsilon^i_{jk}\epsilon^j_{mn}$ and $V^{kmn} = A^kB^mC^n +
+    B^kC^mA^n + C^kA^mB^n$.
+
+    Now, $\epsilon^i_{jk}\epsilon^j_{mn} = T^i_{kmn}$is a symbol of rank $(1,3)$ whose
+    components can be calculated directly. It is easy to see that this symbol is
+    antisymmetric in the first and last two components. Furthermore, the only
+    nonzero terms (up to antisymmetry) is $T^i_{kki} = 1$. Thus
+    \[
+        \begin{aligned}
+            ((A\times B)\times C + (B\times C)\times A + (C\times A)\times B)^i &=
+            T^i_{kmn}V^{kmn}\\
+            &=T^i_{kki}V^{kki} + T^i_{kik}V^{kik} &\textrm{for fixed }i,k\\
+            &=T^i_{kki}V^{kki} - T^i_{kki}V^{kki} &\textrm{by antisymmetry of
+            }T\\
+            &=0
+        \end{aligned}
+    \]
+    as desired.
+
+    Thus, the cross product is a bilinear map that satisfies the Jacobi
+    identity, and $\R^3$ with this product is a Lie algebra.
+\end{proof}
+
+\section*{Problem 5} %Lee 8-20
+Let $A\subseteq \mathcal{X}(\R^3)$ be the subspace spanned by the vector fields
+\[
+    \begin{aligned}
+        X &= y\partial_z - z\partial_y\\
+        Y &= z\partial_x - x\partial_z\\
+        Z &= x\partial_y - y\partial_x\\
+    \end{aligned}
+\]
+Show that $A$ is a Lie subalgebra of $\mathcal{X}(\R^3)$.
+\\
+\begin{proof}
+    We note first that this defines a two-dimensional distribution on $\R^3$,
+    since for all points $(x,y,z)$ for which $z\neq 0$, we have that
+    $Z = \frac{x}{z}X + \frac{y}{z}Y$, and similarly if $z=0$, we have that
+    $-X = \frac{y}{x}Y + \frac{z}{x}Z$. 
+
+    So, all we need to check is that this distribution is involutive.
+    Furthermore, since $[X,X]=0$ for all $X$, it suffices to only check that for
+    $X,Y$ that span the distribution, $[X,Y]$ is in the distribution.
+
+    So, since $X$ and $Y$ are linearly independent for $z\neq 0$, they span the
+    distribution for all $z\neq 0$. Now, we can calculate
+    \[
+        \begin{aligned}
+            {[}X,Y{]}^i &= X^j\partial_jY^i - Y^j\partial_jX^i\\
+            [X,Y]^x &= X^j\partial_jY^x - Y^j\partial_jX^x\\
+                    &= X^j\partial_jz - 0\\
+                    &= X^z = y\\
+                    \\
+            [X,Y]^y &= X^j\partial_jY^y - Y^j\partial_jX^y\\
+                    &= 0 - Y^j\partial_j(-z)\\
+                    &= Y^z = -x\\
+                    \\
+            [X,Y]^z &= X^j\partial_jY^z - Y^j\partial_jX^z\\
+                    &= X^j\partial_j(-x) - Y^j\partial_j(y)\\
+                    &=-X^x - Y^y = 0
+        \end{aligned}
+    \]
+    Thus, ${[}X,Y{]} = y\partial_x - x\partial_y = -Z$, which is in the
+    distribution, so the distribution is involutive for $z\neq 0$. However, the
+    exact same calculation on ${[}Y,Z{]}$ by permuting the indices reveals that
+    ${[}Y,Z{]} = -X$, and so the distribution is involutive.
+
+    Thus, the subspace $A$ is closed under the Lie bracket, and is a Lie
+    subalgebra of $\mathcal{X}(\R^3)$
+\end{proof}
+
+\section*{Problem 6}
+Construct a non-vanishing vector field on a general odd-dimensional sphere.
+\\
+\\
+\begin{proof}
+    Let $S^{2n-1}$ be embedded in $\C^n$.
+\end{proof}
 
 \end{document}
