@@ -192,8 +192,22 @@ extends to all of $M$ if and only if $S$ is properly embedded.
     \]
     so if $e\circ r$ is the identity on $Y(f)g + fY(g)$, then $Y$ is a
     derivation. However, we recall that $e$ is only unique up to a factor of
-    $C^{\infty}(U)/{C^{\infty}(S)}$. So, for each $f\in C^{\infty}(U)$, we
-    define $e_f$... %TODO finish
+    $C^{\infty}(U)/{C^{\infty}(S)}$. So, for each $fg\in C^{\infty}(U)$, we
+    define $q_{fg} = f(eX(rg)) + g(eX(rf)) - er(f(eX(rg)) + g(eX(rf)))$ i.e. the
+    correction factor for the Leibniz rule. Then, redefine $Y$ to be
+    \[
+        Y(fg) = eXr(fg) + q_{fg}
+    \]
+
+    Clearly, $q$ is in $C^{\infty}(U)/{C^{\infty}(S)}$, since $q$ restricted to
+    $X$ is the correction factor for the Leibniz rule for $X$, and since $X$
+    already satisfies the Leibniz rule, $q$ vanishes on $S$.
+    
+    With this correction, $Y$ is indeed a linear derivation, and is thus a
+    smooth vector field.
+
+    Now, if $S$ is properly embedded, we can take $U$ to be all of $M$, and the
+    vector field $Y$ extends to all of $M$.
 \end{proof}
 
 \section*{Problem 3} %Lee 8-18
@@ -268,7 +282,9 @@ we know that $X$ and $Y$ are $F$-related, and $V$ and $0$ are $F$-related, so
     \]
     Thus, $V(X(f\circ F)) = 0$, which means that around a point $p$, $X(f\circ
     F) = C_p$ for some constant $C_p$. Now, for points $p$ and $q$ on the same
-    (connected) fiber, it must be that $C_p=C_q$, and thus $dF_p(X_p)
+    (connected) fiber, there is a path $\gamma$ connecting them, whose
+    derivative defines a vertical vector field in a neighborhood of $\gamma$.
+    For this vector field, it must be that $C_p=C_q$, and thus $dF_p(X_p)
     =dF_q(X_q)$ and by the previous result, $X$ is a lift of some vector field
     on $N$.
 \end{proof}
@@ -520,13 +536,25 @@ $Y=x\partial_y + y\partial_x$.
     \]
     which has solution
     \[
-        x(t) = S\exp(Jt)S^{-1}x_0
-            = S
+        \begin{aligned}
+            x(t) &= S\exp(Jt)S^{-1}x_0\\
+            &= S
             \begin{bmatrix}
                 \exp(-t)&0\\
                 0&\exp(t)
             \end{bmatrix}
-            S^{-1}x_0
+            S^{-1}x_0\\
+        &=\frac{1}{2}\begin{bmatrix}
+            \exp(-t)+\exp(t) &-\exp(-t)+\exp(t)\\
+            -\exp(-t)+\exp(t) &\exp(-t)+\exp(t)
+        \end{bmatrix}
+            x_0
+        \end{aligned}
+    \]
+    with flow
+    \[
+        \theta(p,t) = \frac{1}{2}((\exp(-t)+\exp(t))p_x + (-\exp(-t)+\exp(t))p_y,
+                    (-\exp(-t)+\exp(t))p_x + (\exp(-t)+\exp(t))p_y)
     \]
 \end{proof}
 
@@ -535,7 +563,17 @@ Prove the escape lemma.
 \\
 \\
 \begin{proof}
+Suppose for a contradiction that $\gamma$ is a maximal integral curve of a
+    vector field $V$ whose domain has a finite least upper bound $b$, but there
+    exists a $t_0$ such that $\gamma([t_0,b))$ is contained in a compact subset
+    $C$ of $M$.
+    
+    In particular, we know that on $C$, $V$ satisfies the uniform time lemma,
+    and so $\gamma$ cannot be maximal, since one could always flow from
+    $\gamma(b-\epsilon)$ further than $\epsilon$ (for small enough $\epsilon$),
+    which would yield an integral curve that is larger than $\gamma$.
 
+    Thus, $\gamma([t_0,b))$ is not in a compact subset of $M$ for all $t_0<b$.
 \end{proof}
 
 \section*{Problem 10}
@@ -544,7 +582,18 @@ manifold.
 \\
 \\
 \begin{proof}
+Let $p$ and $q$ be distinct points on $M$. We wish to find a diffeomorphism $F$
+that sends $p$ to $q$. Now, since $M$ is connected, there exists a smooth curve
+    $\gamma$ with $\gamma(0)=p$ and $\gamma(1)=q$. This is an integral curve of
+    the vector field $\dot{\gamma}$ defined on the image of $\gamma$, and by an
+    earlier result, has an extension $X$ to a neighborhood $U$ of $\gamma$.
+    Furthermore, multiplying such a vector field by a smooth bump can guarantee
+    that $X$ is compactly supported.
 
+    Then, it follows from Theorem 9.16 that $X$ is complete, and so its flow
+    defines a one-parameter group of diffeomorphisms. Specifically, for
+    $\theta(p,t)$ the flow of $X$, $\theta(p,1)$ is a diffeomorphism that takes
+    $p$ to $q$ (since $\gamma$ is an integral curve of $X$) as desired.
 \end{proof}
 
 \section*{Problem 11}
@@ -569,10 +618,10 @@ the origin.
     but
     \[
         \begin{aligned}
-            [\tilde{V},W]^x &= \tilde{V}W^x - W\tilde{V}^x\\
+            {[}\tilde{V},W{]}^x &= \tilde{V}W^x - W\tilde{V}^x\\
                             &= 0\\
             \\
-            [\tilde{V},W]^y &= \tilde{V}W^y - W\tilde{V}^y\\
+            {[}\tilde{V},W{]}^y &= \tilde{V}W^y - W\tilde{V}^y\\
                             &= -1\neq 0
         \end{aligned}
     \]
@@ -591,7 +640,33 @@ Compute the flows and verify they do not commute.
 \\
 \\
 \begin{proof}
-    
+    We've already calculated the flows for $X$ and $Y$, which are
+    \[
+        \begin{aligned}
+            \theta(p,t) &= (\exp(t)p_x, \exp(-t)p_y)\\
+            \psi(p,t) &= \frac{1}{2}((\exp(-t)+\exp(t))p_x + (-\exp(-t)+\exp(t))p_y,
+                    (-\exp(-t)+\exp(t))p_x + (\exp(-t)+\exp(t))p_y)\\
+                    &= (\cosh(t)p_x + \sinh(t)p_y,\sinh(t)p_x+\cosh(t)p_y)
+        \end{aligned}
+    \]
+    Now, we will flow $(1,1)$ along $\theta$, then $\psi$, which yields
+    \[
+        \begin{aligned}
+            \theta((1,1),1) &= (e^{-1},e)\\
+            \psi((e^{-1},e),1) &= (\cosh(1)e^{-1} +
+            \sinh(1)e,\sinh(1)e^{-1}+\cosh(1)e)
+        \end{aligned}
+    \]
+    but flowing first on $\psi$ and then on $\theta$ yields
+    \[
+        \begin{aligned}
+            \psi((1,1),1) &= (\cosh(1)+\sinh(1),\sinh(1)+\cosh(1))\\
+                        &=  (e,e)\\
+            \theta((e,e),1) &= (e^{-1}e,e^2)\\
+                            &= (1,e^2)
+        \end{aligned}
+    \]
+    and so the flows do not commute.
 \end{proof}
 
 \section*{Problem 13}
@@ -627,7 +702,7 @@ Show that this is equivalent to $[X,Y] = 0$.
     We can calculate the Lie bracket
     \[
         \begin{aligned}
-            {[}X,y{]} &= (XY^j-YX^j)\partial_j\\
+            {[}X,Y{]} &= (XY^j-YX^j)\partial_j\\
                     &= 0\partial_x + 0\partial_y + (Xh-Yg)\partial_z\\
                     &= \partial_xh + g\partial_zh - (\partial_yg +
                     h\partial_zg)\partial_z\\
