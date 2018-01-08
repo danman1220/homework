@@ -1,0 +1,322 @@
+\documentclass[12pt,reqno]{amsart}
+\usepackage{amssymb}
+\usepackage{amscd}
+\usepackage{amsxtra}
+\usepackage[mathscr]{eucal}
+
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\textwidth}{16.5cm}
+\setlength{\topmargin}{0.35cm}
+\setlength{\textheight}{8.5in}
+\renewcommand{\baselinestretch}{1.33}
+
+\pagestyle{plain}
+
+\newtheorem*{definition}{Definition}
+\newtheorem*{statement}{Statement}
+
+\begin{document}
+\title[]{Math 220A: Final Examination\\
+        December 12, 2017\\
+        Daniel Halmrast}
+\maketitle
+\large
+\section*{Problem 1}
+\subsection*{Part i}
+Show that a finite group $G$ with a non-trivial cyclic Sylow-2 subgroup has a
+subgroup of index $2$.
+\\
+\begin{proof}
+    Let $P_2$ be a non-trivial cyclic Sylow-2 subgroup of $G$, with generator
+    $x$. Since $P_2$ is a cyclic Sylow-2 subgroup of $G$, there exists some
+    natural number $\alpha$ such that $|x| = 2^{\alpha}$.
+
+    From Cayley's theorem, we know that there exists an embedding $\rho$ of $G$
+    into the symmetric group $S_{|G|}$. Furthermore, it is easily shown that
+    $\rho(x)$ is an odd permutation. This is evident, since the order of
+    $\rho(x)$ is $2^{\alpha}$, and $\rho(x)$ consists of exactly
+    $\frac{|G|}{2^{\alpha}} = r$ disjoint $2^{\alpha}$-cycles. Since $r$ is odd (since
+    $\alpha$ is the largest power such that $2^{\alpha}$ divides $|G|$), it
+    follows that $\rho(x)$ is the product of $r$ disjoint odd cycles, and is
+    odd itself. Thus, $\rho(x)\not\in A_{|G|}$,
+    and therefore $\rho(G)\not\leq A_{|G|}$.
+
+    I assert that exactly half of $\rho(G)$ is contained in $A_{|G|}$. To see
+    this, consider the sets $T_1 = \rho(G)\cap A_{|G|}$ and $T_2 =
+    \rho(G)\setminus T_1$. Clearly, all elements of $T_1$ are even permutations, and
+    all elements of $T_2$ are odd permutations. Now, consider the function $l_x:T_1\to T_2$
+    given by $l_x(\tau) = \rho(x)\tau$. This function is well-defined, since
+    multiplying an even permutation (an element of $T_1$) by an odd permutation
+    (namely, $\rho(x)$) yields an odd permutation (an element of $T_2$).
+    Furthermore, $l_x$ is clearly invertible (via
+    left-multiplication by $\rho(x)^{-1}$) to a function from $T_2$ to $T_1$,
+    and thus is a bijection between $T_1$ and $T_2$
+
+    Therefore, $|\rho(G)\cap A_{|G|}| = \frac{|\rho(G)|}{2}$, and since $\rho$ is
+    injective, it follows that
+    \[
+    |\rho^{-1}(\rho(G)\cap A_{|G|})| = |\rho(G)\cap A_{|G|}| =
+    \frac{|\rho(G)|}{2} = \frac{|G|}{2}
+    \]
+    And thus, Lagrange's theorem guarantees that the index of
+    $\rho^{-1}(\rho(G)\cap A_{|G|})$ is $2$, as desired.
+\end{proof}
+
+\subsection*{Part ii}
+Suppose in addition that $|G| = 2^mr$, where $2$ does not divide $r$. By
+induction on $m$, show that $G$ contains a normal subgroup of order $r$.
+\\
+\begin{proof}
+    This proof will induct on $m$. The base case of $m=1$ follows immediately.
+    From part i, we know that $G$ has a subgroup of index $2$, with
+    order $\frac{|G|}{2} = r$. Since the index of this subgroup is $2$, it is
+    normal in $G$, and is a normal subgroup of order $r$, as desired. 
+
+    Now, suppose the theorem holds for all $k\leq m$, and let $|G| = 2^{m+1}r$. 
+    We know that $G$ has a (normal) subgroup $H$ of index $2$ from part i, and
+    so $H$ has order $2^mr$. By induction, then, $H$ has a normal subgroup $M$ of order
+    $r$. Since $H$ has index $2$, it follows that $M$ is normal in $G$ as well,
+    as desired.
+    %TODO finish this
+\end{proof}
+
+\newpage
+
+\section*{Problem 2}
+\subsection*{Part i}
+Give an example of a group that is not soluble.
+\\
+\begin{proof}
+    The simple group of order 168 is not Abelian, and is thus not soluble.
+\end{proof}
+
+\subsection*{Part ii}
+Give an example with proof of a soluble group which is not nilpotent.
+\\
+\begin{proof}
+The dihedral group $D_3$ of the triangle is soluble, but not nilpotent. To see
+    that this group is soluble, we consider the normal chain
+    \[
+        D_3 \geq R_3 \geq 1
+    \]
+    where $R_3$ is the subgroup of rotations of the triangle. Since $D_3$ has
+    six elements, and $R_3$ has three, $R_3$ has index $2$, and is thus normal
+    in $D_3$. Furthermore, the group $D_3/{R_3}$ has order $\frac{6}{3}=2$, and
+    is therefore Abelian. Finally, we observe that $R_3/1 = R_3$ is Abelian as
+    well. Clearly, all the factor groups of this normal chain are Abelian, and
+    so $D_3$ is soluble.
+
+    However, $D_3$ is not nilpotent. To see this, we calculate the lower central
+    series for $D_3$. Recursively, this is defined as
+    \[
+        \begin{aligned}
+        \gamma_1 = D_3\\
+            \gamma_{i+1} = [\gamma_i,D_3]
+        \end{aligned}
+    \]
+    Now, $\gamma_2$ clearly contains $R_3$. To see this, we note that
+    \[
+        (123) = (132)(12)(132)^{-1}(12)^{-1}
+    \]
+    and since $(123)$ generates $R_3$, it follows that $R_3\leq \gamma_2$.
+    Since $\gamma_3 = [\gamma_2,D_3]$, and since $(132)\in\gamma_2$, it follows
+    that
+    \[
+        (123) = (132)(12)(132)^{-1}(12)^{-1}
+    \]
+    is an element of $[\gamma_2,D_3]$, and thus $R_3\leq \gamma_3$. Continuing
+    this argument shows that for any $\gamma_i$, we have that
+    \[
+        R_3\leq \gamma_i
+    \]
+    and since the lower central series never terminates in a $1$, it must be
+    that $D_3$ is not nilpotent.
+\end{proof}
+
+\subsection*{Part iii}
+Suppose that a group $G$ has a composition series, and that $H$ is normal in
+$G$. Show that $G$ has a composition series one of whose terms is $H$.
+\\
+\begin{proof}
+    We know that any two normal chains of a group $G$ have isomorphic
+    refinements. Thus, the normal chain
+    \[
+        G\geq H\geq 1
+    \]
+    has a refinement isomorphic with a refinement of the composition series for
+    $G$. But since the composition series for $G$ is a composition series, it is
+    isomorphic with its refinements. Therefore, the normal chain $G\geq H\geq 1$
+    has a refinement isomorphic to the composition series for $G$. Such a
+    refinement, then, is a composition series for $G$.
+
+    Thus, $G\geq H\geq 1$ can be refined to a composition series for $G$, which
+    necessarily has $H$ as one of its terms.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3}
+Suppose that a group $G$ has three distinct composition series $G\geq H_1\geq
+1$, $G\geq H_2\geq 1$, and $G\geq H_3\geq 1$.
+
+\subsection*{Part i}
+Show that the six groups $H_1,H_2,H_3,G/{H_1},G/{H_2}$, and $G/{H_3}$ are all
+isomorphic.
+\\
+\begin{proof}
+Since each series given is a composition series, it follows that the quotient
+    groups $G/{H_i}$ are simple for $i\in\{1,2,3\}$. Now, consider the canonical
+    quotient map $q:G\to G/{H_i}$. Since $G/{H_i}$ is simple, and $H_j$ is
+    normal in $G$, it follows that $q(H_j)$ is normal in $G/{H_i}$, and thus
+    $q(H_j)$ is either $1$ or $G/{H_i}$.
+
+    Suppose $q(H_j) = 1$. Then, it must be that $H_j\leq H_i$. Since $H_j$ is
+    normal in $G$, it must also be normal in $H_i$. However, $H_i/1=H_i$ is a
+    factor group of the composition series, and is simple. So, $H_j=H_i$ or
+    $H_j=1$. Clearly, $H_j\neq 1$, so it must be that $H_j=H_i$.
+    Conversely, if $H_j=H_i$, then trivially $q(H_j)=1$. Thus, $q(H_j)=1$
+    precisely when $H_i=H_j$ (i.e. when $i=j$).
+
+    Now, suppose $q(H_j)=G/{H_i}$. This defines a surjection from $H_j$ to
+    $G/{H_i}$. Since $H_j$ is simple, the kernel of this surjection must be
+    trivial. Therefore, $q$ restricted to $H_j$ is actually an isomorphism
+    between $H_j$ and $G/{H_i}$. Thus, $H_j\cong G/{H_i}$ for $i\neq j$. It
+    follows immediately, then, that each of the six groups are isomorphic to
+    each other.
+\end{proof}
+
+\subsection*{Part ii}
+Show that $G=\langle H_1,H_2\rangle$.
+\\
+\begin{proof}
+    Observe first that $H_1$ and $H_2$ are both simple. Now, the subgroup $H_1\cap
+    H_2$ is normal in $H_1$, since $H_2$ is normal in $G$. Thus, $H_1\cap H_2 =
+    1$. The isomorphism theorems tell us, then, that
+    \[
+        H_1H_2/{H_2}\cong H_1
+    \]
+    and from part i, we have that $H_1\cong G/{H_2}$. Thus, $G/{H_2}\cong
+    H_1H_2/{H_2}$, and the correspondence theorem guarantees that $G\cong
+    H_1H_2$. Now, since $H_1H_2\leq \langle H_1,H_2\rangle$, it follows that
+    $\langle H_1,H_2\rangle = G$ as desired.
+\end{proof}
+
+\subsection*{Part iii}
+Show $H_3$ is Abelian.
+\\
+\begin{proof}
+    Consider the center $Z(H_3)$. We know that
+    \[
+        Z(H_3) = Z(G/H_3) = Z(G)/H_3
+    \]
+    and so it must be that $Z(G)\geq H_3$. However, since $Z(G)$ is normal, and
+    $G/H_3$ is simple, either $Z(G) = H_3$ or $Z(G) = G$. Clearly, $Z(G)$ cannot
+    equal $H_3$, since the argument can be repeated for $H_1$ to show that $Z(G)
+    = H_1$ or $Z(G)=G$. Since $H_1\neq H_3$, it must be that $Z(G) = G$, and
+    thus $G$ is Abelian. This clearly implies that $H_3$ is Abelian as well.
+\end{proof}
+
+\newpage
+
+\section*{Problem 4}
+\subsection*{Part a}
+Define the notion of a Hall subgroup of a finite group $G$.
+\\
+\begin{definition}
+    Let $\prod_{i=1}^n p_i^{\alpha_i}$ be the prime factorization of the order
+    of $G$, and let $\pi$ be a subset of $\{p_i\}_{i=1}^n$. A Hall-$\pi$
+    subgroup of $G$ is a subgroup of $G$ of order $\prod_{p_i\in\pi}p_i^{\alpha_i}$.
+\end{definition}
+
+\subsection*{Part b}
+State Hall's criterion for finite soluble groups.
+\\
+\begin{statement}
+    A finite group $G$ is soluble if and only if it has a system of Hall
+    complements. That is, for $\prod p_i^{\alpha_i}$ the prime factorization of
+    $|G|$, there exist subgroups of index $p_i^{\alpha_i}$ for each prime
+    factor $p_i$.
+\end{statement}
+
+\subsection*{Part c}
+Show that all groups of order properly dividing $84$ are soluble.
+\\
+\begin{proof}
+We first note that the prime factorization of $84$ is $2^2.7.3$. Sylow's
+    theorems guarantee that groups of order $2^2.7$, $2.7$, $2^2.3$, $2.3$ and
+    $3.7$ have a system of Hall complements, and thus are soluble.
+
+    So, consider the group $G$ of order $2.3.7$. Sylow's theorem guarantees that a
+    subgroup $P_7$ of order $7$ exists. Furthermore, the number of Sylow-7
+    subgroups of $G$ is congruent to $1\mod 7$. Since the
+    number of Sylow-7 subgroups must also divide $2.3.7$, it must be that there
+    is only one Sylow-7 subgroup of $G$. In particular,
+    this means that $P_7$ is normal in $G$. Now, since $P_7$ is a cyclic group
+    (of order $7$), it is soluble. Furthermore, $G/{P_7}$ is of order $2.3$, and
+    is also soluble. Thus, since both $P_7$ and $G/{P_7}$ are soluble, $G$ is
+    soluble as well.
+    This exhausts all possible orders that properly divide $84$. 
+\end{proof}
+
+\subsection*{Part d}
+Show that a group of order $84$ is either soluble or simple.
+\\
+\begin{proof}
+    Let $G$ be a group of order $84$, and suppose $G$ is not simple. Let $N$ be
+    a normal subgroup of $G$. Now, since $N$ is a subgroup of $G$, its order
+    properly divides the order of $G$, and thus by part c $N$ is soluble.
+    Similarly, the group $G/N$ has order properly dividing the order of $G$, and
+    thus $G/N$ is soluble as well. Since both $G/N$ and $N$ are soluble, $G$ is
+    as well. Thus, $G$ is either simple or soluble, as desired.
+\end{proof}
+
+\section*{Problem 5}
+Let $G$ be a finite group.
+\subsection*{Part a}
+Give the definitions of the commutator subgroup $G'$ and the Frattini subgroup
+$\Phi(G)$ of $G$.
+\begin{definition}
+    The commutator subgroup $G'$ of $G$ is defined as
+    \[
+        G' = [G,G] = \{ghg^{-1}h^{-1}\ |\ g,h\in G\}
+    \]
+\end{definition}
+\begin{definition}
+    The Frattini subgroup $\Phi(G)$ is defined to be the intersection of all
+    maximal normal subgroups of $G$, or $G$ itself if no maximal normal
+    subgroups exist.
+\end{definition}
+
+\subsection*{Part b}
+Suppose that every maximal subgroup of $G$ is normal in $G$. Prove that $G'\leq
+\Phi(G)$.
+\\
+\begin{proof}
+Let $M$ be a maximal subgroup of $G$. Since $M$ is normal, we may consider the
+    quotient $G/M$. Now, the correspondence theorem tells us that subgroups of
+    $G/M$ are in bijection with subgroups of $G$ containing $M$. Since $M$ is
+    maximal, it must be that the only subgroups of $G/M$ are $G/M$ and $1$.
+    Furthermore, $G/M$ must be a group of order $p^{\alpha}$ for some prime $p$.
+    (If this were not the case, Sylow's theorems would give a proper subgroup of
+    $G/M$ for each prime factor of the order of $G/M$).
+    Since every p-group is the direct product of cyclic p-groups, and $G/M$ has
+    no subgroups, it must be that $G/M$ is cyclic of order $p$. Thus, $G/M$ is
+    Abelian.
+
+    Since $G/M$ is Abelian, it must be that there is some group homomorphism
+    $f:G/G'\to G/M$ such that the quotient $q_m:G\to G/M$ factors through
+    $q_g:G\to G/G'$.
+    Since $f$ is a group homomorphism, it must send the coset $G'$ into $M$. Thus, since
+    $q_m = f\circ q_g$, it follows that for any $x\in G'$,
+    \[
+        q_m(x) = f(q_g(x)) = f(e) = e
+    \]
+    and thus $x\in M$. Thus, $G'\leq M$.
+
+    Since $G'\leq M$ for every maximal normal subgroup $M$ in $G$, it follows
+    that $G'\leq \Phi(G)$ as desired.
+\end{proof}
+
+
+\end{document}
