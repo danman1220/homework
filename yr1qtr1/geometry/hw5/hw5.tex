@@ -192,18 +192,108 @@ extends to all of $M$ if and only if $S$ is properly embedded.
     \]
     so if $e\circ r$ is the identity on $Y(f)g + fY(g)$, then $Y$ is a
     derivation. However, we recall that $e$ is only unique up to a factor of
-    $C^{\infty}(U)/{C^{\infty}(S)}$. So, for each $f\in C^{\infty}(U)$, we
-    define $e_f$... %TODO finish
+    $C^{\infty}(U)/{C^{\infty}(S)}$. So, for each $fg\in C^{\infty}(U)$, we
+    define $q_{fg} = f(eX(rg)) + g(eX(rf)) - er(f(eX(rg)) + g(eX(rf)))$ i.e. the
+    correction factor for the Leibniz rule. Then, redefine $Y$ to be
+    \[
+        Y(fg) = eXr(fg) + q_{fg}
+    \]
+
+    Clearly, $q$ is in $C^{\infty}(U)/{C^{\infty}(S)}$, since $q$ restricted to
+    $X$ is the correction factor for the Leibniz rule for $X$, and since $X$
+    already satisfies the Leibniz rule, $q$ vanishes on $S$.
+    
+    With this correction, $Y$ is indeed a linear derivation, and is thus a
+    smooth vector field.
+
+    Now, if $S$ is properly embedded, we can take $U$ to be all of $M$, and the
+    vector field $Y$ extends to all of $M$.
 \end{proof}
 
 \section*{Problem 3} %Lee 8-18
-%TODO write this
+Let $F:M\to N$ be a smooth submersion.
+\subsection*{Part 1}
+Show that if $\dim M = \dim N$, then every smooth vector field on $N$ has a
+unique lift.
+\\
+\\
+\begin{proof}
+    Let $Y\in \mathcal{X}(N)$. Then, define $X_p = dF^{-1}_{F(p)}(Y_{F(p)})$, where
+    $dF^{-1}_{F(p)}$ is an isomorphism, since $F$ is a submersion to a space of
+    the same dimension. Clearly, $X$ and $Y$ are $F$-related, as desired.
+\end{proof}
+
+\subsection*{Part b}
+Show that if $\dim M \neq \dim N$, then the lift is not unique.
+\\
+\\
+\begin{proof}
+    Theorem 4.26 guarantees the existence of local sections of $F$, so we can
+    define $X_p = d\pi_{F(p)}(Y_{F(p)})$, and clearly $X$ is a lift of $Y$,
+    since $d\pi\circ dF = id$. This lift will not be unique, since $\pi$ is not
+    unique.
+\end{proof}
+
+\subsection*{Part c}
+Suppose $F$ is surjective. Given $X\in\mathcal{X}(M)$, show that $X$ is the lift
+of a smooth vector field on $N$ if and only if $dF_p(X_p) = dF_q(X_q)$ for all
+$F(p) = F(q)$.
+\\
+\\
+\begin{proof}
+    Suppose $X$ is the lift of some $Y$ on $N$. Then, we know that for $F(p) =
+    F(q)$,
+    \[
+        dF_p(X_p) = Y_{F(p)}=Y_{F(q)}=dF_q(X_q)
+    \]
+    as desired.
+
+    Suppose instead that $dF_p(X_p)=dF_q(X_q)$ for each $F(p)=F(q)$. Then, we
+    define
+    \[
+        Y_{F(p)} = dF_p(X_p)
+    \]
+    Clearly, $X$ is a lift of $Y$, and $Y$ is well-defined since $F$ is
+    surjective, and if $F(p)=F(q)$, then $Y_{F(p)}=Y_{F(q)}$ by the condition of
+    $X$.
+\end{proof}
+
+\subsection*{Part d}
+Suppose in addition that $F$ has connected fibers. Show that
+$X\in\mathcal{X}(M)$ is a lift of a smooth vector field on $N$ if and only if
+$[V,X]$ is vertical whenever $V$ is a vertical vector field on $M$.
+\\
+\\
+\begin{proof}
+Suppose $X$ is a lift of some vector field $Y$ in $N$. Then,
+we know that $X$ and $Y$ are $F$-related, and $V$ and $0$ are $F$-related, so
+    $[V,X]$ and $[0,Y]=0$ are $F$-related, and thus $[V,X]$ is vertical.
+
+    Suppose instead that $[V,X]$ is vertical. That is $dF([V,X])=0$.
+    Then,
+    \[
+        \begin{aligned}
+            dF([V,X])(f) &= 0\\
+                        &= (VX-XV)(f\circ F)\\
+                        &=VX(f\circ F) - XV(f\circ F)\\
+                        &=VX(f\circ F) - X(0)\\
+                        &=VX(f\circ F)
+        \end{aligned}
+    \]
+    Thus, $V(X(f\circ F)) = 0$, which means that around a point $p$, $X(f\circ
+    F) = C_p$ for some constant $C_p$. Now, for points $p$ and $q$ on the same
+    (connected) fiber, there is a path $\gamma$ connecting them, whose
+    derivative defines a vertical vector field in a neighborhood of $\gamma$.
+    For this vector field, it must be that $C_p=C_q$, and thus $dF_p(X_p)
+    =dF_q(X_q)$ and by the previous result, $X$ is a lift of some vector field
+    on $N$.
+\end{proof}
 
 \section*{Problem 4} %Lee 8-19
 Show that $\R^3$ is a Lie algebra with the cross product.
 \\
 \begin{proof}
-    The cross product is, by definition, bilinear, so it suffices to check that the
+    The cross product is, by definition, bilinear and antisymmetric, so it suffices to check that the
     cross product satisfies the Jacobi identity.
 
     We proceed to calculate the Jacobi identity directly. Now, we know that
@@ -254,17 +344,7 @@ Let $A\subseteq \mathcal{X}(\R^3)$ be the subspace spanned by the vector fields
 Show that $A$ is a Lie subalgebra of $\mathcal{X}(\R^3)$.
 \\
 \begin{proof}
-    We note first that this defines a two-dimensional distribution on $\R^3$,
-    since for all points $(x,y,z)$ for which $z\neq 0$, we have that
-    $Z = \frac{x}{z}X + \frac{y}{z}Y$, and similarly if $z=0$, we have that
-    $-X = \frac{y}{x}Y + \frac{z}{x}Z$. 
-
-    So, all we need to check is that this distribution is involutive.
-    Furthermore, since $[X,X]=0$ for all $X$, it suffices to only check that for
-    $X,Y$ that span the distribution, $[X,Y]$ is in the distribution.
-
-    So, since $X$ and $Y$ are linearly independent for $z\neq 0$, they span the
-    distribution for all $z\neq 0$. Now, we can calculate
+    We can calculate
     \[
         \begin{aligned}
             {[}X,Y{]}^i &= X^j\partial_jY^i - Y^j\partial_jX^i\\
@@ -281,13 +361,20 @@ Show that $A$ is a Lie subalgebra of $\mathcal{X}(\R^3)$.
                     &=-X^x - Y^y = 0
         \end{aligned}
     \]
-    Thus, ${[}X,Y{]} = y\partial_x - x\partial_y = -Z$, which is in the
-    distribution, so the distribution is involutive for $z\neq 0$. However, the
+    Thus, ${[}X,Y{]} = y\partial_x - x\partial_y = -Z$. However, the
     exact same calculation on ${[}Y,Z{]}$ by permuting the indices reveals that
-    ${[}Y,Z{]} = -X$, and so the distribution is involutive.
+    ${[}Y,Z{]} = -X$, and ${[}Z,X{]} = -Y$.
 
-    Thus, the subspace $A$ is closed under the Lie bracket, and is a Lie
-    subalgebra of $\mathcal{X}(\R^3)$
+    So, the Lie algebra isomorphism will be
+    \[
+        \begin{aligned}
+            X &\mapsto e_1\\
+            Y &\mapsto -e_2\\
+            Z &\mapsto e_3
+        \end{aligned}
+    \]
+    and since this isomorphism preserves the bracket of each, it is a Lie
+    algebra isomorphism.
 \end{proof}
 
 \section*{Problem 6}
@@ -295,7 +382,337 @@ Construct a non-vanishing vector field on a general odd-dimensional sphere.
 \\
 \\
 \begin{proof}
-    Let $S^{2n-1}$ be embedded in $\C^n$.
+    Let $S^{2n-1}$ be embedded in $\C^n$. Furthermore,
+    $\gamma_i(t) = \exp(it)(0,\ldots,1,0,\ldots,0)$ where the $1$ is in the
+    $i^{th}$ coordinate. Then, the vector field
+    \[
+        \sum_{i=1}^n \dot{\gamma}_i(t)
+    \]
+    is a nowhere-vanishing vector field on the sphere.
+\end{proof}
+
+\section*{Problem 7} %Lee 9-1
+Suppose $M$ is a smooth manifold, $X\in \mathcal{X}(M)$, and $\gamma$ is a
+maximal integral curve of $X$.
+\subsection*{Part a}
+Show that exactly one of the following holds:
+\begin{itemize}
+    \item $\gamma$ is constant.
+    \item $\gamma$ is injective.
+    \item $\gamma$ is periodic and nonconstant.
+\end{itemize}
+\begin{proof}
+    If $\gamma$ is constant, In particular, $\gamma$ cannot be injective, since
+    its domain is uncountable, but each maps to the same point. Furthermore,
+    clearly if $\gamma$ is constant, $\gamma$ cannot be nonconstant.
+
+    If $\gamma$ is injective, then it cannot be constant, since the domain has
+    more than one point. Furthermore, it cannot be periodic, since if $\gamma(t)
+    = \gamma(t+T)$ for some $T>0$, then $\gamma$ sends $t$ and $t+T$ to the
+    same point.
+
+    If $\gamma$ is periodic and nonconstant, then $\gamma$ is clearly not
+    constant, and $\gamma$ is not injective, since $\gamma(t) = \gamma(t+T)$.
+\end{proof}
+
+\subsection*{Part b}
+Suppose $\gamma$ is periodic and nonconstant. Show that there exists a unique
+positive number $T$ for which $\gamma(t)=\gamma(t')$ if and only if $t'-t=kT$.
+\\
+\\
+\begin{proof}
+    Let $P = \{T\ |\ \gamma(t) = \gamma(t+T)\}$ the set of all periodicity
+    constants of $\gamma$, and let $T' = \inf P$. Now, it should be clear that
+    $P$ is closed, since for any $\tilde{T}\not\in P$, we have that 
+    \[
+        \gamma(t) \neq \gamma(t+\tilde{T})
+    \]
+    and since $\gamma$ is continuous, this must  be true on some neighborhood of
+    $t$ as well. Thus, there is a neighborhood of $\tilde{T}$ for which
+    \[
+        \gamma(t)\neq\gamma(t+\tilde{T}-\epsilon)
+    \]
+    and so $P^c$ is open and $P$ is closed.
+
+    Thus, $P$ contains its $\inf$, and thus $T'\in P$ and $T'$ is the period of
+    $\gamma$.
+\end{proof}
+
+\subsection*{Part c}
+Show that the image of $\gamma$ is an immersed submanifold of $M$ diffeomorphic
+to $\R, S^1,$ or $\R^0$.
+\\
+\\
+\begin{proof}
+    If $\gamma$ is injective, then it is an injective smooth immersion, and thus
+    its image is diffeomorphic to its domain (which is $\R$).
+
+    If $\gamma$ is constant, then it is trivially diffeomorphic to $\R^0$.
+
+    If $\gamma$ is periodic, then we can factor $\gamma$ through the quotient
+    $\R/{T\R}\cong S^1$, and $\gamma$ is an injective smooth immersion from
+    $S^1$ into $M$, and thus its image is diffeomorphic to its domain $S^1$.
+\end{proof}
+
+\section*{Problem 8} %Lee 9-3
+Calculate the flows of the following
+\subsection*{Part b}
+$W=x\partial_x + 2y\partial_y$.
+\\
+\\
+\begin{proof}
+    We have the differential equation
+    \[
+        W = \dot{\theta}(p,t)
+    \]
+    which can be written as
+    \[
+        \begin{aligned}
+            \dot{x}(t) &= x(t)\\
+            \dot{y}(t) &=2y(t)
+        \end{aligned}
+    \]
+    or (with $x$ being the vector quantity $(x,y)$)
+    \[
+        \dot{x}(t) =
+        \begin{bmatrix}
+        1&0\\
+        0&2
+        \end{bmatrix}
+        x(t)
+    \]
+    Which has a general solution
+    \[
+        x(t) =
+        \begin{bmatrix}
+        \exp(t)&0\\
+            0&\exp(2t)
+        \end{bmatrix}
+        x_0
+    \]
+    and so the flow is
+    \[
+        \theta(p,t) = (p_x\exp(t),p_y\exp(2t))
+    \]
+\end{proof}
+
+\subsection*{Part b}
+$Y=x\partial_y + y\partial_x$.
+\\
+\\
+\begin{proof}
+    This has the same form of solution as above, except now the equation is
+    \[
+        \dot{x}(t) =
+        \begin{bmatrix}
+        0&1\\
+            1&0
+        \end{bmatrix}
+        x(t)
+    \]
+    Now, we can diagonalize the matrix to get
+    \[
+        \begin{bmatrix}
+        0&1\\
+            1&0
+        \end{bmatrix}
+        = M = SJS^{-1}
+    \]
+    for
+    \[
+        S=
+        \begin{bmatrix}
+            -1&1\\
+            1&1
+        \end{bmatrix}
+    \]
+    and
+    \[
+        J=
+        \begin{bmatrix}
+            -1&0\\
+            0&1
+        \end{bmatrix}
+    \]
+    which has solution
+    \[
+        \begin{aligned}
+            x(t) &= S\exp(Jt)S^{-1}x_0\\
+            &= S
+            \begin{bmatrix}
+                \exp(-t)&0\\
+                0&\exp(t)
+            \end{bmatrix}
+            S^{-1}x_0\\
+        &=\frac{1}{2}\begin{bmatrix}
+            \exp(-t)+\exp(t) &-\exp(-t)+\exp(t)\\
+            -\exp(-t)+\exp(t) &\exp(-t)+\exp(t)
+        \end{bmatrix}
+            x_0
+        \end{aligned}
+    \]
+    with flow
+    \[
+        \theta(p,t) = \frac{1}{2}((\exp(-t)+\exp(t))p_x + (-\exp(-t)+\exp(t))p_y,
+                    (-\exp(-t)+\exp(t))p_x + (\exp(-t)+\exp(t))p_y)
+    \]
+\end{proof}
+
+\section*{Problem 9}
+Prove the escape lemma.
+\\
+\\
+\begin{proof}
+Suppose for a contradiction that $\gamma$ is a maximal integral curve of a
+    vector field $V$ whose domain has a finite least upper bound $b$, but there
+    exists a $t_0$ such that $\gamma([t_0,b))$ is contained in a compact subset
+    $C$ of $M$.
+    
+    In particular, we know that on $C$, $V$ satisfies the uniform time lemma,
+    and so $\gamma$ cannot be maximal, since one could always flow from
+    $\gamma(b-\epsilon)$ further than $\epsilon$ (for small enough $\epsilon$),
+    which would yield an integral curve that is larger than $\gamma$.
+
+    Thus, $\gamma([t_0,b))$ is not in a compact subset of $M$ for all $t_0<b$.
+\end{proof}
+
+\section*{Problem 10}
+Show that $\textrm{Diff}(M)$ acts transitively on $M$ for $M$ a connected smooth
+manifold.
+\\
+\\
+\begin{proof}
+Let $p$ and $q$ be distinct points on $M$. We wish to find a diffeomorphism $F$
+that sends $p$ to $q$. Now, since $M$ is connected, there exists a smooth curve
+    $\gamma$ with $\gamma(0)=p$ and $\gamma(1)=q$. This is an integral curve of
+    the vector field $\dot{\gamma}$ defined on the image of $\gamma$, and by an
+    earlier result, has an extension $X$ to a neighborhood $U$ of $\gamma$.
+    Furthermore, multiplying such a vector field by a smooth bump can guarantee
+    that $X$ is compactly supported.
+
+    Then, it follows from Theorem 9.16 that $X$ is complete, and so its flow
+    defines a one-parameter group of diffeomorphisms. Specifically, for
+    $\theta(p,t)$ the flow of $X$, $\theta(p,1)$ is a diffeomorphism that takes
+    $p$ to $q$ (since $\gamma$ is an integral curve of $X$) as desired.
+\end{proof}
+
+\section*{Problem 11}
+Give an example of smooth vector fields $V$, $\tilde{V}$ and $W$ on $\R^2$ so
+that $V=\tilde{V}=\partial_x$ on the $x$ axis, but $L_VW\neq L_{\tilde{V}}W$ at
+the origin.
+\\
+\\
+\begin{proof}
+    The vector fields
+    \[ 
+        \begin{aligned}
+            V &=\partial_x\\
+            \tilde{V} &=\partial_x + y\partial_y\\
+            W &=\partial_y
+        \end{aligned}
+    \]
+    are such that
+    \[
+        [V,W] = 0
+    \]
+    but
+    \[
+        \begin{aligned}
+            {[}\tilde{V},W{]}^x &= \tilde{V}W^x - W\tilde{V}^x\\
+                            &= 0\\
+            \\
+            {[}\tilde{V},W{]}^y &= \tilde{V}W^y - W\tilde{V}^y\\
+                            &= -1\neq 0
+        \end{aligned}
+    \]
+    as desired.
+\end{proof}
+
+\section*{Problem 12}
+Let
+\[
+    \begin{aligned}
+        X &= x\partial_x - y\partial_y\\
+        Y &= x\partial_y + y\partial_x
+    \end{aligned}
+\]
+Compute the flows and verify they do not commute.
+\\
+\\
+\begin{proof}
+    We've already calculated the flows for $X$ and $Y$, which are
+    \[
+        \begin{aligned}
+            \theta(p,t) &= (\exp(t)p_x, \exp(-t)p_y)\\
+            \psi(p,t) &= \frac{1}{2}((\exp(-t)+\exp(t))p_x + (-\exp(-t)+\exp(t))p_y,
+                    (-\exp(-t)+\exp(t))p_x + (\exp(-t)+\exp(t))p_y)\\
+                    &= (\cosh(t)p_x + \sinh(t)p_y,\sinh(t)p_x+\cosh(t)p_y)
+        \end{aligned}
+    \]
+    Now, we will flow $(1,1)$ along $\theta$, then $\psi$, which yields
+    \[
+        \begin{aligned}
+            \theta((1,1),1) &= (e^{-1},e)\\
+            \psi((e^{-1},e),1) &= (\cosh(1)e^{-1} +
+            \sinh(1)e,\sinh(1)e^{-1}+\cosh(1)e)
+        \end{aligned}
+    \]
+    but flowing first on $\psi$ and then on $\theta$ yields
+    \[
+        \begin{aligned}
+            \psi((1,1),1) &= (\cosh(1)+\sinh(1),\sinh(1)+\cosh(1))\\
+                        &=  (e,e)\\
+            \theta((e,e),1) &= (e^{-1}e,e^2)\\
+                            &= (1,e^2)
+        \end{aligned}
+    \]
+    and so the flows do not commute.
+\end{proof}
+
+\section*{Problem 13}
+\subsection*{Part a}
+If $z = f(x,y)$ solves the system $z_x = g, z_y=h$. Find the compatibility
+condition for $g$ and $h$.
+\\
+\\
+\begin{proof}
+    We know from the compatibility condition that $\partial_x\partial_y f =
+    \partial_y\partial_x f$, which means that
+    \[
+        \partial_x z_y = \partial_y z_x
+    \]
+    or,
+    \[
+        \partial_x h = \partial_y g
+    \]
+\end{proof}
+
+\subsection*{Part b}
+Show that this is equivalent to $[X,Y] = 0$.
+\\
+\\
+\begin{proof}
+    The vector fields are
+    \[
+        \begin{aligned}
+            X &= \partial_x + g\partial_z\\
+            Y &= \partial_y + h\partial_z
+        \end{aligned}
+    \]
+    We can calculate the Lie bracket
+    \[
+        \begin{aligned}
+            {[}X,Y{]} &= (XY^j-YX^j)\partial_j\\
+                    &= 0\partial_x + 0\partial_y + (Xh-Yg)\partial_z\\
+                    &= \partial_xh + g\partial_zh - (\partial_yg +
+                    h\partial_zg)\partial_z\\
+                    &=\partial_xh+\partial_xz\partial_zh -
+                    (\partial_yg+\partial_yz\partial_zg)\\
+                    &=\partial_xh - \partial_yg
+        \end{aligned}
+    \]
+    and for this to be zero, we must have that $\partial_xh=\partial_yg$, which
+    is the compatibility condition.
 \end{proof}
 
 \end{document}
