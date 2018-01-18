@@ -1,0 +1,73 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\section{Preliminaries}
+
+\begin{hw}
+    Prove that $V^{**}\cong V$ for finite-dimensional vector space $V$.
+\end{hw}
+
+From this, it is clear that $T_p^*M\otimes T_pM\cong \textrm{Hom}(T_pM,T_pM)$
+for a manifold $M$.
+
+Recall the tangent bundle $TM$ is defined as
+\[
+    TM = \coprod_{p\in M} T_pM
+\]
+and a vector field on the manifold $M$ is simply a section of the tangent bundle
+projection
+$\begin{tikzcd}TM\arrow{r}{\pi} &M\end{tikzcd}$. In other words, a vector field
+    is a function $f:M\to TM$ such that $\pi\circ f = id$.
+Requiring the section to be smooth makes it into a smooth vector field.
+
+We can also do the same thing for the cotangent bundle $T^*M$ to obtain a
+covector field.
+
+Now, we can take the tensor product of copies of $TM$ and $T^*M$ to obtain our
+tensor bundles, and tensor fields will be sections of these bundles.
+
+Let $(U,\phi)$ be a smooth chart on $M$ with coordinate functions $x^i$,
+coordinate vector fields $\partial_i$, and coordinate one-forms $dx^i$. Recall
+that $dx^i$ is defined to be the dual basis to $\partial_i$, that is,
+\[
+    dx^i(\partial_j) = \delta^i_j
+\]
+
+Recall also that the exterior derivative of a function $df$ is defined as
+\[
+    df(v) = v(f)
+\]
+and this definition applied to the coordinate functions $x^i$ (yielding $dx^i$)
+coincides with the definition above. Note that $\partial_i$ form a basis for
+$T_pM$ and $dx^i$ form a basis for $T_p^*M$. Tensor products of them, then, form
+a basis for the tensor product space.
+
+\begin{hw}
+    Prove that, for a vector space $V$ with basis $v_i$, dual basis $v^i$, the
+    set
+    \[
+        \{v^i\otimes v^j\ |\ 1\leq i,j\leq n\}
+    \]
+    forms a basis for $V^*\otimes V^*$. Here $v^i\otimes v^j(u,v) =
+    v^i(u)v^j(v)$.
+\end{hw}
+
+\section{Affine Connections}
+
+\begin{defn}
+    Let $M^n$ be a smooth manifold of dimension $n$. A {\em Riemannian Metric}
+    $g$ on $M$ is a rank $(0,2)$ tensor (a section of $T^*M\otimes T^*M$) that
+    is symmetric and positive-definite. In other words, $g$ is a rank $(0,2)$
+    tensor that restricts to an inner product on the tangent space at every
+    point.
+\end{defn}
+
+We can express $g$ in local coordinates!
+\[
+    g_{ij} = g(\partial_i,\partial_j)
+\]
+or
+\[
+    g = g_{ij}dx^i\otimes dx^j
+\]
+
+\end{document}

@@ -24,6 +24,7 @@
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
 \usepackage{mathrsfs}
+\usepackage{bbm}
 
 \usepackage[margin=1in]{geometry}
 
@@ -58,9 +59,9 @@
 
 \title{	
 \normalfont \normalsize 
-\textsc{<<CLASS>>} \\ [25pt] % Your university, school and/or department name(s)
+\textsc{Homotopy Theory} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\huge <<TITLE>> \\ % The assignment title
+\huge Problem Set 1 \\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
 
@@ -73,4 +74,77 @@
 \maketitle % Print the title
 
 % Problems
+\section*{Problem 1} %Hatcher 0.2
+Construct an explicit deformation retraction of $\R^n\setminus \{0\}$ to
+$S^{n-1}$.
+\\
+\\
+\begin{proof}
+    The straight-line homotopy from $v$ to $\frac{v}{\|v\|}$ satisfies the
+    criteria for a deformation retract. Namely, the retract is given by
+    \[
+        \begin{aligned}
+            r:&\R^n\setminus\{0\}\to S^{n-1}\\
+            r(v) &= \frac{v}{\|v\|}
+        \end{aligned}
+    \]
+    With homotopy
+    \[
+        \begin{aligned}
+            F:&\R^n\setminus\{0\}\times I\to S^{n-1}\\
+            F(v,t) &= (1-t)v + t\frac{v}{\|v\|}
+        \end{aligned}
+    \]
+\end{proof}
+
+\newpage
+
+\section*{Problem 2} %Hatcher 0.3c
+Show that a map homotopic to a homotopy equivalence is a homotopy equivalence.
+\\
+\\
+\begin{proof}
+    Let $f:X\to Y$ be a map, which is homotopic to a homotopy equivalence
+    $g:X\to Y$ with homotopy inverse $h:Y\to X$. That is, $g\circ h \simeq
+    \mathbbm{1}_Y$
+    and $h\circ g \simeq \mathbbm{1}_X$. Furthermore, let $F:X\times I\to Y$ be the
+    homotopy between $f$ and $g$.
+
+    First, let's consider the map $h\circ f:X\to X$. We wish to show
+    $h\circ f\simeq \mathbbm{1}_X$. To do so, let's consider the
+    homotopy 
+    \[
+        h\circ F:X\times I\to X
+    \]
+    This is the composition of two continuous functions, and so it is
+    continuous. Furthermore, since $F(0,x) = f(x)$ and $F(1,x)=g(x)$, this is
+    actually a homotopy between $h\circ f$ and $h\circ g$. Now, since $h\circ
+    f\simeq h\circ g\simeq \mathbbm{1}_X$ and homotopy equivalence is an
+    equivalence relation, it follows immediately that $h\circ f\simeq
+    \mathbbm{1}_X$.
+
+    Now, consider the map $f\circ h:Y\to Y$. We wish to show $f\circ h\simeq
+    \mathbbm{1}_Y$. To do so, consider the homotopy 
+    \[
+        F\circ(h\times \mathbbm{1}_I): Y\times I\to Y
+    \]
+    It is easy to see this is a homotopy between $f\circ h$ and $g\circ h$, and
+    so we have that $f\circ h \simeq g\circ h \simeq \mathbbm{1}_X$, and so
+    $f\circ h \simeq \mathbbm{1}_X$, as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3} %Hatcher 0.4
+A deformation retraction in the weak sense of a space $X$ to a subspace $A$ is a
+homotopy $f_t:X\to X$ such that $f_0 = \mathbbm{1}_X$, $f_1(X)\subset A$, and
+$f_t(A)\subset A$ for all $t$. Show that if $X$ deformation retracts onto $A$ in
+the weak sense, then the inclusion map $i:A\to X$ is a homotopy equivalence.
+\\
+\\
+\begin{proof}
+
+\end{proof}
+
+
 \end{document}
