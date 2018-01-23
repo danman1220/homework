@@ -53,6 +53,8 @@ a basis for the tensor product space.
 
 \section{Affine Connections}
 
+\subsection{The Metric}
+
 \begin{defn}
     Let $M^n$ be a smooth manifold of dimension $n$. A {\em Riemannian Metric}
     $g$ on $M$ is a rank $(0,2)$ tensor (a section of $T^*M\otimes T^*M$) that
@@ -69,5 +71,105 @@ or
 \[
     g = g_{ij}dx^i\otimes dx^j
 \]
+
+\subsection{Integration of Top Degree Differential Forms}
+Let $M^n$ be an orientable $n$-dimensional manifold, and $\omega\in
+\Omega^n(M)$. Furthermore let $(U,\phi)$ be a positive coordinate chart. On $U$
+we have that
+\[
+    \omega = fdx^1\wedge\ldots\wedge dx^n
+\]
+for some $f\in C^{\infty}(M)$.
+
+Now, let $K\subset U$ be compact. We define
+\[
+    \begin{aligned}
+        \int_K\omega &= \int_{\phi(K)}\phi^{-1*}\omega\\
+                    &= \int_{\phi(K)}f\circ\phi^{-1}
+                    \phi^{-1*}dx^1\wedge\ldots\wedge\phi^{-1*}dx^n\\
+                    &=\int_{\phi(K)}f\circ\phi^{-1}dx^1\wedge\ldots\wedge dx^n
+    \end{aligned}
+\]
+where the last integral is just the standard integral in $\R^n$.
+
+Is this definition independent of choice of coordinates? Let's check.
+Let $(V,\psi)$ be another coordinate chart containing $K$. Then, the integral
+with respect to this coordinate system is
+\[
+    \int_K\omega = \int_{\psi(K)}g\circ\psi^{-1}dy^1\wedge\ldots\wedge dy^n
+\]
+for $g$ defined as
+\[
+    \omega = hdy^1\wedge\ldots\wedge dy^n
+\]
+with coordinate functions $y^i$. The claim is that these integrals are equal.
+
+Consider the change-of-coordinates map $\psi\circ\phi^{-1}$ from the $x^i$ to
+the $y^i$ coordinate system. Since $K$ is in both $U$ and $V$, its image
+$\phi(K)$ lies in the domain of $\psi\circ\phi^{-1}$.
+
+All that remains is to apply the change of variables to the integrals. Recall
+that if one has a diffeomorphism $F:\Omega_1\to\Omega_2$ for compact $\Omega_i$,
+one has that
+\[
+    \int_{\Omega_2}fdy^1\ldots dy^n = \int_{\Omega_1}f\circ F|J_F|dx^1\ldots
+    dx^n
+\]
+where $|J_F|$ is the determinant of the Jacobian matrix for $F$.
+\begin{hw}
+    Check that the two integrals claimed to be equal are actually equal.
+\end{hw}
+
+Now we have an idea for how to integrate $\omega$ on a single chart, let's
+extend this. Let $(\eta_i,U_i)$ be a partition of unity of $M$ where each $U_i$
+is contained in a single chart on $M$. Then,
+\[
+    \omega = \sum\omega\eta_i
+\]
+and we can integrate by extending linearly
+\[
+    \int_K\omega = \sum\int_{K}\omega\eta_i
+\]
+where the right hand side has integrals over functions supported in a single
+chart, and is well-defined. But is this independent of the choice of partition
+of unity? Short answer: yes (Optional homework).
+
+\subsection{Integration on an Orientable Smooth Riemannian Manifold}
+Recall that a Riemannian manifold has a volume form
+\[
+    dvol = \sqrt{|g_{ij}|}dx^1\wedge\ldots\wedge dx^n
+\]
+which is obtained by taking an orthonormal frame $e_i$ and considering the dual
+frame $\omega^i$ defined as
+\[
+    \omega^ie_j = \delta^i_j
+\]
+and letting
+\[
+    dvol = \omega^1\wedge\ldots\wedge\omega^n
+\]
+This construction is independent of choice of orthonormal frame.
+\begin{proof}
+Let $\epsilon_i$ be another orthonormal frame with dual frame $\alpha^i$. Then,
+$\epsilon_i = a^j_ie_j$ and $\alpha^i = b^i_j\omega^j$ and so
+    \[
+        \begin{aligned}
+            \alpha^1\wedge\ldots\wedge\alpha^n &=
+            b^1_{j_1}\omega^{j_1}\wedge\ldots\wedge b^n_{j_n}\omega^{j_n}\\
+            &= \sum_{\sigma\in S_n} b^1_{\sigma(1)}\ldots
+            b^n_{\sigma(n)}sgn(\sigma)\omega^1\wedge\ldots\wedge\omega^n\\
+            &= |b|\omega^1\wedge\ldots\wedge\omega^n\\
+            &= \omega^1\wedge\ldots\wedge\omega^n\\
+        \end{aligned}
+    \]
+    where the last line was obtained from the fact that $b$ is the orthogonal
+    change-of-basis matrix from $e$ to $\epsilon$.
+\end{proof}
+
+Then, we define
+\[
+    \Vol(K) = \int_Kdvol
+\]
+
 
 \end{document}

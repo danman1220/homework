@@ -143,8 +143,131 @@ the weak sense, then the inclusion map $i:A\to X$ is a homotopy equivalence.
 \\
 \\
 \begin{proof}
+Let $f_t:X\to X$ be a deformation retraction in the weak sense of $X$ onto
+$A$, and let $i$ be the inclusion map from $A$ to $X$. We will show that
+    $i\circ f_1 \simeq \mathbbm{1}_X$ and that $f_1\circ i \simeq
+    \mathbbm{1}_A$.
+    
+    Considering $i\circ f_1$, we note that this is actually equal to $f_1$,
+    since the inclusion map is the identity on $A$, and $f_1$ maps into $A$.
+    Now, $f_1$ is homotopic to $f_0$ which is equal to $\mathbbm{1}_X$, and so
+    by transitivity of homotopy equivalence, $f_1\simeq \mathbbm{1}_X$.
 
+    Now, let's consider $f_1\circ i$. We note first that this is equal to
+    $f_1|_A$, since $i$ is the identity on $A$. Furthermore, the restrictions
+    $f_t|_A$ define a homotopy from $f_1|_A$ to $f_0|_A$, and so we have that
+    \[
+        f_1\circ i = f_1|_A\simeq f_0|_A = \mathbbm{1}_X|_A = \mathbbm{1}_A
+    \]
+    as desired. Thus, $i$ is a homotopy equivalence with homotopy inverse $f_1$.
 \end{proof}
 
+\section*{Problem 4} %Hatcher 0.5
+Show that if a space $X$ deformation retracts to a point $x\in X$, then for each
+neighborhood $U$ of $x$ in $X$, there exists a neighborhood $V\subset U$ of $x$
+such that the inclusion map $V\to U$ is nullhomotopic.
+\\
+\\
+\begin{proof}
+    Let $F:X\times I\to X$ be the deformation retraction of $X$ onto $x_0\in X$,
+    and let $U$ be a neighborhood of $x_0$. Now, consider the open set
+    \[
+        F^{-1}(U)\subset X\times I
+    \]
+    Now, since $F(x_0,t) = x_0$ for all $t$, we know that $\{x_0\}\times I$ is
+    in $F^{-1}(U)$. Applying the tube lemma, we find an open set $V$ containing
+    $x_0$ for which $V\times I\subset F^{-1}(U)$. In particular, this means that
+    for all $v\in V$, we have that $F(v,t)\in U$ for all $t$.
+
+    Now we are ready to show that the inclusion map from $V$ to $U$ is
+    nullhomotopic. We note that $F\circ(i\times \mathbbm{1}_I):V\times I\to U$
+    defines a homotopy from $f_0\circ i = i$ to $f_1\circ i = c_{x_0}$, where
+    $c_{x_0}$ is the constant function to $x_0$. This is clear, since the image
+    of $i$ is $V\subset U$, and the image of $V$ under $F$ is always in $U$, as
+    proved above. Thus, since the domain of $F$ matches the image of $i$, and
+    the image of $F$ stays inside $U$, this is a well-defined homotopy.
+
+    Therefore, $i\simeq c_{x_0}$ as desired.
+\end{proof}
+
+\section*{Problem 5} %Hatcher 0.6
+Consider the subspace $X\subset \R^2$ defined as
+\[
+    X = [0,1]\times\{0\} \cup \bigcup_{r\in\Q}\{r\}\times[0,1-r]
+\]
+\subsection*{Part a}
+Show that $X$ deformation retracts to any point in $[0,1]\times\{0\}$, but not
+any other point.
+\\
+\\
+\begin{proof}
+    To construct the deformation retraction of $X$ to a point in the interval
+    $[0,1]\times\{0\}$, we first note that $X$ deformation retracts onto
+    $[0,1]\times\{0\}$ via the straight-line homotopy along the $y$-axis. It is
+    clear also that the unit interval deformation retracts to any point on it
+    via the straight-line homotopy along the $x$-axis. Running the first
+    homotopy for the first half time, and running the second homotopy for the
+    second half time yields a deformation retraction of $X$ onto a point in the
+    interval $[0,1]\times\{x\}$.
+
+    Now, consider a point $x$ not in the base interval. Consider also a
+    neighborhood $U$ of $x$ that does not intersect the base interval. Any
+    neighborhood $V\subset U$ containing $x$ will necessarily intersect at least
+    one other stalk than the one $x$ is in (since the rationals are dense in
+    $\R$), and these stalks will not be connected, since $V$ does not intersect
+    the base interval. Thus, the inclusion map of $V$ into $U$ cannot be
+    nullhomotopic, and by problem 4, we know that $X$ therefore cannot
+    deformation retract onto $x$.
+\end{proof}
+
+\subsection*{Part b}
+Let $Y$ be the subset of $\R^2$ that is the union of infinite copies of $X$ in a
+zigzag pattern. Show that $Y$ is contractible, but does not deformation retract
+onto any point.
+\\
+\\
+\begin{proof}
+    To show that $Y$ is contractible, we reference part c of this problem, which
+    asserts the existence of a deformation retraction in the weak sense of $Y$
+    onto the zigzag subspace $Z$. Now, problem 3 guarantees that if $Y$
+    deformation retracts onto $Z$ in the weak sense, then the inclusion $i:Z\to
+    Y$ is a homotopy equivalence, and thus $Y$ and $Z$ have the same homotopy
+    type. However, $Z$ is homeomorphic to $\R$, which has the homotopy type of a
+    point. Therefore, by transitivity of the homotopy equivalence, $Y$ has the
+    homotopy type of a point as well.
+
+    Now, we must show that $Y$ does not deformation retract onto any point. To
+    do so, we look at any point $x$ in $Y$. If $x$ is not in $Z$, the same
+    argument from part a can be applied to show that $Y$ cannot deformation
+    retract onto $x$. If $x$ is in $Z$, we observe that $x$ is actually in a
+    stalk of the copy of $X$ running parallel to the line segment of $Z$ that
+    $x$ is on. Noting then that $x$ is on a stalk, we apply the same argument as
+    the one in part a to see that $Y$ cannot deformation retract onto $x$.
+\end{proof}
+
+\subsection*{Part c}
+Let $Z$ be the zigzag subspace of $Y$ homeomorphic to $\R$. Show that there is a
+deformation retraction in the weak sense of $Y$ onto $Z$, but no true
+deformation retraction. 
+\\
+\\
+\begin{proof}
+     We can construct a deformation retraction in the weak sense explicitly for
+     $Y$ onto $Z$. For each stalk, we define its ``direction of motion'' to be
+     towards $Z$, and on $Z$ we define its ``direction of motion'' to be towards
+     the right. Now, the deformation retraction in the weak sense sends points
+     at constant velocity $1$ along the direction of motion. Away from $Z$, this
+     is clearly continuous, and on $Z$, we see that all points are moving at the
+     same speed, so whatever stalks $Z$ is close to are retracting at the same
+     speed $Z$ itself is moving. Thus, points stay close to each other, and the
+     motion is continuous. This is a weak deformation retraction, since it does
+     not fix any point in $Z$.
+
+     However, there is no true deformation retraction of $Y$ onto $Z$, since if
+     there were, it could be concatenated with a deformation retraction of $Z$
+     onto a point in $Z$ to yield a deformation retraction of $Y$ onto a point
+     in $Z\subset Y$. However, this would contradict part b, and so no such
+     deformation retraction can exist.
+\end{proof}
 
 \end{document}
