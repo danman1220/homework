@@ -25,6 +25,7 @@
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
 \usepackage{mathrsfs}
 \usepackage{bbm}
+\usepackage{tikz-cd}
 
 \usepackage[margin=1in]{geometry}
 
@@ -190,6 +191,8 @@ such that the inclusion map $V\to U$ is nullhomotopic.
     Therefore, $i\simeq c_{x_0}$ as desired.
 \end{proof}
 
+\newpage
+
 \section*{Problem 5} %Hatcher 0.6
 Consider the subspace $X\subset \R^2$ defined as
 \[
@@ -261,13 +264,114 @@ deformation retraction.
      same speed, so whatever stalks $Z$ is close to are retracting at the same
      speed $Z$ itself is moving. Thus, points stay close to each other, and the
      motion is continuous. This is a weak deformation retraction, since it does
-     not fix any point in $Z$.
+     not fix any point in $Z$, but every point in $Z$ gets mapped to (for
+     example, by the point exactly one unit of length before it on $Z$). 
 
      However, there is no true deformation retraction of $Y$ onto $Z$, since if
      there were, it could be concatenated with a deformation retraction of $Z$
      onto a point in $Z$ to yield a deformation retraction of $Y$ onto a point
      in $Z\subset Y$. However, this would contradict part b, and so no such
      deformation retraction can exist.
+\end{proof}
+
+\newpage
+
+\section*{Problem 6}
+Prove that the homotopy $F$ from the proof of lemma 1.2 is continuous.
+\\
+\\
+\begin{proof}
+Recall from the proof of lemma 1.2 that we have the following diagram
+    \[
+        \begin{tikzcd}
+            Z\times I \arrow{r}{\tilde{F}}\arrow{d}{\pi} & Z\arrow{d}{\pi}\\
+            M_f\times I\arrow{r}{F} & M_f
+        \end{tikzcd}
+    \]
+    Where $\tilde{F}$ was previously defined, and $F$ is such that the diagram
+    commutes. Now, $F$ is unique, since the nontrivial fibers of $\pi$ are stable with
+    respect to $\tilde{F}$.  This is clear, since $\tilde{F}$ is a homotopy
+    relative to $(X\times 1)\coprod Y$, and so it fixes that subspace.
+
+    Now, we wish to show that $F$ is continuous. That is, we wish to show that
+    $F^{-1}(U)$ is open for every $U\in M_f$ open.
+    Recall first that for a quotient space $\begin{tikzcd}X\arrow{r}{\pi}
+    &Y\end{tikzcd}$, a
+    subset $U\subset Y$ is open if and only if $\pi^{-1}(U)$ is open in $X$.
+    Thus, to show that $F^{-1}(U)$ is open, we wish to show that
+    $\pi^{-1}\circ F^{-1}(U)$ is open. However, by commutativity of the diagram,
+    this amounts to showing that $\tilde{F}^{-1}\circ\pi^{-1}(U)$ is open.
+
+    Now, $\pi^{-1}(U)$ is open in $Z$ by the definition of the quotient
+    topology. Furthermore, since $\tilde{F}$ is continuous,
+    $\tilde{F}^{-1}(\pi^{-1}(U))$ is also open. Thus, it follows that
+    $F^{-1}(U)$ is open as well, and $F$ is continuous.
+\end{proof}
+
+\newpage
+
+\section*{Problem 7}
+Show that for homotopies $F,G:X\times I \to Y$ such that $F(x,1) = G(x,0)$, the
+concatenation homotopy $H:X\times I\to Y$ given by
+\[
+    H(x,t) =
+    \begin{cases}
+        F(x,2t), & t\in[0,\frac{1}{2}]\\
+        G(x,2(t-\frac{1}{2})), &t\in [\frac{1}{2},1]
+    \end{cases}
+\]
+is continuous.
+\\
+\\
+\begin{proof}
+    Let us reinterpret the question. Consider the
+    quotient space $(Z = X\times I_1 \coprod X\times I_2)/{\sim}$ for
+    $(x,1_1)\sim(x,0_2)$ with $1_1\in I_1, 0_2\in I_2$. That is, glue two copies
+    of $X\times I$ to each other along the surface $X\times\{1\}$ and
+    $X\times\{0\}$.
+
+    Now, this space is homeomorphic to $X\times I$ via the homeomorphism that
+    sends $(x,t)$ to $(x,\frac{t}{2})$. Furthermore, we can define $\tilde{H}$ on
+    $Z$ as
+    \[
+        \tilde{H}(x,t) = 
+        \begin{cases}
+            F(x,t), &t\in I_1\\
+            G(x,t), &t\in I_2
+        \end{cases}
+    \]
+    This function will be well-defined with respect to the quotient, since if
+    $(x,t_1)\sim(x,t_2)$, then it must be that $t_1=1,t_2=0$, and we are
+    guaranteed that $F(x,1)=G(x,0)$. That is, $\tilde{H}$ is constant on the nontrivial
+    fibers of the quotient map.
+    
+    Therefore, we can construct a map $H':Z/{\sim}\to Y$ to be the unique
+    function that makes the diagram
+    \[
+        \begin{tikzcd}
+            Z\arrow{r}{\tilde{H}}\arrow{d}{\pi} &Y\\
+            Z/{\sim}\arrow{ur}{H'}
+        \end{tikzcd}
+    \]
+    commute. It is easy to see that such an $H'$ is continuous. First, observe
+    that $\tilde{H}$ is continuous, since it maps from the coproduct space $Z$
+    and is continuous on each copy of $X\times I$. The universal property of
+    coproducts then guarantees that $\tilde{H}$ itself is continuous.
+    Then, applying a similar argument to the one in problem 6, we find that $H'$
+    is continuous as well.
+
+    It is clear that $H$ and $H'$ coincide up to homeomorphism.
+    That is, the diagram
+    \[
+        \begin{tikzcd}
+            Z/{\sim}\arrow{r}{H'}\arrow{d}{\cong} &Y\\
+            X\times I \arrow{ru}{H}
+        \end{tikzcd}
+    \]
+    commutes. Now, since $H'$ is continuous, it follows immediately that $H$ is
+    continuous as well.
+
+    
 \end{proof}
 
 \end{document}
