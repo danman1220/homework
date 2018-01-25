@@ -1,0 +1,215 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 1 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+
+\section*{Problem 1}
+Let $\mathscr{F}$ be the set of all measurable functions which are finite
+$\mu$-a.e. on $\Omega$.
+
+\subsection*{Part a}
+Prove $\mathscr{F}$ is a vector space.
+\\
+\\
+\begin{proof}
+    We first note that $\mathscr{F}$ is a subset of the vector space of all
+    measurable functions (modulo functions zero $\mu$-a.e.). We just need to
+    show, then, that $\mathscr{F}$ is closed under addition and scalar
+    multiplication.
+
+    So, let $f$ and $g$ be measurable functions that are finite $\mu$-a.e. on
+    $\Omega$. Now, let's consider $f+g$. If $x\in\Omega$ is such that $f(x)$ and
+    $g(x)$ are finite, then the sum $f(x)+g(x)$ is finite. Let $E$ be the set of all
+    such $x$. We will show that $\Omega\setminus E$ has measure zero, so that
+    $f+g$ is finite $\mu$-a.e.
+
+    To see that $\Omega\setminus E$ has measure zero, we note that
+    $\Omega\setminus E =
+    \{|f| = \infty\}\cup \{|g| = \infty\}$. Now, since $f$ and $g$ are finite
+    $\mu$-a.e., we know that each of these sets has measure zero, and so the
+    union $\Omega\setminus E$ has measure zero as well. Thus, $f+g$ is finite
+    $\mu$-a.e.
+
+    It is immediately clear as well that for arbitrary scalar $\alpha$, we have
+    that $\alpha f$ is also finite $\mu$-a.e., since for $x\in \{|f|<\infty\}$,
+    we have that $|f(x)|<\infty$, which implies that $|\alpha f(x)|<\infty$ as
+    well.
+
+    Thus, $\mathscr{F}$ is an algebraically closed subspace of a vector space,
+    and is a vector space itself.
+\end{proof}
+
+\subsection*{Part b}
+Prove that $\mathscr{F}$ is a metric space with the metric
+\[
+    d(f,g) = \int_{\Omega}\frac{|f-g|}{1+|f-g|}d\mu
+\]
+\begin{proof}
+    To show that $d$ is a metric, we need to show that $d(f,f)=0$, $d(f,g)>0$
+    for $f\neq g$, and the triangle inequality $d(f,h)\leq d(f,g)+d(g,h)$.
+
+    It is clear that $d(f,f)=0$, since this amounts to
+    \[
+        \begin{aligned}
+            d(f,f) &= \int_{\Omega}\frac{|f-f|}{1+|F-f|}d\mu\\
+                    &=\int_{\Omega}\frac{0}{1}d\mu\\
+                    &=0
+        \end{aligned}
+    \]
+
+    Now, suppose $f$ and $g$ differ on a positive-measure set $E$. In other
+    words, $|f-g|\neq 0$ on $E$. Now, since $|f-g|$ is positive on $E$,
+    $\frac{|f-g|}{1+|f-g|}$ is as well. Thus, $\frac{|f-g|}{1+|f-g|}\neq 0$ in
+    $L^1$, and so $\|\frac{|f-g|}{1+|f-g|}-0\|_{L^1}
+    =\int_{\Omega}\frac{|f-g|}{1+|f-g|}d\mu >0$ as desired.
+
+    Finally, we wish to prove the triangle inequality. This will follow from the
+    convexity of the function $\frac{x}{1+x}$. That is, for
+    $f,g,h\in\mathscr{F}$, we have that
+    %TODO finish
+\end{proof}
+
+\subsection*{Part c}
+Show that $d$ metrizes the convergence in measure.
+\\
+\\
+\begin{proof}
+Suppose first that $f_n\to f$ in $\mu$. That is, for all $t>0$,
+    \[
+        \mu(\{|f_n-f|>t\})\to 0
+    \]
+    Now, consider the integral
+    \[
+        \begin{aligned}
+            \int_{\Omega}\frac{|f_n-f|}{1+|f_n-f|}d\mu
+            &= \int_{\{|f_n-f|\leq t\}}\frac{|f_n-f|}{1+|f_n-f|}d\mu +
+            \int_{\{|f_n-f|>t\}}\frac{|f_n-f|}{1+|f_n-f|}d\mu\\
+            &\leq \int_{\{|f_n-f|\leq t\}}\frac{t}{1+t}d\mu +
+            \int_{\{|f_n-f|>t\}}1d\mu\\
+        \end{aligned}
+    \]
+    Now, the first term goes to zero as $t$ goes to zero, and the second term
+    is just $\mu(\{|f_n-f|>t\})$, which goes to zero as $n$ goes to infinity.
+    Thus, the expression goes to zero, and $d(f_n,f)$ goes to zero, as desired.
+
+    Now, suppose $d(f_n,f)$ goes to zero. We wish to prove that for all $t>0$,
+    $\mu(\{|f_n-f| > t\})\to 0$. To do so, we consider
+    \[
+        \begin{aligned}
+            d(f_n,f) &= \int_{\Omega}\frac{|f_n-f|}{1+|f_n-f|}d\mu\\
+            &= \int_{\{|f_n-f|>t\}}\frac{|f_n-f|}{1+|f_n-f|}d\mu +
+                \int_{\{|f_n-f|\leq t\}}\frac{|f_n-f|}{1+|f_n-f|}d\mu\\
+            &\geq\int_{\{|f_n-f|>t\}}\frac{|f_n-f|}{1+|f_n-f|}d\mu\\
+            &\geq\int_{\{|f_n-f|>t\}}\frac{t}{1+t}d\mu
+            &=\frac{t}{1+t}\mu(\{|f_n-f|>t\})
+        \end{aligned}
+    \]
+    and since $d(f_n,f)$ goes to zero, so does
+    $\frac{t}{1+t}\mu(\{|f_n-f|>t\})$, which implies that for fixed $t>0$,
+    \[
+        \mu(\{|f_n-f|>t\})\to 0
+    \]
+    as well.
+\end{proof}
+
+%TODO more
+
+\section*{Problem 5}
+Construct a sequence of $L^1$ functions that converge $\mu$-a.e. to an $L^1$
+function, but do not converge in $L^1$ norm. Show that such a sequence is not
+uniformly integrable, and describe the concentration phenomenon.
+\\
+\\
+\begin{proof}
+    Consider the sequence
+    \[
+        f_n = n\chi_{[0,\frac{1}{n}]}
+    \]
+    which converges $\mu$-a.e. to the zero function. However, in $L^1$ norm, we
+    have that
+    \[
+        \begin{aligned}
+            \|f_n-0\|_{L^1} &= \int_{\R}|f_n-0|d\lambda^1\\
+                            &= \int_{\R}n\chi_{[0,\frac{1}{n}]}d\lambda^1\\
+                            &= \int_{[0,\frac{1}{n}]}nd\lambda^1\\
+                            &=1
+        \end{aligned}
+    \]
+    which does not go to zero as $n$ goes to infinity.
+
+    %TODO finish
+\end{proof}
+
+
+\end{document}
