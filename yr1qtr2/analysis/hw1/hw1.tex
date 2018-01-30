@@ -135,12 +135,30 @@ Prove that $\mathscr{F}$ is a metric space with the metric
     =\int_{\Omega}\frac{|f-g|}{1+|f-g|}d\mu >0$ as desired.
 
     Finally, we wish to prove the triangle inequality. This will follow from the
-    convexity and monotonicity of the function $\frac{x}{1+x}$. That is, for
-    $f,g,h\in\mathscr{F}$, we have that
-
+    convexity and monotonicity of the function $\rho(x) = \frac{x}{1+x}$. Recall
+    that $\rho$ being convex means
     \[
-
+        \rho(x+y)\leq \rho(x) + \rho(y)
     \]
+    and $\rho$ being monotonic means
+    \[
+        x\leq y \implies \rho(x)\leq \rho(y)
+    \]
+    With these equipped, we are ready to prove the triangle inequality.
+
+    We wish to show that
+    \[
+        \rho(|f-g|) \leq \rho(|f-h|)+\rho(|h-g|)
+    \]
+    To do so, we observe that
+    \[
+        \begin{aligned}
+            \rho(|f-h|) + \rho(|h-g|) &\leq \rho(|f-h|+|h-g|)\\
+            &\leq \rho(|f-g|)
+        \end{aligned}
+    \]
+    where the last line followed by monotonicity of $\rho$ and the triangle
+    inequality for the norm.
 \end{proof}
 
 \subsection*{Part c}
@@ -188,8 +206,120 @@ Suppose first that $f_n\to f$ in $\mu$. That is, for all $t>0$,
 
 \section*{Problem 2}
 \subsection*{Part a}
+Prove that
+\[
+    \limsup_j \{\phi_j\geq t\} \subset \{x\ |\ \limsup_j \phi_j(x) \geq t\}
+\]
+and show that the set containment is proper with a counterexample.
+\\
+\\
+\begin{proof}
+    Let $x\in\Omega$ such that $x\in\limsup_j \{\phi_j\geq t\}$. That is, $x$ is
+    in infinitely many sets $\{\phi_j \geq t\}$. This implies that
+    \[
+        \begin{aligned}
+            &\forall m\in \N, \exists n>m \textrm{ s.t. } \phi_n(x)\geq t\\
+            \implies &\forall m\in \N, \sup_{n>m}\phi_n(x)\geq t\\
+            \implies &\inf_m\sup_{n>m}\phi_n(x) \geq t\\
+            \implies &\limsup_n\phi_n(x) \geq t
+        \end{aligned}
+    \]
+    and thus $x\in\{x\ |\ \limsup_j \phi_j(x) \geq t\}$ as desired.
 
-%TODO more
+    To show containment is proper, consider the sequence of constant functions
+    on $[0,1]$ defined by $\phi_n(x) = 1-\frac{1}{n}$.
+
+    Now, we set $t=1$. For each $x\in[0,1]$, we have that
+    \[
+        \limsup_n\phi_n(x) = \limsup_n 1-\frac{1}{n} = 1
+    \]
+    and so $\{x\ |\ \limsup_j \phi_j(x) \geq 1\} = [0,1]$. However, for each
+    $n$, we have that
+    \[
+        \{\phi_n\geq 1\} = \emptyset
+    \]
+    and so
+    \[
+        \limsup_n \{\phi_n\geq 1\} = \emptyset
+    \]
+    which is clearly not $[0,1]$ as desired.
+\end{proof}
+
+\subsection*{Part b}
+Prove that
+\[
+    \limsup_j \{\phi_j > t\} \supset \{x\ |\ \limsup_j \phi_j(x) > t\}
+\]
+and show that the set containment is proper with a counterexample.
+\\
+\\
+\begin{proof}
+    Suppose $x\in\Omega$ with $\limsup_j\phi_j(x)>t$. In particular, this means
+    that
+    \[
+        \begin{aligned}
+            &\inf_m\sup_{n>m}\phi_n(x) > t\\
+            \implies &\forall m\in \N, \sup_{n>m} \phi_n(x) > t\\
+            \implies &\forall m\in N, \exists n>m, \phi_n(x) > t\\
+            \implies &\phi_n(x) > t \textrm{ for infinitely many }\phi_n\\
+            \implies &x\in\limsup_j\{\phi_j > t\}
+        \end{aligned}
+    \]
+    as desired.
+
+    Now to see the containment may be strict, consider the sequence of functions
+    on $[0,1]$ defined by
+    \[
+        \phi_n(x) = \frac{1}{n}
+    \]
+    with $t=0$. Now, clearly $\{\phi_n > 0\} = [0,1]$ for all $n$, but for any
+    $x\in[0,1]$, we have that $\limsup_n\phi_n(x) = 0$ and so
+    \[
+        \{x\in [0,1]\ |\ \limsup_n\phi_n(x)>0\} = \emptyset
+    \]
+    and the sets are not equal.
+\end{proof}
+
+\section*{Problem 3}
+Where in the proof of (notes 4.11) was the finiteness of $\Omega$ used? Can this
+hypothesis be omitted?
+\\
+\\
+\begin{proof}
+In the proof of the Borel-Cantelli lemma, we assert that for a decreasing
+    sequence of sets $F_n$,
+    \[
+        \mu(\lim F_n) = \lim(\mu(F_n))
+    \]
+    which requires the space to be finite. More specifically, passing the
+    measure through the limit requires the first set in the sequence to be
+    finite measure. This was never asserted in the proof of 4.11.
+
+    However, it is easy to see that (after passing to a sufficient subsequence)
+    the set $F_1 = \cup_{l>1}E_{j_{k_l}}^{\frac{1}{l}}$ is of finite measure. Just
+    take $j_{k_l}$ to be the first term in the sequence $j_k$ such that
+    $\{g_{j_{k_l}} < \frac{1}{l}\}$ is finite.
+\end{proof}
+
+\section*{Problem 4}
+Where in the proof of (notes 4.13) was the finiteness of $\Omega$ used? can this
+hypothesis be omitted?
+\\
+\\
+\begin{proof}
+    Again, in the proof (eqn 4.4) we use the fact that the limit of a monotonic
+    sequence of sets commutes with the measure, which is only true if the space
+    is finite measure.
+
+    However, in this case, the hypothesis that $\Omega$ is finite cannot be
+    dropped. Consider as a counterexample the sequence of functions
+    \[
+        f_n = \chi_{[n,n+1]}
+    \]
+    which converge pointwise to zero. However, removing any set of finite
+    measure does not change the fact that this sequence does not converge
+    uniformly. 
+\end{proof}
 
 \section*{Problem 5}
 Construct a sequence of $L^1$ functions that converge $\mu$-a.e. to an $L^1$
@@ -214,8 +344,43 @@ uniformly integrable, and describe the concentration phenomenon.
     \]
     which does not go to zero as $n$ goes to infinity.
 
-    %TODO finish
+    This sequence however is not uniformly integrable. To see this, let
+    $\epsilon=\frac{1}{2}$, and let $\delta$ be arbitrary. Choose $n$ such that
+    $\frac{1}{n}<\delta$. Then,
+    \[
+        \int_{[0,\delta]}f_nd\mu \geq
+        \int_{[0,\frac{1}{n}]}n\chi_{[0,\frac{1}{n}]}d\mu = 1
+    \]
+    which is certainly greater than $\epsilon$.
+
+    This is because the sequence of functions has a ``concentration'' at zero,
+    where more and more of the mass of the function is being compressed to.
 \end{proof}
 
+\section*{Problem 6}
+Prove the dominated convergence theorem for convergence in measure.
+\\
+\\
+\begin{proof}
+    Recall that a sequence of real numbers $x_n$ converges to $x$ if each
+    subsequence of $x_n$ has a sub-subsequence that converges to $x$.
+
+    So, let $f_n$ be a sequence of functions converging to $f$ in measure, and
+    let $g$ be such that $|f_n|<g$ $\mu$-almost everywhere.
+
+    Now, let $f_{n_j}$ be an arbitrary subsequence. We know that $f_{n_j}$
+    converges in measure to $f$, so we can find a subsequence $f_{n_{j_k}}$ that
+    converges pointwise to $f$. Applying the old dominated convergence theorem
+    to this sequence yields
+    \[
+        \lim\int f_{n_{j_k}} = \int f
+    \]
+    Thus since every subsequence of the sequence $\int f_n$ has a
+    sub-subsequence that converges to $f$, it follows that
+    \[
+        \lim\int f_n = \int f
+    \]
+    as desired.
+\end{proof}
 
 \end{document}
