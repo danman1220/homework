@@ -276,4 +276,211 @@ This distance, denoted $d(p,q)$, turns out to metrize the manifold.
 Show that the topology on $M$ coincides with the metric topology from $d$.
 \end{hw}
 
+\begin{hw}
+    Show that for $(\R^n,g_{\R^n})$, $d(p,q) = \|p-q\|$.
+\end{hw}
+
+\subsection{Connections on a Riemannian Manifold}
+Let $(M^n,g)$ be a smooth Riemannian Manifold, $X\in\mathfrak{X}(M)$. We wish to
+take the derivative of this vector field. Recall that the Lie derivative allows
+us to take the derivative of $X$ along another vector field $Y$, however this
+operation is not linear with respect to the module of smooth functions. That is,
+\[
+    L_X(fY) = fL_XY + (Xf)Y
+\]
+Also, the Lie derivative is not defined for a single point, since it takes into
+account the motion of $X$ around any particular point.
+
+What we really want is $\nabla_v$, the covariant derivative.
+
+\begin{defn}
+    A {\em Connection} is a map
+    \[
+        \begin{aligned}
+            \nabla: &\mathfrak{X}(M)\times \mathfrak{X}(M)\to\mathfrak{X}(M)
+            &(X,Y)\mapsto \nabla_XY
+        \end{aligned}
+    \]
+    such that $\nabla_XY$ is linear in both $X$ with respect to the module
+    $C^{\infty}(M)$, scalar linear in $Y$ and satisfies the Leibniz rule
+    \[
+        \nabla_X(fY) = (Xf)Y + f\nabla_XY
+    \]
+\end{defn}
+\begin{defn}
+    A {\em Connection} is the following: for each $p\in M$, we have a map
+    $\nabla: T_pM\times C^{\infty}(TM)\to T_pM$ that sends $(v,Y)$ to
+    $\nabla_vY$. Such that $\nabla$ is linear in $v$, linear in $Y$, and
+    satisfies the Leibniz rule
+    \[
+        \nabla_v(fY) = (vf)Y_p + f(p)\nabla_v(Y)
+    \]
+    and, for all $X,Y$ in $\mathfrak{X}(M)$, $\nabla_XY\in\mathfrak{X}(M)$ where
+    \[
+        (\nabla_XY)_p = \nabla_{X_p}Y
+    \]
+\end{defn}
+
+Interpreting $\nabla$ as an operator from $\mathfrak{X}(M)$, we see that it
+actually adds a covariant index. That is,
+\[
+    \nabla_{\mu}v^{\nu}
+\]
+takes in a vector, and outputs a $(1,1)$ tensor.
+
+\begin{ex}
+    The directional derivative in $\R^n$ yields a connection. For $v\in
+    T_x\R^n$, and $X$ a smooth vector field on $\R^n$, we have
+    \[
+        D_{(x,v)}X = \partial_tX(x+tv)|_{t=0}
+    \]
+    and we define $\nabla_vX = (x,D_{(x,v)}X)$
+\end{ex}
+
+Now, on $TM$ for a general Riemannian manifold, there are many different
+connections. However, given a metric, we have a unique metric compatible,
+torsion-free connection called the {\em Levi-Civita Connection}.
+
+\begin{theorem}
+    For $M$ a smooth Riemannian manifold, then there exists a unique connection
+    $\nabla$ on $TM$ such that
+    \begin{itemize}
+        \item $\nabla$ is symmetric i.e.
+            \[
+                \nabla_XY -\nabla_YX = [X,Y]
+            \]
+            (The Christoffel symbols are symmetric in lower indices)
+        \item $\nabla$ is metric-compatible. That is,
+            \[
+                \nabla g = 0
+            \]
+            or
+            \[
+                \nabla_{\gamma}g_{\mu\nu}v^{\nu} =
+                g_{\mu\nu}\nabla_{\gamma}v^{\nu}
+            \]
+            or
+            \[
+                Xg(Y,Z) = g(\nabla_XY,Z) + g(Y,\nabla_XZ)
+            \]
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    See Carroll (p.99) for an explicit construction of the torsion free, metric
+    compatible connection in terms of the components of $g$.
+    The formula is
+    \[
+        \Gamma_{\mu\nu}^{\gamma} = \frac{1}{2}g^{\gamma\rho}
+        (\partial_{\mu}g_{\nu\rho} +
+        \partial_{\nu}g_{\mu\rho}-\partial_{\rho}g_{\mu\nu})
+    \]
+\end{proof}
+\begin{hw}
+    Prove that the resulting connection is indeed a connection.
+\end{hw}
+
+Now to prove that the two definitions of a connection coincide.
+
+From the local to the global definition is trivial, so we wish to prove that we
+can localize the global definition.
+
+\begin{proof}
+    Consider a smooth connection $\nabla$ on $M$. Let $U\subset M$ be open, and
+    $Y$ a smooth vector field on $M$, $X$ a smooth vector field on $U$. 
+
+    Now, for $p\in U$, choose a smooth function $\eta$ on $M$ such that $\eta=1$
+    in a neighborhood $V_1$ of $p$, and $\eta=0$ on $M\setminus V_2$ with
+    $\overline{V_1}\subset V_2$, $\overline{V_2}\subset U$ and $\overline{V_i}$
+    compact.
+
+    \begin{hw}
+        Construct a one-dimensional smooth bump function on $\R$
+    \end{hw}
+
+    Now, set $\tilde{X}=\eta X$, which is defined globally on $M$.
+    We can now define
+    \[
+        \nabla_XY|_{V_1} = \nabla_{\tilde{X}}Y|_{V_1}
+    \]
+    and we can do this for every point $p\in M$. Now, we must show that such a
+    construction is unique. 
+    
+    Suppose instead that we chose a different $V_1',V_2',\eta'$. We have a new
+    globally-defined vector field $X'=\eta' X$, and we wish to show that
+    $\nabla_{\tilde{X}}Y = \nabla_{X'}Y$ at $p$.
+
+    So, we construct
+    \[
+        \begin{aligned}
+            \nabla_{\tilde{X}}(Y) - \nabla_{X'}(Y) &= \nabla_{\tilde{X}-X'}Y\\
+        \end{aligned}
+    \]
+    Now, we know that $\tilde{X}-X'$ is zero at (and nearby) $p$, so
+    \[
+        \tilde{X} -X' = \zeta(\tilde{X}-X')
+    \]
+    \begin{hw}
+        Construct $\zeta$.
+    \end{hw}
+    So, we have that
+    \[
+        \begin{aligned}
+            \nabla_{\tilde{X}-X'} &= \nabla_{\zeta(\tilde{X}-X')}\\
+            &= \zeta\nabla_{\tilde{X}-X'}\\
+            &=0
+        \end{aligned}
+    \]
+    and so they agree around $p$.
+
+    Next, consider $p\in M$, with $Y$ a smooth vector field. Choose a coordinate
+    chart $(U,\phi)$ around $p$, with $v\in T_pM$, $v = v^i\partial_i$.
+
+    Then, we set $\nabla_v Y = \nabla_{v^i\partial_i}Y =
+    v^i\nabla_{\partial_i}Y$, where we have already defined what
+    $\nabla_{\partial_i}$ should be, since $\partial_i$ is a locally defined
+    vector field.
+
+    Now, we need to show this is independent of coordinate charts. Let
+    $(V,\psi)$ be another coordinate chart, with $v = v^j\partial'_j$ for
+    coordinate field $\partial'_i$. The claim is that
+    \[
+        v^i\nabla_{\partial_i}Y = v^j\nabla_{\partial'_j}Y
+    \]
+    which is easily verified, since $J(\partial\to\partial')\nabla_{\partial_i}
+    = \nabla_{\partial'_j}$, and so
+    \[
+        v^j\nabla_{\partial'_j} = v^j\nabla_{J(\partial\to\partial')^j_i\partial_j}
+    \]
+    but $v^i = J^i_jb^j$, and so they agree.
+\end{proof}
+
+\subsection{The Levi-Cevita Connection}
+Recall that we have a unique torsion-free, metric compatible connection $\nabla$
+for any Riemannian manifold. We wish to localize this $\nabla$ further.
+
+\begin{def}
+    Let $\gamma$ be a smooth curve in $M$. A vector field $X$ {\em along
+    $\gamma$} is an assignment $X:I\to TM$ with $X(t) \in T_{\gamma(t)}M$ where
+    $X$ is called smooth if its coordinate decomposition
+    \[
+        X = \xi^i(t)\partial_i
+    \]
+    is smooth in each component.
+\end{def}
+
+\begin{def}
+    $\nabla_{\partial_t}X$ is define along $\gamma$ as follows: Let $I_{t_0}$ be an open
+    interval around $t_0$, which maps into chart $(U,\phi)$. Then,
+    \[
+        \begin{aligned}
+            \nabla_{\partial_t}X &= \nabla_{\partial_t}\xi^i(t)\partial_i\\
+                        &= \partial_t\xi^i(t)\partial_i +
+                        \xi^i(t)\nabla_{\partial_t}\partial_i\\
+                        &= \partial_t\xi^i(t)\partial_i +
+                        \xi^i(t)\nabla_{\partial_t\gamma}\partial_i\\
+        \end{aligned}
+    \]
+    which is already defined.
+\end{def}
+
 \end{document}
