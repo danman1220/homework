@@ -209,10 +209,30 @@ $f$ is a homotopy equivalence if $fg$ and $hf$ are homotopy equivalences.
     and so $f$ is a homotopy equivalence with homotopy inverse $g$.
 
     More generally, suppose $fg$ and $hf$ are homotopy equivalences. That is,
-    that there exist functions $g':Y\to Y$ and $h':X\to X$ such that
-    $fgg'\simeq g'fg\simeq \mathbbm{1}_Y$ and $hfh'\simeq h'hf\simeq
+    that there exist functions $\gamma:Y\to Y$ and $\delta:X\to X$ such that
+    $fg\gamma\simeq \gamma fg\simeq \mathbbm{1}_Y$ and $hf\delta\simeq \delta hf\simeq
     \mathbbm{1}_X$.
-    %TODO finish
+
+    Now, since $fg\gamma \simeq \mathbbm{1}_Y$, we have that (using Lemma 1)
+    \[
+        \begin{aligned}
+            h_*fg\gamma &\simeq h_*\mathbbm{1}_Y\\
+            hfg\gamma &\simeq h\\
+            \delta_*hfg\gamma &\simeq \delta_*h\\
+            \delta hfg\gamma &\simeq \delta h\\
+            g\gamma &\simeq \delta h
+        \end{aligned}
+    \]
+    Now, it is easily verified that $\delta hfg\gamma$ is a homotopy inverse for
+    $f$. To see this, note that
+    \[
+        \begin{aligned}
+            \delta hfg\gamma f &\simeq \delta hf &\simeq \mathbbm{1}_X\\
+            f\delta hfg\gamma &\simeq f\delta h &\simeq fg\gamma\simeq
+            \mathbbm{1}_Y
+        \end{aligned}
+    \]
+    and so $f$ is a homotopy equivalence.
 \end{proof}
 
 \section*{Problem 4}
@@ -364,7 +384,42 @@ Show that for a map $f:S^1\to S^1$, the mapping cylinder is a CW complex.
 \\
 \\
 \begin{proof}
-    
+    We will show that the mapping cylinder is actually the 1-skeleton $S^1\wedge
+    I\wedge S^1$ along with a single $2$-cell attached to it. To see this, we
+    note that the mapping cylinder is actually
+    \[
+        S^1_1\times I \coprod S^1_2/{(x_1,1)\sim f(x_1)}
+    \]
+    Now, $S^1\times I$ is just $I\times I/{(0,t)\sim (1,t)}$ and so the total
+    space is just
+    \[
+        \frac{I\times I \coprod S^1_2}{(0,t)\sim (1,t), (x_1,1)\sim f(x_1)}
+    \]
+    Which can be further decomposed into
+    \[
+        \frac{I_s\coprod S^1_1\coprod I\times I\coprod S^1_2}
+        {(s)_{I_s}\sim(0,s)_{I\times I}, (x)_{S^1_1}\sim (x,0)_{I\times I},
+        (0,t)_{I\times I}\sim (1,t)_{I\times I}, (x_1,1)_{I\times I}\sim
+        f(x_1)_{S^1_2}}
+    \]
+    Here, it is clear that $I_s$, $S^1_1$ and $S^1_2$ form a 1-skeleton. Now, we
+    can take the attaching map from $I\times I\cong D^2$ to the 1-skeleton as
+    \[
+        \begin{aligned}
+            \phi^2&:\partial(I\times I)\to X^1\\
+            \phi^2(0,s) &= s_{I_s}\\
+            \phi^2(1,s) &= s_{I_s}\\
+            \phi^2(x,0) &= x_{S^1_1}\\
+            \phi^2(x,1) &= f(x)_{S^1_2}
+        \end{aligned}
+    \]
+
+    Now, $I\times I$ is homeomorphic to $D^2$, and so we can consider $I\times
+    I$ to be a 2-cell we attach to the 1-skeleton. Since $\phi$ is a valid
+    attaching map,attaching $D^2$ along $\phi$ yields a 2-dimensional cell
+    complex. However, this construction is identical to the construction we
+    started with (constructing the mapping cylinder) and so the mapping cylinder
+    is a CW complex.
 \end{proof}
 
 \subsection*{Part b}
