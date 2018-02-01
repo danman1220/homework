@@ -74,36 +74,397 @@
 
 \maketitle % Print the title
 
+\section*{Preliminaries}
+Before the homework begins, we prove a few useful lemmas.
+\begin{lemma}
+    Let $g,h:X\to Y$ be homotopic maps. Then, for any function $f:Y\to Z$ for
+    arbitrary $Z$, the push-forwards $f_*g$ and $f_*h$ are also homotopic.
+    Similarly, if instead we have $f:Z\to X$, then the pullbacks $f^*g$ and
+    $f^*h$ are homotopic.
+\end{lemma}
+\begin{proof}
+    Let $g_t:X\to Y$ be a homotopy with $g_0=g$ and $g_1=h$. Then, for $f:Y\to
+    Z$, the homotopy $f_*g_t:X\to Z$ yields
+    \[
+        \begin{aligned}
+            f_*g_0 &= f_*g\\
+            f_*g_1 &= f_*h
+        \end{aligned}
+    \]
+    and so $f_*g$ is homotopic to $f_*h$.
+
+    Similarly, if $f:Z\to X$, the homotopy $f^*g_t:Z\to Y$ yields
+    \[
+        \begin{aligned}
+            f^*g_0 &= f^*g\\
+            f^*g_1 &= f^*h
+        \end{aligned}
+    \]
+    and so $f^*g$ and $f^*h$ are homotopic.
+\end{proof}
+
+\begin{lemma}
+    Let $X$ be a contractible space. Then, there exists a homotopy $f_t:X\to X$
+    with $f_0=\mathbbm{1}_X$ and $f_1=x_0$ the constant function to some $x_0\in
+    X$.
+\end{lemma}
+\begin{proof}
+    Since $X$ is contractible, it has the homotopy type of a point.
+    Specifically, there exists a homotopy equivalence $g:X\to\{\cdot\}$ with
+    homotopy inverse $h:\{\cdot\}\to X$.
+
+    Now, we will call $h(\{\cdot\}) = x_0$, since the image of $h$ has only one
+    point. Since $h$ is the homotopy inverse of $g$, it follows that
+    $hg\simeq\mathbbm{1}_X$ with homotopy $f_t:X\to X$ such that
+    $f_0=\mathbbm{1}_X$ and $f_1 = hg$. But $hg$ is easily verified to be the
+    constant map $x_0$, and the homotopy $f$ satisfies the conditions desired.
+\end{proof}
+
+
 % Problems
 \section*{Problem 1} %Hatcher 0.9
 Show that the retract of a contractible space is contractible.
 \\
 \\
 \begin{proof}
-    Let $X$ retract onto $A$ via $r:X\to X$, with $X$ a contractible space.
-    In particular, we have a homotopy equivalence $X\simeq \{\cdot\}$, and so
-    $\pi_1(X) = 0$.
+    Let $X$ retract onto $A$ via $r:X\to A$, with $X$ a contractible space.
+    We wish to show $A$ is contractible. To do so, we will show that every
+    map $g:A\to Y$ for arbitrary $Y$ is nullhomotopic (see next problem).
 
-    Now, we have the commutative diagram
+    Consider the commutative diagram
     \[
         \begin{tikzcd}
-            A\arrow[hook]{r}{i}\arrow[bend right=40]{rr}{\mathbbm{1}_A} &X\arrow[two heads]{r}{r} &A\\
+        A\arrow{r}{i}\arrow[bend right]{rr}{\mathbbm{1}_A} &X\arrow{r}{r}
+            &A\arrow{r}{g} &Y
         \end{tikzcd}
     \]
-    Now, since $\pi_1$ is a covariant functor from $Top^*$ to $Grp$, we can
-    apply it to the diagram above to obtain
-    \[
-        \begin{tikzcd}[row sep=small]
-             & 0 & \\
-            \pi_1(A)\arrow[hook]{r}{i_*}\arrow[bend right=40]{rr}{\mathbbm{1}_{\pi_1(A)}} 
-            &\pi_1(X)\arrow[two heads]{r}{r_*} \arrow[equal]{u}
-            &\pi_1(A)\\
-        \end{tikzcd}
-    \]
-    and since $\mathbbm{1}_{\pi_1(A)}$ factors through zero, it must be that
-    $\pi_1(A) = 0$ and thus $A$ is contractible.
+    Now, $gr$ defines a map from $X$ to $Y$, which we know is nullhomotopic by
+    the next problem. In particular, this means that $gr\simeq y_0$ for some
+    constant $y_0$, and by Lemma 1, we know that $i^*(gr)\simeq i^*(y_0)=y_0$.
+    But $i^*(gr)=gri=g$, and so $g\simeq y_0$.
+
+    Thus, since every map from $A$ to $Y$ is nullhomotopic, it follows that $A$
+    is contractible.
+
 \end{proof}
 
+\section*{Problem 2} %Hatcher 0.10
+Show that a space $X$ is contractible if and only if every map $f:X\to Y$ for
+any $Y$ is nullhomotopic. Similarly, show that $X$ is contractible if and only
+if every map $f:Y\to X$ for arbitrary $Y$ is nullhomotopic.
+\\
+\\
+\begin{proof}
+    This proof is broken into two parts, one for each iff statement.
 
+    For the first statement, we first assume $X$ is contractible, and let
+    $f:X\to Y$ be arbitrary. Now, since $x$ is contractible, we know that
+    $\mathbbm{1}_X\simeq x_0$ for some constant function $x_0$ (Lemma 2). 
+    Thus, it follows that $f_*\mathbbm{1}_X\simeq f_*x_0 = f(x_0)$ where
+    $f(x_0)$ is the constant function from $X$ to the point $f(x_0)$. Thus,
+    since $f_*\mathbbm{1}_X = f$, we have that $f$ is homotopic to a constant
+    map, and is nullhomotopic.
+
+    Now, suppose for every space $Y$ and every map $f:X\to Y$, $f$ is
+    nullhomotopic. In particular, take $Y=X$ and $f=\mathbbm{1}_X$. Then, it
+    follows immediately that $\mathbbm{1}_X$ is nullhomotopic, and $X$ is
+    contractible.
+    \\
+    \\
+    For the second statement, we first assume $X$ is contractible, and let
+    $f:Y\to X$ be arbitrary. Now, since $x$ is contractible, we know that
+    $\mathbbm{1}_X\simeq x_0$ for some constant function $x_0$ (Lemma 2). 
+    Thus, it follows that $f^*\mathbbm{1}_X\simeq f^*x_0 = x_0$.
+    Since $f^*\mathbbm{1}_X = f$, we have that $f$ is homotopic to a constant
+    map, and is nullhomotopic.
+
+    Conversely, suppose every map $f:Y\to X$ is nullhomotopic. Taking $Y=X$ and
+    $f = \mathbbm{1}_X$, we see that $\mathbbm{1}_X$ is homotopic to the
+    constant map, and thus $X$ is contractible.
+\end{proof}
+
+\section*{Problem 3} %Hatcher 0.11
+Show that $f:X\to Y$ is a homotopy equivalence if there exist maps $g,h:Y\to X$
+such that $fg\simeq\mathbbm{1}_Y$ and $hf\simeq\mathbbm{1}_X$. More generally, show that
+$f$ is a homotopy equivalence if $fg$ and $hf$ are homotopy equivalences.
+\\
+\\
+\begin{proof}
+    Suppose $f:X\to Y$ and there exist maps $g,h:Y\to X$ such that
+    $fg\simeq\mathbbm{1}_X$ and $hf\simeq\mathbbm{1}_Y$.
+    Now, from Lemma 1 we have that
+    \[
+        \begin{aligned}
+            gfh &= h^*(gf) \simeq h^*(\mathbbm{1}_X) = h\\
+            gfh &= g_*(fh) \simeq g_*(\mathbbm{1}_Y) = g
+        \end{aligned}
+    \]
+    and so $g\simeq h$. Then, again by Lemma 1, we have
+    \[
+        \begin{aligned}
+            fg &\simeq\mathbbm{1}_Y &\text{by hypothesis}\\
+            gf &=f^*g \simeq f^*h = hf\simeq \mathbbm{1}_X &\text{by Lemma 1}
+        \end{aligned}
+    \]
+    and so $f$ is a homotopy equivalence with homotopy inverse $g$.
+
+    More generally, suppose $fg$ and $hf$ are homotopy equivalences. That is,
+    that there exist functions $g':Y\to Y$ and $h':X\to X$ such that
+    $fgg'\simeq g'fg\simeq \mathbbm{1}_Y$ and $hfh'\simeq h'hf\simeq
+    \mathbbm{1}_X$.
+    %TODO finish
+\end{proof}
+
+\section*{Problem 4}
+Show that a homotopy equivalence $f:X\to Y$ induces a bijection between the set
+of path components of $X$ and the set of path components of $Y$, and that $f$
+restricts to a homotopy equivalence on each path component. Prove the same for
+components instead of path components. Deduce that if the components of $X$
+coincide with the path components of $X$, then the same is true for $Y$ homotopy
+equivalent to $X$.
+\\
+\\
+\begin{proof}
+    There is a functor $Path:Top\to Set$ which takes a space $X$ to the set of
+    its path components, and takes maps $f:X\to Y$ to induced maps
+    $\tilde{f}:Path(X)\to Path(Y)$ by mapping a path component $X_p$ to the path
+    component containing $f(X_p)$. This function is well-defined, since the
+    image of a path connected space is path connected.
+
+    This is functorial, since it sends the identity map in $Top$ to the identity
+    in $Set$ (since the identity in $Top$ will necessarily map path components
+    to themselves), and furthermore it respects composition. That is, for
+    $g:X\to Y$ and $f:Y\to Z$, we have
+    \[
+        \widetilde{fg} = \tilde{f}\tilde{g}
+    \]
+    This is easily verified by considering a path-component $X_p$ of $X$. Now,
+    we have that $\widetilde{fg}(X_p)$ is the path component containing
+    $fg(X_p)$, and $\tilde{f}\tilde{g}(X_p)$ is the path component containing
+    the image under $f$ of the path component containing $g(X_p)$. But this is
+    simply the path component containing $fg(X_p)$, and thus
+    $\widetilde{fg}=\tilde{f}\tilde{g}$ as desired.
+
+    Now we just have to show that such a functor is homotopy invariant. That is,
+    we wish to show that for $f\simeq g$, we have that $\tilde{f}=\tilde{g}$.
+    So, let $f,g:X\to Y$ be two homotopic maps, and let $X_p$ be a path
+    component of $X$. We wish to show that the path component containing
+    $f(X_p)$ also contains $g(X_p)$. That is, we wish to find a path from
+    $f(x_p)$ to $g(x_p)$ for all $x_p\in X_p$. 
+    
+    Let $F:X\times I\to Y$ be the
+    homotopy from $f$ to $g$. Fixing $x_p$, we have a function $F_{x_p}:I\to Y$
+    defined by $F_{x_p}(t) = F(x_p,t)$. This function has the property that
+    $F_{x_p}(0)=f(x_p)$ and $F_{x_p}(1)=g(x_p)$ since $F$ is the homotopy from
+    $f$ to $g$. Thus, $F_{x_p}$ defines a path from $f(x_p)$ to $g(x_p)$ and
+    therefore $\tilde{f}(X_p)=\tilde{g}(X_p)$. Since $X_p$ was arbitrary, we
+    have that $\tilde{f}=\tilde{g}$ as desired.
+
+    Thus, the $Path$ functor is homotopy invariant. In particular, if $X$ is
+    homotopy equivalent to $Y$ via a function $f:X\to Y$ with homotopy inverse
+    $g:Y\to X$ (that is, $fg\simeq\mathbbm{1}_Y$ and $gf\simeq\mathbbm{1}_X$),
+    we can apply $Path$ to find that 
+    \[
+        \tilde{f}\tilde{g} =
+        \widetilde{fg}=\mathbbm{1}_{Path(Y)}
+    \]
+    and 
+    \[
+        \tilde{g}\tilde{f} = \widetilde{gf}=\mathbbm{1}_{Path(X)}
+    \]
+    and so $\tilde{f}$ is a bijection with inverse $\tilde{g}$ between the set
+    of path components of $X$ and the set of path components of $Y$.
+    \\
+    \\
+    We now wish to show that $f$ restricts to a homotopy equivalence between the
+    corresponding path components of $X$ and $Y$. To see this, we first
+    show that a homotopy $F$ restricts to the path components in
+    a well-defined way. That is, if $F(x_p,0)$ is in a path component $X_p$,
+    then $F(x_p,t_0)$ is in that path component for all $t_0\in I$.
+
+    This is obvious, since the point $F(x_p,t_0)$ has a path from $F(x_p,0)$ to
+    it: namely, the path given by $F(x_p,\frac{t}{t_0})$. Thus, the homotopy $F$
+    is well-defined when restricted to a path component.
+
+    So, given that $f$ is a homotopy equivalence with homotopy inverse $g$, we
+    can consider the restriction of the homotopy $F$ between $gf$ and
+    $\mathbbm{1}$ on a path component to get a homotopy $F|_{X_p}$ from $gf$
+    restricted to $X_p$ and $\mathbbm{1}$ restricted to $X_p$.
+    Similarly it can be shown that $fg$ restricts on the path component
+    $Y_p$ to a map homotopic to $\mathbbm{1}_{Y_p}$, and thus we have that $f$
+    restricted to a path component is a homotopy equivalence.
+    \\
+    \\
+    We now wish to prove the same for the connected components of the space.
+    We can define a similar functor $Conn:Top\to Set$ taking a space $X$ to its
+    connected components, and a function $f:X\to Y$ mapping a connected
+    component $X_c$ to the connected component containing $f(X_c)$. In a similar
+    argument to the one above, it is easy to see that this is indeed a functor.
+    We wish to show that it is homotopy invariant.
+
+    Now, we argued in the previous part of this proof that if $f$ and $g$ are
+    homotopic to each other, then $f(x_c)$ is path connected to $g(x_c)$. Since
+    this is the case, it follows that $f(x_c)$ and $g(x_c)$ are in the same
+    connected component, and thus for connected component $X_c$, $f(X_c)$ and
+    $g(X_c)$ are in the same connected component. Thus, $\tilde{f}$ and
+    $\tilde{g}$ are equal, and the functor is homotopy invariant.
+
+    By a similar argument to the one made in the path component case, this means
+    that for $f$ a homotopy equivalence between $X$ and $Y$, $\tilde{f}$ defines
+    a bijection between $Conn(X)$ and $Conn(y)$, as desired.
+    \\
+    \\
+    Now, we wish to show that $f$ restricts to a homotopy equivalence between
+    the corresponding path components. Again, we just need to show that a
+    homotopy $F$ restricts to components in a well-defined way. That is,
+    $F(x_c,t)$ lies in the same component for all $t$.
+
+    However, we have already shown that $F(x_c,t)$ lies in the same path
+    component for all $t$, and it follows immediately that $F(x_c,t)$ lies in
+    the same connected component as well. Thus, $F$ restricts to the components
+    in a well-defined way.
+
+    By the same argument as the one made in the path connected case, this means
+    that the homotopy equivalence $f$ restricts to a homotopy equivalence
+    between the connected components of $X$ and $Y$, as desired.
+    \\
+    \\
+    Finally, we conclude that if $X$ and $Y$ are homotopy equivalent, and the
+    components of $X$ coincide with the path components of $X$, then the same is
+    true for $Y$. This is immediate by considering the fact that each component
+    $X_c$ is homotopy equivalent to its corresponding component
+    $\tilde{f}_c(X_c)$, and thus its path components are in bijection with each
+    other. Since $X_c$ has only one path component, so does $\tilde{f}_c(X_c)$
+    as desired.
+\end{proof}
+
+\section*{Problem 5}
+Show that two deformation retractions $r^0_t$ and $r^1_t$ from $X$ to $A\subset
+X$ can be joined by a continuous family of deformation retractions $r^s_t$,
+$s\in I$ of $X$ into $A$.
+\\
+\\
+\begin{proof}
+    We define $r_t^s$ to be
+    \[
+        r^s_t = 
+        \begin{cases}
+            r^0_{(1-2s)t}, &s\leq \frac{1}{2}\\
+            r^1_{2(s-\frac{1}{2})t}, &s\geq \frac{1}{2}
+        \end{cases}
+    \]
+    which is clearly continuous at $s=\frac{1}{2}$ since
+    $r^0_{(1-2(\frac{1}{2}))t} = r^0_0 = r^1_0 =
+    r^1_{2(\frac{1}{2}-\frac{1}{2})t}$.
+\end{proof}
+
+\section*{Problem 6}
+\subsection*{Part a}
+Show that for a map $f:S^1\to S^1$, the mapping cylinder is a CW complex.
+\\
+\\
+\begin{proof}
+    
+\end{proof}
+
+\subsection*{Part b}
+Construct a space with both the Mobius band and the annulus $S^1\times I$ as
+deformation retracts.
+\\
+\\
+\begin{proof}
+    Consider the space constructed as follows:
+    Start with the Mobius band $M$, and glue a copy of $S^1\times I$ along the map
+    that sends $S^1\times \{1\}$ via the identity to the equator $S^1\subset M$ of the
+    Mobius band. Since both the Mobius band and the annulus are CW complexes,
+    and the gluing is done between entire subcomplexes, it follows that this
+    construction yields a CW complex.
+
+    Now, the Mobius band deformation retracts onto its equator, and so this CW
+    complex deformation retracts in the same way by sending $M$ to its equator
+    and leaving $S^1\times I$ by itself. This yields just $S^1\times I$, as
+    desired.
+
+    $S^1\times I$ also deformation retracts onto $S^1\times \{1\}$, and so this
+    CW complex deformation retracts in the same way by leaving $M$ along and
+    sending $S^1\times I$ to $S^1\times \{1\}$. This yields just $M$, as
+    desired.
+\end{proof}
+
+\section*{Problem 7}
+Show that a CW complex is path connected if and only if its 1-skeleton is path
+connected.
+\\
+\\
+\begin{proof}
+    ($\implies$)
+    Suppose first that a CW complex $X$ is path connected. We will induct on the
+    dimension of $X$. The base case of $X$ being one dimensional means that
+    $X=X^1$ and thus the 1-skeleton is path connected.
+
+    Now suppose that this theorem holds for an $n-1$-dimensional CW complex. We
+    will show that any path in an $n$-dimensional CW complex starting and ending
+    on the $n-1$-skeleton is homotopic to a path in the $n-1$-skeleton rel the
+    start and end points.
+
+    To see this, we observe two key facts about paths through $n$-cells. First,
+    any path in the disk $D^n$ for $n>1$ can be homotoped so as to avoid passing the
+    center. Second, any path through the disk $D^n$ that avoids the center is
+    homotopic to a path along the boundary $\partial D^n$. This homotopy is just
+    the deformation retraction of $D^n\setminus\{0\}$ to $\partial D^n$ given by
+    radial projection. 
+
+    Thus, any path through an $n$-cell is homotopic to a path through the $n-1$
+    skeleton. Therefore, for any two points $x,y$ in the $n-1$-skeleton, there exists
+    a path from $x$ to $y$ (since $X$ is path connected) that stays in the $n-1$
+    skeleton. Thus, the $n-1$-skeleton is path-connected, and by the inductive
+    hypothesis, the $1$-skeleton is as well.
+    \\
+    \\
+    ($\impliedby$)
+    Suppose instead that for a CW complex $X$, its 1-skeleton is path connected.
+    Again we will induct on the dimension of $X$. If $X$ is 1-dimensional, then
+    $X^1=X$ and so $X$ is path connected.
+
+    Now, suppose this holds for an $n-1$ dimensional CW complex. We will show
+    that an $n$ dimensional CW complex with a path-connected 1-skeleton is path
+    connected. To see this, note that since $X^1$ is path connected, so is
+    $X^{n-1}$. So, all we have to do to get a path from $x$ to $y$ (for $x,y\in
+    X$) is find a path from $x$ and $y$ to the $n-1$-skeleton.
+
+    Now, if $x$ or $y$ are already in the $n-1$-skeleton, we are done. Suppose,
+    however, that $x$ is not in the $n-1$-skeleton. Then, $x$ must be in the
+    interior of some $n$-cell. However, since $D^n$ is path connected, there
+    always exists a path from $x\in D^n$ to the boundary $\partial D^n$. This
+    path sends $x$ to the $n-1$-skeleton, as desired.
+
+    Thus, $X$ is path connected, as desired.
+\end{proof}
+
+\section*{Problem 8}
+Show that a CW complex is locally compact if and only if each point has a
+neighborhood that meets only finitely many cells.
+\\
+\\
+\begin{proof}
+    ($\implies$)
+    Suppose that a CW complex $X$ is locally compact. It follows that for any
+    point $x\in X$, there is a neighborhood $U$ of $x$ with compact closure.
+    However, in proposition A1 of Hatcher, it is asserted that any compact
+    subset of a CW complex meets only finitely many cells. Thus, the closure of
+    $U$ (and therefore $U$ itself) must meet only finitely many cells. Such a
+    neighborhood satisfies the properties desired.
+    \\
+    \\
+    ($\impliedby$)
+    Suppose instead that each point $x\in X$ has a neighborhood $U$ that meets
+    only finitely many cells. In particular, this means that the closure of $U$
+    also meets only finitely many cells. Thus, $\overline{U}$ is a subset of
+    $X^n$ for some $n$. As a closed subset of a compact Hausdorff space,
+    $\overline{U}$ is compact as well, as desired.
+    
+    So, each point has a neighborhood with compact closure, and $X$ is locally
+    compact.
+\end{proof}
 
 \end{document}

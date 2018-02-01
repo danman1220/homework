@@ -458,7 +458,7 @@ can localize the global definition.
 Recall that we have a unique torsion-free, metric compatible connection $\nabla$
 for any Riemannian manifold. We wish to localize this $\nabla$ further.
 
-\begin{def}
+\begin{defn}
     Let $\gamma$ be a smooth curve in $M$. A vector field $X$ {\em along
     $\gamma$} is an assignment $X:I\to TM$ with $X(t) \in T_{\gamma(t)}M$ where
     $X$ is called smooth if its coordinate decomposition
@@ -466,9 +466,9 @@ for any Riemannian manifold. We wish to localize this $\nabla$ further.
         X = \xi^i(t)\partial_i
     \]
     is smooth in each component.
-\end{def}
+\end{defn}
 
-\begin{def}
+\begin{defn}
     $\nabla_{\partial_t}X$ is define along $\gamma$ as follows: Let $I_{t_0}$ be an open
     interval around $t_0$, which maps into chart $(U,\phi)$. Then,
     \[
@@ -481,6 +481,110 @@ for any Riemannian manifold. We wish to localize this $\nabla$ further.
         \end{aligned}
     \]
     which is already defined.
-\end{def}
+\end{defn}
+
+The second term in this expansion turns into
+\[
+    \xi^i(t)\nabla_{\partial_t\gamma}\partial_i
+    = \xi^i\partial_tx^j \nabla_{\partial_j}\partial_i
+\]
+and we define
+\[
+    \Gamma^k_{ij}\partial_k = \nabla_{\partial_j}\partial_i
+\]
+Where $\Gamma^k_{ij}$ is the Christoffel symbol (of the first kind) for the
+connection.
+
+\begin{hw}
+    Show that for the Levi-Civita connection,
+    \[
+        \Gamma^k_{ij} = \frac{1}{2}g^{kl}(g_{il,j} + g_{lj,i} - g_{ij,l})
+    \]
+\end{hw}
+
+\subsection{The Connection in Local Coordinates}
+
+\begin{defn}
+    The connection forms of the connection $\omega_i^j$ associated with an
+    orthonormal frame $e_i$ is defined as
+    \[
+        \nabla e_i = \omega_i^j\otimes e_j
+    \]
+\end{defn}
+
+Knowing that the frame is orthonormal and the connection is metric compatible,
+we get
+\[
+    \begin{aligned}
+        \langle e_i, e_j\rangle &= \delta_{ij}\\
+        \langle \nabla_Xe_i,e_j\rangle + \langle e_i,\nabla_Xe_j\rangle &=0\\
+        \langle \omega_i^k(X)e_k, e_j\rangle + \langle e_i,
+        \omega_j^l(X)e_l\rangle &= 0\\
+        \omega_i^j(X) + \omega^i_j(X) &= 0\\
+    \end{aligned}
+\]
+and so $\omega^i_j$ is antisymmetric.
+
+\begin{theorem}
+    The following holds for the connection forms:
+    \begin{itemize}
+        \item $\omega$ is antisymmetric
+        \item $d\omega^i = \omega_j^i\wedge\omega^j$
+    \end{itemize}
+\end{theorem}
+
+To prove this, we can use the identity
+\[
+    d\alpha(X,Y) = X\alpha(Y) -Y\alpha(X) - \alpha([X,Y])
+\]
+for one-forms $\alpha$.
+
+\subsection{Parallel Transport}
+Let $X$ be a vector field on $M$ along $\gamma$.
+\begin{defn}
+    $X$ is called parallel if
+    \[
+        \nabla_{\partial_t}X=0
+    \]
+\end{defn}
+
+\begin{theorem}
+    For each $v\in T_{\gamma(0)}M$, there is a unique solution to the initial
+    value problem
+    \[
+        \begin{aligned}
+            \nabla_{\partial_t}X = 0\\
+            X(0)=v
+        \end{aligned}
+    \]
+\end{theorem}
+\begin{proof}
+    Let $(U,\phi)$ be a coordinate chart around $\gamma(0)$. Then, in $U$,
+    \[
+        \nabla_{\partial_t}X = 0
+    \]
+    is the same as
+    \[
+        \partial_t\xi^k + \Gamma^k_{ij}\xi^i\partial_tx^j
+    \]
+    which is a first order linear ODE with smooth coefficients, and so it has
+    unique solutions for the initial value $X(0)=v$, or $\xi^i(0) = v^i$.
+\end{proof}
+Now, since the ODE is linear, there is a linear map between initial values and
+solutions, that is we have a linear map from $T_{\gamma(0)}M$ to
+$T_{\gamma(1)}M$ by evaluating $X$ at $1$. This map is the parallel transport
+map, and it is invertible by running the curve backwards. Thus, this map is an
+isomorphism. Even better...
+\begin{prop}
+    The parallel transport map is an isometry.
+\end{prop}
+
+\begin{hw}
+Prove that
+    \[
+        \partial_t g(X,Y) = g(\nabla_{\partial_t}X,Y) +
+        g(X,\nabla_{\partial_t}Y)
+    \]
+\end{hw}
 
 \end{document}
