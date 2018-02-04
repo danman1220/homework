@@ -1,0 +1,131 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Homotopy Theory} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 3 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1} %Hatcher 0.15
+Enumerate all subcomplexes of $S^{\infty}$ with the cell structure on
+$S^{\infty}$ that has $S^n$ as the $n$-skeleton.
+\\
+\\
+\begin{proof}
+    We notice at first that each $n$-skeleton is a subcomplex, and so $S^n$ is a
+    subcomplex of $S^{\infty}$ for each $n$.
+
+    There is another subcomplex in each dimension. Namely, by omitting one of
+    the $n$-cells attaching to the $n-1$-skeleton, we obtain another subcomplex
+    in the $n$th dimension that is the $n-1$ skeleton along with a single
+    $n$-cell attached in the usual way. In fact, depending on which $n$-cell we
+    omit, we can obtain two different subcomplexes.
+
+    So far, we have three subcomplexes in each dimension. I assert that this is
+    all the subcomplexes. Suppose there existed a subcomplex in $n$ dimensions
+    that did not contain the entire $n-1$-skeleton. In particular, this means
+    that the attaching map of the $n$-cell, which is bijective from $\partial
+    D^n$ onto the entire
+    $n-1$-skeleton, is not well-defined, and so no such subcomplex can be
+    constructed.
+\end{proof}
+
+
+\section*{Problem 2} %Hatcher 0.16
+Show $S^{\infty}$ is contractible.
+\\
+\\
+\begin{proof}
+    We will show that the $n$-skeleton of $X=S^{\infty}$ is contractible in
+    $X^{n+1}$. To see this, consider the subcomplex of $X^n$ along with a single
+    disk $D^{n+1}$ attached in the usual way. In particular, $X^n$ is identified
+    with $\partial D^{n+1}$, and since $D^{n+1}$ is contractible, it follows
+    that $\partial D^{n+1}$ contracts via the restriction to a point in
+    $D^{n+1}$.
+
+    Thus, each $X^n$ is contractible in $X$, and since
+    $X=\cup_{n=0}^{\infty}X^n$, it follows that $X$ is contractible as well.
+\end{proof}
+
+\section*{Problem 3}
+Show that $S^1\star S^1=S^3$. In general, show $S^m\star S^n= S^{m+n+1}$.
+\\
+\\
+\begin{proof}
+    
+\end{proof}
+
+
+
+\section*{Problem Extra}
+In the proof of the Brouwer fixed point theorem, construct explicitly the
+retraction from $D$ to $\partial D$ by assuming $f(x)\neq x$.
+
+\end{document}

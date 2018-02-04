@@ -1,0 +1,80 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+\section{Geodesics and Curvature}
+
+\subsection{Geodesics}
+\begin{defn}
+Let $(M^n,g)$ be a Riemannian manifold, and let $\gamma:I\to M$ a smooth curve.
+$\gamma$ is called a {\em geodesic} if its second derivative vanishes. That is,
+if it solves the geodesic equation
+\[
+    \nabla_{\partial_t}\partial_t\gamma = 0
+\]
+\end{defn}
+
+Now, let's examine the geodesic equation further. In local coordinates, we have
+\[
+    \begin{aligned}
+        \nabla_{\partial_t}\partial_t\gamma &=
+        \nabla_{\partial_t}\partial_tx^i\partial_i\\
+        &=\partial_t\partial_t x^k\partial_k +
+        \partial_tx^k\nabla_{\partial_t}\partial_k\\
+        &=(\partial_t\partial_t x^k +
+        \Gamma^k_{ij}\partial_tx^i\partial_tx^j)\partial_k\\
+    \end{aligned}
+\]
+and so the local coordinate version of the differential equation is the system
+of equations
+\[
+    (\partial_t)^2x^k + \gamma^k_{ij}\partial_tx^i\partial_tx^j = 0
+\]
+which are guaranteed local unique solutions for initial conditions of $\gamma$
+and $\gamma'$.
+
+Let's look at properties of geodesics. In particular, we can look at
+\[
+    \partial_t|\gamma'|^2 = \partial_t(g(\gamma',\gamma'))
+    = 2g(\nabla_{\partial_t}\gamma',\gamma') = 0
+\]
+and so the velocity of the geodesic does not change.
+
+\subsection{The Exponential Map}
+Let $p\in M$. We can define an exponential map $\exp:T_pM\to M$ via
+the following:
+
+\begin{defn}
+    The {\em exponential map} $\exp:T_pM\to M$ is defined as
+    $\exp(v) = \gamma(1)$ where $\gamma$ is a geodesic with $\gamma(0)=p$ and
+    $\gamma'(0)=v$. 
+\end{defn}
+Why do we insist that $\exp_p(v) = \gamma(1)$? Consider
+\[
+    \exp_p(tv) = \gamma_{tv}(1) =\gamma_v(t)
+\]
+where $t\in \R$. The last equality is obtained in the following way:
+
+\begin{lemma}
+    $\gamma_{tv}(1) = \gamma_v(t)$ for all $t$. 
+\end{lemma}
+\begin{proof}
+    Consider $\gamma(t) = \gamma_{sv}(t)$. This is the geodesic such that
+    $\gamma(0)=p$ and $\gamma'(0)=sv$. Now, notice that $\tilde{\gamma}(t) =
+    \gamma_v(st)$ is defined so that $\tilde{\gamma}(0)=p$ and
+    $\tilde{\gamma}'(0) = \partial_t\gamma_v(st) =
+    \gamma'_v(0)\partial_t(st)|_{t=0} = sv$ and by uniqueness of geodesics,
+    $\gamma = \tilde{\gamma}$ as desired.
+\end{proof}
+
+Let's examine the domain for the exponential map. With no assumptions on the
+structure of the manifold, what can we say about solutions to the geodesic
+equation?
+
+Recall the escape lemma for flows along vector fields. If $\gamma$ is a maximal
+integral curve of a vector field $X$ whose domain $J$ has a least upper bound
+$b$, then for each $t_0<b$, $\gamma([t_0,b))$ is not contained in any compact
+subset of the manifold. That is, if $\gamma$ goes into a compact subset of the
+manifold, it will not die in the interior of the compact subset.
+
+
+\end{document}
