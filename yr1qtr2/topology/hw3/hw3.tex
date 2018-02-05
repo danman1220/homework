@@ -104,10 +104,10 @@ Show $S^{\infty}$ is contractible.
 \\
 \begin{proof}
     We will show that the $n$-skeleton of $X=S^{\infty}$ is contractible in
-    $X^{n+1}$. To see this, consider the subcomplex of $X^n$ along with a single
+    $X^{n+1}$. To see this, consider the subcomplex $X^n$ along with a single
     disk $D^{n+1}$ attached in the usual way. In particular, $X^n$ is identified
     with $\partial D^{n+1}$, and since $D^{n+1}$ is contractible, it follows
-    that $\partial D^{n+1}$ contracts via the restriction to a point in
+    that $\partial D^{n+1}$ contracts to a point in
     $D^{n+1}$.
 
     Thus, each $X^n$ is contractible in $X$, and since
@@ -119,8 +119,48 @@ Show that $S^1\star S^1=S^3$. In general, show $S^m\star S^n= S^{m+n+1}$.
 \\
 \\
 \begin{proof}
-    
+    We will prove the more general result that
+    \[
+        \bigstar_{i=1}^n S^0 = S^{n-1}
+    \]
+    along with the associativity of $\star$.
+
+    To see the first result, we will use the interpretation of the star product
+    as the set of all convex formal linear combinations of the two spaces. In
+    particular, interpreting $S^0_i$ to be the two points $1,-1$ on the $i$th
+    coodinate axis in $\R^n$, we see that join across all $n$ copies of $S^0$ is
+    really all points $x=(x^1,\ldots,x^n)$ satisfying
+    \[
+        \begin{aligned}
+            x^i\leq 1 \textrm{ and } x^i\geq -1\\
+            \sum_i x^i = 1
+        \end{aligned}
+    \]
+    which is just the convex hull of the $2n$ unit vectors along the coordinate
+    axes of $/R^n$. In other words, it is the ball of radius $1$ in the
+    $1$-norm. However, this is obviously homeomorphic to $S^n-1$ as desired.
+
+    Now, we will show that $\star$ is associative. However, this falls almost
+    immediately from the definition of $\star$ in terms of formal linear
+    combinations.
+
+    Thus, $S^n = \bigstar_{i=1}^{n+1}S^0$, and so
+    \[
+        \begin{aligned}
+            S^m\star S^n &=
+            (\bigstar_{i=1}^{m+1}S^0)\star(\bigstar_{i=1}^{n+1}S^0)\\
+            &=\bigstar_{i=1}^{m+n+2}S^0\\
+            &= S^{m+n+1}
+        \end{aligned}
+    \]
+    as desired.
 \end{proof}
+
+\section*{Problem 4}
+Show that the space obtained by attaching $n$ 2-cells along any collection of
+$n$ circles in $S^2$ is homotopy equivalent to the wedge sum of $n+1$ 2-spheres.
+\\
+\\
 
 
 
