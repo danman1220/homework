@@ -1,0 +1,143 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Homotopy Theory} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 4 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+Show that the composition of paths satisfies the following property: if 
+$f_0\cdot g_0 \simeq f_1\cdot g_1$, and $g_0\simeq g_1$, then $f_0\simeq f_1$.
+\\
+\\
+\begin{proof}
+    Recall from homework 2 that pre-composition and post-composition respect
+    homotopies. That is, for $f,g:X\to Y$ with $f\simeq g$, and $h_1:Y\to Z$ and
+    $h_2:A\to X$, then $h_{1*}f\simeq h_{1*}g$ and $h_2^*f\simeq h_2^*g$.
+
+    Now, since $g_0\simeq g_1$, we have that
+    \[
+        f_{0*}g_0\simeq f_{0*}g_1
+    \]
+    and since $f_0g_0\simeq f_1g_1$, we have that $f_1g_1\simeq f_0g_1$.
+
+    Now, let $g_1^{-1}$ be the inverse path of $g_1$. That is, the path
+    $g_1(1-t)$. We have that 
+    \[
+        \begin{aligned}
+            g_1^{-1*}f_1g_1 &\simeq g_1^{-1*}f_0g_1\\
+            f_1g_1g_1^{-1} &\simeq f_0g_1g_1^{-1}
+        \end{aligned}
+    \]
+    now, since $g_1g_1^{-1}$ is homotopic to the identity, we have that
+    \[
+        f_0\simeq f_1
+    \]
+    as desired.
+\end{proof}
+
+
+\section*{Problem 2}
+Show that the change of basepoint homomorphism $\beta_h$ depends only on the
+homotopy class of $h$.
+\\
+\\
+\begin{proof}
+    Let $g,h$ be paths in a space $X$ with the same starting and ending points,
+    and such that $g\simeq h$. We will show that $\beta_h=\beta_g$. In
+    particular, we will show that conjugating by $h$ is homotopic to conjugating
+    by $g$.
+
+    So, let $f$ be a loop based at the endpoint of $g,h$. We will show that
+    $g^{-1}fg \simeq h^{-1}fh$. This, however, is just a straightforward
+    application of the pre-composition and post-composition lemma from homework
+    2.
+    
+    To see this, we note that since $g\simeq h$, we have that $f_*g\simeq f_*h$.
+    Thus, $fg\simeq fh$. Now, since $g^{-1}\simeq h^{-1}$, we can also write
+    \[
+        g^{-1}fg\simeq g^{-1}fh = (fh)^*g^{-1}\simeq (fh^*)h^{-1} = h^{-1}fh
+    \]
+    as desired
+\end{proof}
+
+
+\section*{Problem 3}
+For a path-connected space $X$, show that $\pi_1(X)$ is Abelian if and only if
+all basepoint-change homomorphisms $\beta_h$ depend only on the endpoints of
+$h$.
+\\
+\\
+\begin{proof}
+    
+\end{proof}
+
+\end{document}

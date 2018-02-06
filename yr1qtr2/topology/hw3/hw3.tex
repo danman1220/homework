@@ -212,12 +212,86 @@ whose intersection is contractible.
 
 \section*{Problem 7}
 Let $X$ and $Y$ be CW complexes with $0$-cells $x_0$ and $y_0$. Show that the
-quotient $X\star Y/(X\star\{y_0\}\cup \{x_0\star Y)$ and $S(X\wedge
+quotient $X\star Y/(X\star\{y_0\}\cup \{x_0\}\star Y)$ and $S(X\wedge
 Y)/S(\{x_0\}\wedge \{y_0\})$ are homeomorphic.
 \\
 \\
 \begin{proof}
-    
+    We will expand both sides of this equation, and show they are homeomorphic.
+    The left-hand side expands as
+    \[
+        \begin{aligned}
+            X\star Y &= X\times Y\times I/{(x,y_1,0)\sim
+            (x,y_2,0),(x_1,y,1)\sim(x_2,y,1)}\\
+            X\star \{y_0\} &= X\times \{y_0\}\times I/{(x_1,y_0,1)\sim
+            (x_2,y_0,1)}\\
+            \{x_0\}\star Y &= \{x_0\}\times Y\times I/{(x_0,y_1,0)
+            \sim(x_0,y_2,0)}\\
+        \end{aligned}
+    \]
+
+    Similarly, the right hand side expands as
+    \[
+        \begin{aligned}
+            \{x_0\}\wedge \{y_0\} &= \{x_0\}\times \{y_0\}/\{x_0\}\vee\{y_0\}
+            =\{\cdot\}\\
+            S(X\wedge Y) &= X\times Y\times I/{(X\times\{y_0\}\cup
+            \{x_0\}\times Y),(X\wedge Y)\times \{0\},(X\wedge Y)\times \{1\}}\\
+        \end{aligned}
+    \]
+    and thus
+    \[
+        \begin{aligned}
+            S(X\wedge Y)/{S(\{x_0\}\wedge\{y_0\})} &= (X\wedge Y)\times
+            I/{(X\wedge Y)\times \{0\},(X\wedge Y)\times \{1\}, (\{x_0\}\wedge
+            \{y_0\})\times I}\\
+            &= X\times Y\times I/{(\ldots, (X\times \{y_0\}\cup \{x_0\}\times
+            Y)\times I)}
+        \end{aligned}
+    \]
+    However, the left hand side has the same space quotienting by, namely
+    $X\times Y\times I$, and so we only have to verify that the two have the
+    same quotient operations on them, which I did not have enough time to
+    complete...
+
+    Suppose that the claim is true. Since both $S(X\wedge Y)$ and $X\star Y$ are
+    being quotiented by contractible subspaces, they are homotopy equivalent to their
+    quotient. And since the quotients are homeomorphic, it follows that
+    $S(X\wedge Y)$ and $X\star Y$ are homotopy equivalent to each other as well.
+
+\end{proof}
+
+\section*{Problem 8}
+Show that for a CW complex $X$ with components $X_{\alpha}$, $SX\simeq
+Y\vee_{\alpha}SX_{\alpha}$ for some graph $Y$.
+\\
+\\
+\begin{proof}
+    It should be clear that for components $X_{\alpha}$, the suspension $SX$ is
+    equal to the union of all $SX_{\alpha}$ attached at the top and bottom. That
+    is, $SX = (\coprod SX_{\alpha})/{(x_\alpha,0)\sim (x_{\beta},0),
+    (x_{\alpha},1)\sim (x_{\beta},1)}$.
+
+    So, let $Y = \vee_{\alpha}S^1$, and consider the space
+    $Y\vee_{\alpha}X_{\alpha}$. We will take as the basepoint the top of the
+    suspensions. Now, all we need to do is connect the bottom of the suspensions
+    using $Y$. To do this, we first choose a distinguished component $X_0$, and
+    homotope $Y$ to the bottom of $SX_0$ (since $X_0$ is path connected, so is
+    $SX_0$ so we can safely do this). Now, for each copy $S^1_{\alpha}$ in $Y$,
+    fix one endpoint on the bottom of $SX_0$, and homotope the other endpoint
+    to the top of $SX_0$. Now, send that endpoint to the bottom of $SX_{\alpha}$
+    (which we can do since $SX_0$ is connected to $SX_{\alpha}$ via the wedge,
+    and $SX_{\alpha}$ is path connected). We now have a tree connecting all the
+    bottom points of $SX_{\alpha}$, which contracts to a point. The space we end
+    up with is the union of $SX_{\alpha}$ with the top and bottom points
+    respectively identified with each other, which is just $SX$ as desired.
+
+    Now to show that if $X$ is a finite graph, then $SX$ is homotopy equivalent
+    to the wedge sum of circles and 2-spheres. Now, each component $X_{\alpha}$
+    is homotopy equivalent to a wedge of circles, and the suspension of that is
+    a wedge of $2$-spheres. Thus, by the same construction as above, $SX$ is
+    homotopy equivalent to $Y\vee_{\alpha}SX_{\alpha}$ where $Y$ is a wedge of
+    circles, and each $SX_{\alpha}$ is a wedge of spheres.
 \end{proof}
 
 \end{document}
