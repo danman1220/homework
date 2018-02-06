@@ -76,5 +76,70 @@ $b$, then for each $t_0<b$, $\gamma([t_0,b))$ is not contained in any compact
 subset of the manifold. That is, if $\gamma$ goes into a compact subset of the
 manifold, it will not die in the interior of the compact subset.
 
+We also have the uniform time lemma, which guarantees that for $U$ open with
+compact closure, any $K>0$, there is some $\epsilon>0$ such that the geodesic
+$\gamma(t)$ with $\gamma(t_0)=p$ $\gamma'(t_0)=v$ exists for
+$t\in[t_0-\epsilon,t_0+\epsilon]$ and the map
+\[
+    \begin{aligned}
+        \gamma&:U^*\times (t_0-\epsilon,t_0+\epsilon)\to M\\
+        \gamma(v,t) &= \gamma(t)
+    \end{aligned}
+\]
+and here $U^* = \{v\in TM, \|v\|<K,\pi(v)\in U\}$.
+
+Now, we can see that $\exp_p$ is defined on a closed ball
+$\overline{B}_{\epsilon}(0)\subset T_pM$ for some $\epsilon>0$, and furthermore for
+any compact set $K$, there is some $\epsilon>0$ such that $\exp_p$ is defined on
+$\overline{B}_{\epsilon}(0)$ for all $p\in K$.
+
+In $\R^n$, we have geodesics as linear affinely parameterized curves i.e.
+$\gamma(t) = \vec{a}t+\vec{b}$.
+
+\begin{ex}
+    Consider the sphere $S^n$ with the induced metric from $\R^{n+1}$. Then, the
+    Levi-Civita connection is given as
+    \[
+        \nabla^{S^n}_{\partial_t}\gamma' =
+        \left(\nabla^{\R^{n+1}}_{\partial_t}\gamma'\right)^T
+    \]
+    Where $T$ is the tangential projection onto $S^n$.
+\end{ex}
+
+More generally, for $N$ a submanifold of $M$, and $X$ a vector field on $N$, we
+can extend $X$ to a neighborhood in $M$, and take $\nabla_{\partial_t}^NX =
+(\nabla_{\partial_t}^MX)^T$.
+
+\subsection{Further properties of geodesics}
+In $\R^n$, it is clear that the straight line geodesic between two points is the path of
+shortest length between them. Is this the case in general? Do geodesics exist
+between any two points?
+
+Obviously there are not geodesics between arbitrary points in a general
+connected Riemannian manifold (motivating example: Schwarzschield geometry).
+However, if a Riemannian manifold is complete, then it has geodesics between all
+points.
+
+Does there always exist a geodesic of minimal length? And are such geodesics
+unique? No. On $S^2$, we have an infinite number of geodesics from the north to
+the south pole. Suppose instead, however, that we restrict to anything but the
+south pole. Then, there exist unique geodesics of minimal length from the north
+pole to any point. This has to do with the fact that the geodesics from the
+north pole do not cross until the south pole.
+
+We can prove that {\em locally}, points are connected by a minimal geodesic, and
+that open balls around a point correspond to exponential projections of open
+balls in the tangent space.
+
+Now, an important lemma:
+\begin{lemma}
+    {\em Gauss Lemma:} Let $M$ be a manifold, and $p\in M$ with exponential
+    $\exp_p$. We wish to understand $(d\exp_p)_v:T_pM\to T_{\exp_p(v)}M$. It is
+    true that
+    \[
+        g(v,w) = g(d(\exp_p)_v(v),d(\exp_p)_v(w))
+    \]
+\end{lemma}
+
 
 \end{document}

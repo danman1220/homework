@@ -1,0 +1,287 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 2 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+Show that the function sending $\phi$ to $\phi^{-1}(\{1\})$ is a bijection
+between nonzero bounded linear functionals and hyperplanes not containing $0$.
+\\
+\\
+\begin{proof}
+    We first show that for arbitrary bounded linear functional $\phi$, the set
+    $\phi^{-1}(\{1\})$ is a closed hyperplane.
+
+    To see this, let $\phi\in X^*\setminus \{0\}$. In particular, this means
+    that $H:=\phi^{-1}(\{1\})$ is nonempty. So, let $x_0\in H$. Then, we have
+    $\phi(x_0) = 1$. Now, let $x\in X$ be arbitrary, and consider
+    \[
+        \phi(x-\phi(x)x_0) = \phi(x)-\phi(x)\phi(x_0)=0
+    \]
+    This implies that $y:=x-\phi(x)x_0$ is in the kernel of $\phi$. Solving for
+    $x$ yields
+    \[
+        x = y+\phi(x)x_0
+    \]
+    and so $X=\ker\phi\oplus\text{span}(x_0)$.
+
+    Thus, we know that $\ker\phi$ has codimension $1$. In particular, we know
+    that for $y\in\ker\phi$ we have that $\phi(y+x_0) = 1$ and so the hyperplane
+    obtained by translating $\ker\phi$ is in $\phi^{-1}(\{1\})$. Thus, since
+    $\phi^{-1}(\{1\})$ does not contain zero, it follows that it is the
+    translate of $\ker\phi$ by $x_0$. The hyperplane is closed because it is the
+    inverse image of a point.
+
+    Now, let's start with a hyperplane $H$ that misses zero, and show that it is the
+    inverse image of $\{1\}$ by some function. To begin with, we note that a
+    hyperplane missing zero is just a hyperplane containing zero translated by
+    some constant vector. In particular,for each hyperplane missing zero, there
+    is a unique hyperplane through zero that is the translate of it. Let $H'$ be
+    the hyperplane through zero that is the translate of $H$. Then, since $H'$
+    is closed with codimension $1$, we can write $X=H'\oplus \text{span}(v)$ for
+    some $v$. Define $\phi$ to be
+    \[
+        \phi(x) = \phi(h+\lambda v) = \lambda
+    \]
+    for $\lambda\in\C$.
+
+    Now, $H$ is just $H'+c$ for some $c\in X$, and so $H'$ is the set
+    \[
+        \{x:\ \phi(x-c)=0\}
+    \]
+    or,
+    \[
+        \{x:\ \phi(x)=\phi(c)\}
+    \]
+    letting $c=h+\eta v$ for $\eta\in\C$, we see that $\phi(x) = \eta$ defines
+    the hyperplane.
+
+    Now, define $\phi'(x) = \frac{\phi(x)}{\eta}$, and note that
+    \[
+        H' = \{x:\ \phi'(x)=1
+    \]
+    as desired.
+
+    Now, let's show that distinct functionals generate distinct hyperplanes. To
+    see this, let $\phi,\psi$ be such that
+    $\phi^{-1}(\{1\})=\psi^{-1}(\{1\})=H$. Now, consider the bounded linear
+    functional defined by
+    \[
+        \theta(x) = \phi(x)-\psi(x)
+    \]
+    Clearly, $H\subset\ker\theta$, and so since $H$ has codimension $1$ and does
+    not contain zero, it follows immediately that $\ker\theta=X$ and so $\phi(x)
+    = \psi(x)$ for all $x$ as desired.
+\end{proof}
+
+
+\section*{Problem 2}
+For $K\subset L$ an absorbing convex set, define
+\[
+    \mu_K(x) = \inf\{t>0|\ x\in tK\}
+\]
+Show that $\mu_K$ is convex, and show that if $\phi\in L'$, then $\phi\leq \mu_K$
+implies $\phi|K\leq 1$ and vice versa.
+\\
+\\
+\begin{proof}
+    We first show that $\mu_K$ is homogeneous. To see this, we note that
+    \[
+        \begin{aligned}
+            \mu_K(ax) &= \inf\{t>0|\ ax\in tK\}\\
+                    &= \inf\{t>0|\ x\in \frac{t}{a}K\}\\
+                    &=a\inf\{t>0|\ x\in tK\}]\\
+                    &= a\mu_K(x)
+        \end{aligned}
+    \]
+    as desired. Now, we show that $\mu_K$ is subadditive. To see this, consider
+    \[
+        \mu_K(x) + \mu_K(y)
+    \]
+    and let $t^* = \max(\mu_K(x),\mu_K(y))$. Now, we know that $d(x,t^*K) =
+    d(y,t^*K)=0$, and by the triangle inequality, this forces $d(x+y,t^*K)$ to
+    be zero as well. Thus, $\mu_K(x+y)\geq t^*$. It follows immediately that
+    \[
+        \mu_K(x+y)\leq \mu_K(x)+\mu_K(y)
+    \]
+    since $\mu_K$ is positive.
+
+    Now to show the second statement.
+    \\
+    ($\implies$)
+    Suppose $\phi$ is such that $\phi\leq \mu_K$. It follows immediately from
+    the definition that $\mu_K|_K\leq 1$, and so$\phi|_K\leq 1$ as well.
+
+    ($\impliedby$)
+    Suppose $\phi|_K\leq 1$. We wish to show (by homogeneity) that
+    $\phi(\frac{x}{\mu_K(x)})\leq\mu_K(\frac{x}{\mu_K(x)})=1$. Now, since $K$ is
+    closed, $\frac{x}{\mu_K(x)}$ is in $K$ (since $\mu_K(x)$ is the $\inf$ of
+    all $t$ such that $\frac{x}{t}$ is in $K$). Now, it follows by the
+    hypothesis that
+    \[
+        \phi(\frac{x}{\mu_K(x)})\leq 1=\mu(\frac{x}{\mu_K(x)})
+    \]
+    as desired.
+\end{proof}
+
+\section*{Problem 3}
+Prove that for every $e\in X$ not equal to zero, there is some $\phi\in V^*$
+such that $\phi(e) = \|e\|$ and $\|\phi\|_*=1$.
+\\
+\\
+\begin{proof}
+    We note first that there is a bounded linear functional $\rho(x)$ on
+    $\text{span}(e)$ given by $\rho(\lambda e)=\lambda\|e\|$. 
+    Hahn-Banach then guarantees the
+    existence of $\phi\in X^*$ with $\phi|_{\text{span}(e)} = \rho$ and
+    $\|\phi\|_*=\|\rho\|$. This is the same as saying $\phi(e) =\|e\|$ and
+    $\|\phi\|_*=1$ as desired.
+\end{proof}
+
+\section*{Problem 4}
+Let $X$, $Y$ be normed spaces, and $Z=X\oplus Y$ with $\|z\| = \|x\|+\|y\|$.
+What is $Z^*$?
+\\
+\\
+\begin{proof}
+    I assert that $Z^* = X^*\oplus Y^*$ with the (linear) isomorphism
+    \[
+        \phi_x\times \phi_y \mapsto (z=x+y\mapsto \phi_x(x)+\phi_y(y))
+    \]
+    Now, clearly this map is injective, and the resulting functional is bounded
+    (since $\phi_x$ and $\phi_y$ are bounded, and projections are bounded). So,
+    all we need to show is that this map is surjective.
+
+    However, consider some $\psi\in Z^*$. This can be written as
+    \[
+        \begin{aligned}
+            \psi(z) &= \psi(x+y)\\
+                    &= \psi(x) + \psi(y)\\
+                    &= \psi|_X(x) + \psi|_Y(y)
+        \end{aligned}
+    \]
+    and since $\psi|_X$ and $\psi|_Y$ are in $X^*$ and $Y^*$ respectively, it
+    follows that the isomorphism maps $\psi|_X\times \psi|_Y$ to $\psi$, and the
+    isomorphism is surjective.
+
+    Thus, the spaces are equal.
+\end{proof}
+
+\section*{Problem 5}
+Show that if $f$ is a positive linear functional on $l^{\infty}$, then $f$ is
+bounded.
+\\
+\\
+\begin{proof}
+    Suppose $f$ is a positive linear functional, and let $x\in l^{\infty}$.
+    Then, we know that $-x + \|x\|_{l^{\infty}}(1,1,\ldots) \geq 0$. So,
+    \[
+        \begin{aligned}
+            f(-x + \|x\|_{\infty}(1,1,\ldots)) &\geq 0\\
+            f(-x)\geq -f((1,1,\ldots))\|x\|_{\infty}\\
+            f(x) \leq f((1,1,\ldots))\|x\|_{\infty}\\
+            |f(x)| \leq f((1,1,\ldots))\|x\|_{\infty}\\
+        \end{aligned}
+    \]
+    and thus $f$ is bounded.
+\end{proof}
+
+\section*{Problem 6}
+Let $Y$ be a subspace of $X$. Show that the closure of $Y$ is the intersection
+of all kernels containing $Y$.
+\\
+\\
+\begin{proof}
+    We first prove the hint: for $Y$ a closed subspace and $x_0\not\in Y$, there
+    exists a function $\phi\in X^*$ such that $\phi(x_0) = 1$ and $\phi|_Y=0$.
+
+    This is clear by considering the bounded linear functional $\xi$ on
+    $Y\oplus\text{span}(x_0)$ given by $\xi(y+\lambda x_0) = \lambda$.
+    Hahn-Banach guarantees this extends to a bounded linear functional on all of
+    $X$.
+
+    Now, clearly $\overline{y}\subset \bigcap_{f\ |\ \ker f\supset Y}\ker f$,
+    since $\overline{Y}$ is the intersection of all closed subsets containing
+    it, and kernels are closed.
+
+    Now, we wish to show the other containment. To do so, we will show that for
+    any point not in $\overline{Y}$ is outside of some kernel containing $Y$. To
+    see this, we apply the hint on $x_0\not\in \overline{Y}$ to obtain $\phi\in X^*$ with
+    $\phi(x_0)=1$ and $\phi|_Y=0$. Thus, $\ker\phi$ contains $Y$ but does not
+    contain $x_0$. Thus, $x_0$ is not in the intersection.
+
+    Therefore, the two sets are equal, as desired.
+\end{proof}
+
+
+\end{document}
