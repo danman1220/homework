@@ -1,0 +1,372 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\im}{\textrm{im}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 3 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+
+\section*{Problem 1}
+Show that for $A\in \mathscr{B}(X,Y)$, $\|A\| = \|A^*\|$. Furthermore, if $A$ is
+invertible, show that $A^*$ is invertible with inverse $(A^*)^{-1} =
+(A^{-1})^*$.
+\\
+\\
+\begin{proof}
+    We know that
+    \[
+        \begin{aligned}
+            \|A^*\| &= \sup_{\phi\in Y^*,\|\phi\|=1}\|A^*\phi\|\\
+            &= \sup_{\phi\in Y^*,\|\phi\|=1}\sup_{x\in X,\|x\|=1}\|A^*\phi(x)\|
+        \end{aligned}
+    \]
+    Now, by the definition of the norm, we have that
+    \[
+        \phi(Ax)\leq \|\phi\|\|Ax\|
+    \]
+    and so
+    \[
+        \begin{aligned}
+            \|A^*\| &= \sup_{\phi\in Y^*,\|\phi\|=1}\sup_{x\in X,\|x\|=1}\|A^*\phi(x)\|
+                    &\leq\sup_{\phi\in Y^*,\|\phi\|=1}\sup_{x\in
+                    X,\|x\|=1}\|\phi\|\|Ax\|\\
+                    &= \sup_{x\in X,\|x\|=1} \|Ax\|\\
+                    &= \|A\|
+        \end{aligned}
+    \]
+    and so $\|A^*\|\leq \|A\|$ as desired.
+
+    For the other inequality, we note that $\|A\| = \sup_{x\in
+    X,\|x\|=1}\|Ax\|$, and since $\|Ax\| = \sup_{\phi\in
+    Y^*,\|\phi\|=1}|\phi(Ax)|$ (proved in HW2 by explicit construction of
+    $\phi$ that attains the norm), we have that
+    \[
+        \|A\| = \sup_{x\in X,\|x\|=1}\sup_{\phi\in Y^*,\|\phi\|=1} |\phi(Ax)|
+    \]
+    The definition of the norm $\|x\| = \|x\|_{X^{**}}$ shows that
+    \[
+        x(A^*\phi) \leq \|x\|\|A^*\phi\|
+    \]
+    Now, by a similar argument to the last inequality, we have
+    \[
+        \begin{aligned}
+            \|A\| &= \sup_{x\in X,\|x\|=1}\sup_{\phi\in Y^*,\|\phi\|=1}
+            |\phi(Ax)|\\
+            &= \sup_{x\in X,\|x\|=1}\sup_{\phi\in Y^*,\|\phi\|=1}
+            |x(A^*\phi)|\\
+            &\leq \sup_{x\in X,\|x\|=1}\sup_{\phi\in Y^*,\|\phi\|=1}
+            \|x\|\|A^*\phi\|\\
+            &=\sup_{\phi\in Y^*,\|\phi\|=1}\|A^*\phi\|\\
+            &=\|A^*\|
+        \end{aligned}
+    \]
+    and so $\|A\|\leq \|A^*\|$. Combining both inequalities, we have that
+    \[
+        \|A\|=\|A^*\|
+    \]
+    as desired.
+    \\
+    \\
+    if $A$ is invertible, it is easily shown that $(A^{-1})^*$ inverts $A^*$.
+    That is, we wish to show that for all $\phi\in Y^*$, we have that
+    \[
+        (A^{-1})^*A^*\phi = \phi
+    \]
+    In particular, we wish to show that for all $y\in Y$,
+    \[
+        (A^{-1})^*A^*\phi(y) = \phi(y)
+    \]
+    This is clear, however, since
+    \[
+        \begin{aligned}
+            (A^{-1})^*A^*\phi(y) &= A^*\phi(A^{-1}y)\\
+                &= \phi(AA^{-1}y)\\
+                &=\phi(y)
+        \end{aligned}
+    \]
+    as desired.
+\end{proof}
+
+\section*{Problem 2}
+Prove the Fredholm Theorem.
+\\
+\\
+\begin{proof}
+    Recall from the previous homework that for a subspace $V$ of a Banach space
+    $X$, we have that
+    \[
+        \overline{V} = \cap_{\phi \text{s.t. } V\subset\ker\phi}\ker\phi
+    \]
+
+    Letting $V=\im A$, we see that
+    \[
+        \overline{\im A} = \cap_{\phi \text{s.t. } \im A\subset\ker\phi}\ker\phi
+    \]
+    Now, the right hand side is just the set of all $y\in Y$ for which
+    $\phi(y)=0$ for any $\phi$ such that $\phi(Ax) = 0$ for all $x$. That is,
+    $\phi$ is such that $A^*\phi(x) = 0$ for all $x$, so $A^*\phi = 0$. That is,
+    the right hand side is the set of all $y\in Y$ for which $\phi(y) = 0$ for
+    all $\phi$ in $\ker A^*$, as desired.
+\end{proof}
+
+\section*{Problem 3}
+Explain the difference between the weak-$*$ convergence of a sequence $(\phi_j)$ in
+$X^*$ and the weak convergence of $(\phi_j)$ in $Y=X^*$. State the relations
+between the strong, weak, and weak-$*$ convergences on $X^*$.
+\\
+\\
+\begin{proof}
+    If $(\phi_j)$ converges in weak-$*$ to $\phi$, this means that for all $x\in
+    X$, $\phi_j(x) \to \phi(x)$. That is, $\phi_j$ converges pointwise to
+    $\phi$. Specifically, the weak-$*$ topology is the weak topology with
+    respect to $i_{can}X\subset X^{**}$.
+
+    On the other hand, if $(\phi_j)$ converges to $\phi$ weakly, then for all
+    $x\in X^{**}$, $x(\phi_j)\to x(\phi)$. In particular, the weak topology is
+    the weak topology with respect to $X^{**}$. That is to say, the weak
+    topology utilizes the entirety of $X^{**}$ to detect convergence, while the
+    weak-$*$ convergence only uses $i_{can}(X)\subset X^{**}$.
+
+    It should be clear, however, that strong convergence implies weak
+    convergence, which implies weak-$*$ convergence. To see this, let $\phi_j$
+    be such that $\|\phi_j-\phi\|\to 0$. Then, for any $x\in X^{**}$, since $x$
+    is continuous with respect to the norm on $X^*$, we have that
+    \[
+        x(\phi_j)\to x(0)
+    \]
+    which is the condition for weak convergence. The fact that weak convergence
+    implies weak-$*$ convergence is clear, since $i_{can}(X)\subset X^{**}$, and
+    so if for all $x\in X^{**}$, $x(\phi_j)\to x(\phi)$, then clearly for all
+    $x\in X$, $\phi_j(x)\to \phi(x)$.
+\end{proof}
+
+\section*{Problem 4}
+Prove that the sequence of standard basis vectors $e_n\in \ell^p$, $1<p<\infty$
+converges weakly but not strongly.
+\\
+\\
+\begin{proof}
+    We first show that $(e_n)$ does not converge strongly. This is clear, since
+    the sequence is not Cauchy, that is
+    \[
+        \begin{aligned}
+            \|e_n-e_m\|^p_p &= \sum_{i=1}^{\infty}(|(e_n-e_m)_i|)^p\\
+                            &= 1^p+1^p\neq 0
+        \end{aligned}
+    \]
+    Thus, it does not converge in norm.
+
+    Now, we show that $(e_n)$ converges weakly. To see this, let $x\in \ell^{p*}
+    = \ell^q$. Then, we need to show that $|x(e_n)|\to 0$. This is clear,
+    however, since
+    \[
+        |x(e_n)| = \sum_{i=1}^{\infty}|x_i(e_n)_i| = |x_n|
+    \]
+    and since $x\in\ell^q$, $|x_i|\to 0$ (since $\sum_{i=1}^{\infty}|x_i|^q <
+    \infty$), it follows that
+    \[
+        |x(e_n)|\to 0
+    \]
+    as desired.
+\end{proof}
+
+
+\section*{Problem 5}
+Prove that $\frac{\epsilon}{\pi(x^2+\epsilon^2)}d\lambda^1(x)\to\delta_0$ in
+weak-$*$ as
+measures in $C([-1,1])^*$.
+Prove that
+$\frac{1}{2\epsilon}\chi_{-\epsilon,\epsilon}(x)d\lambda^1(x)\to\delta_0$ in
+weak-$*$ as measures in $C([-1,1])^*$.
+\\
+\\
+\begin{proof}
+    First, we show that for all $f\in C([-1,1])$,
+    $\int_{[-1,1]}f(x)\frac{\epsilon}{\pi(x^2+\epsilon^2)}d\lambda^1(x)$ goes to
+    $f(0)$.
+
+    To see this, we can estimate the integral away from zero as well as at zero
+    by
+    \[
+        \begin{aligned}
+            \int_{[-1,1]}f(x)\frac{\epsilon}{\pi(x^2+\epsilon^2)}d\lambda^1(x)
+            &= \int_{[-1,-\delta]\cup[\delta,1]}
+            f(x)\frac{\epsilon}{\pi(x^2+\epsilon^2)}dx + \int_{-\delta}^{\delta}
+            f(x)\frac{\epsilon}{\pi(x^2+\epsilon^2)}dx\\
+        \end{aligned}
+    \]
+    Letting $M$ be the bound on $|f(x)|$ (since $f$ is on a compact set, this is
+    defined), we can bound the first integral above and below by
+    \[
+        \begin{aligned}
+            \int_{[-1,-\delta]\cup[\delta,1]}f(x)\frac{\epsilon}{\pi(x^2+\epsilon^2)}dx
+            &\leq M\frac{\epsilon}{\pi\delta^2}2(1-\delta)\\
+            \int_{[-1,-\delta]\cup[\delta,1]}f(x)\frac{\epsilon}{\pi(x^2+\epsilon^2)}dx
+            &\geq -M\frac{\epsilon}{\pi\delta^2}2(1-\delta)
+        \end{aligned}
+    \]
+    which goes to zero as delta gets small, and can safely be ignored so long as
+    $\delta$ shrinks slower than $\epsilon$. 
+
+    For the second integral, we use the fact that $|f(x)-f(0)| < \epsilon'$ for
+    $|x|<\delta'$ to estimate
+    \[
+        \begin{aligned}
+        \int_{-\delta}^{\delta}f(x)\frac{\epsilon}{\pi(x^2+\epsilon^2)}dx
+        &\leq
+        \int_{-\delta}^{\delta}(f(0)+\epsilon')\frac{\epsilon}{\pi(x^2+\epsilon^2)}dx\\
+        &= 2(f(0)+\epsilon')\frac{1}{\pi}\tan^{-1}(\frac{\delta}{\epsilon})
+        \int_{-\delta}^{\delta}f(x)\frac{\epsilon}{\pi(x^2+\epsilon^2)}dx
+        &\geq
+        \int_{-\delta}^{\delta}(f(0)-\epsilon')\frac{\epsilon}{\pi(x^2+\epsilon^2)}dx\\
+        &= 2(f(0)-\epsilon')\frac{1}{\pi}\tan^{-1}(\frac{\delta}{\epsilon})
+        \end{aligned}
+    \]
+    which are both equal to $(f(0)\pm\epsilon')$ so long as
+    $\frac{\delta}{\epsilon}$ goes to infinity, or $\delta$ shrinks slower than
+    $\epsilon$.
+
+    So, fixing a sequence of $\delta$ for which the integral goes to
+    $f(0)\pm\epsilon'\to 0$, and letting $\epsilon$ go to zero faster than
+    $\delta$, we see that the measure converges to the delta measure centered at
+    zero, as desired.
+    
+    Thus, since this holds for any $f\in C([-1,1])$, it follows (by Riesz
+    representation for $C([-1,1])^*$ into Borel measures on $[-1,1]$) that the
+    measure given converges in weak-$*$ to the delta measure.
+    \\
+    \\
+    For the second statement, we wish to show that for all $f\in C([-1,1])$,
+    \[
+        \int_{[-1,1]}f(x)\frac{1}{2\epsilon}\chi_{[-\epsilon,\epsilon]}dx = f(0)
+    \]
+    This is easily done.
+    \[
+        \begin{aligned}
+        \int_{[-1,1]}f(x)\frac{1}{2\epsilon}\chi_{[-\epsilon,\epsilon]}dx
+            &= \frac{1}{2\epsilon}\int_{-\epsilon}^{\epsilon}f(x)dx
+        \end{aligned}
+    \]
+    Now, we use continuity of $f$ to get a sequence of $\delta_n$ for which
+    $|x|<\delta_n$ implies $|f(x)-f(0)|<\frac{1}{n}$. Then, it follows that (by
+    setting $\epsilon = \delta_n$)
+    \[
+        \begin{aligned}
+        \int_{[-1,1]}f(x)\frac{1}{2\delta_n}\chi_{[-\delta_n,\delta_n]}dx
+            &= \frac{1}{2\delta_n}\int_{-\delta_n}^{\delta_n}f(x)dx
+            &\leq
+            \frac{1}{2\delta_n}\int_{-\delta_n}^{\delta_n}(f(0)+\frac{1}{n})dx\\
+            &=f(0)+\frac{1}{n}
+        \end{aligned}
+    \]
+    and similarly,
+    \[
+        \begin{aligned}
+        \int_{[-1,1]}f(x)\frac{1}{2\delta_n}\chi_{[-\delta_n,\delta_n]}dx
+            &\geq
+            \frac{1}{2\delta_n}\int_{-\delta_n}^{\delta_n}(f(0)-\frac{1}{n})dx\\
+            &=f(0)-\frac{1}{n}
+        \end{aligned}
+    \]
+    which goes to $f(0)$ as $n$ goes to infinity.
+\end{proof}
+
+
+\section*{Problem 6}
+Prove that a finite dimensional vector space is reflexive. Find an expression
+for the matrix form of $A^*$ given the matrix form of $A$.
+\\
+\\
+\begin{proof}
+    To show that $V$ is reflexive, we only need to show that the canonical
+    injection $i$ is surjective. However, since $V$ and $V^*$ have the same
+    dimension, so does $V^*$ and $V^{**}$, and so since $i$ is injective into a
+    space of the same dimension, $i$ is surjective as well, as desired.
+
+    Now, we wish to find $A^*$ as a matrix in the dual basis. We wish to show
+    \[
+        \langle Ax,y\rangle = \langle x,A^{\dagger}y\rangle
+    \]
+    for all $x\in V$ and $y\in W$ for $A:V\to W$.
+
+    To do so, let's express $A$ in local coordinates.
+
+    \[
+        \begin{aligned}
+
+        \end{aligned}
+    \]
+\end{proof}
+
+
+\end{document}

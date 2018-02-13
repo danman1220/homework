@@ -141,5 +141,244 @@ Now, an important lemma:
     \]
 \end{lemma}
 
+\begin{proof}
+    We begin by calculating $(d\exp_p)_v(V)$. Note that here, the $v$ in the
+    parentheses is actually in $T_vT_pM$, which is canonically identified with
+    $T_pM$.
+
+    Specifically, we wish to show $\|(d\exp_p)_v(v)\| = \|v\|$, or that
+    $g((d\exp_p)_v(v),(d\exp_p)_v(v)) = g(v,v)$.
+
+    To see this, consider the geodesic $c(t) = \exp_p(tv)$. Now, $c$ is affinely
+    parameterized, so it has constant speed (magnitude of tangent vector). Now,
+    $c'(0)=v$, and $c'(1) = (d\exp_p)_v(\partial_t(tv)|_{t=1}) =
+    (d\exp_p)_v(v)$ and since $c$ is affinely parameterized, these two have the
+    same magnitude.
+
+    Now, let $w\in T_pM$ such that $w$ is perpendicular to $v$. We can choose a
+    path $\tau(s) = v+sw$ such that $\tau(0) = v$ and $\tau'(0) = w$.
+    Consider
+    \[
+        F(t,s) = \exp_p(t(v+sw))
+    \]
+    where, by varying $s$, we get a family of geodesics from the tangent vectors
+    $v+sw$. Now, for $t\in [0,1]$ (actually $(-\epsilon, 1+\epsilon)$), $s\in
+    (-\epsilon,\epsilon)$, we have a smooth map $F:[0,1]\times
+    (-\epsilon,\epsilon) \to M$.
+
+    \begin{lemma}
+        For a smooth map $F:[a,b]\times [c,d]\to M$ with first coordinate $t$
+        and second coordinate $s$,
+        \[
+            \nabla_{\partial_s}\partial_t F = \nabla_{\partial_t}\partial_s F
+        \]
+    \end{lemma}
+    \begin{hw}
+        Prove this lemma, using the fact that $[\partial_s,\partial_t]=0$.
+    \end{hw}
+
+    Now, we have that
+    \[
+        \partial_t F(t,0) = c'(t)
+    \]
+    since $F(t,0) = \exp_p(tv) = c(t)$. We also have
+    \[
+        \partial_s F(1,0) = (d\exp_p)_v(\partial_s(t(v+sw))|_{t=1,s=0}) =
+        (d\exp_p)_v(w)
+    \]
+    Now, we wish to show that
+    \[
+        g((d\exp_p)_v(v),(d\exp_p)_v(w)) = 0
+    \]
+    which is clear, since
+    \[
+        \begin{aligned}
+            g((d\exp_p)_v(v),(d\exp_p)_v(w))
+            &= g(\partial_t F(1,0),\partial_s F(1,0))\\
+            &= g(\partial_t F,\partial_s F)|_{t=1,s=0}
+        \end{aligned}
+    \]
+    Now,
+    \[
+        \begin{aligned}
+            \partial_t g(\partial_tF,\partial_sF)|_{s=0} &= g(\nabla_{\partial_t}\partial_t
+        F,\partial_s F) + g(\partial_t F,\nabla_{\partial_t}\partial_s F)\\
+            &= g(\partial_t F,\nabla_{\partial_t}\partial_s F) &\text{since $F$
+            is along a geodesic, second derivatives vanish}\\
+            &= g(\partial_t F,\nabla_{\partial_s}\partial_t F)\\
+            &= \frac{1}{2}\partial_s g(\partial_t F,\partial_tF) &\text{By
+            symmetry of the metric}
+        \end{aligned}
+    \]
+    Now, suppose instead that we use a circular arc in $T_pM$ between $v$ and
+    $w$ so that $\|\partial_t F\|$ is independent of $s$. Then, it follows that
+    $\partial_s g(\partial_t F,\partial_t F) = 0$ as desired.
+
+    Now, let's calculate $g(\partial_t F,\partial_sF)|_{t=0,s=0}$.
+    We have
+    \[
+        \begin{aligned}
+            \partial_t F|_{t=0,s=0} &= c'(0) = v\\
+            \partial_s F|_{t=0,s=0} &=\partial_s\exp_p(t\tau(s))|_{t=0,s=0}=0
+        \end{aligned}
+    \]
+    and so $g((d\exp_p)_v(v),(d\exp_p)_v(w)) = 0$.
+
+    These two facts then prove the Gauss lemma by writing $u = \alpha v+\beta
+    w$ for $w$ perpendicular to $v$. 
+\end{proof}
+
+If we were to follow the proof through using the straight line in $T_pM$ instead
+of a circular arc, we would need to use the following lemma
+\begin{lemma}
+    $(d\exp_p)_0 = id$
+\end{lemma}
+\begin{proof}
+    Let $v\in T_pM$, and let $\gamma(t) = tv$ be a curve in $T_pM$ with tangent
+    vector $v$ at zero. Then,
+    \[
+        (d\exp_p)_0(v) = \partial_t\exp_p(tv) = v
+    \]
+    as desired.
+\end{proof}
+
+\begin{prop}
+    For $U_p$ an open set in $T_pM$, $0\in U_p$, the exponential map
+    $\exp_p|_{U_p}$ is a diffeomorphism onto its image, and $\exp_p(U_p)$ is
+    open in $M$.
+\end{prop}
+$B_r(0)\subset T_pM$ is called a normal ball if $\exp_p$ restricts to a
+diffeomorphism from $B_r(0)$ to its image.
+
+\begin{theorem}
+    Let $B_{r_0}(0)$ be a normal ball. Then, for each $v\in B_{r_0}(0)$, the
+    radial geodesic $c(t) = \exp_p(tv)$ for $t\in[0,1]$ is the unique shortest
+    smooth curve up to reparameterization from $p$ to $\exp_p(v)$.
+\end{theorem}
+
+A corollary of this is that $\exp_p(B_r(0)) = B_r(p)$.
+
+\begin{proof}
+    Let $v\in B_{r_0}(0)$ as described in the hypothesis. Let $c(t) =
+    \exp_p(v)$, with $c(0)=p$ and $c(1)=q$. Furthermore, let $\gamma$ be any
+    curve from $p$ to $q$.
+
+    Suppose $\gamma$ leaves $\exp_p(B_{\|v\|}(0))$ at some time$t_1$. That is,
+    $\gamma([0,t_1))\subset\exp(B_{\|v\|})$ and $\gamma(t_1)$ is in the
+    boundary. Then, we know that
+    \[
+        L_{\gamma}\geq L_{\gamma|_{[0,t_1)}}
+    \]
+    so all we need to show is that
+    \[
+        L_c\leq L_{\gamma|_{[0,t_1)}}
+    \]
+
+    Now, this reduces to the second case. Namely, suppose $\gamma$ is entirely
+    contained in $\exp(B_{\|v\|}(0))$, and $\gamma(1)=q_1$ is on the boundary.
+    Let $\tilde{\gamma}(t) = \exp_p|_{B_{\|v\|}(0)}^{-1}\circ\gamma(t)$ be the
+    corresponding curve in $T_pM$. Now, all we have to do is calculate the
+    length of $\gamma$.
+    \[
+        L_{\gamma} = \int_Ig(\gamma',\gamma')dt
+    \]
+    Now,
+    $\gamma'(t) = (d\exp_p)_{\tilde{\gamma}(t)}(\tilde{\gamma}'(t))$
+    and if we assume $\tilde{\gamma}(t)$ is not zero, we can calculate the
+    magnitude of $\gamma'(t)$. Let $\tilde{\gamma}'(t)$ be decomposed into a
+    radial and normal part $r(t)$ and $n(t)$ with
+    respect to the vector $\tilde{\gamma}$. Then,
+    \[
+        \begin{aligned}
+        g((d\exp_p)_{\tilde{\gamma}(t)}(r(t)+n(t)),(d\exp_p)_{\tilde{\gamma}(t)}(r+n))
+        &= \|r(t)\|^2 + \|d\exp_p(n(t))\|^2\\
+            &\geq \|r(t)\|^2
+        \end{aligned}
+    \]
+\begin{hw}
+    prove that equality is met in the previous inequality if and only if
+    $\tilde{\gamma}(t)$ is radial.
+\end{hw}
+    Then,
+    \[
+        \begin{aligned}
+            L_{\gamma} &= \int_{0+}^1 \|\gamma'\|dt\\
+            &\geq \int_{0+}^1\|r(t)\|dt\\
+        \end{aligned}
+    \]
+    switching to polar coordinates, we denote $R(v) = \|v\|$, and we can
+    calculate 
+    \[
+        \begin{aligned}
+        \partial_t R(\tilde{\gamma}(t)) &= \nabla (R)\cdot\tilde{\gamma}'(t)\\
+            &=
+            \frac{\tilde{\gamma}(t)}{\|\tilde{\gamma}(t)\|}\cdot\tilde{\gamma}'(t)\\
+            &= r(t)
+        \end{aligned}
+    \]
+    and so
+    \[
+        \begin{aligned}
+            L_{\gamma} &\geq \int_{0+}^1\|r(t)\|dt\\
+                        &= \int_{0+}^1\partial_tR(\tilde{\gamma}(t))dt
+                        &=L(c)
+        \end{aligned}
+    \]
+    as desired.
+\end{proof}
+
+The corollary follows immediately.
+
+\begin{proof}
+    Let $U_r = \exp_p(B_r(0))$. It should be clear that $U_r\subset B_r(p)$
+    since the radial geodesic $\exp_p(tv)$ for $v\in B_r(0), t\in[0,1]$ has
+    length $\|v\| \<r$. Since this geodesic is the minimal path from $p$ to
+    $\exp_p(v)$, it follows that $d(p,\exp_p(v))<r$ as well.
+
+    Now, let $q\in B_r(p)$. That is, $d(p,q)<r$. Hence, we can find a smooth
+    curve $c:I\to M$ with $L(c)<r$ and $c(0)=p,c(1)=q$.
+    Let $t_1$ be such that $c([0,t_1))\subset U_r$ (since $c$ is continuous, and
+    $c(0)\subset U_r$, and $U_r$ is open).
+    Thus, for all $t\in[0,t_1)$, we have $c(t) = \exp_p(v(t))$ for some $v(t)\in
+    B_r(0)$. In particular, we can find an $r_1<r$ such that $v(t)\in
+    B_{r_1}(0)$. 
+
+    Thus, we know that
+    \[
+        L(c|_{[0,t_1)})\leq L(c)\leq r_1
+    \]
+    and so
+    \[
+        L(\exp_p(sv(t))|_{s\in[0,1]})=\|v(t)\|\leq L(c) <r_1
+    \]
+
+    Now, consider the supremum of such $t_1$. We claim that $\sup t_1 = 1$,
+    which implies that $L(c)\leq r_1<r$ as desired. To see that $\sup t_1 = 1$,
+    suppose instead that $\sup t_1 = T < 1$. This means that for all $t<T$,
+    $c(t) = \exp_p(v(t)), t\in[0,T)$. However, taking a limit of such $v(t)$
+    yields some $V = v(T)$ for which $c(T) = \exp_p(V)$. However, this means
+    that $c(T)\in U_r$ as well, and thus there is some $t' > T$ for which $c(t)
+    = \exp_p(v(t)),t\in[0,t')$, which contradicts $T$ being the supremum.
+
+    Thus, $c(t) = \exp_p(v(t)),t\in I$, and so $q\in U_r$ as desired.
+\end{proof}
+
+\begin{hw}
+    Find a counterexample to $\exp_p(B_r(0)) = B_r(p)$ for arbitrary $r$.
+\end{hw}
+(Note, for compact Riemannian manifolds, this is actually true! So $S^n$ or
+$T^n$ won't be a good counterexample...)
+
+
+\begin{cor}
+    If a piecewise differentiable curve $\gamma(t)$ affinely parameterized
+    minimizes the length between $\gamma(0)$ and $\gamma(1)$ (that is,
+    $L(\gamma) = d(\gamma(0),\gamma(1))$), then $\gamma$ is a smooth geodesic.
+\end{cor}
+
+\begin{proof}
+    (Easy proof) Apply variational calculus to the arc length formula to see
+    that minimal paths satisfy the geodesic equation, and apply uniqueness.
+\end{proof}
 
 \end{document}

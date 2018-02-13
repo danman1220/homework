@@ -1,0 +1,47 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+\section{Curvature}
+
+Let's just straight-up define the curvature: 
+
+\begin{defn}
+    Consider a Riemannian manifold $(M,g)$, with smooth vector fields
+    $X,Y,Z\in\mathfrak{X}(M)$. We define
+    \[
+        R_m(X,Y)Z = -\nabla_X\nabla_YZ + \nabla_Y\nabla_XZ+\nabla_{[X,Y]}Z
+    \]
+
+    Alternately,
+    \[
+        R_{abc}^d\omega_d = \nabla_a\nabla_b\omega_c -
+        \nabla_b\nabla_a\omega_c
+    \]
+    (Wald, p. 37)
+\end{defn}
+
+Now, we need to establish that this is a tensor by showing it is function linear
+in each component.
+
+Observe that
+\[
+    \begin{aligned}
+        R_m(X,Y)fZ &= -\nabla_X\nabla_YfZ  + \nabla_Y\nabla_XfZ +
+        \nabla_{[X,Y]}fZ\\
+        &= -X(Yf)Z - (Yf)\nabla_XZ - (Xf)\nabla_YZ - f\nabla_X\nabla_YZ + Y(Xf)Z
+        + (Xf)\nabla_YZ + Yf\nabla_XZ +f\nabla_Y\nabla_XZ + [X,Y]fZ +
+        f\nabla_{[X,Y]}Z\\
+        &= -f\nabla_X\nabla_YZ + f\nabla_Y\nabla_XZ + f\nabla_{[X,Y]}Z
+    \end{aligned}
+\]
+as desired
+\begin{hw}
+    Show this is function-linear in other components.
+\end{hw}
+
+Note you can lower the contravariant index by applying $g_{ab}$ i.e.
+\[
+    R_{abcd} = g_{dd'}R_{abc}^{d'}
+\]
+
+\end{document}

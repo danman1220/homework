@@ -24,6 +24,9 @@
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
 \usepackage{mathrsfs}
+\usepackage{tikz-cd}
+
+\usepackage{enumitem}
 
 \usepackage[margin=1in]{geometry}
 
@@ -72,6 +75,44 @@
 
 \maketitle % Print the title
 
+\section*{Preliminaries}
+
+\begin{lemma}
+    For two paths $f,g:I\to X$ with $f\simeq g$ relative to $\partial I$, and
+    $h:I\to X$ with $f(1)=g(1)=h(0)$, then $hf\simeq hg$, where $hf$ is the
+    path that first traverses $f$ first, and then $h$ (similarly for $hg$).
+
+    Similarly, if $h:I\to X$ with $h(1) = f(0)=g(0)$, then $fh\simeq gh$.
+\end{lemma}
+
+\begin{proof}
+    Let $F:I\times I\to X$ be the homotopy from $f$ to $g$ relative to $\partial
+    I$, and let $h:I\to X$ be such that $f(1)=g(1)=h(0)$. The homotopy between
+    $hf$ and $hg$ is given by
+    \[
+        \begin{aligned}
+            H:&I\times I\to X\\
+            H(t,s) &=
+        \begin{cases}
+            F(2t,s), &\text{ if }t<\frac{1}{2}\\
+            h(2(t-\frac{1}{2})), &\text { else}
+        \end{cases}
+        \end{aligned}
+    \]
+    That is, run the homotopy on the $f$ section of the path, and leave $h$
+    alone. Since the homotopy $F$ fixes the endpoints, it follows that
+    $F(1,s)=h(0)$ for all $s$, and the homotopy $H$ is well-defined. $H$ is
+    clearly continuous, then, by the pasting lemma. Therefore, $H(t,0) =
+    hf\simeq H(t,1)=hg$ as desired.
+
+    Suppose instead that $h:I\to X$ is such that $h(1)=f(0)=g(0)$. Then, it
+    follows that $\overline{h}(0) = \overline{f}(1)=\overline{g}(1)$ which
+    satisfies the hypotheses for the previous result, and so
+    $\bar{h}\bar{f}\simeq \bar{h}\bar{g}$, and so
+    $\overline{fh}\simeq \overline{gh}$, which immediately implies that
+    $fh\simeq gh$ as desired.
+\end{proof}
+
 % Problems
 \section*{Problem 1}
 Show that the composition of paths satisfies the following property: if 
@@ -79,27 +120,45 @@ $f_0\cdot g_0 \simeq f_1\cdot g_1$, and $g_0\simeq g_1$, then $f_0\simeq f_1$.
 \\
 \\
 \begin{proof}
-    Recall from homework 2 that pre-composition and post-composition respect
-    homotopies. That is, for $f,g:X\to Y$ with $f\simeq g$, and $h_1:Y\to Z$ and
-    $h_2:A\to X$, then $h_{1*}f\simeq h_{1*}g$ and $h_2^*f\simeq h_2^*g$.
+%    Recall from homework 2 that pre-composition and post-composition respect
+%    homotopies. That is, for $f,g:X\to Y$ with $f\simeq g$, and $h_1:Y\to Z$ and
+%    $h_2:A\to X$, then $h_{1*}f\simeq h_{1*}g$ and $h_2^*f\simeq h_2^*g$.
+%
+%    Now, since $g_0\simeq g_1$, we have that
+%    \[
+%        f_{0*}g_0\simeq f_{0*}g_1
+%    \]
+%    and since $f_0g_0\simeq f_1g_1$, we have that $f_1g_1\simeq f_0g_1$.
+%
+%    Now, let $g_1^{-1}$ be the inverse path of $g_1$. That is, the path
+%    $g_1(1-t)$. We have that 
+%    \[
+%        \begin{aligned}
+%            g_1^{-1*}f_1g_1 &\simeq g_1^{-1*}f_0g_1\\
+%            f_1g_1g_1^{-1} &\simeq f_0g_1g_1^{-1}
+%        \end{aligned}
+%    \]
+%    now, since $g_1g_1^{-1}$ is homotopic to the identity, we have that
+%    \[
+%        f_0\simeq f_1
+%    \]
+%    as desired.
 
-    Now, since $g_0\simeq g_1$, we have that
+    Since $g_0\simeq g_1$ (assumed to be relative to $\partial I$), we have that
     \[
-        f_{0*}g_0\simeq f_{0*}g_1
+        f_0g_0\simeq f_0g_1
     \]
-    and since $f_0g_0\simeq f_1g_1$, we have that $f_1g_1\simeq f_0g_1$.
+    by Lemma 1. Now, since $f_1g_1\simeq f_0g_0$, it follows that $f_1g_1\simeq
+    f_0g_1$ by transitivity of $\simeq$.
 
-    Now, let $g_1^{-1}$ be the inverse path of $g_1$. That is, the path
-    $g_1(1-t)$. We have that 
+    Now, letting $\overline{g}$ be the inverse path of $g$, we have that
     \[
         \begin{aligned}
-            g_1^{-1*}f_1g_1 &\simeq g_1^{-1*}f_0g_1\\
-            f_1g_1g_1^{-1} &\simeq f_0g_1g_1^{-1}
+            f_1g_1&\simeq f_0g_1\\
+            f_1g_1\overline{g_1} &\simeq f_0g_1\overline{g_1} &\text{by Lemma
+            1}\\
+            f_1 &\simeq f_0 &\text{by $g_1\overline{g_1}\simeq 0$ and Lemma 1}
         \end{aligned}
-    \]
-    now, since $g_1g_1^{-1}$ is homotopic to the identity, we have that
-    \[
-        f_0\simeq f_1
     \]
     as desired.
 \end{proof}
@@ -117,14 +176,13 @@ homotopy class of $h$.
     by $g$.
 
     So, let $f$ be a loop based at the endpoint of $g,h$. We will show that
-    $g^{-1}fg \simeq h^{-1}fh$. This, however, is just a straightforward
-    application of the pre-composition and post-composition lemma from homework
-    2.
+    $\bar{g}fg \simeq \bar{h}fh$. This, however, is just a straightforward
+    application of Lemma 1.
     
-    To see this, we note that since $g\simeq h$, we have that $f_*g\simeq f_*h$.
-    Thus, $fg\simeq fh$. Now, since $g^{-1}\simeq h^{-1}$, we can also write
+    To see this, we note that since $g\simeq h$, we have that $fg\simeq fh$.
+    Now, since $bar{g}\simeq \bar{h}$, we can also write
     \[
-        g^{-1}fg\simeq g^{-1}fh = (fh)^*g^{-1}\simeq (fh^*)h^{-1} = h^{-1}fh
+        \bar{g}fg\simeq \bar{g}fh = \bar{g}(fh)\simeq \bar{h}(fh) = \bar{h}fh
     \]
     as desired
 \end{proof}
@@ -137,7 +195,167 @@ $h$.
 \\
 \\
 \begin{proof}
-    
+    ($\implies$)
+    Suppose that for a path-connected space $X$, we have that $\pi_1(x)$ is
+    Abelian. Furthermore, let $h,g$ be two paths in $X$ such that
+    $g(0)=h(0)=x_0$ and $g(1)=h(1)=x_1$. Furthermore, let $f$ be a loop based at
+    $x_1$. We wish to show that $\beta_h([f]) = \beta_g([f])$ which is equivalent to
+    showing that $\beta_{\bar{g}}\beta_h([f]) = [f]$. Now,
+    $\beta_{\bar{g}}\beta_h([f])$ is just $[g\bar{h}fh\bar{g}]$. Note however that
+    $h\bar{g}$, $g\bar{h}$, and $f$ are loops based at $x_1$. Since $\pi_1(X)$ is
+    Abelian, it follows that
+    \[
+        \begin{aligned}
+            [g\bar{h}fh\bar{g}] &= [g\bar{h}][f][h\bar{g}]\\
+            &=[f][g\bar{h}][h\bar{g}]\\
+            &=[f][g\bar{h}h\bar{g}]\\
+            &=[f]
+        \end{aligned}
+    \]
+    as desired.
+
+    ($\impliedby$)
+    Suppose that $X$ is such that for any two paths $h,g$ with $h(0)=g(0)=x_0$
+    and $h(1)=g(1)=x_1$, we have that $\beta_h = \beta_g$. We wish to show that
+    for any two elements $[f_1],[f_2]\in \pi_1(X)$, we have that $[f_1][f_2] =
+    [f_2][f_1]$. Alternately, we can show that $[f_1][f_2][\bar{f_1}]=[f_2]$.
+    This is obvious, though, since $f_1$ and $f_2$ satisfy the hypotheses for
+    $h,g$, which implies that $\beta_{f_1} = \beta_{f_2}$. So,
+    \[
+        \begin{aligned}
+            [f_1][f_2][\bar{f_1}] &= \beta_{\bar{f_1}}[f_2]\\
+            &= \beta_{\bar{f_2}}[f_2]\\
+        &= [f_2][f_2][f_2^{-1}]\\
+        &=[f_2]
+        \end{aligned}
+    \]
+    as desired.
+\end{proof}
+
+\section*{Problem 4}
+Show that if a subspace $x\subset \R^n$ is locally star-shaped, then every path
+in $X$ is homotopic in $X$ to a piecewise linear path. Show specifically this
+holds when $X$ is open, and when $X$ is a union of finitely many closed convex
+sets.
+\\
+\\
+\begin{proof}
+    To begin with, let $\gamma$ be a path in $X$. At each point $\gamma(t)\in
+    X$, let $S_t$ be a star-shaped neighborhood around $\gamma(t)$. In
+    particular, $\{S_t\}$ is an open cover of $\gamma(I)$, and since $\gamma(I)$
+    is compact, it follows that there is some finite subcover $\{S_i\}_{i=1}^n$.
+    In particular, we can take a finite subcover such that each point
+    $\gamma(t)$ is in at most two open sets in the subcover, and the preimages
+    $\gamma^{-1}(S_i)$ and $\gamma^{-1}(S_j)$ are distinct (neither contains the
+    other). We further require that each open set in the subcover be an
+    interval. Finally, order the subcover sequentially. That is, let $S_1$ be the
+    open set containing $\gamma(0)$, and let $S_i$ be the open set that overlaps
+    with $S_{i-1}$. Define a set of partition points $\{t_i\}_{i=1}^{n-1}$ such
+    that $t_i$ lies in the intersection of $S_i$ and $S_{i+1}$.
+
+    Now, for each $S_i$, let $x_i$ be the distinguished point in the star-shaped
+    neighborhood. That is, for each $x\in S_i$, the line segment from $x$ to
+    $x_i$ is in $S_i$.
+
+    We are finally ready to describe the homotopy from $\gamma$ to a piecewise
+    linear function. We note first that each $S_i$ is simply connected. In
+    particular, all paths in $S_i$ with fixed endpoints are homotopic to each
+    other.
+
+    On $S_1$, we can homotope the segment of the path $\gamma([0,t_1])$ to the
+    path obtained by taking the line segment from $\gamma(0)$ to $x_1$ and then
+    the line segment from $x_1$ to $\gamma(t_1)$. Generally, on $S_i$, homotope
+    the path $\gamma([t_{i-1},t_i])$ to the path from $\gamma(t_{i-1})$ to
+    $x_i$, then from $x_i$ to $\gamma(t_i)$. Finally, in $S_n$, we homotope the
+    path $\gamma([t_n,1])$ to the path from $\gamma(t_n)$ to $\gamma(1)$.
+
+    On each open set, we homotoped to a piecewise linear path, and they agree on
+    the intersection, and so the resulting path is piecewise linear as desired.
+\end{proof}
+
+\section*{Problem 5}
+Show that for every space $X$, the following are equivalent:
+\begin{enumerate}[label=(\alph*)]
+    \item Every map $S^1\to X$ is homotopic to the constant map, with image a
+        point.
+    \item Every map $S^1\to X$ extends to a map $D^2\to X$.
+    \item $\pi(X,x_0) = 0$ for all $x_0\in X$.
+\end{enumerate}
+
+\begin{proof}
+    ((a)$\implies$(b))
+    Suppose $f:S^1\to X$ is such that $f$ is homotopic to a constant map $x_0$.
+    In particular, we have a homotopy $F:S^1\times I\to X$ with $F(x,0) = f(x)$
+    and $F(x,1)=x_0$.
+
+    Now, the disk $D^2$ is homeomorphic to the quotient $(S^1\times I)/{S^1\times
+    \{1\}}$ via the homeomorphism 
+    \[
+        \begin{aligned}
+            \phi&:D^2\to (S^1\times I)/{S^1\times\{0\}}
+            \phi(r,\theta) &= [(\theta,r)]
+        \end{aligned}
+    \]
+    Where the coordinates on $D^2$ are polar coordinates with $r \leq 1$,
+    $\theta\in[0,2\pi)$, and $[(\theta,r)]$ is the equivalence class of the
+    point $(\theta,r)\in S^1\times I$.
+
+    Now, we can define $\tilde{F}:(S^1\times I)/{S^1\times \{1\}}\to X$ to be the
+    unique map that makes the diagram
+    \[
+        \begin{tikzcd}[column sep=small]
+            S^1\times I\arrow{rr}{F}\arrow[two heads]{rd}{q} &&X\\
+            & (S^1\times I)/{S^1\times\{1\}}\arrow{ur}{\tilde{F}}
+        \end{tikzcd}
+    \]
+    commute. Here, $q$ is the canonical quotient map. $\tilde{F}$ is
+    well-defined, since $F$ is constant on the fibers of $q$. This is clear,
+    since the only nontrivial fiber of $q$ is the subspace $S^1\times\{1\}$,
+    which $F$ sends identically to $x_0$.
+
+    Thus, using the homeomorphism above, we find the map $\tilde{F}\circ\phi$ to
+    be an extension of $f$. This is evident, since
+    $\tilde{F}\circ\phi|_{\partial D^2}$ is just $\tilde{F}|_{S^1\times\{0\}}$
+    which is just $F(x,0)=f(x)$ as desired.
+
+    ((b)$\implies$(c))
+    Suppose that any map $f:S^1\to X$ can be extended to a map $\tilde{f}:D^2\to
+    X$. Now, let $x_0\in X$ be arbitrary. We will show that $\pi_1(X,x_0)=0$. in
+    particular, we will show that any loop based at $x_0$ is homotopic to the
+    constant loop.
+
+    So, let $f:S^1\to X$ be a loop such that $f(0) = x_0$. By (b), we know that
+    such an $f$ extends to a $\tilde{f}:D^2\to X$. Now, via the homeomorphism
+    above, we have a map 
+    \[
+        \tilde{F}:(S^1\times I)/{S^1\times \{1\}}\to X
+    \]
+    given by $\tilde{F} = \tilde{f}\circ\phi^{-1}$. Furthermore, for
+    $q:S^1\times I\to (S^1\times I)/{S^1\times\{1\}}$ the canonical quotient
+    map, we have a map
+    \[
+        F:S^1\times I\to X
+    \]
+    given by $F = \tilde{F}\circ q$. Now, 
+    \[
+        \begin{aligned}
+            F|_{S^1\times\{0\}} &= \tilde{F}|_{S^1\times\{0\}}\\
+            &= \tilde{f}|_{\partial D^2}\\
+            &= f
+        \end{aligned}
+    \]
+    and furthermore
+    \[
+        F|_{S^1\times\{1\}} = \tilde{F}|_{[S^1\times\{1\}]} = x_1
+    \]
+    for some $x_1\in X$. This is because $q(S^1\times\{1\}) = [S^1\times\{1\}]$
+    is just a single point.
+
+    Thus, $F$ defines a homotopy from $f$ to the constant map $x_1$ as desired.
+
+    ((c)$\implies$(a))
+    Suppose that $\pi_1(X,x_0)=0$ for all $x_0\in X$. Trivially, each loop in
+    $X$ is homotopic to a constant loop, as desired.
 \end{proof}
 
 \end{document}
