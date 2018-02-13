@@ -157,6 +157,8 @@ invertible, show that $A^*$ is invertible with inverse $(A^*)^{-1} =
     as desired.
 \end{proof}
 
+\newpage
+
 \section*{Problem 2}
 Prove the Fredholm Theorem.
 \\
@@ -178,6 +180,8 @@ Prove the Fredholm Theorem.
     the right hand side is the set of all $y\in Y$ for which $\phi(y) = 0$ for
     all $\phi$ in $\ker A^*$, as desired.
 \end{proof}
+
+\newpage
 
 \section*{Problem 3}
 Explain the difference between the weak-$*$ convergence of a sequence $(\phi_j)$ in
@@ -210,6 +214,8 @@ between the strong, weak, and weak-$*$ convergences on $X^*$.
     $x\in X$, $\phi_j(x)\to \phi(x)$.
 \end{proof}
 
+\newpage
+
 \section*{Problem 4}
 Prove that the sequence of standard basis vectors $e_n\in \ell^p$, $1<p<\infty$
 converges weakly but not strongly.
@@ -240,6 +246,7 @@ converges weakly but not strongly.
     as desired.
 \end{proof}
 
+\newpage
 
 \section*{Problem 5}
 Prove that $\frac{\epsilon}{\pi(x^2+\epsilon^2)}d\lambda^1(x)\to\delta_0$ in
@@ -341,6 +348,7 @@ weak-$*$ as measures in $C([-1,1])^*$.
     which goes to $f(0)$ as $n$ goes to infinity.
 \end{proof}
 
+\newpage
 
 \section*{Problem 6}
 Prove that a finite dimensional vector space is reflexive. Find an expression
@@ -357,16 +365,19 @@ for the matrix form of $A^*$ given the matrix form of $A$.
     \[
         \langle Ax,y\rangle = \langle x,A^{\dagger}y\rangle
     \]
-    for all $x\in V$ and $y\in W$ for $A:V\to W$.
+    for all $x\in V$ and $y\in W$ for $A:V\to W$ (anticipating that $A^* =
+    A^{\dagger}$.)
 
     To do so, let's express $A$ in local coordinates.
-
     \[
         \begin{aligned}
-
+            \langle Ax,y\rangle &= A_{ij}x^j\overline{y^i}\\
+            &= \overline{\overline{A_{ij}}y^i}x^j\\
+            &= x^j\overline{\overline{A_{ji}^T}y^i}\\
+            &= \langle x, \overline{A^T}y\rangle
         \end{aligned}
     \]
+    and so $A^* = A^{\dagger}$, as desired.
 \end{proof}
-
 
 \end{document}
