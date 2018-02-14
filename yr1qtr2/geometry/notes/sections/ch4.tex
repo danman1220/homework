@@ -44,4 +44,50 @@ Note you can lower the contravariant index by applying $g_{ab}$ i.e.
     R_{abcd} = g_{dd'}R_{abc}^{d'}
 \]
 
+\subsection*{Calculating Curvature}
+
+We can calculate the Riemann curvature tensor in coordinates by using the
+definitions of the covariant derivative.
+\[
+    \R_{abc}^d = \partial_b\Gamma^d_{ac} - \partial_a\Gamma^d_{bc}
+    +\sum_{\alpha} (\Gamma^{\alpha}_{ac}\Gamma^d_{\alpha b} -
+    \Gamma^{\alpha}_{bc}\Gamma^d_{\alpha a})
+\]
+
+To make things easier, we can use local Riemannian normal coordinates by pushing
+the coordinates from $T_pM$ to $M$ via the exponential map.
+\begin{hw}
+    Show that in Riemannian normal coordinates,
+    \[
+        \Gamma^k_{ij} = 0 \text{ at }p
+    \]
+    and
+    \[
+        \partial_kg_{ij} = 0 \text{ at }p
+    \]
+\end{hw}
+
+\begin{defn}
+    an orthonormal frame $\{e_i\}$ on an open neighborhood of a point $p\in M$
+    is called normal around $p$ if
+    \[
+        \nabla_ae_i = 0
+    \]
+    at $p$.
+\end{defn}
+
+The curvature follows the Bianchi Identity
+\[
+    R(X,Y)Z + R(Y,Z)X + R(Z,X)Y = 0
+\]
+
+In general, we have four important properties of the metric:
+\begin{itemize}
+    \item $R_{abc}^d = R_{[ab]c}^d$ antiymmetry of the first two components
+    \item $R_{[abc]}^d = 0$ the Bianchi identity
+    \item $R_{abcd} = R_{ab[cd]}$ antiymmetry of the second two components
+    \item $R_{abcd} = R_{cdab}$ symmetry in the first and second half
+        components.
+\end{itemize}
+
 \end{document}

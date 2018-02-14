@@ -113,6 +113,7 @@
     $fh\simeq gh$ as desired.
 \end{proof}
 
+\newpage
 % Problems
 \section*{Problem 1}
 Show that the composition of paths satisfies the following property: if 
@@ -163,6 +164,7 @@ $f_0\cdot g_0 \simeq f_1\cdot g_1$, and $g_0\simeq g_1$, then $f_0\simeq f_1$.
     as desired.
 \end{proof}
 
+\newpage
 
 \section*{Problem 2}
 Show that the change of basepoint homomorphism $\beta_h$ depends only on the
@@ -187,7 +189,7 @@ homotopy class of $h$.
     as desired
 \end{proof}
 
-
+\newpage
 \section*{Problem 3}
 For a path-connected space $X$, show that $\pi_1(X)$ is Abelian if and only if
 all basepoint-change homomorphisms $\beta_h$ depend only on the endpoints of
@@ -232,6 +234,8 @@ $h$.
     as desired.
 \end{proof}
 
+\newpage
+
 \section*{Problem 4}
 Show that if a subspace $x\subset \R^n$ is locally star-shaped, then every path
 in $X$ is homotopic in $X$ to a piecewise linear path. Show specifically this
@@ -272,6 +276,8 @@ sets.
     On each open set, we homotoped to a piecewise linear path, and they agree on
     the intersection, and so the resulting path is piecewise linear as desired.
 \end{proof}
+
+\newpage
 
 \section*{Problem 5}
 Show that for every space $X$, the following are equivalent:
@@ -356,6 +362,162 @@ Show that for every space $X$, the following are equivalent:
     ((c)$\implies$(a))
     Suppose that $\pi_1(X,x_0)=0$ for all $x_0\in X$. Trivially, each loop in
     $X$ is homotopic to a constant loop, as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 6}
+Let $[S^1,X]$ be the set of homotopy classes of maps $S^1\to X$ with no
+conditions on basepoints, and let $\Phi:\pi_1(X,x_0)\to [S^1,X]$ be the natural
+map obtained by ignoring basepoints. Show that $\Phi$ is onto if $X$ is
+path-connected, and that $\Phi([f]) = \Phi([g])$ if and only if $[f]$ and $[g]$
+are conjugate in $\pi_1(X,x_0)$. Hence $\Phi$ induces a one-to-one
+correspondence between $[S^1,X]$ and the set of conjugacy classes in
+$\pi_1(X,x_0)$ if $X$ is path-connected.
+\\
+\\
+\begin{proof}
+    We first show that if $X$ is path-connected, then $\Phi:\pi_1(X,x_0)\to
+    [S^1,X]$ is onto. To see this, let $[f]\in [S^1,X]$ be some loop in $X$. In
+    particular, since $X$ is path-connected, there is a path $\gamma$ from $f(0)$ to
+    $x_0$. Then, $\gamma\cdot f\cdot \gamma^{-1}$ (first do $\gamma^{-1}$, then
+    $f$, then $\gamma$) is a loop based at $x_0$, and $[\gamma f \gamma^{-1}]$
+    is an element of $\pi_1(X,x_0)$. Furthermore, this identification is stable
+    with respect to homotopy. That is, for $f\simeq g$, $\gamma f
+    \gamma^{-1}\simeq \gamma g\gamma^{-1}$ and so it follows immediately that
+    $\Phi([\gamma f \gamma^{-1}]) = [f]$. Since $[f]$ was arbitrary, $\Phi$ is
+    onto as desired.
+
+    Now we show that $\Phi([f]) = \Phi([g])$ if and only if $[f]$ and $[g]$ are
+    conjugate to each other.
+
+    ($\implies$)
+    Suppose $\Phi([f]) = \Phi([g])$. This means that $[f] = [g]$ (as a general
+    homotopy, not relative to the basepoint). Now, let $f_t:S^1\to X$ be the
+    homotopy from $f$ to $g$. In particular, $f_t(0) = \gamma(t)$ is a loop
+    based at $x_0$ that tracks how the basepoint moves in the homotopy. We will
+    show that $f$ is homotopic to $\gamma^{-1} g \gamma$ relative to the
+    basepoint. 
+
+    Now, we define a family of paths $\gamma_s$ as the path $\gamma$ restricted
+    to the domain $[0,s]$. Similarly, $\gamma_s^{-1}$ will be the inverse of
+    $\gamma_s$, which is just $\gamma^{-1}$ restricted to the domain $[1-s,1]$.
+
+    Now, we can construct the homotopy between $f$ and $\gamma^{-1}g\gamma$. 
+    Let $h_s$ be the homotopy defined as
+    \[
+        h_s = \gamma^{-1}_s f_s\gamma_s
+    \]
+    which is well-defined with respect to path concatenation, since $\gamma_s(1)
+    = \gamma(s) = f_s(0)$ and $\gamma^{-1}_s(0) = \gamma_s(1) = \gamma(s) =
+    f_s(1)$. Clearly this homotopy is relative to the starting point of the loop
+    as well, since $\gamma_s(0) = x_0$ for all $s$, and $\gamma^{-1}_s(1) = x_0$
+    for all $s$.
+
+    Thus, $[f]$ and $[g]$ are conjugate to each other in $\pi_1(X,x_0)$.
+
+    ($\impliedby$)
+    Suppose instead that $[f]$ and $[g]$ are conjugate to each other in
+    $\pi_1(X,x_0)$. We can write $[g] = [\gamma^{-1}f\gamma]$ for some
+    $[\gamma]$ in $\pi_1(X,x_0)$. Let $f_t$ be the homotopy from $g$ to
+    $\gamma^{-1} f\gamma$. Then, we just need to show that $\gamma^{-1}f\gamma$
+    is homotopic to $f$ as a general homotopy. This is clear, however, by
+    considering $\gamma^{-1}f\gamma$ as a loop based at $f(0)$ which is given as
+    $\gamma\gamma^{-1}f$. This is the same loop (up to reparameterization), it
+    just has a new base point. However, in $\pi_1(X,f(0))$, this is homotopic to
+    $f$ by canceling $\gamma$ and $\gamma^{-1}$. Thus, $\gamma^{-1}f\gamma$ is
+    homotopic to $f$ (and it is assumed to be homotopic to $g$) and so $f\simeq
+    g$ without regard to basepoint.
+\end{proof}
+
+\newpage
+
+\section*{Problem 7} %Hatcher 1.9
+Let $A_1$, $A_2$, and $A_3$ be compact sets in $\R^3$. Use Borsuk-Ulam theorem
+to show that there is one plane $P\in \R^3$ such that $P$ simultaneously divides
+each $A_i$ into two pieces of equal measure.
+\\
+\\
+\begin{proof}
+    Let $A_1,A_2, A_3$ be compact sets in $\R^3$. Now, for $\theta\in S^1$, we
+    can define a plane whose normal has polar coordinate $\theta$ and azimuthal
+    coordinate $\phi$ which cuts $A_1$ in half. This is a clear application of
+    the intermediate value theorem, by varying the translation of the plane from
+    the origin and looking at the function $f(r)$ which measures how much of
+    $A_1$ is above (in the direction of the normal) the plane.
+
+    Now, let $f:S^2\to\R^2$ be the function that measures how much of $A_2$ and
+    $A_3$ is above the plane defined above. This function is pretty clearly
+    continuous, since a small change$d\Phi$ in the angle of the plane results in
+    at most a change of $Rd\Phi$ in the area above the plane (for $R$ the bound
+    on the compact sets $A_i$).
+
+    Thus, there exists a point $x\in S^2$ for which $f(x) = f(-x)$. That is,
+    there is a point for which the plane divides $A_1$ in half (by
+    construction), and for which the amount of $A_2$ and $A_3$ (individually)
+    above the plane is the same as the amount of $A_2$ and $A_3$ above the
+    same plane with opposite orientation. However, this just means that this
+    plane cuts $A_1$, $A_2$, and $A_3$ each in half, as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 8} %Hatcher 1.11
+If $X_0$ is the path component of $X$ containing $x_0$, show that the inclusion
+$X_0\to X$ induces an isomorphism $\pi_1(X_0,x_0)\to\pi_1(X,x_0)$.
+\\
+\\
+\begin{proof}
+    In particular, we wish to show that the inclusion map $i$ induces a map
+    $i^*$ which is surjective with trivial kernel.
+
+    The fact that $i^*$ is surjective is trivial, since a loop $f$ based at
+    $x_0$ in $X$ must stay in its path-component. Therefore, the image of $f$ is
+    completely contained in $X_0$, and easily factors through $i$. That is,
+    there is some $\tilde{f}:S^1\to X_0$ based at $x_0$ for which
+    $i\circ\tilde{f} = f$. Clearly, then, $i^*([\tilde{f}]) = [f]$. This is a
+    well-defined map, since if $\tilde{f}\simeq \tilde{g}$, we have that
+    $f\simeq g$ after inclusion, and so $i^*([\tilde{f}]) = i^*[\tilde{g}])$.
+
+    Now, suppose $[f]$ is such that $i^*([f]) = [0]$. In particular, this means
+    that $f\circ i\simeq x_0$. However, any homotopy between two maps must stay
+    in its path component for all $t$ (Given $f_t$ a homotopy, $f_t(x)$ for
+    fixed $x$ is a continuous map from $I$ into $X$, and thus must be mapped
+    into a single path-component).
+
+    Therefore, since $f\circ i \simeq x_0$, and such a homotopy stays in $X_0$,
+    we can easily restrict the homotopy to $X_0$ without issue, which leads to a
+    homotopy $f\simeq x_0$.
+
+    Thus, $i^*$ is surjective with trivial kernel, and is an isomorphism.
+\end{proof}
+
+\newpage
+
+\section*{Problem 9}
+Given a space $X$ and a path-connected subspace $A$ containing $x_0$ the
+basepoint, show that the map $\pi_1(A,x_0)\to \pi_1(X,x_0)$ induced by the
+inclusion map is surjective if and only if every path in $X$ with endpoints in
+$A$ is homotopic to a path in $A$.
+\\
+\\
+\begin{proof}
+    ($\implies$)
+    Suppose first that every path in $X$ with endpoints in $A$ is homotopic to a
+    path in $A$. Now, let $[f]\in\pi_1(X,x_0)$. By hypothesis, $[f]$ contains a
+    loop $g$ in $A$ based at $x_0$ (since $x_0\in A$), and so $i^*([g]) = [f]$.
+
+    ($\impliedby$)
+    Suppose conversely that there is a path $f$ in $X$ with endpoints in $A$
+    that is not homotopic to a path in $A$. Let $\gamma$ be a path in $A$
+    connecting $f(0)$ to $f(1)$. Then, the concatenation $f\cdot\gamma$ is a
+    loop in $X$. However, since $f$ is not homotopic to any path in $A$, it
+    follows that $f\cdot\gamma$ is not homotopic to a loop in $A$ (if it were,
+    it would also be homotopic to a loop in $A$ passing through $f(1)$, and
+    either the part of the loop going to $f(1)$ or the part of the loop going
+    from $f(1)$ would be homotopic to $f$, a contradiction). Therefore,
+    $[f\cdot\gamma]$ is not in the image of $i^*$, and so $i^*$ is not
+    surjective.
 \end{proof}
 
 \end{document}
