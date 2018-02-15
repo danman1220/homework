@@ -49,6 +49,7 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
 
 \newtheorem{lemma}{Lemma}
 %----------------------------------------------------------------------------------------
@@ -92,6 +93,35 @@ is stationary on both boundary circles.
     (\theta,0)$ and so $f_t$ is stationary on $S^1\times \{0\}$
 
 \end{proof}
+
+
+\section*{Problem 2}
+Does the Borsuk-Ulam theorem hold for the torus? That is, for every map
+$f:S^1\times S^1 \to \R^2$ does there exist a point $(x,y)$ for which
+$f(x,y) = f(-x,-y)$?
+\\
+\\
+\begin{proof}
+    I assert that the Borsuk-Ulam theorem does not hold for the torus. To see
+    this, we construct an explicit function from $T^2$ to $\R^2$ which does not
+    have any antipodal points with the same value.
+
+    Consider the function $f:T^2\to \R^2$ given as follows. First, let $T^2$ be
+    embedded in $\R^3$. Then, consider the vector field
+    $\frac{\partial}{\partial\phi}$ where $\phi$ runs parallel to the $x-y$
+    plane. Since $T^2$ is embedded in $\R^3$, these vectors can be thought of as
+    living in the tangent bundle to $\R^3$. Thus, for each vector, it makes
+    sense to take its projection onto the $x-y$ plane. Now, since the original
+    vector field $\frac{\partial}{\partial \phi}$ is smooth, and projection is a
+    continuous operation, this defines a continuous map from $T^2$ to $\R^2$.
+
+    In coordinates, this map is given as
+    \begin{equation}
+        f(\theta,\phi) = (\cos(\phi),\sin(\phi))
+    \end{equation}
+    and clearly, $f(\theta,\phi)\neq f(-\theta,-\phi)$ as desired.
+\end{proof}
+
 
 \section*{Problem extra}
 Find the standard form of $\Z_4\times\Z_6\times\Z_6$, and prove or disprove:
