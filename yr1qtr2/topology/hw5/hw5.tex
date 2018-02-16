@@ -24,6 +24,7 @@
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
 \usepackage{mathrsfs}
+\usepackage{tikz-cd}
 \usepackage{bbm}
 
 \usepackage[margin=1in]{geometry}
@@ -122,6 +123,126 @@ $f(x,y) = f(-x,-y)$?
     and clearly, $f(\theta,\phi)\neq f(-\theta,-\phi)$ as desired.
 \end{proof}
 
+\section*{Problem 3}
+From the isomorphism $\pi_1(X\times Y, (x_0,y_0))\cong
+\pi_1(X,x_0)\times\pi_1\left( Y,y_0 \right)$ it follows that loops in
+$X\times\{y_0\}$ and $\left\{ x_0 \right\}\times Y$ represent commuting elements
+of $\pi_1\left( X\times Y,\left( x_0,y_0 \right) \right)$. Construct an explicit
+homotopy demonstrating this.
+\\
+\\
+\begin{proof}
+    Let $f$ be a loop in $X\times\left\{ y_0 \right\}$, and let $g$ be a loop in
+    $\left\{ x_0 \right\}\times Y$. We wish to show that $f\cdot g \simeq g\cdot
+    f$. We can construct this homotopy explicitly by ``sliding'' $f$ along $g$.
+    Concretely the homotopy is as follows.
+
+    First, define $g_t = g\Big|_{[0,t]}$ and $g_{t'} = g\Big|_{[t,1]}$ so that
+    $g_{t'}\cdot g_t = g$. That is, $g_t$ is the segment of $g$ from $g(0)$ to
+    $g(t)$. Furthermore, let $f_y$ be the loop $f$ in the subspace
+    $X\times\left\{ y \right\}$.
+
+    Now, define a homotopy $h$ as
+    \begin{equation}
+        h_t = g_{t'}\cdot f_{\pi_y(g(t))}\cdot g_t
+    \end{equation}
+    Now, this is well-defined, since $g_t$ has an endpoint at
+    $(x_0,\pi_y(g(t)))$, and $f$ starts and ends at $(x_0,\pi_y(g(t)))$, and
+    $g_{t'}$ begins at $(x_0,\pi_y(g(t))$ and ends at $(x_0,y_0)$. We just have
+        to make sure this is continuous. Since $h$ is a map into $X\times Y$, we
+        just have to check that the corresponding map $H:S^1\times I \to X\times
+        Y$ is continuous onto both $X$ and $Y$. That is, $H$ is continuous if
+        and only if $\pi_X H$ and $\pi_Y H$ are continuous.
+
+    However, it should be clear that $\pi_X H = f$, since $\pi_X(g(t)) = x_0$
+    for all $t$. Thus, the path $g_{t'}\cdot f \cdot g_t$ projects down to just
+    $x_0\cdot f\cdot x_0$, which is clearly continuous. 
+    
+    Similarly, $\pi_Y H = g_{t'}\cdot y_0\cdot g_t$, which is (after
+    reparameterization) equal to $g_{t'}\cdot g_t = g$, which is clearly
+    continuous for all $t$.
+
+    Thus, $H$ is continuous in its projections, and by the universal property of
+    products, is continuous in general.
+
+    Now, $h_0$ is just $g_{0'}\cdot f\cdot g_0 = g\cdot f$, and $h_1 =
+    g_{1'}\cdot f\cdot g_1 = f\cdot g$, and so $f\cdot g \simeq g\cdot f$ as
+    desired.
+\end{proof}
+
+\section*{Problem 4}
+Show that every homomorphism $\pi_1(S^1)\to \pi_1(S^1)$ can be realized as the
+induced homomorphism $\varphi_*$ of a map $\varphi:S^1\to S^1$.
+\\
+\\
+\begin{proof}
+    Throughout this problem, I will identify $\pi_1(S^1)$ with $\Z$ by
+    identifying $1$ with the loop that goes once around the circle
+    counterclockwise.
+
+    Since $\pi_1(S^1) \cong \Z$, each homomorphism is characterized by where it
+    sends the generator $1$.
+
+    So, suppose $\phi:\pi_1(S^1)\to\pi_1(S^1)$ is such that $\phi(1) = n$ for
+    some integer $n$. Define $\varphi(z) = z^n$. I claim that $\varphi_* =
+    \phi$.
+
+    To see this, we just need to see that $\varphi_*(1) = n$. Now, the loop $1$
+    is just the map $f(t) = \exp(2\pi i t)$, and the induced loop $\varphi_*(1)$ is the
+    composition $\phi(f(t)) = \exp(2\pi i nt)$ which is easily seen to be
+    homotopic to the loop $n$, as desired.
+\end{proof}
+
+\section*{Problem 5}
+Show that there does not exist a retraction from $X$ to $A$ in the following
+cases:
+\subsection*{Part (a)}
+$X=\R^3$ and $A$ is any subspace homeomorphic to $S^1$.
+\begin{proof}
+    Suppose such a retraction $r:X\to A$ existed. In particular, we would have
+    that
+    \[
+\begin{tikzcd}
+    A\arrow{r}{i}\arrow[bend right]{rr}{\mathbbm{1}} &X\arrow{r}{r} &A
+\end{tikzcd}
+    \]
+    commutes. Now, applying the $\pi_1$ functor to this diagram yields
+    \[
+\begin{tikzcd}
+    \Z\arrow[leftrightarrow]{d} &0\arrow[leftrightarrow]{d}
+    &\Z\arrow[leftrightarrow]{d}\\
+    \pi_1(A)\arrow{r}{i_*}\arrow[bend right]{rr}{\mathbbm{1}} &X\arrow{r}{r} &A
+\end{tikzcd}
+    \]
+    Now, this diagram implies that $\mathbbm{1}$ on $\Z$ factors through zero,
+    which cannot happen. Thus, no such $r$ exists.
+\end{proof}
+\subsection*{Part (b)}
+$X=S^1\times D^2$ with $A$ the boundary torus $S^1\times S^1$.
+\\
+\\
+\begin{proof}
+    Following the same diagram as the one used in the previous problem, assuming
+    such an $r:X\to A$ exists yields the diagram
+    \[
+\begin{tikzcd}
+    \Z\times\Z\arrow{r}{i_*}\arrow[bend right]{rr}{\mathbbm{1}}
+    &\Z\arrow{r}{r_*} &\Z\times \Z
+\end{tikzcd}
+    \]
+    which commutes. However, for this to commute, it must be that $i_*$ is
+    injective. This cannot happen, however, since $\Z\times \Z$ has two
+    generators, but $\Z$ only has one. Since an injective map has to map
+    generators to generators, $i_*$ cannot be injective, and the diagram cannot
+    commute, a contradiction. Thus, no such $r$ exists.
+\end{proof}
+\subsection*{Part (c)}
+$X=S^1\times D^2$ with $A$ the circle shown in the figure.
+\\
+\\
+\begin{proof}
+    
+\end{proof}<++>
 
 \section*{Problem extra}
 Find the standard form of $\Z_4\times\Z_6\times\Z_6$, and prove or disprove:
