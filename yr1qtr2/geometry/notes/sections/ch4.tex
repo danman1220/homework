@@ -89,5 +89,81 @@ In general, we have four important properties of the metric:
     \item $R_{abcd} = R_{cdab}$ symmetry in the first and second half
         components.
 \end{itemize}
+Note that item $4$ can be derived from the other three.
+
+An important concept not covered in Do Carmo:
+\begin{defn}
+    Given a finite dimensional vector space (over $\R$) $V$, consider the tensor $C$
+    of rank $(0,4)$ (4 covariant indices). $C$ is called an algebraic curvature
+    tensor on $V$ if it satisfies the above four properties (with appropriate
+    index lowering).
+\end{defn}
+
+\subsection*{Sectional Curvature}
+
+Let $p\in M$ and let $\sigma$ be a $2-$dimensional subspace of $T_pM$.
+\begin{defn}
+    The sectional curvature $K(\sigma)$ is defined to be
+    \[
+        K(\sigma) = R_m(e_1,e_2,e_1,e_2)
+    \]
+    for $\left\{ e_1,e_2 \right\}$ an orthonormal basis for $\sigma$.
+\end{defn}
+
+This definition is independent of choice of orthonormal basis by exploiting
+linearity of $R_m$.
+
+This can also be expressed in an arbitrary basis $u,v$ by
+\begin{equation}
+    K(\sigma) = \frac{R_m\left( u,v,u,v \right)}{\|u\wedge v\|^2}
+\end{equation}
+Where $\|u\wedge v\|^2$ is calculated from the inner product induced by the
+metric. That is, for $\left\{ e_i \right\}$ an orthonormal basis for $V$, we
+declare $\left\{ e_i\wedge e_j \right\}i<j$ to be orthonormal.
+
+\begin{hw}
+    Show that the induced inner product is independent of choice of orthonormal
+    basis.
+\end{hw}
+
+\begin{lemma}
+    Let $V$ be a vector space (finite dimensional, real) of dimension at least
+    2 with an inner product. Consider two algebraic curvature tensors $C_1$ and
+    $C_2$. Let $K_1,K_2$ denote the sectional curvatures of $C_1$ and $C_2$.
+    $K_1 = K_2$ if and only if $C_1 = C_2$.
+\end{lemma}
+
+Suppose $C$ is such that $K(\sigma)=\kappa$ for all $\sigma$. Then,
+\begin{equation}
+    C(x,y,z,w) = \kappa\left( g(x,z)g(y,w) -g(x,w)g(y,z) \right)
+\end{equation}
+
+\subsection*{Ricci Curvature}
+Let $R_m$ be a Riemannian curvature tensor, with components $R_{abc}^d$.
+We can take the trace over the first and third components to get
+\begin{equation}
+    R_{ac} = R{abc}^b
+\end{equation}
+
+Geometrically, this is defined as
+\begin{defn}
+    $R_{C_p}(u,w) = \trace(R_{m_p}(u,\cdot)w)$.
+\end{defn}
+
+In an orthonormal frame with $g(e_j,e_k) = \delta_{jk}$, we have
+\begin{equation}
+    R_{ij} = R_{ikj}^k = R_{ikjk}
+\end{equation}
+
+We can also define the Ricci scalar
+\begin{defn}
+    $R = R_c(u,u)$ for unit vector $u$.
+\end{defn}
+This can be given in coordinates as
+\begin{equation}
+    R = R^i_i
+\end{equation}
+
+
 
 \end{document}
