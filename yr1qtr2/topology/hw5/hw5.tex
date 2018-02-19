@@ -241,8 +241,146 @@ $X=S^1\times D^2$ with $A$ the circle shown in the figure.
 \\
 \\
 \begin{proof}
+    Again, we assume that such a retraction exists, and form the diagram
+    \[
+\begin{tikzcd}
+    \pi_1(A)\arrow{r}{i}\arrow[bend right]{rr}{\mathbbm{1}} $X\arrow{r}{r} &A
+\end{tikzcd}
+    \]
+    which would force $i_*$ to be injective. However, since $A$ is contractible
+    in $X$, for any loop $[f]\in\pi_1(A)$, $i_*[f]$ is homotopic to the constant
+    loop. Thus, $i_*$ is actually the zero map, and in particular is not
+    injective. Thus, no such retraction $r$ can exist.
+\end{proof}
+\subsection*{Part (d)}
+$X=D^2\vee D^2$ with $A = \partial X$.
+\\
+\\
+\begin{proof}
+    Mirroring the approach in part (a), we show that $\pi_1(X)=0$, with
+    $\pi_1(A)\neq 0$. This forces $i_*$ to fail to be injective, and thus no
+    retraction can exist from $X$ to $A$.
+
+    It should be clear that $\pi_1(D^2\vee D^2)$ is trivial, since the space is
+    contractible via the contraction that sends each copy of $D^2$ to the single
+    point in their intersection.
+
+    Thus, since $\pi_1(X) = 0$ (and $\pi_1(A) = \Z\star\Z\neq 0$) the induced
+    map $i_*$ is not injective, and thus cannot have a retract.
+\end{proof}
+\subsection*{Part (e)}
+$X$ is a disk with two points on the boundary identified, and $A$ is the
+boundary $S^1\vee S^1$.
+\\
+\\
+\begin{proof}
+    To begin with, we note that $\pi_1(X) = \Z$ (since $X\simeq S^1$) and that
+    $\pi_1(A)=\Z\star\Z$ (calculated in Hatcher).
+
+    Now, we will show that the induced map $i_*$ is not injective (for $i$ the
+    canonical inclusion map of $A$ into $X$). Clearly, $i_*$ cannot be
+    injective, since there is no injective map from $\Z\star\Z$ to $\Z$.
     
-\end{proof}<++>
+    To see this, note that any group homomorphism $\phi:\Z\star\Z\to\Z$ is
+    completely determined by where it sends its generators. Let $a$ and $b$ be
+    the generators for $\Z\star\Z$. Then, since $\Z$ only has one generator, it
+    must be that $\phi(a) = n\phi(b)$ for some $n\in\Z$. However, this implies
+    that $\phi(a) = \phi(nb)$ and since $\Z\star\Z$ has no relations between $a$
+    and $b$, we know that $nb\neq a$. Thus, $\phi$ is not injective.
+
+    Since $i_*$ is not injective, it cannot have a retract, and so no
+    retraction $r:X\to A$ exists.
+\end{proof}
+\subsection*{Part (f)}
+$X$ is the Mobius band, and $A$ is the boundary circle.
+\\
+\\
+\begin{proof}
+    We observe first that the boundary of the Mobius band loops twice around it
+    before returning to its basepoint. Using this fact, we can calculate what
+    the induced map $i_*$ is.
+
+    Let $[1]_A$ be the generator of $\pi_1(A)$ going counterclockwise, and let
+    $[1]_X$ be similarly defined for $X$. We only need to calculate what
+    $i_*[1]_A$ is. However, it is clear from the observation above that
+    $i_*[1]_A = [2]_X$.
+
+    Now, suppose a retraction $r:X\to A$ existed. since $r\circ i  =
+    \mathbbm{1}$, we know that $r_*\circ i_* = \mathbbm{1}$ as well. Thus,
+    $r_*[2]_X = [1]_A$. But this is not a well-defined group homomorphism! In
+    particular, $r_*[1]_X$ is not well-defined. Suppose $r_*[1]_X = [n]$. Then,
+    $r_*[2]_X = 2r_*[1]_X = [2n] \neq [1]$ which contradicts $r_*[2]_X = [1]_A$.
+    Thus, no such retraction can exist.
+\end{proof}
+
+\section*{Problem 6}
+Use Lemma 1.15 to show that if a space $X$ is obtained from a path-connected
+subspace $A$ by attaching a cell $e^n$ with $n\geq 2$, then the inclusion $A\to
+X$ induces a surjection on $\pi_1$.
+\\
+\\
+\begin{proof}
+    Recall that Lemma 1.15 states that if a space $X$ is the union of a
+    collection of path-connected open sets $A_{\alpha}$ each containing the
+    basepoint $x_0$, and each pairwise intersection is path-connected, then
+    every loop in $X$ at $x_0$ is homotopic to a product of loops each of which
+    is contained in a single $A_{\alpha}$.
+
+    Now, we can decompose $X$ into $A\cup D^n$ where $D^n$ is the $n$-cell $e^n$
+    along with its boundary. Furthermore, since $A$ is path-connected, we can
+    take the basepoint of $X$ without loss of generality to be on the
+    intersection $A\cap D^n$. Thus, this decomposition satisfies the properties
+    of Lemma 1.15. So, we just need to show that any loop in $X$ is the
+    inclusion of a loop in $A$.
+
+    Let $f$ be any loop in $X$. By Lemma 1.15, we know that $f$ is homotopic to
+    a product of loops in $A$ and $D^n$. However, each loop in $D^n$ is
+    nullhomotopic, and so $f$ is homotopic to a product of loops in $A$, which
+    itself is a loop in $A$. Call this loop $\tilde{f}$. It should be clear,
+    then, that $i_*[\tilde{f}] = [f]$, and thus $i_*$ is surjective.
+\end{proof}
+\subsection*{Part (a)}
+Use this to show that the wedge sum $S^1\vee S^2$ has fundamental group $\Z$.
+\\
+\\
+\begin{proof}
+    We let $A=S^1$, and $X=S^1\vee S^2$. Then the inclusion map $i_*$ is a
+    surjection. Furthermore, it should be clear that $i_*$ is injective as well,
+    since the inclusion of a nontrivial loop in $A$ to $X$ will not be
+    nullhomotopic.
+    
+    Thus, $i_*$ is actually an isomorphism, and $\pi_1(X) = \Z$ as desired.
+\end{proof}
+\subsection*{Part (b)}
+Use this to show that for a path-connected CW complex $X$ the inclusion map
+$X^1\to X$ of its $1$-skeleton induces a surjection $\pi_1(X^1)\to\pi_1(X)$.
+\\
+\\
+\begin{proof}
+    We first show this result holds in the finite case. To do so, we induct on
+    the number of cells attached to the $1$-skeleton. In particular, we show
+    that adding an $n$-cell for $n\geq 2$ keeps the inclusion map a surjection.
+
+    This should be clear. For the base case, we note that $X^1$ along with the
+    next cell to be attached $e_1$ satisfy the hypothesis for the main proof of
+    this problem, and so the map $i_*:\pi_1(X^1)\to\pi_1(X_1)$ is surjective
+    (here $X_1$ is just $X^1\cup e_1$, and $X_k$ will denote the space obtained
+    by attaching the first $k$ cells to $X^1$).
+
+    Now, suppose the proposition holds for $X_k$. That is, the inclusion
+    $i_*:X^1\to X_k$ is surjective. Then, $X_k$ along with the
+    next cell $e_{k+1}$ satisfy the hypotheses for the main proof of this
+    problem, and the map $i_{k*}:\pi_1(X_k}\to \pi_1(X_{k+1})$ is surjective.
+    Then, the composition $i_{k*}\circ i_*$ which is the inclusion of $X^1$ into
+    $X_{k+1}$ is surjective as well.
+
+    Thus, if a loop is in a finite number of cells, it is homotopic to a loop on
+    the $1$-skeleton. However, Proposition $A.1$ guarantees that any loop in $X$
+    (which is compact since it is the image of the interval) only passes through
+    finitely many cells. So, every loop in $X$ is homotopic to a loop in $X^1$,
+    and thus the inclusion map $i_*:\pi_1(X^1)\to \pi_1(X)$ is surjective as
+    desired.
+\end{proof}
 
 \section*{Problem extra}
 Find the standard form of $\Z_4\times\Z_6\times\Z_6$, and prove or disprove:
