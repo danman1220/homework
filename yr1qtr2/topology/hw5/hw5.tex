@@ -93,9 +93,26 @@ is stationary on both boundary circles.
     Clearly, $f_0 = \mathbbm{1}$ and $f_1 = f$. Furthermore, $f_t(\theta,0) =
     (\theta,0)$ and so $f_t$ is stationary on $S^1\times \{0\}$
 
+    However, there is no homotopy that is stationary on both boundary circles.
+    This is made clear by considering what $f$ does to the path $s\mapsto
+    (\theta_0,s)$, namely $f$ wraps the path around the cylinder once. Thus, the
+    projection of this path onto the space $s^1\times\{1\}$ is a loop homotopic
+    to the counterclockwise generator for $\pi_1(S^1)$. 
+
+    If such a homotopy existed between the identity and $f$ that was
+    stationary on both boundary circles, it would induce a homotopy between the
+    straight line $s\mapsto(\theta_0,s)$ and the image of this path under $f$
+    that fixes the endpoints. By composing with the projection onto $S^1\times
+    \{1\}$, we would obtain a homotopy between the constant path
+    $s\mapsto\theta_0$ and the projection of the image $s\mapsto \theta_0 + 2\pi
+    s$ which fixes the endpoints (which coincide). Thus, this would be a
+    homotopy between a constant path and a path homotopic to $[1]$, which cannot
+    happen.
+
 \end{proof}
 
 
+\newpage
 \section*{Problem 2}
 Does the Borsuk-Ulam theorem hold for the torus? That is, for every map
 $f:S^1\times S^1 \to \R^2$ does there exist a point $(x,y)$ for which
@@ -123,6 +140,7 @@ $f(x,y) = f(-x,-y)$?
     and clearly, $f(\theta,\phi)\neq f(-\theta,-\phi)$ as desired.
 \end{proof}
 
+\newpage
 \section*{Problem 3}
 From the isomorphism $\pi_1(X\times Y, (x_0,y_0))\cong
 \pi_1(X,x_0)\times\pi_1\left( Y,y_0 \right)$ it follows that loops in
@@ -170,6 +188,7 @@ homotopy demonstrating this.
     desired.
 \end{proof}
 
+\newpage
 \section*{Problem 4}
 Show that every homomorphism $\pi_1(S^1)\to \pi_1(S^1)$ can be realized as the
 induced homomorphism $\varphi_*$ of a map $\varphi:S^1\to S^1$.
@@ -193,6 +212,7 @@ induced homomorphism $\varphi_*$ of a map $\varphi:S^1\to S^1$.
     homotopic to the loop $n$, as desired.
 \end{proof}
 
+\newpage
 \section*{Problem 5}
 Show that there does not exist a retraction from $X$ to $A$ in the following
 cases:
@@ -244,7 +264,7 @@ $X=S^1\times D^2$ with $A$ the circle shown in the figure.
     Again, we assume that such a retraction exists, and form the diagram
     \[
 \begin{tikzcd}
-    \pi_1(A)\arrow{r}{i}\arrow[bend right]{rr}{\mathbbm{1}} $X\arrow{r}{r} &A
+    \pi_1(A)\arrow{r}{i}\arrow[bend right]{rr}{\mathbbm{1}} &X\arrow{r}{r} &A
 \end{tikzcd}
     \]
     which would force $i_*$ to be injective. However, since $A$ is contractible
@@ -313,6 +333,7 @@ $X$ is the Mobius band, and $A$ is the boundary circle.
     Thus, no such retraction can exist.
 \end{proof}
 
+\newpage
 \section*{Problem 6}
 Use Lemma 1.15 to show that if a space $X$ is obtained from a path-connected
 subspace $A$ by attaching a cell $e^n$ with $n\geq 2$, then the inclusion $A\to
@@ -370,7 +391,7 @@ $X^1\to X$ of its $1$-skeleton induces a surjection $\pi_1(X^1)\to\pi_1(X)$.
     Now, suppose the proposition holds for $X_k$. That is, the inclusion
     $i_*:X^1\to X_k$ is surjective. Then, $X_k$ along with the
     next cell $e_{k+1}$ satisfy the hypotheses for the main proof of this
-    problem, and the map $i_{k*}:\pi_1(X_k}\to \pi_1(X_{k+1})$ is surjective.
+    problem, and the map $i_{k*}:\pi_1(X_k)\to \pi_1(X_{k+1})$ is surjective.
     Then, the composition $i_{k*}\circ i_*$ which is the inclusion of $X^1$ into
     $X_{k+1}$ is surjective as well.
 
@@ -382,10 +403,38 @@ $X^1\to X$ of its $1$-skeleton induces a surjection $\pi_1(X^1)\to\pi_1(X)$.
     desired.
 \end{proof}
 
+\newpage
 \section*{Problem extra}
 Find the standard form of $\Z_4\times\Z_6\times\Z_6$, and prove or disprove:
 \[
     \Z_4\times\Z_6\times\Z_6\cong \Z_4\times\Z_4\times\Z_3\times\Z_3
 \]
+\begin{proof}
+    We first find the standard form of $\Z_4\times \Z_6\times \Z_6$. Now, it is
+    a standard result that $\Z_6 \cong \Z_3\times \Z_2$, and so
+    \[
+        \Z_4\times \Z_6\times \Z_6\cong \Z_4\times \Z_3\times
+        \Z_2\times\Z_3\times\Z_2
+    \]
+    and by commutativity of the product in $Ab$ we can write this in standard
+    form as
+    \[
+\begin{aligned}
+        \Z_4\times \Z_6\times \Z_6 &\cong \Z_4\times \Z_3\times
+        \Z_2\times\Z_3\times\Z_2\\
+        &\cong \Z_4\times \Z_3\times\Z_3\times\Z_2\times\Z_2\\
+        &=\Z_{2^2}\times \Z_3\times\Z_3\times\Z_2\times\Z_2
+\end{aligned}
+    \]
+    Now, to show that this group is not isomorphic to $\Z_4\times\Z_4\times
+    \Z_3\times\Z_3$, we just need to compute the standard form. But
+    $\Z_4\times\Z_4\times\Z_3\times\Z_3$ is already in standard form, as
+    \[
+        \Z_4\times\Z_4\times\Z_3\times\Z_3=\Z_{2^2}\times\Z_{2^2}\times\Z_3\times\Z_3
+    \]  
+    and since both groups have different standard forms, they are not
+    isomorphic.
+
+\end{proof}
 
 \end{document}
