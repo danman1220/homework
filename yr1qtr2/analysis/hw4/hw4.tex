@@ -74,7 +74,154 @@
 
 % Problems
 \section*{Problem 1}
+Show that if a smooth function $f$ is such that for all $x$, there is some $N_x$
+such that the $n$th derivative of $f$ vanishes at $x$ for all $n>N_x$, then $f$
+is a polynomial.
+\\
+\\
+\begin{proof}
+Let $G$ be the set of all $x\in\R$ such that there exists some neighborhood of
+$x$ for which $f$ is a polynomial on that neighborhood, and let $F=G^c$.
 
+Now, we first observe that $F$ has no isolated points.
+Indeed, suppose $c\in\R$ were such that $f$ was a polynomial on $(a,c)$ and
+$(c,b)$ for some $a,b\in\R$. Then, by observation 2 made in class, since $f$ at
+$c$ has derivatives vanishing beyond $N_c$ and $f$ is a polynomial on $(a,c)$
+and $(c,b)$, we know that $f$ is the same polynomial on $(a,c]$ and $[c,b)$ and
+so $c$ cannot be in $F$ (since it is now in $G$).
+
+Now, we wish to show that $F=\emptyset$. So, suppose for contradiction $F$ is
+nonempty. Now, since $G$ is open (by definition) $F$ is closed, and is thus a
+complete metric space as a closed subset of $\R$.
+
+Define $E_n = \{x\in F\ |\ f^{(j)}(x) = 0 \forall j>n\}$. Now, $F = \cup E_n$
+and so at least one of them $E_{n_0}$ must contain an interval
+$(x_0-r,x_0+r)\cap F$ for $x_0\in F$ (by Baire's lemma).
+
+Now, for all $x\in (x_0-r,x_0+r)\cap F$, we have that $f^{(j)}(x) = 0$ for all
+$j>n_0$. If $(x_0-r,x_0+r)$ does not intersect $G$, then $f^{(j)}(x) = 0$ for
+all $j>n_0$ and all $x\in (x_0-r,x_0+r)$ and so $x_0\in G$, a contradiction.
+
+So, if $I=(a,b)$ is an interval in $G$ contained in $(x_0-r,x_0+r)$, then $b\in
+F$. But $b$ is such that $f^{(j)}(b) = 0$, and so $f$ is a polynomial on
+$[a,b]$, and this leads to a contradiction on $(x_0-r,x_0+r)$ containing points
+of $F$.
+
+Thus, $F$ is empty, and $f$ is a polynomial on all of $\R$.
+\end{proof}
+
+\section*{Problem 2}
+Prove that if a vector space is Banach with respect to two norms then the
+topologies induced by the norms are either equivalent or incomparable.
+\\
+\\
+\begin{proof}
+    We will show that for two norms $\|\cdot\|_1$ and $\|\cdot\|_2$ on a
+    vector space $V$ that is complete with respect to the induced
+    topologies $\tau_1,\tau_2$, if $\tau_1\subset \tau_2$, then $\tau_1=\tau_2$
+    which completes the proof.
+
+    To see this, suppose $\tau_1\subset\tau_2$. Then, the ball $B^1(0,1)$ with
+    respect to the $1$ norm is open in $\tau_2$, and thus $0$ has a ball
+    $B^2(0,\epsilon)\subset B^1(0,1)$. Thus, by homogeneity of vector spaces,
+    every $1$ norm ball contains a $2$ norm ball centered at the same point.
+
+    Now, let $V_1$ denote $V$ under the $\|\cdot\|_1$ norm. Now, we know that $V
+    = \cup_{x\in V_1}B^2(x,1)$ for $B^2$ the balls in the $2$ norm. Now, Baire's
+    lemma guarantees that for some $x_0$, there is a ball
+    $B^1(x_0,\delta)\subset  B^2(x_0,1)$. Then, translating these to the
+    origin yields $B^1(0,\delta) \subset B^2(0,1)$. Thus, every $2$ norm ball
+    contains a $1$ norm ball centered at the same point.
+
+    Thus, the two topologies are equivalent.
+\end{proof}
+
+\section*{Problem 3}
+Let $A\in B(X,Y)$ for $X,Y$ Banach spaces. Suppose that for every $f\in Y$, the
+equation $Au=f$ is solvable. Prove that there exists $C<\infty$ such that for
+every $f$ in $y$, one can find a solution to $Au=f$ with $\|u\|_X < C\|f\|_Y$.
+\\
+\\
+\begin{proof}
+    Since $Au=f$ is solvable for any $f$, $A$ is injective and satisfies the
+    hypotheses for the open mapping theorem. Thus, $A$ is an open map.
+    This means that $A(B_X(0,1))$ is open in $Y$, and contains zero. Thus, there
+    is some $\epsilon$ for which $B_Y(0,\epsilon)\subset A(B_X(0,1))$. Thus, for
+    $f$ such that $\|f\|<\epsilon$, and for $u$ such that $Au=f$, we have
+    $\|u\|<1$.
+
+    So, let $f$ be arbitrary. Then, let $\tilde{f} = \frac{\epsilon f}{2\|f\|}$
+    with solution $\tilde{u} = \frac{\epsilon u}{2\|f\|}$. Now, $\|\tilde{f}\| <
+    \epsilon$ and so $\|\tilde{u}\|<1$. Thus, $\|u\| < \frac{2}{\epsilon}\|f\|$
+    as desired.
+\end{proof}
+
+\section*{Problem 4}
+Let $X$ be a normed space, $E\subset X$. Suppose that for every $\phi\in X^*$
+the set $\{\phi(x)\ |\ x\in E\}$ is bounded. Prove that $E$ is strongly bounded
+in $X$.
+\\
+\\
+\begin{proof}
+    Let's start by embedding $E$ into $X^{**}$ via the canonical mapping. Then,
+    we notice that the hypothesis states that for all $\phi\in X^*$, the set
+    $\{x(\phi)\ |\ x\in E\}$ is bounded. In particular, this means that for all
+    $\phi\in X^*$, we have that $\sup_{x\in E} |x(\phi)|$ is finite. Since $X^*$
+    is complete, we can apply the uniform boundedness principle to the
+    collection $E$ of linear functionals on $X^*$ (as operators from $X^*$ to
+    $\R$) to get the result
+    \[
+        \sup_{x\in E}\|x\| < \infty
+    \]
+    and thus since $E$ was isometrically embedded into $X^{**}$, it follows that
+    $E$ is bounded as desired.
+\end{proof}
+
+\section*{Problem 5}
+Let $X$ be a Banach space, and let $E\subset X^*$. Suppose also that for every
+$x\in X$, the set $\{\phi(x)\ |\ \phi\in E\}$ is bounded. Prove that $E$ is
+strongly bounded in $X^*$.
+\\
+\\
+\begin{proof}
+    We note first that the condition that $\{\phi(x)\ |\ \phi\in E\}$ is bounded
+    means that $\sup_{\phi\in E} |\phi(x)|$ is bounded for each $x$. Thus, we
+    can apply the uniform boundedness principle to the family of operators $E$
+    from $X$ to $\R$ to get the result
+    \[
+        \sup_{\phi\in E} \|\phi\|<\infty
+    \]
+    as desired.
+
+    If $X$ is not complete, then we cannot use the uniform boundedness
+    principle, and the proof falls apart.
+\end{proof}
+
+\section*{Problem 6}
+Let $X$ be a Banach space decomposed as $X=X_1\oplus X_2$ with closed subspaces
+$X_i$.
+Define the projection operators $P_i:X\to X_i$ and prove they are bounded.
+\\
+\\
+\begin{proof}
+    Without loss of generality, we will define $P_1$ and show it is bounded. The
+    argument works the same for $P_2$.
+
+    Define $P_1(x) = P_1(x_1+x_2) = x_1$ for the (unique) decomposition
+    $x=x_1+x_2$. Now, clearly $P_1$ is linear, so all we have to do is show it
+    is bounded.
+
+    Since $P_1:X\to X_1$ is a map between Banach spaces, we only need to show
+    its graph is closed. So, let $(x_k, P_1(x_k))\to (x,y)$ for some $x\in X$
+    and $y\in X_1$. Now, for each $x_k$, we can decompose it as
+    \[
+        x_k = (x_k)_1 + (x_k)_2
+    \]
+    for $(x_k)_i\in X_i$. Now, since $x_k\to x$ and $P_1(x_k) = (x_k)_1\to y$,
+    it must be that $(x_k)_2\to z$ for some $z\in X_2$. Thus, $x = y+z$ and
+    $P_1(x) = y$ as desired. Thus, the graph of $P_1$ is closed, and $P_1$ is
+    bounded as desired.
+\end{proof}
 
 
 \end{document}
