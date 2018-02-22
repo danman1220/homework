@@ -164,6 +164,118 @@ This can be given in coordinates as
     R = R^i_i
 \end{equation}
 
+\begin{theorem}
+    The Ricci curvature tensor is symmetric
+\end{theorem}
+\begin{proof}
+    We know that
+    \[
+        R_{ac} = R_{abc}^b
+    \]
+    But by symmetry of the Riemann curvature tensor, we have
+    \[
+\begin{aligned}
+    R_{ac} &= R_{abc}^b\\
+            &= R_{cba}^b\\
+            &= R_{ca}
+\end{aligned}
+    \]
+    as desired
+\end{proof}
+
+Now, let $u$ be a unit vector, and build an orthonormal basis around $u$. Then,
+\[
+    R_c(u,u) = \sum R(e_1,e_i,e_1,e_i) = \sum K(e_1,e_i)
+\]
+and
+\[
+    R = \sum R_c(e_i,e_i) = \sum K(e_i,e_j)
+\]
+
+
+We also have the following identity for the Riemann curvature tensor $R$:
+\begin{equation}
+    R(u\wedge v, w\wedge z) = R(u,v,w,z)
+\end{equation}
+This relies on the antisymmetry of $R$, since $R$ has to be linear.
+
+Thus, interpreting $R$ as a map from $\Lambda^2T_pM\times\Lambda^2T_pM\to\R$ we
+have that $R$ is a symmetric bilinear map.
+
+\subsection{Riesz Representation and Tangent/Cotangent isomorphism}
+Given a metric, we have a natural isomorphism between $T_pM$ and $T^*_pM$,
+denoted $\flat: T_pM\toT^*_pM$ and $\sharp:T^*_pM\to T_pM$ is given by
+\begin{equation}
+    \flat(v) - v^{\flat} = g(v,\cdot)
+\end{equation}
+This isomorphism extends also to exterior products of tangent spaces, allowing
+us to raise and lower indices at will.
+
+\subsection{Constant Curvature Spaces}
+Recall that if a space has constant sectional curvature $\kappa$, then
+\begin{equation}
+    R(x,y,z,w) = \kappa(g(x,z)g(y,w) - g(x,w)g(y,z))
+\end{equation}
+
+Examples of such spaces are
+\begin{enumerate}
+    \item Euclidean flat space $\R^n$: $\kappa=0$.
+    \item Spherical space $S^n$ with the pullback metric from $\R^{n+1}$: 
+        $\kappa>0$.
+    \item Hyperbolic space with the metric $\frac{ds^2}{(x^n)^2}$: $\kappa<0$.
+\end{enumerate}
+
+Calculating the curvature for $\R^n$ is easy: we can always find an orthonormal
+frame that is parallel (covariant derivative is zero). Then, since $R$ is
+defined in terms of the covariant derivatives, $R$ must be zero.
+
+\begin{hw}
+    Prove that $R_{abc}^d = 0 $ on the product manifold $S^1\times S^1$ with the
+    standard product metric.
+\end{hw}
+
+Now, let's calculate the curvature for the other two spaces.
+
+Let $M$ be our manifold, and let $e_i$ be a local orthonormal frame on $U\subset
+M$ with dual $\omega^i$. Then, we know that
+\begin{equation}
+    d\omega^i = \omega^j\wedge\omega_j^i
+\end{equation}
+with 
+\begin{equation}
+    \omega^i_j + \omega_i^j = 0
+\end{equation}
+
+Now, recall that
+\begin{equation}
+    R(e_i,e_j) = \nabla_{e_i}\nabla_{e_j} + \nabla_{e_j}\nabla_{e_i} +
+\nabla_{[e_i,e_j]}
+\end{equation}
+
+and $\nabla_{e_j}e_k = \omega_k^l(e_j)e_l$ for connection forms $\omega_k^l$.
+
+Thus,
+\[
+    \begin{aligned}
+    \nabla_{e_i}\nabla_{e_j}e_k &= \nabla_{e_i}(\omega_k^l(e_j)e_l +
+        \omega_k^l(e_j)\nabla_{e_j}e_l\\
+        &=e_i \omega_k^l(e_j)e_l + \omega_k^l(e_j)\omega_l^m(e_j)e_m\\
+    \end{aligned}
+\]
+Now, if the frame is normal, and we calculate at the center, $[e_i,e_j] = 0$ and
+so the last term vanishes.
+
+So, we have
+\[
+\begin{aligned}
+    R(e_i,e_j)e_k &= 
+        e_i \omega_k^l(e_j)e_l + \omega_k^l(e_j)\omega_l^m(e_j)e_m
+        + e_j \omega_k^l(e_i)e_l + \omega_k^l(e_i)\omega_l^m(e_i)e_m\\
+        &= d\omega_k^l(e_j,e_i)e_l + \omega_k^m\wedge\omega_m^l(e_i,e_j)e_l\\
+        &= (d\omega_k^l + \omega_k^m\wedge\omega_m^l)(e_i,e_j)e_l
+\end{aligned}
+\]
+where the form in parentheses is the curvature form.
 
 
 \end{document}
