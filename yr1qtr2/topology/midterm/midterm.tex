@@ -48,6 +48,8 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\Aut}{\text{Aut}}
+\newcommand{\im}{\text{im}}
 
 \newtheorem{lemma}{Lemma}
 %----------------------------------------------------------------------------------------
@@ -73,4 +75,137 @@
 \maketitle % Print the title
 
 % Problems
+\section*{Problem 1}
+Show that for two nontrivial groups $G$ and $H$, their free product $G\star H$
+has trivial center, and that the only elements of finite order are the
+conjugates of finite order elements in $G$ and $H$.
+\\
+\\
+\begin{proof}
+    We first show that the free product has a trivial center. To show this, we
+    will consider two cases of elements from $G\star H$. First, observe
+    that for any element $g\in G$ with $g\neq e$, $g$ (or rather, the inclusion
+    of $g$ into $G\star H$) cannot be in the center $Z(G\star H)$. To see this,
+    let $h\in H$ with $h\neq e$, and note that the element $ghg^{-1}h^{-1}$ is a
+    reduced word in the free group, and cannot be equal to the identity. Thus,
+    $gh\neq hg$, and $g$ is not in $Z(G\star H)$.  Similarly, any element $h\in
+    H$ is not in $Z(G\star H)$.
+
+    Now, let $w$ be a reduced word in $G\star H$ that is not in $G$ or $H$.
+    Without loss of generality, we can write
+    \[
+        w = g_1h_1g_2h_2\dots g_nh_n
+    \]
+    or
+    \[
+        w = g_1h_1g_2h_2\dots g_n
+    \]
+    for $g_i\in G$, and $h_i\in H$. Now, since $G$ and $H$ have no relations to
+    each other, this word is not equal to any word beginning with an element of
+    $H$. Suppose for a contradiction that
+    \[
+        w = h'_1g'_1h'_2g'_2\dots h'_mg'_m
+    \]
+    with $g'_m$ possibly equal to the identity.
+    This would imply that
+    \[
+        g_1h_1g_2h_2\dots g_nh_n = h'_1g'_1h'_2g'_2\dots h'_mg'_m
+    \]
+    which would imply the relation
+    \[
+        g_1h_1g_2h_2\dots g_nh_n(g'_m)^{-1}(h'_m)^{-1}\dots
+        (g'_1)^{-1}(h'_1)^{-1} = e
+    \]
+    Now, if $g'_m\neq e$, the word on the left hand side is already reduced, and
+    thus cannot be equal to $e$. If $g'_m=e$, then the word could reduce
+    further. However, note that this word only reduces further if adjacent
+    elements from the same group cancel to the identity (that is, if adjacent
+        elements from the same group do not cancel to the identity, then
+    the word is reduced, and in particular is not equal to the identity). Now,
+    careful counting of the elements of the word reveals that the (unreduced)
+    word has one more element from $H$ than it does elements from $G$. So, the
+    total number of elements in the unreduced word is odd. Clearly, then, we
+    cannot cancel in pairs to get the identity. 
+    Therefore, this relation cannot be true, and thus $w$ cannot be written as a
+    word beginning with an element from $H$.
+
+    It follows immediately, then, that $wh\neq hw$ for $h\in H$ a nontrivial
+    element, since $wh$ is a word beginning with an element of $G$, and $hw$ is
+    a word beginning with an element of $H$.
+
+    Thus, no element in $G\star H$ is in the center, as desired.
+    \\
+    \\
+    Next, we show that every element of finite order is the conjugate of a
+    finite order element of $G$ or $H$. So, let $w$ be a word in $G\star H$ with
+    $w^n = e$. Without loss of generality, let the first term of $w$ be from
+    $G$.
+
+    If $w = g_1h_1\dots g_nh_n$, then the concatenation $w^n$ is already reduced
+    (since adjacent elements are from different groups) and in particular cannot
+    be equal to the identity.
+
+    So, suppose $w = g_1h_1\dots h_{n-1}g_{n}$, with $w^n = e$. Now, for this to
+    be true, it must be that $g_n=g_1^{-1}$. If this were not the case, the
+    concatenated word $w^n$ would be reduced already (by treating $g_ng_1$ as an
+    element of $G$) since $g_ng_1$ is adjacent to only elements of $H$.
+    Continuing the argument, we find that $h_{n-1} = h_1^{-1}$,
+    $g_{n-1}=g_2^{_1}$ and so on, save for the central term (since $w$ has odd
+    length). If $n$ is even, the central term is $h_{\frac{n}{2}}$, and if $n$
+    is odd, the central term is $g_{\frac{n+1}{2}}$. For the sake of simplicity,
+    we will assume that $n$ is odd, but the proof works the same way for $n$
+    even.
+
+    Now, we know that
+    \[
+        w = g_1h_1g_2h_2\dots h_{\frac{n+1}{2}-1}
+        g_{\frac{n+1}{2}}h_{\frac{n+1}{2}-1}^{-1}\dots h_2^{-1}g_2^{-1}h_1^{-1}g_1^{-1}
+    \]
+    which is just
+    \[
+        w= (g_1h_1g_2h_2\dots
+        h_{\frac{n+1}{2}-1})g_{\frac{n+1}{2}}(g_1h_1g_2h_2\dots
+        h_{\frac{n+1}{2}-1})^{-1}
+    \]
+    and thus $w$ is a conjugate of an element of $G$. Now for $w^n = e$ it must
+    be that 
+    \[
+        w^n = 
+        (g_1h_1g_2h_2\dots
+        h_{\frac{n+1}{2}-1})g^n_{\frac{n+1}{2}}(g_1h_1g_2h_2\dots
+        h_{\frac{n+1}{2}-1})^{-1} = e
+    \]
+    which is only true if $g^n = e$.
+
+    Thus, the elements of finite order in $G\star H$ are all conjugates of
+    elements of finite order in $G$ or $H$.
+
+    Finally, we observe that every element that is the conjugate of an element
+    of finite order in $G$ (or $H$) is of finite order. Let $g\in G$ with $g^n =
+    e$, and observe that for any $w\in G\star H$, we have that
+    \[
+        (wgw^{-1})^n = wg^nw^{-1} = ww^{-1} = e
+    \]
+    and so $wgw^{-1}$ has finite order as well.
+
+    Thus the elements of finite order in $G\star H$ are exactly the conjugates
+    of elements of finite order in $G$ or $H$, as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 2}
+Let $X\subset \R^n$ be the union of convex open sets $X_1,\dots,X_n$ such that
+$X_i\cap X_j\cap X_k\neq\emptyset$ for all $i,j,k$. Prove that $X$ is simply
+connected.
+\\
+\\
+\begin{proof}
+    Without loss of generality, let the basepoint $x_0$ be in $X_1$. Let $f$ be
+    a loop in $X$ based at $x_0$. We wish to show that $f$ is nullhomotopic
+    relative to the basepoint.
+
+
+\end{proof}<++>
+
 \end{document}
