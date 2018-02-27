@@ -201,11 +201,83 @@ connected.
 \\
 \\
 \begin{proof}
-    Without loss of generality, let the basepoint $x_0$ be in $X_1$. Let $f$ be
-    a loop in $X$ based at $x_0$. We wish to show that $f$ is nullhomotopic
-    relative to the basepoint.
+    This proof will be done inductively on the number of convex open sets used
+    to union to $X$. Now, convex sets have a distinct property which makes them
+    nice for this problem. Namely, if $X$ is a convex set, and $\gamma$ is a
+    path in $X$, $\gamma$ is homotopic to the line segment from $\gamma(0)$ to
+    $\gamma(1)$. This is clear; since convex sets are simply connected, all
+    paths with fixed endpoints are homotopic to each other, and since each
+    convex set is convex, it contains the straight line path from $\gamma(0)$ to
+    $\gamma(1)$.
 
+    Now, let's first prove the base case of $n=2$. For this, let $f$ be a loop
+    in $X$ based at $x_0$. Without loss of generality, we let $x_0\in X_1$. Now,
+    if $f$ stays in $X_1$, then it is nullhomotopic since $X_1$ is simply
+    connected. Now, suppose $f$ enters $X_2$ at some time $t_1$, exits $X_1$ at
+    some $t>t_1$, and exits $X_2$ at $t_2>t$. Then, the segment $f|_{[t_1,t_2]}$
+    is homotopic to the straight line from $f(t_1)$ to $f(t_2)$, which is in
+    $X_1$. Repeating this for the (finite) number of times $f$ exits $X_1$, we
+    see that $f$ is homotopic to a loop that stays in $X_1$, and is thus
+    nullhomotopic.
 
+    Now suppose the theorem holds for the union of $n-1$ convex sets with the
+    triple intersection property, and let $X$ be the union of $n$ convex sets
+    with the same property. Let $f$ be a loop in $X$ based at $x_0\in X_1$. Now,
+    if $f$ stays in $\cup_{i=1}^{n-1}X_i$ (that is, if $f$ avoids being in only
+    $X_n$), then $f$ is a loop in the union of $n-1$ convex sets with the triple
+    intersection property, and is nullhomotopic. 
+    
+    So, suppose $f$ enters $X_n$ at
+    some time $t_1$ from a set $X_i$, leaves $X_i$ at some $t>t_1$, then leaves
+    $X_n$ in $X_j\cap X_n$ at some $t_2$. Now, by the triple intersection
+    property, we know that $X_i\cap X_j\cap X_n \neq \emptyset$, so let $x$ be a
+    point in the common intersection. Now, since $f(t_1)$, $f(t_2)$, and $x$ are
+    all in $X_n$, so is the path taking the straight line from $f(t_1)$ to $x$,
+    then the straight line from $x$ to $f(t_2)$. Then, the segment
+    $f|_{[t_1,t_2]}$ is homotopic to this path from $f(t_1)$ through $x$ to
+    $f(t_2)$. However, since $f(t_1)$ and $x$ are in $X_i$, so is the straight
+    line connecting them. Furthermore, since $x$ and $f(t_2)$ are in $X_j$, so
+    is the straight line connecting them. Thus, $f|_{[t_1,t_2]}$ is homotopic to
+    a path that stays in $X_i$ and $X_j$. Repeating this process for the
+    (finite) number of times $f$ stays in $X_n$ alone, we see that $f$ is
+    homotopic to a loop that stays in $\cup_{i=1}^{n-1}X_i$, and by the
+    inductive hypothesis, $f$ is nullhomotopic as desired.
+
+\end{proof}
+
+\section*{Problem 3}
+Show that the complement of a finite set of points in $\R^n$ is simply connected
+if $n\geq 3$.
+\\
+\\
+\begin{proof}
+    Let $X$ be a set of $m$ points in $\R^n$ and without loss of generality let
+    $0\not\in X$. We wish to calculate $\pi_1(\R^n\setminus X)$. To do so, we
+    will establish that $\R^n\setminus X$ deformation retracts onto the $m$-fold
+    wedge of $S^{n-1}$.
+
+    Consider the following process. First, take $r$ large enough so that the
+    ball $B_r(0)$ of radius $r$ at zero contains all of $X$. Now, outside of
+    $B_r(0)$ we can define a deformation retraction onto $\partial B_r(0)$.
+    Inside, however, we have to be more careful. We will define a subspace $C$ as
+    follows: around each point in $X$, expand a sphere centered at that point at
+    uniform speed. Now, wherever two spheres collide (or one collides with the
+    boundary $\partial B_r(0)$), the point of collision remains fixed, and the
+    rest of the sphere keeps expanding. This process eventually terminates,
+    since the spheres will eventually hit the boundary $\partial B_r(0)$, and
+    the result is a closed subspace $C$ of $\bar{B}_r(0)$ such that the
+    complement $B_r(0)\setminus C$ has $m$ components, with each component
+    containing exactly one point of $X$.
+    
+    More generally, this process defines a deformation retract of $B_r(0)$ onto
+    $C$. The deformation retract moves points along the expanding spheres until
+    they reach $C$. Since all the spheres eventually expand to $C$, this is
+    well-defined for all of $B_r(0)$.
+
+    So, all we need to show is that $C$ has a trivial fundamental group. (Note
+        that $C$ contains $\partial B_r(0)$, so it contains the retract of the
+    points outside $B_r(0)$).
+    This is clear, however, since $C$ is homeomorphic to 
 \end{proof}<++>
 
 \end{document}

@@ -1,0 +1,302 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Problem Set 5 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+
+\section{Problem 1}
+Show that for a Banach space $X$, $X^*$ is weak-$*$ sequentially complete.
+Formulate an analagous statement for $X$ being weak sequentially complete, and
+show where the proof collapses.
+\\
+\\
+\begin{proof}
+    We first show that $X^*$ is weak-$*$ sequentially complete. So, let $\phi_j$
+    be a sequence for which $\langle \phi_j,x\rangle$ converges for all $x\in X$. We can
+    define the limit to be $\phi := x\mapsto \lim \phi_j(x)$. Now, we just have
+    to show that $\phi$ is linear and bounded.
+
+    Linearity of $\phi$ follows directly from its definition, and the linearity
+    of limits. That is, for $x,y\in X$,
+    \[
+\begin{aligned}
+    \phi(x+y) &= \lim \phi_j(x+y)\\
+    &= \lim (\phi_j(x) + \phi_j(y))\\
+    &= \lim \phi_j(x) + \lim \phi_j(y)\\
+    &= \phi(x) + \phi(y)
+\end{aligned}
+    \]
+    and for $\alpha\in\C$,
+    \[
+\begin{aligned}
+    \phi(\alpha x) &= \lim \phi_j(\alpha x)\\
+    &= \lim \alpha\phi_j(x)\\
+    &= \alpha\lim\phi_j(x)\\
+    &=\alpha\phi(x)
+\end{aligned}
+    \]
+    and thus $\phi$ is linear.
+
+    Now, we just need to show that $\phi$ is bounded. This is clear from the
+    uniform boundedness principle applied to the family $\phi_j$ of operators
+    from $X$ to $\C$. That is, since for each $x\in X$, we have that
+    \[
+        \sup_j \|\phi_j(x)\| < \infty
+    \]
+    (because $\phi_j(x)$ converges for each fixed $x$), it follows then by the
+    principle of uniform boundedness that
+    \[
+        \sup_j \{\|\phi_j\|\} < \infty
+    \]
+    as well. Let $C$ be the uniform bound on the norms of $\phi_j$. Then, it
+    follows that for all $x$ and for all $j$,
+    \[
+        \|\phi_j(x)\|\leq C\|x\|
+    \]
+    Thus, it follows that the limit is also bound by this inequality
+    \[
+        \|\phi(x)\| = \|\lim\phi_j(x)\| = \lim\|\phi_j(x)\| \leq C\|x\|
+    \]
+    and $\phi$ is bounded as desired.
+
+    Thus, $\phi_j$ converges in weak-$*$ to $\phi$, which is in $X^*$ as we just
+    proved.
+    \\
+    \\
+    Now, the analagous statement for $X$ being weak sequentially complete is as
+    follows:
+    Let $x_j$ be a sequence in $X$ for which $\phi(x_j)$ converges for all
+    $\phi\in X^*$. For $X$ to be weak sequentially complete, there must be some
+    $x\in X$ for which $x_j$ converges weakly to $x$.
+
+    The proof fails when we attempt to apply PUB. In particular, we can define
+    the limit of $x_j$ by treating it as a sequence of linear functionals on
+    $X^*$, but we are not guaranteed that the limit of this sequence stays in
+    the embedding of $X$ to $X^{**}$. For example, taking $X = L^1(\R)$, and
+    $x_j = j\chi_{[-\frac{1}{j},\frac{1}{j}]}$, this converges weakly to the
+    delta distribution, which is not an $L^1$ function.
+\end{proof}
+
+\section{Problem 2}
+Let $X$ be Banach. Prove that a sequence $\phi_j$ in $X^*$ converges weak-$*$ if
+and only if it is strongly bounded and there exists a dense subset $E\subset X$
+for which $\phi_j(u)$ converges for all $u\in X$.
+\\
+\\
+\begin{proof}
+    ($\implies$)
+    Suppose first that $\phi_j\to\phi$ in weak-$*$. Then, the principle of
+    uniform boundedness guarantees that the set $\{\phi_j\}$ is strongly bounded.
+    Furthermore, since $\phi_j(x)\to\phi(x) < \infty$ for all $x$, setting $E=X$
+    finishes the proof.
+
+    ($\impliedby$)
+    Suppose $\phi_j$ is such that it is strongly bounded, and there exists a
+    dense subset $E\subset X$ for which $\phi_j(u)$ converges for all $u\in E$.
+    All we need to show is that $\phi(x)$ converges for all $x\in X$, and by
+    problem 1 we will know that $\phi_j$ converges weakly to some $\phi\in X^*$.
+    
+    So, we will show that $\phi_j(x)$ is a Cauchy sequence for all $x$. So, fix
+    $x\in X$, and let $u_n$ be a sequence in $E$ converging to $x$. Then, for
+    fixed $\epsilon>0$, fix $m$ so that $|u_m - x|<\epsilon$, and fix $N$ so
+    that for all $j,k > N$, $|\phi_j(u_m)-\phi_k(u_m)|<\epsilon$. Finally, let
+    $C$ be the uniform bound on $\|\phi_j\|$. Now, we have
+    that
+    \[
+\begin{aligned}
+    |\phi_j(x) - \phi_k(x)| &= |\phi_j(x)-\phi_j(u_m)+\phi_j(u_m) -\phi_k(x) +
+    \phi_k(u_m) - \phi_k(u_m)|\\
+    &\leq |\phi_j(x)-\phi_j(u_m)| + |\phi_k(x)-\phi_k(u_m)| + |\phi_j(u_m) -
+    \phi_k(u_m)|\\
+    &= |\phi_j(x-u_m)| + |\phi_k(x-u_m)| + |\phi_j(u_m)-\phi_k(u_m)|\\
+&\leq (\|\phi_j\| + \|\phi_k\|)|x-u_m| + \epsilon\\
+&\leq (\|\phi_j\| + \|\phi_k\|)\epsilon + \epsilon\\
+&\leq 2C\epsilon + \epsilon
+\end{aligned}
+    \]
+    and so the sequence is Cauchy, as desired. Thus, $\phi_j(x)$ converges for
+    all $x$, and so $\phi_j$ converges in weak-$*$ as desired.
+\end{proof}
+
+\section*{Problem 3}
+Let $d\phi_n(x) = \cos(\pi n x)d\lambda^1(x)$. Prove that
+\[
+    \int_I gd\phi_n \to 0
+\]
+for all $g\in C^1(I)$. Prove that $\phi_n$ converges in weak-$*$ as measures in
+$C(I)^*$.
+\\
+\\
+\begin{proof}
+    For the first part, we integrate by parts to find that
+    \[
+\begin{aligned}
+    |\int_I g\cos(n\pi x)dx| &= |\frac{g\sin(\pi nx)}{n\pi}|_{\partial I} -
+    \int_I \frac{\sin(\pi nx)}{n\pi}g'dx|\\
+    &=|\frac{1}{\pi n}\int_I\sin(\pi nx)g'dx|\\
+    &\leq |\frac{1}{n\pi}\int_I g'dx|
+\end{aligned}
+    \]
+    which clearly goes to zero, since $\int_Ig'dx$ is constant.
+    \\
+    \\
+    For the second part, note that the Weierstrauss approximation theorem says
+    that the polynomials on $I$ are dense in $C(I)$. Now, since every polynomial
+    is in $C^1(I)$, we know that for every polynomial,
+    \[
+        \int_Ip(x)d\phi_n(x) \to 0
+    \]
+    from the first part of this problem. Furthermore, $\{\phi_n\}$ is strongly
+    bounded, since
+    \[
+        \|\phi_n(f)\| = |\int_If(x)\cos(n\pi x)dx| \leq |\int_I f(x)dx| = \|f\|
+    \]
+    so applying problem 2, we see that $\phi_n\to 0$ weakly, since they are
+    strongly bounded, and converge on a dense subset of $C(I)$. 
+\end{proof}
+
+\section*{Problem 4}
+Let $(x_n)$ be a sequence in $\ell^1$ such that $x_n\to x$ weakly, and
+$\|x_n\|\to\|x\|$. Prove that $x_n\to x$ strongly.
+\\
+\\
+\begin{proof}
+    For notation, we will use $f_n := x_n$ and $f:=x$. Now, we first show that
+    $f_n\to f$ pointwise. This is clear, since $f_n\to f$ weakly implies that
+    for each $y\in\ell^{\infty}$, $y(f_n)\to y(f)$. Specifically, by letting $y$
+    be the basis vectors $e_m = \delta(x-m)$, we see that
+    \[
+        e_m(f_n) = f_n(m) \to e_m(f) = f(m)
+    \]
+    for all $m$. Thus, $f_n$ converges pointwise to $f$.
+
+    Now, we let $g_n = |f|+|f_n| - |f_n-f|$. Note that $g_n$ is positive by the
+    triangle inequality. Now, Fatou's lemma implies that
+    \[
+        \int\lim\inf g_n \leq \lim\inf\int g_n
+    \]
+    and so
+    \[
+\begin{aligned}
+    \int\lim\inf(|f|+|f_n|+|f_n-f|) &\leq \lim\inf\int|f| + \lim\inf\int|f_n| +
+    \lim\inf(-\int|f_n-f|)\\
+    \int(|f|+|f|) &\leq |f| + |f| - \lim\sup(\int|f_n-f|)\\
+    0&\leq-\lim\sup\|f_n-f\|
+\end{aligned}
+    \]
+    and since $\|f_n-f\|$ is always positive, $-\lim\sup\|f_n-f\|\leq 0$ which
+    forces $\lim\sup\|f_n-f\| = 0$ and thus $f_n$ converges strongly to $f$.
+\end{proof}
+
+\section*{Problem 5}
+Show that the closed unit ball $\bar{B}(X)$ in a Banach space $X$ is closed
+in the weak topology. Show that the closed unit ball $\bar{B}(X^*)$ in $X^*$ is
+closed in the weak-$*$ topology.
+\\
+\\
+\begin{proof}
+    In particular, we have to show that any net in $\bar{B}(X)$ that converges,
+    converges in $\bar{B}(X)$. So, let $x_{\alpha}$ be a net in $\bar{B}(X)$,
+    and suppose $x_{\alpha}\to x$ in the weak topology. We know, then, that for
+    all $\phi\in X^*$, $\phi(x_{\alpha})\to\phi(x)$. In particular,
+\[
+    |\phi(x_{\alpha})|\to|\phi(x)|
+\]
+    for all $\phi$. Thus,
+    \[
+        |\phi(x_{\alpha})|\leq\|\phi\|\|x_{\alpha}\|\leq \|\phi\|
+    \]
+    and since $|\phi(x_{\alpha})|\to|\phi(x)|$, it follows that
+    \[
+        |\phi(x)|\leq \|\phi\|
+    \]
+    Now, we also know that
+    \[
+        \|x\| = \sup_{\|\phi\| = 1}|\phi(x)|
+    \]
+    and since $|\phi(x)|\leq 1$ for $\|\phi\|=1$, we know that
+    \[
+    \|x\|\leq 1
+    \]
+    as well. Thus, any limit point of a net in $\bar{B}(X)$ is also in
+    $\bar{B}(X)$, and $\bar{B}(X)$ is closed in the weak topology.
+    \\
+    \\
+    The second part follows in exactly the same way as the first, by noting that
+    \[
+        \|\phi\| = \sup_{\|x\|=1}|\phi(x)|
+    \]
+    and that the weak-$*$ topology is the weak topology with respect to $X$.
+\end{proof}
+
+\end{document}
