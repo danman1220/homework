@@ -1,0 +1,92 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+\section{Isometric Immersions}
+\subsection{Gauss Curvature Equation}
+
+\begin{theorem}
+    Let $u,v\in T_pM$ with $p\in M$, $\|u\|=\|v\| = 1$ and $u\cdot v=0$. Then
+    \begin{equation}
+        K(u,v) = \bar{K}(u,v) + B(u,u)\cdot B(v,v) - \|B(u,v)\|^2
+        \label{Gauss Curvature Equation}
+    \end{equation}
+    Where $\bar{K}$ is the sectional curvature for the ambient space, and $B$ is
+    defined as
+    \begin{equation}
+        B(X,Y) = \bar{\nabla}_{\bar{X}}\bar{Y} - \nabla_XY
+    \end{equation}
+\end{theorem}
+The proof of this is found in Do Carmo\ldots
+
+\begin{ex}
+    Let's calculate the curvature of $S^n\subset \R^{n+1}$.
+
+    Let $u,v$ be orthogonal vectors on $S^n$. Now, since we are in the ambient
+    space $\R^{n+1}$, $\bar{K}=0$ everywhere. So, let's calculate the second
+    fundamental form of the inclusion map $i:S^n\to \R^{n+1}$.
+    \[
+    B(u,v) = (\bar{\nabla}_{\bar{X}}\bar{Y})^N
+    \]
+    for $\bar{X},\bar{Y}$ extensions of $u$ and $v$ into the ambient space.
+
+    So,
+    \[
+\begin{aligned}
+B(u,v) &= (\bar{\nabla}_{\bar{X}}\bar{Y}\cdot \nu)\nu &\text{$\nu$ is unit
+normal away from $S^n$.}\\
+&=(-\bar{Y}\cdot\bar{\nabla}_{\bar{X}}\nu)\nu\\
+&= (-v\cdot \bar{\nabla}_u v)\nu\\
+&= (-v\cdot u)\nu
+\end{aligned}
+    \]
+    and so using the Gauss curvature equation, we find that 
+    \[
+\begin{aligned}
+    K(u,v) &= (-u\cdot u)\nu\cdot(-v\cdot v)\nu -\|(-v\cdot u)\|^2\\
+    &= (-1)(-1)-0 = 1
+\end{aligned}
+    \]
+    as desired.
+\end{ex}
+
+We can also define the mean curvature vector as $H = \frac{1}{2}\text{tr}(B)$
+which is just
+\[
+    H = \frac{1}{2}(\sum_iB(E_i,E_i))
+\]
+
+For a $2$-dimensional subspace of $\R^3$, the Gauss curvature and the sectional
+curvature are the same.
+
+Of course, this theorem generalizes.
+
+\begin{defn}
+    An isometric immersion $f:M\to \bar{M}$ is called totally geodesic if the
+    second fundamental form $B$ vanishes everywhere. If $B=0$ at a point $p$,
+    then we say $M$ is geodesic at $p$.
+\end{defn}
+
+\begin{theorem}
+    $f:M\to \bar{M}$ (think of an embedded submanifold) is totally geodesic if
+    and only if all geodesics of $M$ are also geodesics of $\bar{M}$.
+\end{theorem}
+
+\begin{proof}
+    ($\implies$) Suppose $M$ is totally geodesic. Then, 
+    \[
+        \bar{\nabla}_{\bar{X}}\bar{Y} = \nabla_XY +B(X,Y)
+    \]
+    and so the connections agree, and geodesics in $M$ are automatically
+    geodesics in $\bar{M}$
+\end{proof}
+\begin{hw}
+    prove the reverse implication.
+\end{hw}
+
+As a consequence, if a submanifold is totally geodesic, then the sectional
+curvature of the submanifold is the same as the sectional curvature of the
+submanifold with respect to the ambient space.
+
+Note that if you take a slice of a Riemannian normal coordinate frame at a
+point, the submanifold is geodesic at that point.
+\end{document}

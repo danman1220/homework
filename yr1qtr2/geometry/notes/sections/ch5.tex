@@ -1,0 +1,41 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+\section{Jacobi Fields}
+Consider $M$ a Riemannian manifold, $p\in M$. Let $\Omega$ be the maximal domain
+of the exponential map $\exp_p$. We wish to understand what happens to the image
+of a ball under the exponential map (which is a diffeo for small balls, but what
+about larger ones?). In essence, where is the exponential map a local
+diffeomorphism? Or, where is $d\exp_p$ an isomorphism? For what $u$ is
+$(d\exp_p)_u:T_uT_pM \cong T_pM \to T_{\exp_p(u)}M$ an isomorphism? This is true
+if and only if the kernel is trivial.
+
+Suppose $v$ is such that $d\exp_p|_u(v) = 0$. We know that 
+\[
+    d\exp_p|_u(v) = \partial_s\exp_p(u+sv)|_{s=0}
+\]
+Now, we have a family of radial geodesics $\exp(t(u+sv))$ (familial wrt $s$)
+which connect $\exp(tu)$ to $\exp(t(u+v))$, call the family $\gamma(t,s) =
+\exp_p(t(u+sv))$. $\gamma$ is a smooth map from a disk $D$ (or a rectangle) to
+$M$. (Horizontal slices in the rectangle are geodesics). We have two important
+vector fields: $\partial_s\gamma$ and $\partial_t\gamma$. $\partial_s\gamma$ is
+the rate of change of the deformation of the starting curve, the deformation
+vector field. Let $J=\partial_s\gamma$. Do we have an equation for $J$? What
+happens if we differentiate $J$?
+\[
+    \begin{aligned}
+    \nabla_{\partial_t}\nabla_{\partial_t}\partial_s\gamma  &=
+    \nabla_{\partial_t}\nabla_{\partial_s}\partial_t\gamma &\text{commutativity
+    not proven in class}\\
+    &= \nabla_t\nabla_s\partial_t\gamma - \nabla_s\nabla_t\partial_t\gamma +
+    \nabla_as\nalba_t\partial_t\gamma +
+    \nabla_{[\partial_s,\partial_t]}\partial_t\gamma\\
+    &=R(\partial_s\gamma,\partial_t\gamma)\partial_t\gamma &\text{since
+    $\nabla_t\partial_t\gamma$ vanishes (geodesic)}
+\end{aligned}
+\]
+which gives us a formula for $J$ as
+\[
+    J'' + R(\gamma_0',J)\gamma_0 = 0
+\]
+
+\end{document}
