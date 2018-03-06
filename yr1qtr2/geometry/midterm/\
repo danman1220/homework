@@ -1,0 +1,194 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Geometry} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Midterm \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+Consider a Riemannian manifold $(M,g)$ of dimension $n$.Let $\{e_i\}$ be a local
+orthonormal frame on $u\subset M$, and let $\{\omega_i\}$ be the dual basis.
+Prove that there is a unique set of smooth $1$-forms $\omega^j_i$ such that
+\[
+    d\omega^i = \omega^k\wedge\omega_k^i
+\]
+and
+\[
+    \omega_i^j + \omega^j_i = 0
+\]
+without appealing to the Levi-Civita connection.
+\\
+\\
+\begin{proof}
+    We note first that the set $\{\omega^i\wedge\omega^j\}_{i<j}$ forms a basis
+    for the second exterior power $\Lambda^2U$. Thus, we can express
+    \[
+        d\omega^i = \frac{1}{2}a_{\alpha\beta}{}^i\omega^{\alpha}\wedge\omega^{\beta}
+    \]
+    For convenience in notation, we will let $\alpha,\beta$ both run up to $n$,
+    and require that $a_{\alpha\beta}{}^i$ be antisymmetric in its lower two
+    indices. That is,
+    \[
+        \begin{aligned}
+            d\omega^i &= \sum_{\alpha<\beta}
+            (\frac{1}{2}a_{\alpha\beta}{}^i -
+            \frac{1}{2}a_{\beta\alpha}{}^i)\omega^{\alpha}\wedge\omega^{\beta}\\
+        &= \sum_{\alpha<\beta}
+        a_{\alpha\beta}{}^i\omega^{\alpha}\wedge\omega^{\beta}
+    \end{aligned}
+    \]
+
+    Now, we define $\omega^j_i$ as follows.
+    \[
+        \omega_{ij} = -\frac{1}{2}(a_{ij\alpha} + a_{i\alpha j} - a_{j\alpha
+        i})\omega^{\alpha}
+    \]
+    Now, $a$ is antisymmetric in its first two indices, so
+    \[
+        \begin{aligned}
+        \omega_{ij} &= -\frac{1}{2}(a_{ij\alpha} + a_{i\alpha j} - a_{j\alpha
+        i})\omega^{\alpha}\\
+        &= -\frac{1}{2}(-a_{ji\alpha} - a_{j\alpha i} + a_{i\alpha
+        j})\omega^{\alpha}\\
+        &= \frac{1}{2}(a_{ji\alpha} + a_{j\alpha i} -a_{i\alpha
+        j})\omega^{\alpha}\\
+        &= -\omega_{ji}
+    \end{aligned}
+    \]
+    and so the family of one-forms $\omega_{ij}$ is antisymmetric in its
+    indices.
+
+    Next, we wish to show that the equation
+    \[
+        d\omega^i = \omega^k\wedge\omega_k^i
+    \]
+    holds for this definition of $\omega_k^i$. Allowing for somewhat haphazard
+    placement of indices, we know that
+    \[
+        \begin{aligned}
+            \omega^j\wedge\omega_{ij} &=
+            -\frac{1}{2}a_{ij\alpha}\omega^j\wedge\omega^{\alpha} -
+            \frac{1}{2}a_{i\alpha j}\omega^j\wedge\omega^{\alpha} +
+            \frac{1}{2}a_{j\alpha i}\omega^j\wedge\omega^{\alpha}\\
+            &= 
+            -\frac{1}{2}a_{ij\alpha}\omega^j\wedge\omega^{\alpha} +
+            \frac{1}{2}a_{i\alpha j}\omega^{\alpha}\wedge\omega^j +
+            \frac{1}{2}a_{j\alpha i}\omega^j\wedge\omega^{\alpha}\\
+            &=
+            \frac{1}{2}a_{j\alpha i}\omega^j\wedge\omega^{\alpha}\\
+            &=
+            \frac{1}{2}a_{j\alpha}{}^i\omega^j\wedge\omega^{\alpha}\\
+        \end{aligned}
+    \]
+    which, by the definition of $a_{j\alpha}{}^i$, is equal to $d\omega^i$, as
+    desired.
+
+    Now, to see that these are unique, we can simply count the degrees of
+    freedom. To start with, $\omega_i^j$ specifies $n^2$ one-forms, each with
+    $n$ degrees of freedom, for a total of $n^3$ degrees of freedom. However,
+    requiring $\omega_i^j$ to be antisymmetric means that we only need to
+    specify $\frac{n(n-1)}{2}$ one-forms, leading to $\frac{n^2(n-1)}{2}$
+    degrees of freedom.
+
+    Now, the condition that $d\omega^i = \omega^k\wedge\omega_k^i$ for all $i$
+    imposes more restrictions. We expand the left hand side as
+    \[
+        d\omega^i =
+        \sum_{\alpha<\beta}a_{\alpha\beta}{}^i\omega^{\alpha}\wedge\omega^{\beta}
+    \]
+    and let 
+    \[
+        \omega^j_i = b_{i\alpha}^j\omega^{\alpha}
+    \]
+    Then, we can expand the right hand side as
+    \[
+\begin{aligned}
+    \omega^k\wedge\omega^i_k &= \omega^k\wedge(b^i_{k\alpha}\omega^{\alpha})\\
+    &= b^i_{k\alpha}\omega^k\wedge\omega^{\alpha}\\
+    &=\sum_{k<\alpha}(b^i_{k\alpha}-b^i_{\alpha k})\omega^k\wedge\omega^{\alpha}
+\end{aligned}
+    \]
+    equating both sides to each other for each of the $\frac{n(n-1)}{2}$ terms
+    in the sum yields $\frac{n(n-1)}{2}$ equations for each $i$. Furthermore,
+    since this equality must hold for all $i$, we have a total of
+    $\frac{n^2(n-1)}{2}$ constraints.
+
+    Thus, there are no degrees of freedom for $\omega^j_i$ satisfying the
+    equations, and the solution we found is unique.
+\end{proof}
+
+\newpage
+
+\section*{Problem 2}
+Use the curvature form method to calculate the sectional curvature for the
+$n$-sphere $S^n$ with the induced metric from $\R^{n+1}$.
+
+\end{document}

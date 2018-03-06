@@ -1,0 +1,461 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Geometry} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Midterm \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+Consider a Riemannian manifold $(M,g)$ of dimension $n$.Let $\{e_i\}$ be a local
+orthonormal frame on $u\subset M$, and let $\{\omega_i\}$ be the dual basis.
+Prove that there is a unique set of smooth $1$-forms $\omega^j_i$ such that
+\[
+    d\omega^i = \omega^k\wedge\omega_k^i
+\]
+and
+\[
+    \omega_i^j + \omega^j_i = 0
+\]
+without appealing to the Levi-Civita connection.
+\\
+\\
+\begin{proof}
+    We note first that the set $\{\omega^i\wedge\omega^j\}_{i<j}$ forms a basis
+    for the second exterior power $\Lambda^2U$. Thus, we can express
+    \[
+        d\omega^i = \frac{1}{2}a_{\alpha\beta}{}^i\omega^{\alpha}\wedge\omega^{\beta}
+    \]
+    For convenience in notation, we will let $\alpha,\beta$ both run up to $n$,
+    and require that $a_{\alpha\beta}{}^i$ be antisymmetric in its lower two
+    indices. That is,
+    \[
+        \begin{aligned}
+            d\omega^i &= \sum_{\alpha<\beta}
+            (\frac{1}{2}a_{\alpha\beta}{}^i -
+            \frac{1}{2}a_{\beta\alpha}{}^i)\omega^{\alpha}\wedge\omega^{\beta}\\
+        &= \sum_{\alpha<\beta}
+        a_{\alpha\beta}{}^i\omega^{\alpha}\wedge\omega^{\beta}
+    \end{aligned}
+    \]
+
+    Now, we define $\omega^j_i$ as follows.
+    \[
+        \omega_{ij} = -\frac{1}{2}(a_{ij\alpha} + a_{i\alpha j} - a_{j\alpha
+        i})\omega^{\alpha}
+    \]
+    Now, $a$ is antisymmetric in its first two indices, so
+    \[
+        \begin{aligned}
+        \omega_{ij} &= -\frac{1}{2}(a_{ij\alpha} + a_{i\alpha j} - a_{j\alpha
+        i})\omega^{\alpha}\\
+        &= -\frac{1}{2}(-a_{ji\alpha} - a_{j\alpha i} + a_{i\alpha
+        j})\omega^{\alpha}\\
+        &= \frac{1}{2}(a_{ji\alpha} + a_{j\alpha i} -a_{i\alpha
+        j})\omega^{\alpha}\\
+        &= -\omega_{ji}
+    \end{aligned}
+    \]
+    and so the family of one-forms $\omega_{ij}$ is antisymmetric in its
+    indices.
+
+    Next, we wish to show that the equation
+    \[
+        d\omega^i = \omega^k\wedge\omega_k^i
+    \]
+    holds for this definition of $\omega_k^i$. Allowing for somewhat haphazard
+    placement of indices, we know that
+    \[
+        \begin{aligned}
+            \omega^j\wedge\omega_{ij} &=
+            -\frac{1}{2}a_{ij\alpha}\omega^j\wedge\omega^{\alpha} -
+            \frac{1}{2}a_{i\alpha j}\omega^j\wedge\omega^{\alpha} +
+            \frac{1}{2}a_{j\alpha i}\omega^j\wedge\omega^{\alpha}\\
+            &= 
+            -\frac{1}{2}a_{ij\alpha}\omega^j\wedge\omega^{\alpha} +
+            \frac{1}{2}a_{i\alpha j}\omega^{\alpha}\wedge\omega^j +
+            \frac{1}{2}a_{j\alpha i}\omega^j\wedge\omega^{\alpha}\\
+            &=
+            \frac{1}{2}a_{j\alpha i}\omega^j\wedge\omega^{\alpha}\\
+            &=
+            \frac{1}{2}a_{j\alpha}{}^i\omega^j\wedge\omega^{\alpha}\\
+        \end{aligned}
+    \]
+    which, by the definition of $a_{j\alpha}{}^i$, is equal to $d\omega^i$, as
+    desired.
+
+    Now, to see that these are unique, we can simply count the degrees of
+    freedom. To start with, $\omega_i^j$ specifies $n^2$ one-forms, each with
+    $n$ degrees of freedom, for a total of $n^3$ degrees of freedom. However,
+    requiring $\omega_i^j$ to be antisymmetric means that we only need to
+    specify $\frac{n(n-1)}{2}$ one-forms, leading to $\frac{n^2(n-1)}{2}$
+    degrees of freedom.
+
+    Now, the condition that $d\omega^i = \omega^k\wedge\omega_k^i$ for all $i$
+    imposes more restrictions. We expand the left hand side as
+    \[
+        d\omega^i =
+        \sum_{\alpha<\beta}a_{\alpha\beta}{}^i\omega^{\alpha}\wedge\omega^{\beta}
+    \]
+    and let 
+    \[
+        \omega^j_i = b_{i\alpha}^j\omega^{\alpha}
+    \]
+    Then, we can expand the right hand side as
+    \[
+\begin{aligned}
+    \omega^k\wedge\omega^i_k &= \omega^k\wedge(b^i_{k\alpha}\omega^{\alpha})\\
+    &= b^i_{k\alpha}\omega^k\wedge\omega^{\alpha}\\
+    &=\sum_{k<\alpha}(b^i_{k\alpha}-b^i_{\alpha k})\omega^k\wedge\omega^{\alpha}
+\end{aligned}
+    \]
+    equating both sides to each other for each of the $\frac{n(n-1)}{2}$ terms
+    in the sum yields $\frac{n(n-1)}{2}$ equations for each $i$. Furthermore,
+    since this equality must hold for all $i$, we have a total of
+    $\frac{n^2(n-1)}{2}$ constraints.
+
+    Thus, there are no degrees of freedom for $\omega^j_i$ satisfying the
+    equations, and the solution we found is unique.
+\end{proof}
+
+\newpage
+
+\section*{Problem 2}
+Use the curvature form method to calculate the sectional curvature for the
+$n$-sphere $S^n$ with the induced metric from $\R^{n+1}$.
+\\
+\\
+\begin{proof}
+    We will induct on the dimension $n$.
+    The base case will be $n=2$.
+
+    Now, for $n=2$ we choose the orthonormal coframe $\omega^{\theta} =
+    d\theta$ and $\omega^{\phi} = \sin(\theta)d\phi$ so that
+    \[
+        ds^2 = d\theta^2 + \sin^2(\theta)d\phi^2 = (\omega^{\theta})^2 +
+        (\omega^{\phi})^2
+    \]
+    (which verifies that these form an orthonormal coframe).
+
+    Now, we can calculate the connection $1$-forms. By antisymmetry,
+    $\omega^{\theta}_{\theta} = \omega^{\phi}_{\phi} = 0$. Furthermore,
+    \[
+        d\omega^{\theta} = d^2\theta = 0
+    \]
+    implies that
+    \[
+        \omega^{\theta}_{\phi} = f\omega^{\phi}
+    \]
+    for some scalar function $f$.
+
+    We also know that
+    \[
+        d\omega^{\phi} = \cos(\theta)d\theta\wedge d\phi
+    \]
+    and so $\omega^{\phi}_{\theta} = \cos(\theta)d\phi$, forcing
+    $\omega^{\theta}_{\phi} = -\cos(\theta)d\phi$. This completely specifies the
+    connection $1$-forms.
+
+    Now, let's calculate the curvature $2$-forms. By definition,
+    \[
+        \Omega^i_j = -(d\omega^i_j + \omega^i_k\wedge\omega^k_j)
+    \]
+    Clearly, $\Omega$ is antisymmetric, so we only have to find
+    $\Omega^{\phi}_{\theta}$.
+    \[
+        \begin{aligned}
+            \Omega^{\phi}_{\theta} &= -(d\omega^{\phi}_{\theta} +
+            \omega^{\phi}_{\theta}\wedge\omega^{\theta}_{\phi})\\
+            &= -(d(\cos(\theta)d\phi) -
+                \omega^{\phi}_{\theta}\wedge\omega^{\phi}_{\theta}\\
+                &= -(d(\cos(\theta)d\phi) + 0)\\
+                &= \sin(\theta)d\theta\wedge d\phi\\
+                &= \omega^{\theta}\wedge\omega^{\phi}\\
+                &=-\omega^{\phi}\wedge\omega^{\theta}\\
+        \end{aligned}
+    \]
+    and so $\Omega^i_j = -\omega^i\wedge\omega^j$. 
+    
+    Finally, we observe that
+    \[
+        R(X,Y)e_i = \Omega^j_i(X,Y)e_j
+    \]
+    and so, letting $Z=\xi^ie_i$, we have
+    \[
+        \begin{aligned}
+            R(X,Y)Z &= R(X,Y)e_i\xi^i\\
+            &= \Omega^j_i(X,Y)e_j\xi^i\\
+            &= (-\omega^j\wedge\omega^i)(X,Y)e_j\xi^i\\
+            &= (\xi^i\omega^i\wedge\omega^j)(X,Y)e_j\\
+            &= (Z^{\flat}\wedge\omega^j)(X,Y)e_j\\
+            &= (Z^{\flat}\wedge(\text{Id}))(X,Y)\\
+            &= g(Z,X)Y - g(Z,Y)X
+        \end{aligned}
+    \]
+    Recalling that for a space of constant sectional curvature, $R(X,Y)Z =
+    \kappa(g(Z,X)Y - g(Z,Y)X)$ we observe that $\kappa = 1$ and so the sphere
+    $S^2$ has constant sectional curvature $1$.
+    \\
+    \\
+    Now, let's prove the inductive step. Suppose that the sphere $S^{n-1}$ has
+    a local orthonormal frame such that $\Omega^i_j = -\omega^i\wedge\omega^j$. 
+    We will show that there is a local orthonormal frame on $S^n$ such that
+    $\Omega^i_j = -\omega^i\wedge\omega^j$ as well.
+
+    For ease of notation, we will denote all objects from $S^{n-1}$ with tildes
+    (e.g. the local orthonormal frame is $\{\tilde{\omega}^i\}$).
+
+    Recall that for spherical coordinates, the metric is given inductively as
+    \[
+        ds^2 = d\chi^2 + \sin^2(\chi)d\Phi^2
+    \]
+    where $d\Phi^2$ is the metric of $S^{n-1}$. Thus, we can choose a local
+    orthonormal frame as
+    \[
+    \omega^{\chi} = d\chi
+    \]
+    and
+    \[
+        \omega^i = \sin(\chi)\tilde{\omega}^i
+    \]
+    for all $\tilde{\omega}^i$.
+
+    Now, let's calculate the connection forms. For this calculation, greek
+    letters will be used to denote indices coming from the orthonormal frame on
+    $S^{n-1}$.
+    \[
+\begin{aligned}
+    d\omega^{\alpha} &= \cos(\chi)d\chi\wedge\tilde{\omega}^{\alpha} +
+    \sin(\chi)d\tilde{\omega}^{\alpha}\\
+    &= \cot(\chi)\sin(\chi)d\chi\wedge\tilde{\omega}^{\alpha} +
+    \sin(\chi)(\tilde{\omega}^{\beta}\wedge\tilde{\omega}^{\alpha}_{\beta})\\
+    &= \cot(\chi)d\chi\wedge\omega^{\alpha} +
+    \omega^{\beta}\wedge\tilde{\omega}^{\alpha}_{\beta}\\
+    &= \cot(\chi)\omega^{\chi}\wedge\omega^{\alpha} +
+    \omega^{\beta}\wedge\tilde{\omega}^{\alpha}_{\beta}
+\end{aligned}
+    \]
+    and so it follows that
+    \[
+\begin{aligned}
+    \omega^{\alpha}_{\chi} &= -\omega^{\chi}_{\alpha} =
+    \cot(\chi)\omega^{\alpha}\\
+    \omega^{\alpha}_{\beta} &= \tilde{\omega}^{\alpha}_{\beta}
+\end{aligned}
+    \]
+    these are easily verifed to solve the constraint equations for $\omega^i_j$.
+
+    Now, we calculate the curvature $2$-forms, using the inductive hypothsesis
+    $\tilde{\Omega}^{\alpha}_{\beta} =-
+    \tilde{\omega}^{\alpha}\wedge\tilde{\omega}^{\beta}$ to get
+    \[
+        \begin{aligned}
+            -\Omega^{\alpha}_{\beta} &= d\omega^{\alpha}_{\beta} +
+            \omega^{\alpha}_k\wedge\omega^k_{\beta}\\
+            &= -\tilde{\Omega}^{\alpha}_{\beta} +
+            \omega^{\alpha}_{\chi}\wedge\omega^{\chi}_{\beta}\\
+            &= \tilde{\omega}^{\alpha}\wedge\tilde{\omega}^{\beta} +
+            (\cot(\chi)\omega^{\alpha})\wedge(-\cot(\chi)\omega^{\beta})\\
+            &=\csc^2(\chi)\omega^{\alpha}\wedge\omega^{\beta} -
+            \cot^2(\chi)\omega^{\alpha}\wedge\omega^{\beta}\\
+            &=\omega^{\alpha}\wedge\omega^{\beta}
+    \end{aligned}
+    \]
+    as desired.
+
+    All that remains is to calculate $\Omega^{\alpha}_{\chi}$ and show that it
+    is equal to $-\omega^{\alpha}\wedge\omega^{\chi}$.
+
+    \[
+        \begin{aligned}
+            -\Omega^{\alpha}_{\chi} &= d\omega^{\alpha}_{\chi} +
+            \omega^{\alpha}_k\wedge\omega^k_{\chi}\\
+            &= d(\cot(\chi)\omega^{\alpha}) +
+            \omega^{\alpha}_k\wedge\omega^k_{\chi}\\
+            &= -\csc^2(\chi)d\chi\wedge\omega^{\alpha} +
+            \cot(\chi)d\omega^{\alpha} +
+            \tilde{\omega}^{\alpha}_{\beta}\wedge(\cot(\chi)\omega^{\beta})\\
+            &= -\csc^2(\chi)\omega^{\chi}\wedge\omega^{\alpha} +
+            \cot(\chi)(\omega^{\chi}\wedge(\cot(\chi)\omega^{\alpha}) +
+                \omega^{\beta}\wedge\tilde{\omega}^{\alpha}_{\beta}) -
+            (\cot(\chi)\omega^{\beta})\wedge\tilde{\omega}^{\alpha}_{\beta}\\
+            &= -\csc^2(\chi)\omega^{\chi}\wedge\omega^{\alpha} +
+            \cot(\chi)\omega^{\chi}\wedge(\cot(\chi)\omega^{\alpha}) +
+            \cot(\chi)\omega^{\beta}\wedge\tilde{\omega}^{\alpha}_{\beta} -
+            \cot(\chi)\omega^{\beta}\wedge\tilde{\omega}^{\alpha}_{\beta}\\
+            &= -\csc^2(\chi)\omega^{\chi}\wedge\omega^{\alpha} +
+            \cot^2(\chi)\omega^{\chi}\wedge\omega^{\alpha})+
+            0\\
+            &= -\omega^{\chi}\wedge\omega^{\alpha}\\
+            &=\omega^{\alpha}\wedge\omega^{\chi}
+        \end{aligned}
+    \]
+    as desired.
+
+    Thus, following the exact same argument made in the case of $S^2$, we see
+    that the sectional curvature on the sphere is $1$.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3}
+Let $c$ be an arbitrary parallel of latitude on $S^2$, with $V_0$ a tangent
+vector to $S^2$ at some point on $c$. Describe geometrically the parallel
+transport of $V_0$ along $c$.
+\\
+\\
+\begin{proof}
+    We will show that parallel transport along $c$ in $S^2$ is the same as
+    parallel transport along $c$ thought of as a curve in the cone $C$ that lies
+    tangent to $S^2$ at $c$.
+
+    In particular, note that the tangent spaces of $S^2$ and $C$ coincide on
+    $c$. This means that projection of a vector on $c$ in $\R^3$ is the same
+    whether it goes to $TS^2$ or $TC$. Furthermore, since the covariant
+    derivative of a vector on $c$ is equal to the ordinary partial derivative in
+    $\R^3$ followed by projection into the tangent space, it follows that the
+    covariant derivative of $V_0$ along $c$ is the same whether taken in $S^2$
+    or $C$. Thus, since parallel transport is defined in terms of the covariant
+    derivative, the parallel transport of $V_0$ on $S^2$ coincides with the
+    parallel transport of $V_0$ on $C$.
+
+    Now, we note that $C$ is actually flat: by making a suitable radial cut, one
+    may flatten $C$ so that it forms a disk with a slice missing, with the
+    boundary of the disk coinciding with $c$. Here, parallel transport of $V_0$
+    along $c$ is just ordinary translation in $C\subset \R^2$.
+
+    Thus, we have a complete description of the parallel transport of $V_0$
+    along $c$. We form the cone $C$ tangential to $c$, and make a cut so that
+    $C$ can be isometrically embedded as a subset of $\R^2$. Then, identifying
+    $V_0$ with its corresponding tangent vector on $c \subset \partial C$, we
+    apply ordinary translation (parallel transport in $\R^2$) to $V_0$ along
+    $c$. The result is the parallel vector field $V(t)$ along $c$ in $\R^2$,
+    which is identified with the parallel vector field $V(t)\subset TC$.
+    Finally, noting that $TC$ and $TS^2$ coincide on $c$, we see that
+    $V(t)\subset TS^2$ is the parallel vector field of $V_0$ on $c$.
+\end{proof}
+
+\newpage
+
+\section*{Problem 4}
+Suppose $M$ has the following property: given any two points $p,q$ in $M$, the
+parallel transport from $p$ to $q$ does not depend on the path chosen. Show that
+$M$ is flat ($R$ is identically zero).
+\\
+\\
+\begin{proof}
+    We follow the hint outlined in the problem. Let
+    $f:(0-\varepsilon,1+\varepsilon)^2\to M$ parameterize a surface in $M$ with
+    $f(s,0) = f(0,0)$ for all $s$. Let $V_0$ be an arbitrary vector at $f(0,0)$.
+    Now, define a vector field $V$ on the surface where $V(s,0) = V_0$ and
+    $V(s,t)$ is the parallel transport of $V_0$ along $t\mapsto f(s,t)$.
+
+    Now, lemma 4.1 states that
+    \[
+        [\nabla_{\partial_t},\nabla_{\partial_s}]V =
+        R(\partial_sf,\partial_tf)V
+    \]
+    (for ease of notation, we denote $\nabla_{\partial_t}$ as $\nabla_t$ and
+    likewise for $s$).
+
+    Now, we know that $\nabla_s\nabla_tV=0$, since $V$ is a parallel vector
+    field along $t$. Thus,
+    \[
+        R(\partial_sf,\partial_tf)V - \nabla_t\nabla_sV = 0
+    \]
+
+    However, by the hypothesis of the problem, we know that $V(s,1)$ can be
+    thought of as the parallel transport of $V(0,1)$ along $s\mapsto f(s,1)$.
+    This follows, since $V(s,1)$ is the parallel transport of $V_0$ along the
+    path of constant $s$, and thus $V(s,1)$ can be thought of as the parallel
+    transport of $V(0,1)$ backwards to $V(0,0)$, then forwards to $V(s,1)$.
+    Since parallel transport does not depend on paths chosen, it follows that
+    $V(s,1)$ is also the parallel transport of $V(0,1)$ along the curve
+    $s\mapsto f(s,1)$.
+
+    Thus, $\nabla_sV(s,1) = 0$ and so we have that $\nabla_t\nabla_sV(s,1)=0$.
+    In particular, for $s=0$ we have
+    \[
+        R_{f(0,1)}(\partial_sf(0,1),\partial_tf(0,1))V(0,1) = 0
+    \]
+    Now, $f$ and $V$ were arbitrary, and in particular for any vector fields
+    $X,Y,Z$ we can construct an $f$ and $V_0$ for which $X_{f(0,1)}=
+    \partial_sf(0,1)$ and $Y_{f(0,1)} = \partial_tf(0,1)$ and $Z_{f(0,1)} =
+    V(0,1)$. To see this, note that we can choose an $f$ that satisfies
+    conditions for $X$ and $Y$ easily (since $X$ and $Y$ only specify how the
+    parameterization should behave at $(0,1)$) and by setting $V_0$ as the
+    parallel transport of $Z_{f(0,1)}$ along $f(0,t)$ to $f(0,0)$, we obtain
+    that the parallel transport of $V_0$ is $Z_{f(0,1)}$ as desired.
+
+    Thus, the Riemann curvature tensor $R(X,Y)Z$ vanishes at every point for
+    every vector field $X,Y,Z$ as desired.
+\end{proof}
+
+\end{document}
