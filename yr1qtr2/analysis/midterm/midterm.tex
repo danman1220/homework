@@ -1,0 +1,318 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Midterm \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+Construct explicitly a linear isometric bijection between $\ell^1$ and $c_0^*$.
+\\
+\\
+\begin{proof}
+    We define the linear bijection as
+    \[
+        \begin{aligned}
+        \phi:&\ell^1\to c_0^*\\
+        \phi(y) = (x\mapsto \sum_{n=1}^{\infty} y_nx_n)
+    \end{aligned}
+    \]
+
+    First, we observe that $\phi(y)\in c_0^*$. To see this, note that $\phi(y)$
+    is clearly linear, since 
+    \[
+\begin{aligned}
+    \phi(y)(\alpha x+\beta z) &= \sum_{n=1}^{\infty}y_n(\alpha x_n+\beta z_n)\\
+    &=\alpha\sum_{n=1}^{\infty}x_ny_n + \beta\sum_{n=1}^{\infty}z_ny_n\\
+    &=\alpha\phi(y)(x) + \beta\phi(y)(z)
+\end{aligned}
+    \]
+    as desired.
+
+    Next, we show that $\phi(y)$ is bounded. To see this, we compute directly
+    \[
+\begin{aligned}
+    \|\phi(y)(x)\| &= \|\sum_{n=1}^{\infty}y_nx_n\|\\
+    &\leq \sum_{n=1}^{\infty}\|y_nx_n\|\\
+    &\leq \|x\|_{\infty}\sum_{n=1}^{\infty}\|y_n\|\\
+    &= \|x\|_{\infty}\|y\|_1
+\end{aligned}
+    \]
+    and thus $\phi(y)$ is bounded. Therefore, $\phi(y)\in c_0^*$.
+
+    Now, we show that $\phi$ is a linear isometric bijection. First, observe
+    that $\phi$ is linear, since
+    \[
+\begin{aligned}
+    \phi(\alpha y + \beta z) &= 
+    \left(x\mapsto \sum_{n=1}^{\infty}(\alpha y_n+\beta z_n)x_n\right)
+    &= \left(x\mapsto \sum_{n=1}^{\infty}(\alpha y_nx_n + \beta z_nx_n)\right)\\
+    &=\left( x\mapsto \alpha\sum_{n=1}^{\infty}y_nx_n +
+    \beta\sum_{n=1}^{\infty}z_nx_n \right)\\
+    &= \alpha\phi(y) + \beta\phi(z)
+\end{aligned}
+    \]
+
+    Next, we observe that $\phi$ is an isometry. From the proof that $\phi(y)$
+    is bounded, we ascertained that
+    \[
+        \|\phi(y)\|\leq \|y\|_1
+    \]
+    Now, we just need to show that there is a sequence of elements $x_i\in
+    c_0$ of norm $1$ for which
+    $\|\phi(y)(x_i)\| \to\|y\|_1$.
+
+    We define $(x_i)_n$ as
+    \[
+        (x_i)_n =
+        \begin{cases}
+            \text{sign}(y_n), &n\leq i\\
+            0, &n>i
+        \end{cases}
+    \]
+    Thus,
+    \[
+        \begin{aligned}
+            |\phi(y)(x_i)| &= |\sum_{n=1}^{\infty}y_n(x_i)_n|\\
+            &= |\sum_{n=1}^{i}y_n\text{sign}(y_n)|\\
+            &= |\sum_{n=1}^i |y_n||\\
+            &= \|y\|_1 - \sum_{n=i+1}^{\infty}|y_n|
+    \end{aligned}
+    \]
+    and since $y\in\ell^1$, we know that the tail goes to zero as $i\to\infty$.
+    Thus, $\lim_i |\phi(y)(x_i)| =\|y\|_1$ as desired.
+
+    Clearly, $\phi$ is a linear isometry. Now, we just need to show its
+    bijective.
+
+    To see $\phi$ is injective, we just need to show its kernel is trivial. So,
+    suppose $y\in \ell^1$ is such that $\phi(y)$ is the zero map. This means
+    that for all $x\in c_0$, $\phi(y)(x) = 0$. So, consider the standard basis
+    sequences $e_i$ with a one in the $i$th spot, and zeroes elsewhere. Since
+    \[
+        \phi(y)(e_i) = \sum_{n=1}^{\infty}y_n(e_i)_n = y_i
+    \]
+    it follows that $\phi(y) = 0$ implies that $y_i=0$ for all $i$, and thus
+    $y=0$. So, the kernel is trivial, and $\phi$ is injective.
+
+    Now, let $f\in c_0^*$. Define a sequence $y$ as $y_i = f(e_i)$ where $e_i$
+    is the standard basis sequence defined above. Then, since every sequence in
+    $c_0$ can be uniquely written as a linear combination of $e_i$, we have
+    \[
+        \begin{aligned}
+            f(x) &= f(\sum x^ie_i)\\
+            &= \sum x^if(e_i) &\text{by linearity of $f$}\\
+            &= \sum x^iy_i\\
+            &= \phi(y)(x)
+        \end{aligned}
+    \]
+    and so $\phi$ is surjective.
+
+    Thus, $\phi$ is a linear isometric bijection, as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 2}
+Prove that $c_0$ is not reflexive.
+\\
+\\
+\begin{proof}
+    This proof relies on the following useful lemma
+    \begin{lemma}
+        For $X$, $Y$ normed linear spaces, if $X\cong Y$ by a linear isometry,
+        then $X^*\cong Y^*$.
+    \end{lemma}
+    \begin{proof}
+        Let $\phi:X\to Y$ be a linear isometric bijection between $X$ and $Y$.
+        Then, for each bounded linear functional $f\in Y^*$, the pullback
+        $\phi^*(f) = f\circ\phi$ is a bounded linear functional on $X$. The fact
+        that $\phi^*(f)$ is linear is clear, since it is the composition of
+        linear functions. Furthermore, $\phi^*(f)$ is clearly bounded, since
+        \[
+            \begin{aligned}
+                \|\phi^*(f)(x)\| &= \|f(\phi(x))\|\\
+                &\leq \|\phi(x)\|\|f\|\\
+                &=\|x\|\|f\|
+            \end{aligned}
+        \]
+        Thus, $\phi^*$ defines a map from $Y^*$ to $X^*$. It should be clear
+        that this is an isometry, since
+        \[
+\begin{aligned}
+    \|\phi^*(f)\| &= \sup_{x\in X,\|x\|=1} \|\phi^*(f)(x)\|\\
+    &= \sup_{x\in X,\|x\|=1} \|f(\phi(x))\|\\
+    &= \sup_{y\in Y, \|y\|=1} \|f(y)\| &\text{since $\phi$ an isometric
+    bijection}\\
+    &= \|f\|
+\end{aligned}
+        \]
+        as desired.
+
+        By the symmetry of this problem $\phi^{-1}$ also induces an isometry
+        $\phi^{-1}{}^*:X^*\to Y^*$. This map clearly inverts $\phi^*$, since
+        \[
+            \phi^{-1}{}^*\circ\phi^*(f) = (y\mapsto f(\phi(\phi^{-1}(y)))) =
+            y\mapsto f(y) = f
+        \]
+        and thus $\phi^*$ is a linear isometric bijection between $X^*$ and
+        $Y^*$ as desired.
+    \end{proof}
+
+    Thus, since $\ell^1\cong c_0^*$, we have that
+    \[
+        \ell^{1*}\cong c_0^{**}
+    \]
+    but $\ell^{1*}\cong \ell^{\infty}\not\cong c_0$ and so $c_0\not\cong
+    c_0^{**}$ and thus is not reflexive.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3}
+For $X$ a Banach space, suppose $x_n\to x$ strongly for $x_n,x\in X$, and
+$\phi_n\to\phi$ in weak-$*$ for $\phi_n,\phi\in X^*$. Prove that
+$\phi_n(x_n)\to\phi(x)$. Prove by counterexample that this does not hold if
+$x_n\to x$ weakly.
+\\
+\\
+\begin{proof}
+    We wish to evaluate $\lim_n \|\phi_n(x_n) - \phi(x)\|$, which we will
+    directly show is zero. So, let $\varepsilon >0$ be arbitrary, and let $N$ be
+    such that $\|x_n - x\|<\varepsilon$ and $\|\phi_n(x)-\phi(x)\|<\varepsilon$
+    for all $n>N$ (we can do this, since $x_n\to x$ strongly, and
+    $\phi_n(x)\to\phi(x)$ since $\phi_n\to \phi$ in weak-$*$).
+    Now, since $\phi_n\to\phi$ in weak-$*$, we know the set $\{\phi_n\}$ is
+    strongly bounded (we proved this in homework 5). Let $C$ be such a bound.
+    That is, for all $n$, $\|\phi_n\|\leq C$.
+    Then, we have for
+    $n>N$
+    \[
+        \begin{aligned}
+            \|\phi_n(x_n)-\phi(x)\| &= \|\phi_n(x_n) - \phi_n(x) + \phi_n(x) -
+            \phi(x)\|
+            &\leq \|\phi_n(x_n) - \phi_n(x)\| + \|\phi_n(x) - \phi(x)\|\\
+            &= \|\phi_n(x_n-x)\| + \|\phi_n(x)-\phi(x)\|\\
+            &\leq \|\phi_n\|\|x_n-x\| + \|\phi_n(x) - \phi(x)\|\\
+            &\leq C\varepsilon + \varepsilon = 2C\varepsilon
+        \end{aligned}
+    \]
+    and thus, $\lim_n\|\phi_n(x_n)-\phi(x)\| = 0$ as desired.
+
+    Now for a counterexample to show this does not hold if $x_n\to x$ weakly.
+    Let $X=\ell^1$, and let $x_n = e_n$ the standard basis sequences.
+    Furthermore, let $\phi_n((x_i)) = x_n = \sum (e_n)_ix_i$. Now,
+    $\phi_n$ can be identified with the sequence $e_n$, which is in
+    $\ell^{\infty}$ and thus represents an element of $\ell^{1*}$. However,
+    $x_n\to 0$, $\phi_n\to 0$ in weak and weak-$*$ (respectively), but
+    $\phi_n(x_n) = 1$ for all $n$, which converges to $1\neq \phi(x) = 0$.
+\end{proof}
+
+\newpage
+
+\section*{Problem 4}
+Show that $X^*$ separates points.
+\\
+\\
+\begin{proof}
+    Let $x,y\in X$ be distinct points. We wish to find a functional $\phi\in
+    X^*$ for which $\phi(x)\neq \phi(y)$. We will consider two cases.
+    
+    First, suppose $y = \lambda_0 x$ for some scalar $\lambda_0$. Then, construct
+    $\phi$ on $\text{span}(x)$ as
+    \[
+        \phi(\lambda x) = \lambda
+    \]
+    Clearly, this is a bounded linear functional, since 
+    \[
+        \|\phi(\lambda x)\| =
+    |\lambda| = \frac{|\lambda|\|x\|}{\|x\|} = \frac{1}{\|x\|}\|\lambda x\|
+\]
+    Thus, we can extend it to the whole space $X$ using Hahn-Banach. This
+    defines a functional $\phi\in X^*$ with $\phi(x) = 1$ and $\phi(y) =
+    \lambda_0$, and so $\phi$ separates $x$ and $y$ as desired.
+
+    Now, suppose $x$ and $y$ are linearly independent. Again, we define a
+    functional on $\text{span}(x)\oplus\text{span}(y)$ as 
+    \[
+        \phi(\alpha x + \beta y) = \alpha
+    \]
+    clearly this is a bounded linear functional, since it is just projection
+    onto $\text{span}(x)$ composed with the bounded linear functional defined
+    before. Since the projection operator is a bounded linear operator, it
+    follows that the composition is a bounded linear operator into $\C$ i.e. a
+    bounded linear functional.
+
+    Thus, $\phi$ can be extended to the whole space, and $\phi(x) = 1$, and
+    $\phi(y) = 0$. Thus, $\phi$ separates $x$ and $y$ as desired.
+\end{proof}
+
+\end{document}
