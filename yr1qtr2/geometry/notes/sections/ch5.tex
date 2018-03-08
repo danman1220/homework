@@ -27,7 +27,7 @@ happens if we differentiate $J$?
     \nabla_{\partial_t}\nabla_{\partial_s}\partial_t\gamma &\text{commutativity
     not proven in class}\\
     &= \nabla_t\nabla_s\partial_t\gamma - \nabla_s\nabla_t\partial_t\gamma +
-    \nabla_as\nalba_t\partial_t\gamma +
+    \nabla_as\nabla_t\partial_t\gamma +
     \nabla_{[\partial_s,\partial_t]}\partial_t\gamma\\
     &=R(\partial_s\gamma,\partial_t\gamma)\partial_t\gamma &\text{since
     $\nabla_t\partial_t\gamma$ vanishes (geodesic)}
@@ -37,5 +37,97 @@ which gives us a formula for $J$ as
 \[
     J'' + R(\gamma_0',J)\gamma_0 = 0
 \]
+
+\begin{theorem}
+    The linear map $F(w) = Jw$ is an isomorphism.
+\end{theorem}
+\begin{proof}
+    If $Jw = 0$, then $J'w= 0$ so $w = J'w(0) = 0$. So $F$ is injective. Now, to
+    show surjectivity, we let $J$ be a Jacobi field along $\gamma$ such that
+    $J(0) = 0$, $J(1)=0$, and set $w=J'(0)$. Then $Jw = J$ and $F$ is
+    surjective.
+\end{proof}
+
+\begin{theorem}
+    $d\exp_p|_v$ is an isomorphism if and only if $1$ is not a conjugate time
+    for $\gamma(t) = \exp_p(tv)$ i.e. $\exp_p(v)$ is not conjugate to $p$ along
+    $\gamma$.
+\end{theorem}
+Here, $\exp_p(v)$ is conjugate to $p$ if the Jacobi field along $\gamma$
+vanishes at both $p$ and $\exp_p(v)$.
+
+\subsection{Jacobi Fields on Manifolds With Constant Curvature}
+Recall the Jacobi equation
+\begin{equation}
+    J'' + R_m(\gamma',J')\gamma' = 0
+\end{equation}
+First assume $J = f\gamma'$. Then, the jacobi equation yields
+\begin{equation}
+    J'' + fR(\gamma',\gamma')\gamma' = 0
+\end{equation}
+and thus $J''=0$ so $f = at+b$, and so $J(t) = (at+b)\gamma'$. With the initial
+condition $J(0)=0$, we have $J(t) = at\gamma'(t)$, which will never be zero for
+positive time and $a\neq 0$. So, $J$ as a tangential field cannot form conjugate
+points.
+
+Now, let's assume $J$ is normal to $\gamma'(t)$. Now, let's choose a parallel
+frame along $\gamma$ the geodesic such that $e_1$ is parallel to $\gamma'(t)$.
+Then, $J = f^ie_i$ which yields the system of differential equations
+\begin{equation}
+    f''^ie_i + f^iR_m(\gamma',e_i)\gamma' = 0
+\end{equation}
+If we assume that our manifold has constant curvature, we have
+\begin{equation}
+    R(X,Y)Z = \kappa(g(Z,X)Y - g(Z,Y)X)
+\end{equation}
+which yields the equations
+\begin{equation}
+    f''^ie_i + f^i\kappa(\|\gamma'\|^2e_i = 0
+\end{equation}
+or
+\begin{equation}
+    f''^i + f^i\kappa\|\gamma'\|^2 = 0
+\end{equation}
+
+Furthermore, if we assume $\gamma$ is unit  parameterized, we have the
+equations
+\begin{equation}
+    f''^i + f^i\kappa = 0
+\end{equation}
+
+Which has solutions (for $J(0)=0$)
+\begin{table}
+    \centering
+    \begin{tabular}{l l}
+        $\kappa = 0$ & $J^i(t) = a^it$\\
+        $\kappa < 0$ & $J^i(t) = a^i\sinh(\sqrt{-\kappa}t)$\\
+        $\kappa > 0$ & $J^i(t) = a^i\sin(\sqrt{\kappa}t)$
+    \end{tabular}
+\end{table}
+
+Suppose instead we wish to solve this without an orthonormal frame. Let $w =
+J'(0)$ with $J(0)=0$ the initial data. Let $w(t)$ be the parallel vector field
+of $w$ along $\gamma$. We assume the solution has the form $J(t) = f(t)w(t)$.
+Then, we have
+$f(0) = 0$ and $f'(0)=1$ initial conditions. Then, we have the equation
+\begin{equation}
+    f''w + f\kappa(\|\gamma'\|^2w - (\gamma'\cdot w)\gamma')=0
+\end{equation}
+Now, we have already taken care of the tangential part, so let's assume $w$ is
+orthogonal to $\gamma'$. Then, we have the solutions
+\begin{table}
+    \centering
+    \begin{tabular}{l l}
+        $\kappa=0$ & $J(t) = tw(t)$\\
+    $\kappa<0$ & $J(t) = \frac{\sinh(\sqrt{-\kappa} t)}{\sqrt{-\kappa}}$\\
+    $\kappa>0$ & $J(t) = \frac{\sin(\sqrt{\kappa}t)}{\sqrt{\kappa}}$\\
+    \end{tabular}
+\end{table}
+
+Note that in the case $\kappa > 0$, we know that $J(t)$ has a conjugate point
+when $\sin(\sqrt{\kappa}t) = 0$, or $\sqrt{\kappa}t = n\pi$. The first of these
+occurs at $t = \frac{\pi}{\sqrt{\kappa}}$. Note that these are exactly the
+antipodal points on the sphere. Note that this implies the exponential map is
+injective up until the conjugate time!
 
 \end{document}

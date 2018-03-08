@@ -233,6 +233,61 @@ Prove that $c_0$ is not reflexive.
     \]
     but $\ell^{1*}\cong \ell^{\infty}\not\cong c_0$ and so $c_0\not\cong
     c_0^{**}$ and thus is not reflexive.
+
+    To see that $\ell^{\infty}\not\cong c_0$, we will show that their duals are
+    not isometric. It then follows immediately from the lemma that $c_0$ and
+    $\ell^{\infty}$ are not isometric.
+
+    To see this, we note first that $c_0^*\cong \ell^1$, and $\ell^1$ is
+    seperable, since $\Q^{\infty}$ the set of all rational sequences with compact
+    support is dense in $\ell^1$. Indeed, if $x_n$ is a sequence in $\ell^1$,
+    and $\varepsilon>0$ is arbitrary, we can set $N$ large enough so that
+    $\sum_{n=N}^{\infty}|x_n|< \frac{\varepsilon}{2}$. Then, we can choose rationals $r_n$
+    so that $|r_n-x_n|<\frac{\varepsilon}{2N}$.
+    Then,
+    \[
+        \begin{aligned}
+        \|r_n-x_n\|_1 &= \sum_{n=1}^N|r_n-x_n| + \sum_{n=N}^{\infty}|x_n|\\
+        &\leq N\frac{\varepsilon}{2N} + \frac{\varepsilon}{2}\\
+        &=\varepsilon
+    \end{aligned}
+    \]
+    and so $\Q^{\infty}$ is dense.
+
+    Now, we just need to show that $\ell^{\infty *}$ is not seperable. To show,
+    this, we will find an uncountable discrete subset.
+
+    Consider the Stone-Cech compactification of $\N$. First, we show that this
+    space is uncountable. To see this, recall that the space $\{0,1\}^{\R}$ is
+    compact Hausdorff, and is seperable. So, let $S$ be a countable dense subset
+    of $\{0,1\}^{\R}$. Define a surjection $f:\N\to S$, which is trivially
+    continuous, since $\N$ has the discrete topology. Thus, by the universal
+    property of the Stone-Cech compactification, $f$ extends to a function
+    $\beta f:\beta \N\to S$, which extends to a surjection $g:\beta\N \to
+    \{0,1\}^{\R}$. Thus, $|\beta N| \geq |\{0,1\}^{\R}|$ and $\beta \N$ is
+    uncountable. 
+
+    Next, we show that $\ell^{\infty}\cong C(\beta \N)$. Let $x\in
+    \ell^{\infty}$. Then, $x$ is a function from $\N$ to $\R$, but since $x$ is
+    bounded, it can be thought of as a function from $\N$ to $B$ for some closed
+    ball $B\subset \R$. Thus, since $B$ is compact Hausdorff, there is a unique
+    extension $\beta x:\beta \N\to B\subset \R$. Thus, this defines an injection
+    from $\ell^{\infty}$ to $C(\beta \N)$.
+    Furthermore, if we take $B$ to be the smallest such ball, we see that the
+    extension $\beta x:\beta \N\to B$ remains bounded by $B$, and thus $\|\beta
+    x\|_{\sup} = \|x\|_{\infty}$ and the injection is actually an isometry.
+
+    Finally, we note that since $\beta\N$ is compact, any $f:\beta\N\to \R$ must
+    map into a compact set, and is thus bounded. So, $f$ restricts on $\N$ to an
+    element of $\ell^{\infty}$, and the map is surjective as well.
+
+    Finally, we invoke the Riesz representation theorem to identify
+    $\ell^{\infty *}\cong C(\beta\N)^*$ with the set of finite Borel measures on
+    $\beta\N$. In particular, the set $\{\delta_x:x\in\beta\N\}$ is uncountable,
+    and is clearly discrete. Thus, $\ell^{\infty *}$ is not seperable, and in
+    particular is not homeomorphic to $\ell^1 = c_0^*$ as desired.
+
+    Thus, $c_0\not\cong \ell^{\infty}$, as desired.
 \end{proof}
 
 \newpage
