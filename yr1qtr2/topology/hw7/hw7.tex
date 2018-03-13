@@ -24,6 +24,7 @@
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
 \usepackage{mathrsfs}
+\usepackage{tikz-cd}
 
 \usepackage[margin=1in]{geometry}
 
@@ -48,6 +49,9 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\Hom}{\textrm{Hom}}
 
 \newtheorem{lemma}{Lemma}
 %----------------------------------------------------------------------------------------
@@ -76,4 +80,140 @@
 \section*{Problem 1}
 Show that if a path-connected, locally path-connected space $X$ has $\pi_1$
 finite, then every map $X\to S^1$ is nullhomotopic.
+\\
+\\
+\begin{proof}
+    Let $f\in C(X,S^1)$. Since $\pi_1(X)$ is finite, we know that
+    $f_*:\pi_1(X)\to\pi_1(S^1)$ is trivial, since $\pi_1(S^1) = \Z$ and
+    $\pi_1(X)$ is finite. Thus, the conditions are satisfied for $f$ to lift to
+    the universal cover $\R$ of $S^1$.
+
+    Thus, we have
+    \[
+\begin{tikzcd}
+    &\R\arrow{d}{p}\\
+    X\arrow{r}{f}\arrow[dashed]{ru}{\tilde{f}} &S^1
+\end{tikzcd}
+    \]
+
+    Now, since $\R$ is simply connected, $\tilde{f}$ is nullhomotopic. Thus, the
+    homotopy of $\tilde{f}$ with a constant map descends via $p$ to a homotopy
+    of $f$ with a constant map. Thus, $f$ is nullhomotopic as desired.
+\end{proof}
+
+\section*{Problem 2}
+Construct finite graphs $X_1,X_2$ which have a common finite-sheeted covering
+space, but such that there is no space having both $X_1$ and $X_2$ as a covering
+space.
+\\
+\\
+\\
+\\
+\newpage
+
+\section*{Problem 3}
+Let $a,b$ be the generators of $\pi_1(S^1\vee S^1)$. Draw a picture of the
+covering space of $S^1\wedge S^1$ corresponding to the normal subgroup generated
+by $a^2,b^2,(ab)^4$, and prove that this is the correct space.
+\\
+\\
+\newpage
+
+\section*{Problem 4}
+Let $\tilde{X}$ be a simply connected covering space of $X$, and $A\subset X$ be
+a path-connected, locally path-connected subspace with $\tilde{A}$ a path
+component of $p^{-1}(A)$. Show that $p:\tilde{A}\to A$ is a covering space
+corresponding to the kernel of $i_*:\pi_1(A)\to\pi_1(X)$.
+\\
+\\
+\begin{proof}
+    First, we show that $p_*\pi_1(\tilde{A})\subseteq \ker i_*$. To see this,
+    note that the diagram
+    \[
+\begin{tikzcd}
+    \tilde{A}\arrow{d}{p}\arrow{r}{i} &\tilde{X}\arrow{d}{p}\\
+    A\arrow{r}{i} &X
+\end{tikzcd}
+    \]
+    commutes. This implies that the induced diagram
+    \[
+\begin{tikzcd}
+    \pi_1(\tilde{A})\arrow{d}{p_*}\arrow{r}{i_*} &\pi_1(\tilde{X})=0\arrow{d}{p_*}\\
+    \pi_1(A)\arrow{r}{i_*} &\pi_1(X)
+\end{tikzcd}
+    \]
+    and a simple diagram chase shows that $p_*\pi_1(\tilde{A})\subseteq\ker i_*$
+    as desired.
+
+    Now we show the reverse. Let $[f]$ be a loop in $A$ with $i_*([f])=0$. Then,
+    by the lifting property of $p:\tilde{X}\to X$, we have
+    \[
+\begin{tikzcd}
+    &&\tilde{X}\arrow{d}{p}\\
+    S^1\arrow{r}{f}\arrow[dashed]{urr}{\tilde{f}} &A\arrow{r}{i} &X
+\end{tikzcd}
+    \]
+    where we fix $\tilde{f}(0)$ to be in $\tilde{A}$.
+    Now, since this commutes, this implies that $\tilde{f}$ stays in
+    $\tilde{A}$, and defines a loop in $\tilde{A}$ that projects to $f$. Thus,
+    $p_*([\tilde{f}]) = [f]$ and thus $\ker i_* \subseteq p_*(\tilde{A})$ as
+    desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 5}
+Given covering space actions $G_1,G_2$ on $X_1,X_2$, show that the product
+action $G_1\times G_2$ on $X_1\times X_2$ is a covering space action isomorphic
+to $X_1/{G_1}\times X_2/{G_2}$.
+\\
+\\
+\begin{proof}
+    Since $G_i$ is a covering space action on $X_i$, the quotient map
+    $q_i:X_i\to X_i/{G_i}$ is a covering space map. Now, we proved in the last
+    homework set that cartesian products of covering spaces are again covering
+    spaces with the product map (the category of covering spaces is cartesian
+    closed?). Thus, 
+    \[
+        p_1\times p_2:X_1\times X_2\to X_1/{G_1}\times X_2/{G_2}
+    \]
+    is a covering space. Furthermore, note that the quotient map $p_1\times p_2$
+    has image
+    \[
+        \frac{X_1\times X_2}{G_1\times G_2}
+    \]
+    by the definition of the action on $X_1\times X_2$. Thus, the two base
+    spaces are actually isomorphic as desired.
+    Furthermore, this action is a covering space action, since the action of
+    $G_1\times G_2$ is a deck transformation of $X_1\times X_2$, and deck
+    transformations are covering space actions.
+\end{proof}
+
+\newpage
+
+\section*{Problem 6}
+Show that if a group $G$ acts freely and properly discontinuously on a Hausdorff
+space $X$, then $G$ is a covering space action.
+\\
+\\
+\begin{proof}
+    Let $x\in X$, and let $U$ be a neighborhood of $x$ such that $H_x = \{U\cap g(U)
+    \neq \emptyset\}$ is finite. Then for each $g\in H_x$ with $g\neq e$, we
+    know that $gx\neq x$, and since $X$ is Hausdorff, there exist disjoint open
+    sets $U_{gx}$ and $V_{gx}$ containing $x$ and $gx$ respectively. Now, let 
+    \[
+        W = \bigcap_{g\in H_x,g\neq e}\left( U_{gx}\cap g^{-1}(V_{gx}) \right)
+    \]
+    This satisfies the conditions for a neighborhood of $x$ making $G$ act as a
+    covering space action. To see this, let $g\in G$, and let $y\in W$. If
+    $g\not\in H_x$, then $U\cap g(U) = \emptyset$ by definition, and so $W\cap
+    g(W) = \emptyset$ as well.
+
+    Now, suppose $g\in H_x$ with $g\neq e$. Then, we know $y\in U_{gx}$ and
+    $y\in g^{-1}(V_{gx})$, so $gy\in V_{gx}$. In particular, this means that
+    $gy\not\in U_{gx}$, and so $gy\not\in W$ as desired.
+
+    Thus, $G$ acts as a covering space action.
+\end{proof}
+
 \end{document}
