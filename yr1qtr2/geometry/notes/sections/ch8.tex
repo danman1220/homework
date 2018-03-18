@@ -1,0 +1,41 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+\section{Manifolds of Constant Curvature}
+Suppose $M$ is a Riemannian manifold with constant sectional curvature $\kappa$.
+Again, we note that $\exp_p:T_pM\to M$ is a diffeomorphism if and only if
+$d\exp_p|_v$ is an isomorphism for all $v$ in the domain. This means that $p$
+and $\exp_p(v)$ are not conjugate points.
+
+\begin{prop}
+    Let $\gamma$ be a path in a manifold $M$, with $K\leq 0$ along $\gamma$.
+    Then, no point of $\gamma$ is conjugate to $\gamma(0)$.
+\end{prop}
+
+\begin{proof}
+    Let $J$ be a Jacobi field along $\gamma$. Suppose $J(0)=J(1)=0$ (so that
+    $\gamma(1)$ is a candidate for conjugacy). Observe that $J$ is normal to
+    $\gamma$, since the function $f(t) = g(J(t),\gamma'(t))$ has derivative
+    \[
+        f' = g(J',\gamma')
+    \]
+    and second derivative
+    \[
+    f'' = g(J'',\gamma') = -g(R(\gamma',J)\gamma',\gamma') = 0
+    \]
+    and so $f$ is linear with $f(0)=f(1)=0$ and so $f=0$. The last equality
+    follows from the Jacobi equation.
+
+    Thus, by integrating $J''\cdot Jd\gamma$ we find $\|J\|^2=0$ everywhere, and
+    $\gamma(1)$ is not a conjugate point.
+\end{proof}
+
+As a result, for $M$ a manifold with nonpositive sectional curvature, $\exp_p$
+is a local diffeomorphism for each $p$ on its maximal domain. Furthermore, if
+$M$ is complete, then $\exp_p$ is a diffeomorphism from $T_pM$ to $M$. It turns
+out this becomes a covering map from $T_pM$ to $M$ as well. (Covered later).
+
+Suppose $K$ is positive and bounded above by $\kappa$. Then, $p$ does not have a conjugate
+point at (for unit speed parameterization of $\gamma$) $\gamma(b)$ for all $b <
+\frac{\pi}{\sqrt{\kappa}}$.
+\end{document}

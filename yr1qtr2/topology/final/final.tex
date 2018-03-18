@@ -253,6 +253,155 @@ contractible subcomplexes whose intersection is contractible.
     is contractible as well, and $Z$ itself is contractible as desired.
 \end{proof}
 
+\newpage
+
+\section*{Problem 2}
+Prove that there is no retraction $r:D^n\to\partial D^n$ using the fact that
+$\pi_n(S^n)=\Z$.
+\\
+\\
+\begin{proof}
+    Assume for a contradiction that there exists a retraction $r:D^n\to \partial
+    D^n$. That is, assume that there is some $r$ such that the diagram
+    \[
+        \begin{tikzcd}
+            \partial D^n \arrow[r, "i"] \arrow[rr, "\mathbbm{1}"', bend right] &
+            D^n \arrow[r, "r"] & \partial D^n
+        \end{tikzcd}
+    \]
+    commutes. Here $i$ is the inclusion map of $\partial D^n$ into $D^n$. (Since
+    $r$ restricted to $\partial D^n$ is the identity by definition,
+    $ri=\mathbbm{1}$).
+
+    Since $\pi_n$ is a covariant functor (Hatcher states this on page 342), we
+    can apply it to this diagram to get the commutative diagram
+    \[
+        \begin{tikzcd}
+            \pi_n(\partial D^n)=\Z \arrow[r, "i_*"] \arrow[rr, "\mathbbm{1}"', bend
+            right] & \pi_n(D^n)=0 \arrow[r, "r_*"] & \pi_n(\partial D^n)=\Z
+        \end{tikzcd}
+    \]
+    which implies that the identity map from $\Z$ to itself factors through
+    zero, which cannot be. Thus, our assumption that $r$ exists is false, and no
+    retract of $D^n$ to its boundary exists.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3}
+In each case, either prove a covering exists, or that no such covering exists.
+\subsection*{Part a}
+$p:S^2\to T^2$.
+\\
+\\
+\begin{proof}
+    I assert that no such covering map exists. Recall from Hatcher proposition
+    1.37 that for $X$ a path-connected, locally path-connected space, and
+    $p_1:\tilde{X}_1\to X$ and $p_2:\tilde{X}_2$ covering spaces, then
+    $\tilde{X}_1$ and $\tilde{X}_2$ are isomorphic if and only if
+    $p_{1*}(\pi_1(\tilde{X}_1)) = p_{2*}(\pi_1(\tilde{X}_2))$.
+
+    Now, $T^2$ is path-connected and locally path-connected. Furthermore, it has
+    a universal cover $\R^2$. To see this consider the action of $\Z\times \Z$
+    on $\R^2$ given by $(m,n)(x,y) = (x+m,y+n)$. Clearly, this action is
+    properly discontinuous, since each point moves a distance of at least $1$
+    for the action of any nontrivial element of $\Z\times \Z$, and so for any
+    point $(x,y)$ we can take the neighborhood $U= V_{\frac{1}{10}}((x,y))$, which
+    easily satisfies the property $U\cap g(U) = \emptyset$ for nontrivial $g\in
+    \Z\times\Z$.
+
+    Thus, by proposition 1.40, we know that the quotient map $p_{\R^2}:\R^2\to
+    \R^2/{\Z\times\Z}$ is a covering space map. It is easy to see that
+    $\R^2/{\Z\times\Z} = T^2$, and so $\R^2$ is a simply-connected covering
+    space of $T^2$.
+
+    Now, since both $S^2$ and $\R^2$ are simply-connected, we know that
+    \[
+        p_*(\pi_1(S^2)) = p_{\R^2*}(\pi_1(\R^2)) = 0
+    \]
+    and so proposition 1.37 guarantees the existence of a covering space
+    isomorphism between the two. However, $\R^2$ and $S^2$ are not homeomorphic,
+    ($S^2$ is compact but $\R^2$ is not) and so no such isomorphism can exist.
+    Thus, $S^2$ cannot cover $T^2$.
+    
+\end{proof}
+
+\subsection*{Part b}
+$p:T^2\to S^2$.
+\\
+\\
+\begin{proof}
+    Recall Hatcher proposition 1.31, which asserts that for a covering space
+    $p:\tilde{X}\to X$, the induced map $p_*:\pi_1(\tilde{X})\to\pi_1(X)$ is
+    injective. So, if such a covering $p:T^2\to S^2$ existed, it would induce an
+    injection
+    \[
+        p_*:\pi_1(T^2)\to\pi_1(S^2)
+    \]
+    but $\pi_1(T^2) = \Z\times\Z$, and $\pi_1(S^2)=0$, so no such injection can
+    exist! Thus, $T^2$ does not cover $S^2$.
+\end{proof}
+
+\subsection*{Part c}
+$p:\R^2\to T^2$.
+\\
+\\
+\begin{proof}
+    This was constructed in part a as a covering map.
+\end{proof}
+
+\subsection*{Part d}
+$p:\R^2\to S^2$.
+\\
+\\
+\begin{proof}
+    I assert that no such covering exists. This follows from the fact that $S^2$
+    covers itself, and simply-connected covering spaces are unique up to
+    isomorphism.
+
+    Recall from Hatcher proposition 1.37 that for $X$ a
+    path-connected, locally path-connected space, and $p_1:\tilde{X}_1\to X$ and
+    $p_2:\tilde{X}_2$ covering spaces, then $\tilde{X}_1$ and $\tilde{X}_2$ are
+    isomorphic if and only if $p_{1*}(\pi_1(\tilde{X}_1)) =
+    p_{2*}(\pi_1(\tilde{X}_2))$.
+
+    Since $S^2$ is path-connected and locally path-connected, it satisfies the
+    hypotheses for this proposition. Furthermore, the two covering space maps
+    $p:\R^2\to S^2$ and $\mathbbm{1}:S^2\to S^2$ both induce
+    \[
+        p_*(\pi_1(\R^2)) = \mathbbm{1}_*(\pi_1(S^2)) = 0
+    \]
+    and thus if such a $p$ existed, there would be a covering space isomorphism
+    between $\R^2$ and $S^2$. However, these spaces are not homeomorphic, and
+    thus cannot be isomorphic as covering spaces. So, no such $p$ exists.
+\end{proof}
+
+\newpage
+%TODO problem 4!
+\section*{Problem 5}
+Given a sequence $f:\N\to(0, \infty)$ define $p_k = (0, 0, f(k))$ and $C_k$ is
+the boundary of the triangle in the plane $\{(x, y, 0) \in \R^3\}$ with vertices
+$0, v_{2k}, v_{2k+1}$ where $v_n = (\frac{1}{n}, \frac{1}{n^2},0)$.
+For $k \in \N$ the set
+$A_k = \{t\cdot q + (1 - t) \cdot p_k : q \in C_k, 0 \leq t \leq 1\}$
+is the cone from $p_k$ to $C_k$. The subspace $X \subset \R^3$
+is $X=\bigcup A_k$.
+
+\subsection*{Part a}
+Show $X$ is simply-connected if $f(k)=\frac{1}{k}$.
+\\
+\\
+\begin{proof}
+    
+\end{proof}
+
+\subsection*{Part b}
+Show $X$ is not simply-connected if $f(k) = k$.
+\\
+\\
+\begin{proof}
+    
+\end{proof}
 
 
 \end{document}
