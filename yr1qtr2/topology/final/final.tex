@@ -1,0 +1,258 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{tikz-cd}
+\usepackage{mathrsfs}
+\usepackage{bbm}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Homotopy Theory} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Final Exam \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+Carefully prove a CW complex is contractible if it is the union of two
+contractible subcomplexes whose intersection is contractible.
+\\
+\\
+\begin{proof}
+    For this proof, we will begin by proving a couple of useful lemmas.
+    \begin{lemma}
+        The wedge sum is the coproduct in the category $Top_*$ of pointed
+        topological spaces.
+    \end{lemma}
+    \begin{proof}
+        To show this is the coproduct, we need to show that it satisfies the
+        universal property for coproducts. That is for $(X,x_0),(Y,y_0)$ pointed
+        topological spaces, and $(U,u_0)$ any other pointed topological space
+        with arrows $f:(X,x_0)\to (U,u_0)$ and $g:(Y,y_0)\to (U,u_0)$,
+        \[
+            \begin{tikzcd}[column sep=tiny, row sep=large]
+                (X,x_0)\ar[dr,"i_{x*}"]\ar[ddr,"f", bend right]
+                &&(Y,y_0)\ar[dl,"i_{y*}"'] \ar[ddl,"g"', bend left]\\
+                &(X,x_0)\vee (Y,y_0)\ar[d, "\exists !{(f,g)}",dashed]\\
+                &(U,u_0)
+\end{tikzcd}
+        \]
+    where $(f,g)$ is the unique arrow that makes the diagram commute. Now,
+    recall that the wedge sum is defined as the quotient
+    \[
+        (X,x_0)\vee (Y,y_0) = X\coprod Y/{x_0\sim y_0}
+    \]
+    so we can bootstrap by using the fact that the disjoint union is the
+    coproduct in $Top$. That is, we define $i_{x*}$ and $i_{y*}$ to be the
+    unique maps given by the universal property
+    \[
+        \begin{tikzcd}[column sep=tiny, row sep=large]
+    X\ar[dr,"i_x"]\ar[ddr, "i_{x*}",dashed, bend right] &&Y\ar[dl, "i_y"']\ar[ddl,
+    "i_{y*}"',dashed, bend left]\\
+    &X\coprod Y\ar[d,"q"]\\
+    &X\vee Y
+\end{tikzcd}
+    \]
+    Note that these maps preserve basepoints, since 
+    \[
+        i_{x*}(x_0) = q\circ i_x(x_0) = q(x_0)
+    \]
+    and similarly for $y_0$. 
+    
+    Now, suppose we have maps $f:(X,x_0)\to (U,u_0)$
+    and $g:(Y,y_0)\to (U,u_0)$. Define $(f,g)$ to be the unique map
+    \[
+        (f,g):X\coprod Y\to U
+    \]
+    that makes the diagram
+    \[
+        \begin{tikzcd}[column sep=tiny, row sep=large]
+    X\ar[dr,"i_x"]\ar[ddr, "f", bend right] &&Y\ar[dl, "i_y"']\ar[ddl,
+    "g"', bend left]\\
+    &X\coprod Y\ar[d,"{(f,g)}",dashed]\\
+    &U
+\end{tikzcd}
+    \]
+    commute. Now, since $f(x_0) = g(y_0) = u_0$, it follows that $(f,g)$ is
+    constant on the fibers of $q:X\coprod Y\to X\vee Y$ and thus by the
+    universal property of quotient maps factors through $X\vee Y$. That is,
+    \[
+        \begin{tikzcd}[column sep=small]
+            &X\coprod Y\arrow[dl,"{(f,g)}"']\ar[dr,"q"]\\
+    U &&X\vee Y\arrow[dashed]{ll}{(f,g)_*}
+\end{tikzcd}
+    \]
+    commutes for a unique $(f,g)_*$. Thus, we have for $f,g$ arrows from
+    $(X,x_0)$ and $(Y,y_0)$ to $(U,u_0)$ a unique arrow $(f,g)_*$ from $X\vee Y$
+    which makes
+    \[
+        \begin{tikzcd}[column sep=tiny, row sep=large]
+                (X,x_0)\ar[dr,"i_{x*}"]\ar[ddr,"f", bend right]
+                &&(Y,y_0)\ar[dl,"i_{y*}"'] \ar[ddl,"g"', bend left]\\
+                &(X,x_0)\vee (Y,y_0)\ar[d, "{(f,g)_*}",dashed]\\
+                &(U,u_0)
+        \end{tikzcd}
+    \]
+    commute as desired.
+    \end{proof}
+
+    \begin{lemma}
+        The wedge product is stable with respect to (basepoint-preserving) homotopy. That is, if
+        $X_1\simeq X_2$ and $Y_1\simeq Y_2$ relative to basepoints, then
+        \[
+            X_1\vee Y_1\simeq X_2\vee Y_2
+        \]
+    \end{lemma}
+    \begin{proof}
+        Since the wedge sum is the coproduct of pointed topological spaces, we
+        construct the homotopy equivalence as follows:
+
+        Let $f_x:X_1\to X_2$ and $g_x:X_2\to X_1$ be homotopy equivalences of
+        $X_2$ and $X_1$. That is, $f_x$ and $g_x$ are homotopy inverses of each
+        other. Furthermore, let $f_y:Y_1\to Y_2$ and $g_y:Y_2\to Y_1$ be
+        homotopy inverses as well. Then, by the universal property of
+        coproducts, we have the commutative diagram
+        \[
+\begin{tikzcd}
+    &X_2\vee Y_2\arrow[dashed, shift left]{ddd}{\tilde{f}}\\
+    X_2\arrow{ur}\arrow[shift left]{d}{g_x} &&Y_2\arrow{ul}\arrow[shift left]{d}{g_y}\\
+    X_1\arrow{dr}\arrow[shift left]{u}{f_x} &&Y_1\arrow{dl}\arrow[shift left]{u}{f_y}\\
+    &X_1\vee Y_1\arrow[dashed, shift left]{uuu}{\tilde{g}}
+\end{tikzcd}
+        \]
+        where $\tilde{f}$ is defined in terms of the universal
+        property of coproducts with respect to the compositions
+        $\begin{tikzcd}X_1\arrow{r}{f_x} &X_2\arrow{r}&X_2\vee Y_2\end{tikzcd}$
+        and
+        $\begin{tikzcd}Y_1\arrow{r}{f_y} &Y_2\arrow{r}&_2\vee Y_2\end{tikzcd}$
+        (and similarly for $\tilde{g}$).
+
+        I assert that $\tilde{f}$ and $\tilde{g}$ are homotopy inverses. It
+        should be clear that by symmetry of the problem, I need only check that
+        $\tilde{f}\circ\tilde{g}\simeq\mathbbm{1}$. 
+
+        Suppose $x\in X_1\vee Y_1$, and without loss of generality let $x$ be in
+        the inclusion of $X_1$ to $X_1\vee Y_1$. Then, we have the diagram
+        \[
+\begin{tikzcd}
+    &X_2\vee Y_2\arrow[dashed, shift left]{ddd}{\tilde{f}}\\
+    X_2\arrow{ur}{i_2}\arrow[shift left]{d}{g_x}\\
+    X_1\arrow[shift left]{dr}{i_1}\arrow[shift left]{u}{f_x}\\
+    &X_1\vee Y_1\arrow[dashed, shift left]{uuu}{\tilde{g}}
+    \arrow[dashed,shift left]{ul}{i_1^{-1}}
+\end{tikzcd}
+        \]
+        (where $i_1^{-1}$ is only defined on the image of $i_1$, but we are
+            assuming that $x\in i_1(X_1)$ for this diagram chase, so this arrow
+        exists).
+        From here, it is clear that $\tilde{g}(x) = i_2\circ f_x(i_1^{-1}(x))$,
+        and if we identify $X_1$ and $X_2$ as subspaces of their wedge product,
+        we have $\tilde{g}(x) = f_x(x)$. Similarly, we have $\tilde{f}(x) =
+        g_x(x)$. Thus,
+        \[
+            \tilde{f}\circ\tilde{g}(x) = g\circ f(x)\simeq \mathbbm{1}(x)
+        \]
+        as desired.
+
+        Thus, $\tilde{f}$ and $\tilde{g}$ are homotopy inverses, and $X_1\vee
+        Y_1\simeq X_2\vee Y_2$ as desired.
+    \end{proof}
+    Now, we prove the main result.
+    \\
+    \\
+    Let $Z$ be a CW complex which satisfies the hypotheses. In particular, let
+    $X$ and $Y$ be such that $Z=X\cup Y$, $X$ and $Y$ are both contractible, and
+    their intersection $A=X\cap Y$ is contractible as well.
+
+    Since $A$ is a contractible subcomplex of $Z$, we know (via Hatcher prop
+    0.16 and 0.17) that $Z$ is homotopy equivalent to $Z/{A}$. Thus, we only
+    need to show that $Z/{A}$ is contractible.
+
+    Let $q:Z\to Z/{A}$ be the canonical quotient map. Since $Z=X\cup Y$, we know
+    that $q(Z) = Z/{A} = q(X)\cup q(Y)$. In particular, $q(X) = X/{A}$ and $q(Y)
+    = Y/{A}$ (this follows from the definition of the quotient). Thus, $Z/{A} =
+    X/{A}\cup Y/{A}$. Since the quotient map is the identity on $Z\setminus A$
+    and collapses $A$ to a point, it follows that $X/{A}\cap Y/{A} = A/{A} =
+    \{a_0\}$ where $a_0$ is the point $q(A)$. Thus, $Z/{A}$ is actually the wedge
+    sum 
+    \[
+        Z/{A} = X/{A}\vee Y/{A}
+    \]
+    
+    Now, since $A$ is contractible, we know that $X/{A}\simeq X$ and
+    $Y/{A}\simeq Y$. In particular, since $X$ and $Y$ are contractible, so is
+    $X/{A}$ and $Y/{A}$. Thus, $X/{A}\simeq Y/{A}\simeq \{\cdot\}$. By lemma 2,
+    this implies that
+    \[
+        X/{A}\vee Y/{A} \simeq \{\cdot\}\vee \{\cdot\} = \{\cdot\}
+    \]
+    and thus, $X/{A}\vee Y/{A}$ is contractible. Thus, $Z/{A} = X/{A}\vee Y/{A}$
+    is contractible as well, and $Z$ itself is contractible as desired.
+\end{proof}
+
+
+
+\end{document}
