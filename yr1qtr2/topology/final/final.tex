@@ -392,15 +392,62 @@ Show $X$ is simply-connected if $f(k)=\frac{1}{k}$.
 \\
 \\
 \begin{proof}
-    
+    We begin by considering a homotopy of $X$ defined as follows. For $A_1$, fix
+    the subcone, say $B_1$, from $p_2$ to $C_1$ (the cone inside $A_1$ whose face along
+    $A_2$ is the entirety of $A_2\cap A_1$), and perform a straight line
+    homotopy of the rest of $A_1$ downwards into $B_1$. 
+
+    The homotopy on $A_k$ is defined inductively. We retract $\bigcup_{i=1}^k
+    A_k$ (where each $A_i$ has already been moved to have a vertex at $p_k$)
+    onto the subcone from $p_{k+1}$ to $\bigcup_{i=1}^k C_k$ using the straight
+    line homotopy.
+
+    Finally, we stitch these homotopies together by letting the $k$th homotopy
+    occur in the time $[1-\frac{1}{k}, 1-\frac{1}{k+1}]$. Now, for each $t\neq
+    1$, this action is continuous, as each individual retract of $A_k$ is
+    continuous as a straight line homotopy. Furthermore, this homotopy is
+    continuous at $1$. To see this, consider any point $x\in X$, Clearly, this
+    homotopy takes $x$ to its projection on the $x-y$ plane. So, if the height
+    of $x$ is not zero,
+    then $x$ is in some $A_k$ (and possibly $A_{k-1}$ if its on the boundary),
+    and is thus at most a distance $\frac{1}{k}$ from its projection. In
+    particular, since $x$ moves downwards from height $\frac{1}{i}$ to height
+    $\frac{1}{i+1}$ in time $t\in [1-\frac{1}{i},1-\frac{1}{i+1}]$, the homotopy
+    is clearly continuous at $x$. Finally, if the height of $x$ is zero, then
+    $x$ is fixed by the homotopy, and the homotopy is continuous at $x$.
+
+    Thus, $X$ is homotopic to $\bigcup_{k=1}^{\infty}\tilde{C}_k$ for
+    $\tilde{C}_k$ the filled in triangle with boundary $C_k$. This space is
+    clearly simply connected, so $X$ is simply connected as well.
 \end{proof}
+
+\newpage
 
 \subsection*{Part b}
 Show $X$ is not simply-connected if $f(k) = k$.
 \\
 \\
 \begin{proof}
-    
+    We proceed by constructing a nontrivial loop in $X$. To do so, consider the
+    loop $\gamma$ which goes around $C_k$ in time
+    $[1-\frac{1}{k},1-\frac{1}{k+1}]$. This loop is continuous on $[0,1)$, since
+    at each $t\in [0,1)$, $t$ is in some interval
+    $[1-\frac{1}{i},1-\frac{1}{i+1}]$ and is thus part of the loop around $C_i$.
+    Furthermore, this loop is continuous at $t=1$. To see this, observe that any
+    neighborhood $U$ of $\gamma(1)$ necessarily contains all but finitely many
+    $C_k$. Thus, for $n$ the smallest integer for which $C_n$ is completely
+    contained in $U$. The image $\gamma((1-\frac{1}{n},1])$ of the open set
+    $(1-\frac{1}{n},1]$ is equal to $\bigcup_{k=n}^{\infty}C_k$ which is
+    entirely in $U$ by definition of $n$.
+
+    Thus, this defines a loop in $X$. However, this loop is nontrivial, since
+    the only way to homotope the part of the loop around $C_k$ to the constant
+    loop is by taking it over $p_k$. Since the heights $p_k$ go to infinity as
+    $k$ does, it follows that there is no continuous way to homotope all of
+    $\gamma$ to the constant loop (the speeds of the homotopy would have to
+    diverge, which cannot be continuous).
+
+    Thus, $X$ is not simply connected.
 \end{proof}
 
 
