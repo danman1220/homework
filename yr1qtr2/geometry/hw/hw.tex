@@ -1,0 +1,346 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\Hom}{\text{Hom}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Geometry} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Homework \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+Prove that $V^{**}\cong V$ for a finite dimensional vector space $V$.
+\\
+\\
+\begin{proof}
+    The isomorphism is given by
+    \[
+        \begin{aligned}
+        \Phi:V\to V^{**}\\
+        \Phi(v) = ev_v = (\phi\mapsto \phi(v))
+    \end{aligned}
+    \]
+    First, we observe that this map is linear. Indeed, for $v_1,v_2\in V$ and
+    $\alpha,\beta$ a scalar, we have
+    \[
+\begin{aligned}
+    \Phi(\alpha v_1 + \beta v_2)(\phi) &= \phi(\alpha v_1 + \beta v_2)\\
+    &=\alpha \phi(v_1) + \beta\phi(v_2)\\
+    &=\alpha\Phi(v_1)(\phi) + \beta\Phi(v_2)(\phi)
+\end{aligned}
+    \]
+    as desired.
+
+    We need to show this is surjective and injective. Injectivity of $\Phi$ is
+    easily shown by examining the kernel of $\Phi$. Suppose $v$ is such that
+    $ev_v(\phi)= \phi(v)=0$ for all $\phi\in V^*$. Then, since $V^*$ separates points of
+    $V$, it follows that $v=0$. Thus, the kernel is trivial, as desired.
+
+    Now, we need to show this map is surjective. To do so, we appeal to $v$
+    being finite-dimensional, and let $\{e_i\}$ be a basis for $V$ with dual
+    basis $\{\omega^i\}$. Then, let $x\in V^{**}$. Define a corresponding vector
+    $\tilde{x} = \sum_ix(\omega^i)e_i$. Then
+    \[
+\begin{aligned}
+    \Phi(\tilde{x})(\phi) &= \phi(\tilde{x})\\
+    &= \sum_i x(\omega^i)\phi(e_i)\\
+    &= \sum_i x(\omega^i\phi(e_i))\\
+    &= x(\phi)
+\end{aligned}
+    \]
+    as desired. Thus, $\Phi$ is a linear isomorphism.
+\end{proof}
+
+\section*{Problem 2}
+Prove that for $V$ a vector space with basis $v_i$ and dual basis $v^i$, the set
+\[
+    \{v^i\otimes v^j\ |\ 1\leq i,j\leq n\}
+\]
+forms a basis for $V^*\otimes V^*$.
+\\
+\\
+\begin{proof}
+    For this, we will show that the vector space
+\[
+    W = \text{span}(\{v^i\otimes v^j\ |\ 1\leq i,j\leq n\})
+\]
+satisfies the universal property of
+    tensor products. That is, we wish to show that for each bilinear map
+    $h:V^*\times V^*\to U$ for some vector space $U$, there is a unique linear
+    map $\tilde{h}:W\to U$ such that the diagram
+    \[
+        \begin{tikzcd}
+            V^*\times V^* \arrow[d, "\otimes"] \arrow[r, "h"] & U \\
+            W \arrow[ru, "\tilde{h}", dotted] & 
+        \end{tikzcd}
+    \]
+    commutes. We will guess that $\otimes:V^*\times V^*\to W$ is given as
+    \[
+        \otimes(a_iv^i,b_jv^j) = a_ib_jv^i\otimes v^j
+    \]
+
+    So, let $h:V^*\times V^*\to U$ be a bilinear map. Define $\tilde{h}:W\to U$
+    as 
+    \[
+        \tilde{h}(\sum_{i,j}a_{ij}v^i\otimes v^j)
+        =a_{ij}h(v^i,v^j)
+    \]
+    Then it is clear that the diagram
+    \[
+        \begin{tikzcd}
+            V^*\times V^* \arrow[d, "\otimes"] \arrow[r, "h"] & U \\
+            W \arrow[ru, "\tilde{h}", dotted] & 
+        \end{tikzcd}
+    \]
+    commutes, since
+    \[
+\begin{aligned}
+    h(a_iv^i,b_jv^j) &= a_ib_jh(v^i,v^j)\\
+    \tilde{h}\circ\otimes(a_iv^i,b_jv^j) &= \tilde{h}(a_ib_jv^i\otimes v^j)\\
+    &= a_ib_jh(v^i,v^j)
+\end{aligned}
+    \]
+    It should be clear from construction that $\tilde{h}$ is unique.
+
+    Thus, since every bilinear map from $V^*\times v^*$ factors through $W$, $W$
+    satisfies the universal property of tensor products, and is isomorphic to
+    $V^*\otimes V^*$. Thus, the set $\{v^i\otimes v^j\}$ forms a basis for
+    $V^*\otimes V^*$ as desired.
+\end{proof}
+
+\section*{Problem 3}
+Show that $dvol = \wedge_i\omega^i = \sqrt{|g|}dx^n$.
+\\
+\\
+\begin{proof}
+    Recall that $dx^n = \wedge_{i=1}^ndx^i$, and our manifold is
+    $n$-dimensional.
+
+    Recall that for an $n$-fold wedge product $\wedge_{i=1}^n v^i$, we have (for
+    $v^i = a_j^i\omega^j$ in an orthonormal frame)
+    \[
+        \wedge_{i=1}^n v^i = |\det(a_j^1,\dots,a_j^n)|\wedge_{i=1}^n\omega^i
+        =\sqrt{\det(A^tA)}\wedge_{i=1}^n\omega^i
+    \]
+    for $A$ the matrix with columns $a^i$. We can apply this to $v^i = dx^i$ to
+    get the desired result.
+\end{proof}
+
+\section*{Problem 4}
+Show that the definition of the integral of a top degree form on a single chart
+is independent of choice of coordinates.
+\\
+\\
+\begin{proof}
+    Recall the definition of the integral of a top degree differential form on a
+    compact set $K$ in a single coordinate frame is
+    \[
+        \int_K\omega = \int_{\phi(K)}f\circ\phi^{-1}dx^n
+    \]
+    for $\omega = fdx^1\wedge\dots\wedge dx^n$.
+
+    We also have the change-of-coordinates formula for a diffeomorphism
+    $F:\Omega_1\to\Omega_2$ as
+    \[
+        \int_{\Omega_2}fdy^n = \int_{\Omega_1}f\circ F|J_F|dx^n
+    \]
+    where $J_F$ is the jacobian of $F$.
+
+    So, let $\phi:M\to\R^n$ be the original coordinate system, and let
+    $\psi:M\to\R^n$ be another coordinate system covering $K$. Then, we have the
+    diffeomorphism $F = \psi\circ\phi^{-1}$ and we can apply this to get
+    \[
+        \int_{\psi(K)}g\circ psi^{-1}dy^n = \int_{\phi(K)} g\circ\psi^{-1}\circ F|J_F|dx^n
+    \]
+    which is just
+    \[
+        \begin{aligned}
+            \int_{\phi(K)} g\circ\psi^{-1}\circ F|J_F|dx^n &= \int_{\phi(K)}
+            g\circ \psi^{-1}\circ 
+            \psi\circ\phi^{-1}|J_F|dx^n\\
+            &= \int_{\phi(K)} g\circ \phi^{-1} |J_F|dx^n\\
+            &= \int_K g|J_F|dx^n\\
+            &= \int_K\omega
+        \end{aligned}
+    \]
+    where we used the fact that $\omega = g dy^1\wedge\dots\wedge dy^n =
+    g|J_F|dx^1\wedge\dots\wedge dx^n$ since $|J_F|=\det(J_F)$ on a two
+    positively oriented charts.
+
+    Thus, the two integrals agree.
+\end{proof}
+
+\section*{Problem 5}
+Prove that a manifold is orientable if and only if it admits a nowhere vanishing
+top degree form.
+\\
+\\
+\begin{proof}
+    Suppose $M$ is an orientable manifold. That is, there exists an atlas
+    $\{U_{\alpha},\phi_{\alpha}\}$ of $M$ for which the Jacobian of each
+    transition map has positive determinant. Let $\{\psi_{\alpha}\}$ be a
+    partition of unity subordinate to the atlas $U_\alpha$. Then, define
+    \[
+        \omega = \sum_{\alpha}\psi_{\alpha}dx_{\alpha}^i\wedge\dots\wedge
+        dx_{\alpha}^n
+    \]
+    where $x_{\alpha}^i$ are the coordinate functions on $U_\alpha$. We claim
+    that $\omega$ is a nowhere-vanishing form. Clearly, if $p$ is a point in $M$
+    contained in only one chart, then $\omega_p = dx_p^1\wedge\dots\wedge
+    dx_p^n$ and does not vanish. If $p$ is such that it is contained in more
+    than one chart, then $\omega$ at $p$ is the sum of positive terms (since
+        each coordinate system is positive, we have $dx^n = \det(J)dy^n$ and
+    $\det(J)$ is always positive) and does not vanish.
+    \\
+    \\
+    Suppose instead that $M$ admits a nowhere-vanishing top degree form
+    $\omega$. Then, let $\{U_{\alpha},\phi_{\alpha}\}$ be an atlas of $M$. For
+    $x_{\alpha}^i$ the coordinate functions for $\phi_{\alpha}$, define a new
+    coordinate system to be such that if $\omega$ is expressed as
+    \[
+    \omega = fdx_{\alpha}^1\wedge\dots\wedge dx_{\alpha}^n
+    \]
+    then $f$ is positive. This is done by setting $x_{\alpha}^1$ to its negative
+    if $f$ is negative on that chart. Note that since $\omega$ never vanishes,
+    we know that $f$ will be either entirely positive or entirely negative on a
+    chart. Thus, such a choice can be made consistently.
+
+    Then, the modified atlas is a positive coordinate chart for $M$, which is
+    easily verified, since
+    \[
+    \omega = fdx^n = f\det(J)dy^n
+    \]
+    and $\omega$ always has positive coefficient, so $\det(J)$ is positive.
+\end{proof}
+
+\section*{Problem 6}
+Show that the topology of $M$ coincides with the metric topology 
+\[
+    d_g(x,y) = \inf_{\gamma\in C^{\infty}(I,M)} \{L(\gamma)\ |\
+    \gamma(0)=x,\gamma(1)=y\}
+\]
+where $L(\gamma)$ is the total length of $\gamma$ defined by
+\[
+    L(\gamma) = \int_Ig(\gamma',\gamma')dt
+\]
+
+\begin{proof}
+    First, we observe the following: for $g$ a Riemannian metric, and $\gamma$ a
+    curve contained entirely in a single coordinate chart $\phi$, there exist
+    constants $c,C$ such that
+    \[
+        cL_{\R^n}(\gamma) \leq L_g(\gamma) \leq CL_{\R^n}(\gamma)
+    \]
+    where $L_{\R^n}(\gamma)$ is the length of $\phi\circ\gamma$ using the
+    euclidean metric on $\R^n$.  This follows from the fact that the
+    metric induced by $g$ along $\phi^{-1}$ defines a norm on $\R^n$, and all
+    norms are equivalent. That is,
+    \[
+        k\|v\|_{\R^n} \leq \|v\|_{\phi^{-1*}g}\leq K\|v\|_{\R^n}
+    \]
+    for constants $k,K$. Thus, the lengths (defined in terms of integrals of the
+    metric) follow the same inequality. 
+
+    It should also be clear that the metrics induced by $\R^n$ and $g$ are
+    equivalent as well. To see this, note that for any $x,y\in \R^n$, we have
+    \[
+        \begin{aligned}
+        cd_{\R^n}(x,y) &= \inf_{\gamma(0)=x,\gamma(1)=y}cL_{\R^n}(\gamma)\\
+        &\leq \inf_{\gamma(0)=x,\gamma(1)=y}L_g(\gamma)\\
+        &=d_g(x,y)
+    \end{aligned}
+    \]
+    (the first equality is proved in the next problem)
+    and similarly for $d_g(x,y)\leq Cd_{\R^n}(x,y)$. This shows that the two
+    topologies induced by the two metrics are equal.
+
+    Equivalence of the two topologies follows immediately. We can show that for
+    $U$ open in the manifold topology, and $x\in U$, there is a neighborhood $V$
+    of $x$ in the metric topology contained in $U$. Simply take a coordinate
+    ball $V_{\varepsilon}(x)$ of small enough radius to be contained in a single
+    coordinate chart $\phi$. That is, the domain of $\phi$ contains
+    $V_{\varepsilon}(x)$. Then, we know from the above observation that
+    $\phi(V_{\varepsilon}(x))$ is open in $\R^n$ in the standard topology, and
+    thus is open with respect to the pullback of $d_g$ along $\phi^{-1}$. Thus,
+    $V_{\varepsilon}(x)$ is also open in the metric topology induced by $d_g$ on
+    $M$. The same argument with the two topologies switched completes the
+    argument that both topologies are equal.
+\end{proof}
+
+\section*{Problem 7}
+Show that $\|a-b\|_{\R^n}$ is $d_{\R^n}(a,b) = \inf_{\gamma}L_{\R^n}(\gamma)$.
+\\
+\\
+\begin{proof}
+    This result follows from standard variational calculus on the functional
+    $L_{\R^n}(\gamma)$. 
+\end{proof}<++>
+\end{document}
