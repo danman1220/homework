@@ -1,0 +1,297 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+\usepackage{bbm}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Final Exam \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+Let $f_j\in L^1(I,\lambda^1)$ for $I=(-1,1)$, and suppose $f_j\to f$ almost
+everywhere.
+
+\subsection*{Part i}
+Prove or disprove: if
+\[
+    \|f_j\|_{L^1} < M
+\]
+for some constant $M$, then $\|f_j-f\|\to 0$.
+\\
+\\
+\begin{proof}
+    Consider the sequence $f_j = j\chi_{[0,\frac{1}{j}]}$. This converges
+    pointwise almost everywhere to zero, but
+    \[
+        \begin{aligned}
+        \|f_j-0\|_{L^1} &= \int_{(-1,1)}j\chi_{[0,\frac{1}{j}]}d\lambda\\
+        &=\int_{[0,\frac{1}{j}]}j = 1
+    \end{aligned}
+    \]
+    which does not tend to zero.
+\end{proof}
+
+\subsection*{Part ii}
+Prove that if
+\[
+    \|f_j\|_{L^{1+\delta}} < M
+\]
+for some $\delta>0$, then $\|f_j-f\|\to 0$.
+\\
+\\
+\begin{proof}
+    Recall theorem 4 from the notes part 4, which states that for a sequence of
+    functions $f_j$ in $L^1$ on a finite measure space converging pointwise
+    almost everywhere to $f$, then $\|f_j-f\|\to 0$ if and only if the sequence
+    $\{f_j\}$ is uniformly integrable.
+
+    So, we only need to show $\{f_j\}$ is uniformly integrable. So, fix
+    $\varepsilon >0$. Let $q$ be such that $\frac{1}{1+\delta} +
+    \frac{1}{q} = 1$ (in particular, $q>1$). Finally, fix $\delta'$ such that
+    $M^{\frac{1}{1+\delta}}\delta'^{\frac{1}{q}} < \varepsilon$.
+
+    Now, for any subset $E\subset I$ with $\mu(E)<\delta'$, we have by Holder's
+    inequality
+    \[
+        \begin{aligned}
+        \int_E |f_j|d\lambda^1 &\leq \left( \int_E|f_j|^{1+\delta}d\lambda^1
+        \right)^{\frac{1}{1+\delta}}\left( \int_E |1|^qd\lambda^1
+        \right)^{\frac{1}{q}}\\
+        &\leq M^{\frac{1}{1+\delta}}\mu(E)^{\frac{1}{q}}\\
+        &\leq M^{\frac{1}{1+\delta}}\delta'^{\frac{1}{q}}\\
+        &\leq \varepsilon
+        \end{aligned}
+    \]
+    and so $\{f_j\}$ is uniformly bounded. Thus, $\|f_j-f\|\to 0$, as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 2}
+Let $1\leq p <\infty$, and let $(x_n)$ be a sequence in $\ell^p, x_n =
+(x_{n1},x_{n2},\dots)$. Prove that $(x_n)\to 0$ weakly if and only if $(x_n)$ is
+strongly bounded and for all $i$, $x_{ni}\to 0$.
+\\
+\\
+\begin{proof}
+Recall from homework $5$ that for a Banach space $X$, a sequence $(\phi_j)$ in
+$X^*$ converges weak-$*$ if and only if it is strongly bounded, and there exists
+a dense subset $E\subset X$ for which $\phi_j(x)$ converges for all $x\in E$. 
+
+Setting $q$ such that $(\ell^p)^* = \ell^q$, and setting $X=\ell^q$, we see that
+the sequence $(x_n)$ in $\ell^p = (\ell^q)^*$ converges in weak-$*$ (which is
+the same as weak convergence in the reflexive space $\ell^p$) if and only
+if it is strongly bounded, and for some dense subset $E\subset \ell^q$ for which
+$(x_n)(y)$ converges for all $y\in E$.
+
+($\implies$)
+Suppose first that $x_n\to 0$ weakly. By definition, this means that for all
+$y\in\ell^q$, $y(x_n)\to y(0)=0$. In particular, setting $y=e_i$ the standard
+basis sequence with all zeros except a $1$ in the $i$th place, we see that
+\[
+    e_i(x_n) = x_{ni}\to 0
+\]
+as desired.
+
+Furthermore, by the theorem stated above, $(x_n)$ being weakly convergent
+implies it is strongly bounded. This completes this implication.
+
+($\impliedby$)
+Suppose $(x_n)$ is such that it is strongly bounded, and $x_{ni}\to 0$ for all
+$i$. By the theorem above, we only need to show that $y(x_n)\to 0$ for all $y$
+in a dense subset $E\subset \ell^q$. 
+
+Again denoting $e_i$ as the $i$th basis sequence, we see immediately that
+$e_i(x_n)\to 0$ for all $i$. Furthermore, this extends to all finite linear
+combinations of $e_i$. That is,
+\[
+    \begin{aligned}
+        \left(\sum_{i=1}^{n} a_ie_i\right)(x_n) \to 0
+    \end{aligned}
+\]
+where $a_i$ are scalars. This is clear, since we know that $\lim (x_n+y_n) =
+\lim x_n + \lim y_n$ and $\lim ax_n = a\lim x_n$ for real sequences $x_n$.
+Applying this to the real sequences $e_i(x_n)$ achieves the desired result.
+
+Thus, for any sequence $y$ which can be written as a finite linear combination of
+$e_i$ basis sequences, $y(x_n)\to 0$. We only need to show that the set of all
+finite linear combinations of basis sequences is dense in $\ell^q$. 
+
+Denote the set of all finite linear combinations of $e_i$ as $E$.
+Suppose $y = (y_1,y_2,\dots)\in\ell^q$. In particular, we know $\|y\|_q$ is
+finite, and so the tails $\sum_{i=N}^{\infty}y_i$ tend to zero. So, fix
+$\varepsilon>0$, and choose $N$ large enough so that $\sum_{i=N}^{\infty}|y_i| <
+\varepsilon$. Then, consider
+\[
+    y' = \sum_{i=1}^N y_ie_i = (y_1,y_2,\dots,y_N,0,\dots)
+\]
+which is clearly in $E$. Furthermore, we know from notes 3, part 11 that for any
+sequence $x$,
+\[
+ \|x\|_p \leq \|x\|_1
+\]
+for $p\geq 1$. Thus,
+\[
+    \begin{aligned}
+        \|y'-y\|_q &\leq \|y'-y\|_1\\
+        &=\sum_{i=1}^{\infty}|y'_1-y_1|\\
+        &=\sum_{i=1}^{N}|y_i-y_i| + \sum_{i=N}^{\infty}|y_i|\\
+        &=0+\sum_{i=N}^{\infty}|y_i|\\
+        &< \varepsilon
+    \end{aligned}
+\]
+
+Thus, for each $y\in \ell^q$, and each $\varepsilon > 0$, there is some $y'\in
+E$ such that $\|y-y'\|_q <\varepsilon$, which proves $E$ is dense in $\ell^q$.
+
+Thus, the original sequence $(x_n)$ converges on $E$ a dense subset of $\ell^q$,
+and since $(x_n)$ is also bounded, this implies that $(x_n)$ is weakly
+convergent as well.
+
+Since $y(x_n)\to 0$ for all $y\in E$ a dense subset, by linearity we know that
+$y(x_n)\to 0$ for all $y\in\ell^q$, and thus $(x_n)\to 0$ weakly, as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3}
+Prove that for a linear operator $A:X\to X$ for a Banach space $X$ the following
+are equivalent
+\begin{enumerate}
+    \item $A$ is continuous. That is, $x_n\to 0$ implies $Ax_n\to 0$.
+    \item if $x_n\to 0$ weakly, then $Ax_n\to 0$ weakly.
+    \item if $x_n\to 0$, then $Ax_n\to 0$ weakly.
+\end{enumerate}
+
+\begin{proof}
+    ($1 \implies 2$)
+    Suppose $A$ is continuous in the norm topology. We wish to show $A$ is
+    continuous with respect to the weak topology. This should be clear, however,
+    since the weak topology is the initial topology with respect to $X^*$. That
+    is, $A:Y\to X$ is continuous if and only if $\phi\circ A:Y\to \R$ is
+    continuous for all $\phi$.
+
+    Now, we show that $A:(X,\sigma(X^*))\to (X,\sigma(X^*))$ is continuous. To
+    do so, we observe that for $\phi \in X^*$,
+    \[
+        \phi\circ A:(X,\sigma(X^*))\to \R
+    \]
+    is continuous, since
+    \[
+        \phi\circ A:(X,\|\cdot\|)\to \R
+    \]
+    is continuous as the composition of continuous functions, and thus
+    $\phi\circ A\in X^*$, and is therefore continuous with respect to
+    $\sigma(X^*)$ the weak topology on $X$.
+
+    Thus, $A$ is continuous from $(X,\sigma(X^*))$ to itself, and therefore
+    preserves weak limits as desired.
+    \\
+    \\
+    ($2\implies 3$)
+    Suppose $A$ preserves weak limits, and let $x_n\to 0$ strongly. This implies
+    that $x_n\to 0$ weakly as well, and so by statement 2, $A(x_n)\to 0$ weakly
+    as desired.
+    \\
+    \\
+    ($3\implies 1$)
+    Suppose $A$ is such that if $x_n\to 0$, then $Ax_n\to 0$ weakly. That is,
+    for all $\phi\in X^*$,
+    \[
+        \phi(Ax_n)\to 0
+    \]
+    
+    Suppose for a contradiction that $A$ is not continuous. That is, $A$ is not
+    bounded. So, let $x_n$ be a sequence tending to zero with $Ax_n\to\infty$
+    (by unboundedness of $A$). We know that $Ax_n$ weakly converges to zero, but
+    the uniform boundedness principle will lead us to a contradiction.
+
+    Consider $Ax_n$ as a sequence of bounded linear operators on $X^*$. Since
+    $Ax_n$ converges weakly to zero, the sequence $\phi(Ax_n)\to 0$ for all
+    $\phi$, and thus 
+    \[
+        \sup_n\|Ax_n(\phi)\| < \infty
+    \]
+    for each $\phi$. Thus, the uniform boundedness principle implies that
+    \[
+        \sup_{n,\|\phi\|=1}\|Ax_n(\phi)\| = M <\infty
+    \]
+    However, since
+    \[
+        \|x\| = \sup_{\|\phi\|=1}|\phi(x)|
+    \]
+    (proved in an earlier homework), we know that
+    \[
+        \sup_n\sup_{\|\phi\|=1}\|Ax_n(\phi)\| = \sup_n \|Ax_n\|<M
+    \]
+    by properties of $\sup$, and so the set $\{Ax_n\}$ is bounded, a
+    contradiction. Thus, $A$ must be continuous, as desired.
+\end{proof}
+\end{document}
