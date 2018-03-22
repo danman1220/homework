@@ -1,0 +1,226 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Complete Manifolds}
+
+Recall we have a distance on a manifold as
+\[
+    d(p,q) = \inf \{L(\gamma)\ |\ \gamma:I\to M, \gamma(0)=p,\gamma(1)=q\}
+\]
+which metrizes the topology on $M$. Recall also that the Gauss lemma guarantees
+that for each $p\in M$, there is some $r>0$ for which $B_r(p)$ is a normal ball
+(is the diffeomorphic image under $\exp$ of some ball in $T_pM$). We note also
+from before that inside a normal ball, the shortest path from $p$ to $q$ is
+achieved by the unique radial geodesic from $p$ to $q$.
+
+Now we get to the new stuff:
+
+\begin{theorem}
+    Let $(M^n,g)$ be a connected Riemannian manifold, and $p\in M$. The
+    following are equivalent:
+    \begin{itemize}
+        \item $\exp_p$ is defined on all of $T_pM$.
+        \item The closed and bounded sets of $M$ are compact.
+        \item $M$ is complete as a metric space.
+        \item $M$ is geodesically complete. That is, every geodesic of $M$ can
+            be extended for all time. Alternately, $\exp_q$ is defined on all of
+            $T_qM$ for every $q\in M$.
+        \item There exists a sequence of compact subsets $K_n$ of $M$ such that
+            $\{K_n\}$ is increasing, $\lim K_n = M$, and if $q_n\in M\setminus
+            K_n$, then $d(p,q_n)\to\infty$.
+    \end{itemize}
+    Additionally, any of these statements imply the following: For any $q\in M$,
+    there is a geodesic from $p$ to $q$ such that $L(\gamma) = d(p,q)$, or the
+    geodesic minimizes distance. This is equivalent to $B_r(p) = \exp_p(B_r(0))$
+    for any $r>0$.
+    \label{Hopf-Rinnow Theorem}
+\end{theorem}
+
+\begin{proof}
+    Equivalence of the first five is easy. So, lets prove the first one implies
+    the last corollary. Suppose $p$ is such that $\exp_p$ is defined on all of
+    $T_pM$.
+
+    Take $\delta>0$ such that $B_{\delta}(p)$ is a normal ball. Choose
+    $x_0\in\partial B_{\delta}(p)$ such that
+    $d(x_0,q)=d(q,\partial B_{\delta}(p))$ (doable since $\partial
+    B_{\delta}(p)$ is compact). (we assume $q$ is not in the normal ball, since
+    if it were the proof would be trivial).
+
+    Now, we have $x_0 = \exp_p(\delta v)$ for some $\|v\|=1$. Set $\gamma(t)$ to
+    be the geodesic $\gamma(t) = \exp_p(t\delta v)$. Let $r=d(p,q)$. Then,
+    $\gamma(r) = q$ (need to prove) and $\gamma$ minimizes this length.
+
+    We can prove this by showing
+    \[
+        d(p,q) = d(p,\gamma(t))+d(\gamma(t),q)
+    \]
+    which for $t=r$ guarantees
+    \[
+        d(p,q) = d(p,\gamma(r)) + d(\gamma(r),q)
+        =r+0
+    \]
+
+    To that end, let $I=\{t\in[\delta,r]\ |\ d(p,q) =
+    d(p,\gamma(t))+d(\gamma(t),r)\}$. We claim first that this is nonempty.
+    This is clear, since $\delta\in I$. This follows from the fact that
+    $\gamma(\delta) = x_0$ and $d(x_0,q) = r-\delta$, so $d(p,q) = \delta +
+    r-\delta = d(p,\gamma(\delta)) + d(\gamma(\delta),q)$.
+
+    Furthermore, we prove that for any $t\in I$, $t<r$, there is some
+    $\varepsilon$ for which $t+\varepsilon\in I$. 
+
+    Suppose $t<r$ is in $I$. Take a normal ball or radius $\varepsilon$ around
+    $\gamma(t)$. Then, let $y_0\in \partial B_{\varepsilon}(\gamma(t))$ and such
+    that $d(\partial B_{\varepsilon}(\gamma(t))) = d(q,y_0)$. We want to show
+    that $y_0 = \gamma(t+\varepsilon)$.
+
+    To see this, note that 
+    \[
+        d(\gamma(t),q) = r-t
+    \]
+    and note that
+    \[
+        L(\gamma|_{[0,t]}) = t
+    \]
+    which clearly implies that $\gamma$ minimizes the distance between $p$ and
+    $\gamma(t)$.
+    This follows from
+    \[
+\begin{aligned}
+    d(p,q) &= L(\gamma|_{[0,t]}) + d(\gamma(t),q)\\
+    &\geq d(p,\gamma(t)) + d(\gamma(t),q)\\
+    &\geq d(p,q)
+\end{aligned}
+    \]
+    and so $L(\gamma) = d(p,\gamma(t))$.
+
+    Now, we know that $y_0 = \gamma_1(\varepsilon) =
+    \exp_{\gamma(t)}(\varepsilon u)$ for some $u$. Repeating the argument from
+    before by setting $x_0=y_0$, $p=\gamma(t)$, and so forth. Thus,
+    $d(\gamma(t),q) = \varepsilon + d(y_0,q)$ and so
+    \[
+        \begin{aligned}
+        d(p,q) &= d(p,\gamma(t)) + \varepsilon + d(y_0,q)\\
+        &= d(p,\gamma(t)) + L(\gamma_1|_{[0,\varepsilon]}) + d(y_0,q)\\
+        &= L(\gamma|_{[0,t]}) +L(\gamma_1|_{[0,\varepsilon]}) + d(y_0,q)\\ 
+    \end{aligned}
+    \]
+    and so $d(p,y_0) = L(\gamma|_{[0,t]}) +L(\gamma_1|_{[0,\varepsilon]})$. This
+    implies that $\gamma|_{[0,t]}\cdot \gamma_1|_{[0,\varepsilon]}$ is a
+    geodesic minimizing distance between $p$ and $y_0$. This shows that $\gamma$
+    joined to $\gamma_1$ at $\gamma(t)$ is smooth, and so $\gamma_1=\gamma$, and
+    $y_0 = \gamma(t+\varepsilon)$ as desired.
+
+    This completes the proof. To see this, note that the above implies that $I$
+    contains $r$, and so
+    \[
+        d(p,q) = d(p,\gamma(r)) +d(\gamma(r),q) = r+0
+    \]
+    and so $d(\gamma(r),q) = 0$ as desired.
+\end{proof}
+
+The equivalences of the statements are proved below
+\begin{proof}
+    ($a\implies b$)
+
+    Suppose $M$ is such that $\exp_p$ is defined on all $T_pM$. let $A\subset M$
+    be closed and bounded. Then $A\subset B_r(p)$ for some $r>0$ (definition of
+    boundedness). Then, by the corollary above, we have that $A\subset
+    \exp_p(B_r(0))$. Now, $B_r(0)$ is compact, and so its image $B_r(p)$ is
+    compact. Since $A$ is closed and a subset of a compact set, it is compact as
+    well.
+    \\
+    \\
+    ($b\implies c$)
+    Suppose $M$ is such that the closed and bounded sets are the compact sets.
+    Then, $M$ is complete by Heine-Borel. Explicitly, let $p_k$ be a Cauchy
+    sequence. This sequence is bounded, so its closure is compact. Therefore,
+    some subsequence of $p_k$ converges. Thus, since $p_k$ is Cauchy, it
+    converges as well.
+    \\
+    \\
+    ($c\implies d$)
+    Let $\gamma$ be a maximally extended geodesic. $\gamma:(a,b)\to M$. Assume
+    for a contradiction that $b$ is finite. Then, consider a sequence $t_k\to
+    b$, and we claim that $\gamma(t_k)$ is Cauchy. This is clear, since
+    \[
+        d(\gamma(t_k),\gamma(t_m)) \leq \|t_k-t_m\|
+    \]
+    as desired. So, $\gamma(t_k)$ is Cauchy, and has a limit $\gamma(t_k)\to p$
+    by completeness of $M$. Now, consider a normal ball of some radius $\delta$
+    around $\gamma(t_k)$, enough so that $\delta$ works for all $t_k$. We can go
+    far enough in the sequence such that $\gamma(t_{k+1})$ is in the normal ball
+    around $\gamma(t_k)$. Recall that the radial geodesic from $\gamma(t_k)$ to
+    $\gamma(t_{k+1})$ is unique, and so $\gamma$ must be the radial geodesic
+    from $\gamma(t_k)$ to $\gamma(t_{k+1})$. Furthermore, $\gamma$ can be
+    extended across the entire normal ball. Taking $k$ large enough so that $p$
+    is in the normal ball, we see that $\gamma$ can be extended across $p$, a
+    contradiction.
+    \\
+    \\
+    Trivially, $d\implies a$. Thus we have established equivalence of the first
+    four.
+    \\
+    \\
+    ($b\equiv e$)
+    Suppose $M$ satisfies the Heine Borel property. Then, take the distance
+    balls $K_n = \overline{B}_n(p)$ which are bounded and closed, and therefore
+    compact. Clearly, these are also increasing, and clearly satisfy the
+    requirements for $e$.
+
+    Suppose instead that $M$ is written as the union of compact sets defined in
+    $e$. Then, let $A$ be a bounded and closed set. In particular, $A$ is
+    contained in some $K_n$ by boundedness, and since $A$ is closed, it is
+    compact as a closed subspace of a compact space.
+\end{proof}
+
+This implies the following
+\begin{theorem}
+    let $M$ be a complete simply connected Riemannian manifold with sectional
+    curvature $\kappa\leq 0$. Then, the exponential map $\exp_p:T_pM\to M$ is a
+    diffeomorphism for any $p\in M$. 
+    \label{Hadamard Theorem}
+\end{theorem}
+\begin{proof}
+    We have proved before that the exponential map is a local diffeomorphism
+    since $\kappa\leq 0$. In particular, we can pull back the metric along
+    $\exp_p$ to get a metric $\tilde{g}$ on $T_pM = \tilde{M}$. Then,
+    $\exp_p:\tilde{M}\to M$ is a local isometry, So, radial lines in
+    $\tilde{M}$ are geodesics. Consider $\exp_0:T_0\tilde{M}\to \tilde{M}$,
+    which is defined on the whole tangent space. Thus, $\tilde{M}$ is complete.
+    
+    Now, all we need to show is that $\exp_p$ is a covering map. We know that
+    $\exp_p$ is a local homeomorphism, so all we need to show is that $\exp_p$
+    is a covering map. This follows from $\tilde{M}$ being complete. Let
+    $f=\exp_p$, which we know is a local isometry. We clain that $f$ is a
+    covering map.
+
+    Let $p\in M$. We need to find a neighborhood of $p$ for which $f^{-1}(U)$ is
+    a disjoint union of things homeomorphic to (diffeomorphic to) $U$ along $f$.
+    So, let $U$ be the normal ball of radius $\delta$ around $p$. Let $q\in
+    f^{-1}(p)$. Consider $f|_{B_{\delta}}(q)$ which by completeness (and
+    isometry of $f$) maps along $f$ into $B_{\delta}(p)$. To show $f$ is a
+    diffeomorphism in these neighborhoods, we only need to show $f$ is
+    one-to-one.
+
+    Suppose for contradiction that $f(q_1) = f(q_2)$ for $q_i\in
+    B_{\delta}(q)$. It should be clear that this violates the uniqueness of
+    radial geodesics from $p$ to $f(q_i)$. Thus, $f$ is one-to-one, and in fact
+    is a diffeomorphism of $B_{\delta}(q)$ into $B_{\delta}(p)$. 
+
+    Finally, we show the preimages of $U$ are disjoint. So, suppose $q_1,q_2$
+    are in $f^{-1}(p)$. Suppose $B_{\delta}(q_1)\cap B_{\delta}(q_2)$ is
+    nonempty. Then, for $q$ in the intersection, we have two geodesics
+    $\gamma_1$ from $q_1$ to $q$ and $\gamma_2$ from $q_2$ to $q$. Thus, they
+    project into $B_{\delta}(p)$ to two curves starting at $p$ ending at $f(q)$.
+    Thus, they must agree. That is, $f(\gamma_1) = f(\gamma_2)$. This means that
+    $\gamma_1$ and $\gamma_2$ are the same geodesic, and so $q_1=q_2$ and the
+    inverse images are disjoint.
+
+    Thus, by uniqueness of covering maps, and the fact that $M$ covers itself as
+    a simply connected covering space, $\tilde{M}$ is diffeomorphic to $M$.
+\end{proof}
+
+\end{document}
