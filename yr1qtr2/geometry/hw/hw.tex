@@ -342,5 +342,40 @@ Show that $\|a-b\|_{\R^n}$ is $d_{\R^n}(a,b) = \inf_{\gamma}L_{\R^n}(\gamma)$.
 \begin{proof}
     This result follows from standard variational calculus on the functional
     $L_{\R^n}(\gamma)$. 
-\end{proof}<++>
+
+    Let's minimize the functional $L(\gamma)$ by varying the path $\gamma$. We
+    do this by setting the variation to zero. That is, $L(\gamma)$ is maximized
+    for $\gamma$ that makes $\delta L=0$. We calculate
+    \[
+\begin{aligned}
+    $\delta L &= \int \delta(\sqrt(g(\gamma',\gamma')))dt\\
+    &=\int \frac{1}{2\sqrt{g(\gamma',\gamma')}}\delta g(\gamma',\gamma')dt
+\end{aligned}
+    \]
+    Since arc length is independent of parameterization, we can take the unit
+    speed parameterization of $\gamma$, so that $g(\gamma',\gamma')=0$. Then, we
+    have
+    \[
+        \begin{aligned}
+            \delta L &= \int \delta g(\gamma',\gamma')dt\\
+            &= \int \delta (g_{ab}\partial_t\gamma^a\partial_t\gamma^b)dt\\
+            &=\int g_{ab}\delta(\partial_t\gamma^a)\partial_t\gamma^b +
+            g_{ab}\delta(\partial_t\gamma^b)\partial_t\gamma^a dt
+            &= 2\int g_{ab}\partial_t(\delta\gamma^a)\partial_t\gamma^b dt
+        \end{aligned}
+    \]
+    integrating by parts (and tossing boundary terms since the endpoints of
+    $\gamma$ do not vary) and noting $g_{ab} = \delta_{ab}$ in $\R^n$ yields
+    \[
+        \delta L = -2\int \partial_t^2\gamma^a\delta\gamma^bdt
+    \]
+    which holds only if $\partial_t^2\gamma^a = 0$ for all $a$. Thus, the
+    minimal length path from a point $p$ to a point $q$ is the straight line
+    from $p$ to $q$.
+
+    So, for $\gamma$ the straight line from $p$ to $q$, $L(\gamma) = \|\gamma\|
+    = \|p-q\|$ as desired.
+\end{proof}
+
+
 \end{document}
