@@ -305,7 +305,87 @@ a killing field if and only if $X$ is.
 \\
 \\
 \begin{proof}
-    Suppose $X$ is a killing field. 
+    Suppose $X$ is a killing field. That is, the local flow $\phi$ is an
+    isometry. Now, we can push forward a local flow on $X$ to a local flow on
+    $Y$. That is,
+    \[
+        \psi(t,x) = f(\phi(t,f^{-1}(x)))
+    \]
+    defines a flow on $Y$. This is clear, since
+    \[
+        \begin{aligned}
+        \partial_t\psi(t,x) &= \partial_t f(\phi(t,f^{-1}(x)))\\
+        &= df(\partial_t\phi(t,f^{-1}(x)))\\
+        &= df(X(\phi(t,f^{-1}(x))))\\
+        &= Y(f(\phi(t,f^{-1}(x))))\\
+        &= Y(\psi(t,x))
+    \end{aligned}
+    \]
+    as desired. Now, for any fixed $t$, $\psi(t,\cdot) =
+    f\circ\phi(t,\cdot)\circ f^{-1}$ is the composition of isometries, and is
+    therefore an isometry as desired. Thus, $Y$ is a killing field if $X$ is.
+
+    By symmetry of the problem, this implies that $Y$ is a killing field if and
+    only if $X$ is.
+\end{proof}
+
+\subsection*{Part d}
+Show that $X$ is a killing field if and only if
+\[
+    g(\nabla_YX,Z) + g(\nabla_ZX,Y)=0
+\]
+for all $X,Y,Z$. 
+\\
+\\
+\begin{proof}
+    Recall the definition of the Lie derivative of a tensor field $T$ along a
+    vector field $v$ with flow $\phi$
+    \[
+        \mathfrak{L}_v(T)(p) = \lim_{t\to 0}\left\{
+        \frac{\phi^*(-t,T(\phi(t,p)))-T(p)}{t} \right\}
+    \]
+    We first establish that the Lie derivative along a vector field $v$ of the
+    metric $g$ is zero if and only if $v$ is a killing field.
+    To see this, let $p\in M$, and choose a coordinate system $x_i$ around $p$
+    that is compatible with the flow of $v$. That is, 
+    \[
+        \phi(t,(x_1,\dots,x_n)) = \phi(x_1+t,x_2,\dots,x_n)
+    \]
+    Which can be done by setting $x_1$ so that $v = \partial_1$ around $p$. (I
+        suppose we are implicitly assuming $v\neq 0$ around and at $p$. We will
+    handle the case $v=0$ around $p$ later).
+    
+    In this coordinate system, we have
+    \[
+        \mathfrak{L}_v(g)(p) = \partial_1(g)|_p
+    \]
+    which is zero if and only if $g$ does not vary along the flow $\phi$. In
+    particular, this means that $v$ is a killing field at $p$ (its flow is a
+    local isometry) if and only if $\mathfrak{L}_v(g)(p) = 0$.
+
+    This condition is exactly the killing equation. To see this, we first
+    establish a different form of the Lie derivative. Recall that for any vector
+    field $u$ we have
+    \[
+        \mathfrak{L}_v(u) = [v,u]
+    \]
+    and for any function $f$ we have
+    \[
+        \mathfrak{L}_v(f) = v(f)
+    \]
+    These conditions along with the Leibniz rule allow us to characterize
+    $\mathfrak{L}_v$ for more arbitrary tensors. Let $\omega$ be a one-form, and
+    $u$ a vector field. We have
+    \[
+\begin{aligned}
+    \mathfrak{L}_v(\omega_iu^i) &= v(\omega_iu^i)
+\end{aligned}
+    \]
+    and
+    \[
+        \mathfrak{L}_v(\omega_iu^i) = u^i\mathfrak{L}_v(\omega_i) +
+        \omega_i[v,u]^i
+    \]
 \end{proof}<++>
 
 
