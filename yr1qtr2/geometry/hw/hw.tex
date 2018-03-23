@@ -348,7 +348,7 @@ Show that $\|a-b\|_{\R^n}$ is $d_{\R^n}(a,b) = \inf_{\gamma}L_{\R^n}(\gamma)$.
     for $\gamma$ that makes $\delta L=0$. We calculate
     \[
 \begin{aligned}
-    $\delta L &= \int \delta(\sqrt(g(\gamma',\gamma')))dt\\
+    \delta L &= \int \delta(\sqrt(g(\gamma',\gamma')))dt\\
     &=\int \frac{1}{2\sqrt{g(\gamma',\gamma')}}\delta g(\gamma',\gamma')dt
 \end{aligned}
     \]
@@ -377,5 +377,53 @@ Show that $\|a-b\|_{\R^n}$ is $d_{\R^n}(a,b) = \inf_{\gamma}L_{\R^n}(\gamma)$.
     = \|p-q\|$ as desired.
 \end{proof}
 
+\section*{Problem 8}
+Define the Levi-Civita connection as the unique connection such that
+\[
+    \nabla_X Y-\nabla_YX = [X,Y]
+\]
+and
+\[
+    Xg(Y,Z) = g(\nabla_XY,Z) + g(Y,\nabla_XZ)
+\]
+Show that this is indeed a connection on $M$.
+\\
+\\
+\begin{proof}
+    For this proof, we will denote the Levi-Civita connection as $D$.
+
+    We need to show that $D_XY$ is function linear in $X$, scalar linear in
+    $Y$, and satisfies the Leibniz rule
+    \[
+        D_X(fY) = (Xf)Y + fD_XY
+    \]
+
+    Recall from class that by utilizing the two properties above, we see that
+    \[
+        2g(D_XY,Z) = Xg(Y,Z) + Yg(Z,X) - Zg(X,Y) + g([X,Y],Z) -g([Y,Z],X) -
+        g([X,Z],Y)
+    \]
+    which uniquely determines the connection. Now, we just need to show that
+    this definition satisfies the definition of a connection. To that end, let
+    $f\in C^{\infty}(M)$. We calculate
+    \[
+\begin{aligned}
+    2g(D_{fX}Y,Z) &= fXg(Y,Z) + Yg(Z,fX) - Zg(fX,Y)\\
+        &+ g([fX,Y],Z) -g([Y,Z],fX) - g([fX,Z],Y)\\
+        &=fXg(Y,Z) + Yg(Z,fX) - Zg(fX,Y)\\
+        &- g([Y,fX],Z) - g([Y,Z],fX) + g([Z,fX],Y)\\
+        &=fXg(Y,Z) + (Yf)g(Z,X) + fYg(Z,X) - (Zf)g(X,Y) - fZg(X,Y)\\
+        &- g((Yf)X,Z) - g(f[Y,X],Z) - g([Y,Z],fX) + g((Zf)X,Y) + g(f[Z,X],Y)\\
+        &=fXg(Y,Z)  + (Yf)g(Z,X) + fYg(Z,X) - (Zf)g(X,Y) - fZg(X,Y)\\
+        &- g((Yf)X,Z) + g(f[X,Y],Z) - g([Y,Z],fX) + g((Zf)X,Y) - g(f[X,Z],Y)\\
+        &=(fX)g(Y,Z) + (Yf)g(X,Z) - (Yf)g(X,Z) - (Zf)g(X,Y) + (Zf)g(X,Y)\\
+        &+ fYg(X,Z) -fZg(X,Y) + g(f[X,Y],Z) -g([Y,Z],fX) -g(f[X,Z],Y)\\
+        &= f\left\{ Xg(Y,Z) + Yg(X,Z) -Zg(X,Y) + g([X,Y],Z) - g([Y,Z],X) -
+        g([X,Z],Y) \right\}\\
+        &=fg(D_XY,Z) = g(fD_XY,Z)
+\end{aligned}
+    \]
+    and thus $D$ is $C^{\infty}(M)$-linear in $X$.
+\end{proof}<++>
 
 \end{document}

@@ -1,0 +1,312 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{<<CLASS>>} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge <<TITLE>> \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+Show that hyperbolic space $H^n$ is complete.
+\\
+\\
+\begin{proof}
+    We will first show that $H^n$ is homogeneous, and then appeal to the next
+    problem to conclude $H^n$ is complete.
+
+    To see that $H^n$ is homogeneous, we consider two families of isometries.
+    For simplicity, we will write points in $H^n$ as $(x,y)$ with $x\in
+    \R^{n-1}$ the first $n-1$ coordinates, and $y\in\R$ the last coordinate.
+    The first isometry we consider is
+    \[
+        \begin{aligned}
+        T_a&:H^n\to H^n\\
+        (x,y)&\mapsto(x+a,y)
+    \end{aligned}
+    \]
+    for any $a\in\R^{n-1}$. To see this is an isometry, we just need to compute
+    $dT_a$ and show it preserves the metric. So, let $v\in T_pH^n$ for some
+    $p\in H^n$, $p=(x_p,y_p)$, and take $\gamma(t) = p+vt = (x_p+v_xt,y_p+v_yt)$
+    a curve in $H^n$.  Note that $\gamma'(0) = v$. Now, we have that
+    \[
+        \begin{aligned}
+        dT_a(v) &= dT_a(\gamma'(0))\\
+        &= \partial_t T_a(\gamma(t))|_{t=0}\\
+        &=\partial_t (x_p +v_xt+a,y_p+v_yt)|_{t=0}\\
+        &=(v_x,v_y) = v
+    \end{aligned}
+    \]
+    Thus, $dT_a(v)=v$. Furthermore, since the metric at $(x+a,y)$ is the same as
+    at $(x,y)$ (since the scaling factor only depends on $y$) we have that for
+    $u,v\in T_pM$,
+    \[
+\begin{aligned}
+    g(u,v)_{(x,y)} &= g(dT_au,dT_av)_{(x+a,y)}
+\end{aligned}
+    \]
+    and thus $T_a$ is an isometry (I suppose you'd have to check that $T_a$ is a
+        diffeomorphism as well, but this is obvious. Clearly $T_a$ is smooth,
+    and it has a smooth inverse $T_{-a}$).
+
+    Secondly, we consider the isometry
+    \[
+        \begin{aligned}
+        M_{\alpha}&:H^n\to H^n\\
+        (x,y)&\mapsto (\alpha x, \alpha y)
+    \end{aligned}
+    \]
+    for $\alpha>0$. This maps $H^n$ into $H^n$, since it keeps the $y$
+    coordinate positive. Furthermore, it is a diffeomorphism (it is clearly
+    smooth, and $M_{\frac{1}{\alpha}}$ acts as an inverse). I also claim it is
+    an isometry. Again letting $\gamma = (x_p + v_x,y_p+v_y)$ for $(v_x,v_y)\in
+    T_{(x,y)}H^n$ we note that
+    \[
+        \begin{aligned}
+            dM_{\alpha}(v) &= dM_{\alpha}(\gamma'(0))\\
+            &= \partial_t M_{\alpha}(\gamma(t))|_{t=0}\\
+            &= \partial_t (\alpha(x_p + v_x),\alpha(y_p+v_y))|_{t=0}\\
+            &= \alpha V
+        \end{aligned}
+    \]
+    Finally, we compute the metric
+    \[
+\begin{aligned}
+    g(u,v)_(x,y) &= g_{ab}u^av^b\\
+    &=\frac{1}{y^2}u_bv^b\\
+    \\
+    g(dM_{\alpha}u,dM_{\alpha}v)_{(\alpha x,\alpha y)} &= g_{ab}\alpha u^a\alpha
+    v^b\\
+    &= \frac{1}{(\alpha y)^2}\alpha^2 u_bv^b\\
+    &= \frac{1}{y^2}u_bv^b
+\end{aligned}
+    \]
+    Where $u_b = \eta_{ab}u^a$ and so $u_bv^b$ is the standard inner product on
+    $\R^n$. Thus, $M_{\alpha}$ is an isometry.
+
+    I assert that the action of these two isometries is transitive. Indeed,
+    given $(x,y)$ and $(x',y')$ in $H^n$, we construct the isometry as follows.
+    First, apply $T_{-x}$ to map $(x,y)$ to $(0,y)$. Then, apply
+    $M_{\frac{y'}{y}}$ to map $(0,y)$ to $(0,y')$. Finally, apply
+    $T_{x'}$ to map $(0,y')$ to $(x',y')$.
+
+    Thus, for any two points $(x,y)$ and $(x',y')$ in $H^n$, there is an
+    isometry connecting them. Thus, by the result of the next problem, $H^n$ is
+    complete.
+\end{proof}
+
+\newpage
+
+\section*{Problem 2}
+Show that a homogeneous space is complete.
+\\
+\\
+\begin{proof}
+    Let $M$ be a homogeneous manifold. We will show that $M$ is geodesically
+    complete.
+
+    Let $\varepsilon$ be such that $B_{\varepsilon}(p)\subset M$ is a normal
+    ball at $p\in M$. Since $M$ is homogeneous, this implies that
+    $B_{\varepsilon}(q)$ is a normal ball at $q\in M$ for any other $q$. 
+    To see this, we note that for $\phi$ the isometry sending $p$ to $q$,
+    \[
+        \phi\circ\exp_p\circ d\phi^{-1}
+    \]
+    defines a diffeomorphism between $B_{\varepsilon}(0)\subset T_qM$ and the
+    image $B_{\varepsilon}(q)$. This is well-defined, since $\phi$ is an
+    isometry, so $\|v\| = \|d\phi^{-1}v\|$. Furthermore, we can see that
+    $\exp_q=\phi\circ\exp_p\circ d\phi^{-1}$. Obesrve that $\gamma(t) =
+    \exp_q(tv)$ is the unique geodesic through $q$ with tangent vector $v$.
+    However,
+    \[
+        \tilde{\gamma}(t) = \phi\circ\exp_p\circ d\phi^{-1}(tv)
+    \]
+    has the same properties. Namely $\tilde{\gamma}(0) = \phi(p)=q$, and
+    $\tilde{\gamma}'(0)= d\phi(d\phi^{-1}(v)) = v$. Thus, $\tilde{\gamma}(t) =
+    \gamma(t)$ for all $t\in[0,1]$, and so $\exp_q$ and $\phi\circ\exp_p\circ
+    d\phi^{-1}$ agree at all points in the normal ball. Thus,
+    $B_{\varepsilon}(q)$ is a normal ball, as desired.
+
+    Recall that in a normal ball at $p$, any geodesic going through $p$ can be
+    extended throughout the entire normal ball. This follows from the fact that
+    if $\gamma$ is a geodesic passing through $p$ at some time $t_p$ with
+    $\gamma'(t_p)=v$, it is the unique geodesic (up to reparameterization) with
+    $\gamma(t_p)=p$ and $\gamma'(t_p)=v$. Now, since radial geodesics through
+    $p$ are defined on the entire normal ball, the radial geodesic starting at
+    $p$ with tangent vector $v$ is defined throughout the normal ball, and is an
+    extension of $\gamma$. Thus, $\gamma$ can be extended through the normal
+    ball.
+
+    It follows immediately, then, that any geodesic $\gamma$ (with unit speed,
+    without loss of generality) defined on some
+    interval $(a,b)$ can be extended to a geodesic defined on
+    $(a,b+\frac{\varepsilon}{2})$ by observing that $\gamma$ passes through
+    $\gamma(b-\frac{\varepsilon}{2})$, and since
+    $\gamma(b-\frac{\varepsilon}{2})$ has a normal ball of radius $\varepsilon$
+    around it, we know that $\gamma$ can be extended through this normal ball to
+    be defined on $(a,b-\frac{\varepsilon}{2} + \varepsilon) =
+    (a,b+\frac{\varepsilon}{2})$.
+
+    Thus, it follows immediately that geodesics can be extended indefinitely
+    (the symmetric argument works to show $\gamma$ can be extended the other
+    way) and thus $M$ is geodesically complete.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3}
+\subsection*{Part a}
+Let $v$ be a linear field on $\R^n$. That is, $v$ is a vector field, and $v$ is
+linear when thought of as a map from $\R^n$ to $\R^n$. Show that a linear field
+given by a matrix $A$ is a killing field if and only if $A$ is antisymmetric.
+\\
+\\
+\begin{proof}
+    Let $X$ be a linear vector field. Then, $X$ is expressible as a matrix $A$.
+    That is, $X(f(x_1,\dots,x_n)) = Af(x_1,\dots,x_n)$. In order for $X$ to be a
+    killing field, we must have that its local flow around each point is an
+    isometry. That is, for $\phi:(-\varepsilon,\varepsilon)\times U\to M$ the
+    flow of $X$ around a point $p$, $d\phi(t,\cdot)$ preserves inner products.
+
+    Now, the flow of $X$ is the solution to
+    \[
+        \partial_t\phi^a = A\phi^a
+    \]
+    which is solved by setting $\phi = \exp(At)$. Now, let's calculate the
+    differential. For $v\in T_p\R^n$, let $\gamma(s) = p+sv$. Then
+    \[
+        \begin{aligned}
+            d\phi(v) &= \partial_s\phi(\gamma(s))|_0\\
+            &= \partial_s\exp(At)(p+sv)\\
+            &=\exp(At)v
+        \end{aligned}
+    \]
+    and so $d\phi = \phi$. We require that
+    \[
+        \langle u,v\rangle = \langle \exp(At)u,\exp(At)v\rangle
+    \]
+    which amounts to requiring
+    \[
+        \langle u,v\rangle = \langle u,\exp(A^Tt)\exp(At)v\rangle
+    \]
+    Now, this happens for all $u,v$ if and only if $\exp(A^Tt)\exp(At)=I$, which
+    holds for all $t$ if and only if $A^T=-A$. Thus, in order for $X$ to be a
+    killing field, $A$ must be antisymmetric, and vice versa.
+\end{proof}
+
+\subsection*{Part b}
+Let $X$ be a killing field on $M$ with $p\in M$, and let $U$ be a normal
+neighborhood of $p$ in $M$. Assume that $p$ is a unique point of $U$ with
+$X_p=0$. Show that in $U$, $X$ is tangent to the geodesic spheres centered at
+$p$.
+\\
+\\
+\begin{proof}
+    Let $\phi_q:(-\varepsilon,\varepsilon)\times V_q\to M$ denote the local flow
+    of $X$ around any point $q$. Since $X_p = 0$, we know that $\phi(t,p) = p$.
+    That is, $p$ is fixed by the flow of $X$. 
+
+    Now, let $q$ be any point in $U$ the normal neighborhood of $p$. We know
+    that there is a unique radial geodesic from $p$ to $q$ defined as $\gamma(t)
+    = \exp_p(tv)$ for some $v$. Now, $\phi$ is defined
+    across all of $\gamma(t)$ for $t\in[0,1]$ since $\gamma([0,1])$ is a compact
+    set, and thus can be covered by a finite number of sets $V_q$ on which the
+    flow is defined.
+
+    Now, since $\phi(t,\cdot)$ is an isometry, it maps geodesics to geodesics.
+    Thus, the image $\phi(t,\gamma([0,1]))$ is a geodesic from $\phi(t,p)=p$ to
+    $\phi(t,q)$. Furthermore, this geodesic is defined by $\tilde{\gamma(t)} =
+    \exp_p(tu)$ for some $u$. Now, we know that
+    \[
+\begin{aligned}
+    d\phi(t,v) &= d\phi(t,\gamma'(0))\\
+    &= \partial_s\phi(t,\gamma(s))\\
+    &= \partial_s(\tilde{\gamma}(s))\\
+    &= u
+\end{aligned}
+    \]
+    Thus $u$ and $v$ have the same norm, and so $\gamma(1)=q$ and
+    $\tilde{\gamma}(1)=\phi(t,q)$ are the same distance from $q$.
+
+    Thus, $\phi$ moves points along the geodesic spheres, and so $X$ is
+    tangential to the geodesic spheres, as desired.
+\end{proof}
+
+\subsection*{Part c}
+Let $X$ be a smooth vector field on $M$ and let $f:M\to N$ be an isometry. Let
+$Y$ be a vector field on $N$ defined by $Y(f(p))=df_p(X(p))$. Prove that $Y$ is
+a killing field if and only if $X$ is.
+\\
+\\
+\begin{proof}
+    Suppose $X$ is a killing field. 
+\end{proof}<++>
+
+
+\end{document}
