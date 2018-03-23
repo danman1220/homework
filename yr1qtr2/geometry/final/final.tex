@@ -386,6 +386,298 @@ for all $X,Y,Z$.
         \mathfrak{L}_v(\omega_iu^i) = u^i\mathfrak{L}_v(\omega_i) +
         \omega_i[v,u]^i
     \]
+    setting these equal, we have
+    \[
+        \begin{aligned}
+            v(\omega_iu^i) &= u^i\mathfrak{L}_v(\omega_i) + \omega_i[v,u]^i\\
+            \nabla_v(\omega_iu^i) &= u^i\mathfrak{L}_v(\omega_i) +
+            \omega_i[v,u]^i\\
+            u^i\nabla_v\omega_i + \omega_i\nabla_vu^i
+            &= u^i\mathfrak{L}_v(\omega_i) + \omega_i(\nabla_vu^i -
+            \nabla_uv^i)\\
+            u^i\nabla_v\omega_i &= u^i\mathfrak{L}_v(\omega_i) -
+            \omega_i\nabla_uv^i\\
+            \mathfrak{L}_v(\omega_i)u^i &= u^iv^j\nabla_j\omega_i +
+            \omega_iu^j\nabla_jv^i\\
+            \mathfrak{L}_v(\omega_i) &= v^j\nabla_j\omega_i +
+            \omega_j\nabla_iv^j\\
+        \end{aligned}
+    \]
+    and we extend this definition inductively to get
+    \[
+        \mathfrak{L}_v(g_{ab}) = v^c\nabla_cg_{ab} + g_{ac}\nabla_b v^c +
+        g_{cb}\nabla_a v^c
+    \]
+    and since $\nabla$ is metric compatible, $\nabla_cg_{ab} = 0$. Then,
+    \[
+        \mathfrak{L}_v(g_{ab}) = g_{ac}\nabla_bv^c+g_{cb}\nabla_av^c
+        = \nabla_bv_a + \nabla_av_b
+    \]
+    Thus, $v$ is a killing field if and only if
+    \[
+        \nabla_bv_a + \nabla_av_b = 0
+    \]
+    which is the local coordinate version of
+    \[
+        g(\nabla_Yv,Z) + g(Y,\nabla_Zv) = 0
+    \]
+    To see this, set $Y=\partial_a$, $Z=\partial_b$, and compute
+    \[
+        \begin{aligned}
+        g(\nabla_Yv,Z) + g(Y,\nabla_Zv)
+        &= g_{cd}\nabla_av^c(\partial_b)^d + g_{cd}(\partial_a)^c,\nabla_bv^d\\
+        &=g_{cb}\nabla_av^c + g_{ad}\nabla_bv^d\\
+        &=\nabla_av_b + \nabla_bv_a
+    \end{aligned}
+    \]
+    as desired. Thus, $v$ is a killing field if and only if it satisfies the
+    killing equation.
+
+    Note that in the case $v=0$ around $p$, then $v$ trivially satisfies the
+    killing equation, and $v$ is a killing field around $p$, since  the flow of
+    $v$ is stationary.
+\end{proof}
+
+\subsection*{Part e}
+Let $X$ be a killing field with $X(q)\neq 0$  for some $q\in M$. Prove that
+there exist coordinates around $q$ for which the coefficients $g_{ij}$ of the
+metric do not depend on one of the coordinates.
+\\
+\\
+\begin{proof}
+    We assumed this in the previous part, but we will prove it more rigorously
+    now. Let $v=X(q)$, and form a coordinate system $\partial_i$ with
+    $\partial_n = v$ in $T_qM$. This can be done via a coordinate mapping
+    $\psi:M\to\R^n$ which sends the integral curve of $X$ through $q$ to the
+    $n$th coordinate axis.
+
+    Now, since $X$ is a killing field, its flow is a local isometry. So, take a
+    small neighborhood $U$ of $q$ such that our coordinate system is defined on
+    $U$ and the flow of $X$ is an isometry on $U$. Now, by our choice of
+    coordinate system, the flow $\phi$ of $X$ is defined in these coordinates as
+    \[
+        \phi(t,(x_1,\dots,x_n)) = (x_1,\dots,x_n+t)
+    \]
+    Thus, since $\phi$ is an isometry, $g$ at $(x_1,\dots,x_n)$ is the same as
+    $g$ at $(x_1,\dots,x_n+t)$ for $t\in (-\varepsilon,\varepsilon)$ as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 4}
+We can define a metric on $TM$ by the following: Let $(p,v)\in TM$ and $W,V\in
+T_vTM$. Let $\alpha,\beta$ be curves in $TM$ with $\alpha(0)=\beta(0)=(p,v)$ and
+$\alpha'(0)=V,\beta'(0)=W$.
+Define the metric on $TM$ as
+\[
+    g_T(V,W)_{(p,v)} = g(d\pi(V),d\pi(W))_p +
+    g(\nabla_t\alpha|_0,\nabla_s\beta|_0)_p
+\]
+where by $\nabla_t\alpha$ we mean the covariant derivative along $\pi(\alpha)$
+of the vector field $\alpha(t)$.
+
+\subsection{Part a}
+Prove that this metric is well-defined as a Riemannian metric.
+\\
+\\
+\begin{proof}
+    We first show that this definition is independent of choice of curves
+    $\alpha,\beta$. This follows from the fact that $\nabla_t\alpha|_0$ only
+    depends on $\alpha(0)$ and $\alpha'(0)$, which follows immediately from the
+    definition of $\nabla_t$.
+
+    Now, all we need to show is that this is a metric. That is, we need to show
+    $g_T$ is smooth, symmetric, bilinear, and positive-definite.
+
+    Clearly, $g_T$ is smooth as the composition of a bunch of smooth functions
+    ($\pi:TM\to M$, $g$, and $\nabla$ are all smooth, and $g_T$ is the sum of
+    compositions of these)
+
+    Furthermore, $g_T$ is symmetric, since each component in its sum is
+    symmetric.
+
+    $g_T$ is bilinear, since $g$ is bilinear, and $d\pi$ and $\nabla_t$ are both
+    linear.
+
+    Finally, we observe that $g_T$ is positive definite. We know that $g_T$ is
+    always positive (or zero) since it is the sum of positive terms. So, we only
+    have to check that
+    \[
+        g_T(V,V)=0
+    \]
+    implies that $V=0$. Note that if $g_T(V,V)=0$, we know that
+    \[
+\begin{aligned}
+    g(d\pi(V),d\pi(V)) = 0 \implies d\pi(V)=0\\
+    g(\nabla_t\alpha,\nabla_t\alpha) = 0\implies \nabla_t\alpha|_0 = 0\\
+\end{aligned}
+    \]
+    The first statement means that $\partial_t\pi(\alpha(t))=\partial_t(p(t))$
+    is zero, and so $V$ must be a vertical vector. However, the second statement
+    implies that the vertical part of $V$ is zero, and so $V$ itself must be
+    zero. Thus, $g_T$ is positive-definite as desired.
+
+    Thus, $g_T$ is a well-defined metric on $TM$.
+\end{proof}
+
+\subsection*{Part b}
+Prove that the curve $t\mapsto (p(t),v(t))$ is horizontal if and only if $v(t)$
+is parallel along $p(t)$ in $M$.
+\\
+\\
+\begin{proof}
+    Let $\gamma(t) = (p(t),v(t))$ be a horizontal curve. Since this is a
+    horizontal curve, we know that $\gamma'(t)$ is orthogonal to the fiber
+    $\pi^{-1}(p(t))$. That is, we know that for any vertical vector $W$, we have
+    \[
+        g_T(\gamma'(t),W) = 0
+    \]
+    Since $W$ is vertical, this implies that $d\pi(W) = 0$ and thus
+    \[
+        g_T(\gamma'(t),W) = g(\nabla_t\gamma(0),\nabla_s\beta(0))
+    \]
+    for some curve $\beta(s)$ with $\beta(0) = \gamma(0)$ and $\beta'(0)=W$.
+
+    Now, since $W$ is vertical and nonzero, we know that $\nabla_s\beta(0)$ is
+    nonzero (this follows from positive-definiteness of $g_T$ and by the fact
+        that $d\pi(W) = 0$, which means that $g_T(W) =
+    g(\nabla_s\beta(0),\nabla_s\beta(0))$ which is nonzero).
+
+    Thus, the only way that $g(\nabla_t\gamma(0),\nabla_s\beta(0))$ is zero for
+    all $t$ is if $\nabla_t\gamma(0)$ is zero. However, this is just the
+    statement that the vector field $v(t)$ is parallel along $p(t)$ as desired.
+
+    Conversely, let $\gamma(t)=(p(t),v(t))$ be such that $v(t)$ is parallel along
+    $p(t)$, and let $W$ be a vertical vector at $p(t)$. Then, we have
+    \[
+        g_T(\gamma'(t),W) = g(d\pi(\gamma'(t)),d\pi(W)) +
+        g(\nabla_t\gamma(0),\nabla_s\beta(0))
+    \]
+    where $\beta$ is defined in the same way as before. Since $W$ is vertical,
+    $d\pi(W)=0$, and since $v(t)$ is parallel to $p(t)$, $\nabla_t\gamma(0)=0$.
+    Thus,
+    \[
+        g_T(\gamma'(t),W) = 0
+    \]
+    and $\gamma$ is a horizontal curve as desired.
+\end{proof}
+
+\subsection{Part c}
+Prove that the geodesic field is a horizontal vector field.
+\\
+\\
+\begin{proof}
+    Let $G$ be the geodesic field on $TM$. That is, $G$ has trajectories
+    $t\mapsto (\gamma(t),\gamma'(t))$ for geodesics $\gamma$.
+    We will prove that this field is parallel. However, this follows almost
+    immediately from the definition of a geodesic. By definition, $\gamma$ is a
+    geodesic if and only if $\nabla_t\gamma'(s) = 0$ for all $s$. This means
+    that $\gamma'(t)$ is parallel along $\gamma$, and by the result in part b,
+    we know that $G$ is a horizontal vector field.
+\end{proof}
+
+\subsection*{Part d}
+Prove that the trajectories of the geodesic field are geodesics on $TM$ with the
+metric $g_T$.
+\\
+\\
+\begin{proof}
+    Let $\alpha(t) = (\gamma(t),\gamma'(t))$ be an integral curve of $G$. We
+    wish to show this is a geodesic with the metric $g_T$. This amounts to
+    showing
+    \[
+        \nabla_t\alpha' = 0
+    \]
+    under the induced metric. Now, since $\alpha$ is an integral curve of $G$,
+    by part c we know that $\alpha$ is a horizontal curve. This implies that
+    \[
+        g_T(\cdot,\alpha'(t)) = g(d\pi(\cdot),d\pi(\alpha'(t)))
+    \]
+    (since the vertical part is zero). Thus, along $\alpha$, $g_T = \pi^*(g)$.
+    
+    More formally, $\alpha$ lies in the submanifold of $TM$ consisting of all
+    points horizontal to $\alpha(0)$. On this submanifold, the metric looks like
+    $g_T = \pi^*(g)$, which is well-defined, since $\pi$ is bijective on this
+    submanifold. Thus, geodesics in this submanifold are precisely the image
+    under $\pi^{-1}$ of geodesics in $M$. Since $\alpha = \pi^{-1}(\gamma)$
+    which is a geodesic, it follows that $\alpha$ is a geodesic as well.
+\end{proof}
+
+\newpage
+
+\section*{Problem 5}
+Let $M$ be a Riemannian manifold of dimension $2$. Let $B_{\delta}(p)$ be a
+normal ball around $p\in M$, and consider the parameterized surface
+\[
+    f(\rho,\theta) = \exp_p(\rho v(\theta))
+\]
+where $v(\theta)$ is a circle in $B_{\delta}(0)$ parameterized by the central
+angle $\theta$. 
+
+\subsection*{Part a}
+Show that $(\rho,\theta)$ are coordinates in an open set $U\subset M$ formed by
+the open ball $B_{\delta}(p)$ minus the ray $\exp_p(-\rho v(0))$ for
+$\rho\in(0,\delta)$.
+\\
+\\
+\begin{proof}
+    The fact that this is a coordinate system is clear. Since $U$ is contained
+    in a normal ball, $\exp_p$ is a diffeomorphism, and thus the inverse
+    $\exp_p^{-1}$ is a diffeomorphism into $B_{\delta}(0)\subset T_pM\cong \R^2$.
+
+    Since $\rho,\theta$ define a coordinate system on $B_{\delta}(0)$ (as polar
+    coordinates in $\R^2$), their image under $\exp_p$ is also a coordinate
+    system of $M$, as desired.
+\end{proof}
+
+\subsection*{Part b}
+Show that the coefficients of the metric $g_{ij}$ are
+\[
+    \begin{aligned}
+        g_{12}=0,& &g_{11}=\|\partial_{\rho}f\|^2 = \|v(\theta)\|^2=1,&
+        &g_{22}=\|\partial_{\theta}\|^2
+    \end{aligned}
+\]
+
+\begin{proof}
+    We first observe that $\partial_{\rho}$ is a geodesic, and so
+    $\nabla_{\rho}\partial_{\rho} = 0$. In particular, this means that
+    \[
+        \partial_{\rho}g(\partial_\rho,\partial_{\rho}) =
+        2g(\partial_{\rho},\nabla_{\rho}\partial_{\rho}) = 0
+    \]
+    and so $g_{\rho,\rho}$ does not change along $\rho$. Since $\|\partial_r\| =
+    g_{\rho,\rho} = 1$ at the origin, this implies that $g_{\rho,\rho}=1$
+    everywhere.
+
+    Note also that by the Gauss lemma, geodesics from $p$ are orthogonal to the
+    geodesic spheres centered at $p$, and in
+    particular this means that $g(\partial_{\rho},\partial_{\theta}) = 0$. Thus,
+    $g_{12}=g_{21}=0$ as desired.
+
+    Finally, we wish to compute $g(\partial_{\theta},\partial_{\theta})$.
+    Since $\exp_p$ is an isometry around $p$, we can pull back $g$ to find
+    $g(\partial_{\theta},\partial_{\theta}) =
+    f^*(g(\partial_{\theta},\partial_{\theta}))$ which yields
+        \[
+            f^*(g(\partial_{\theta},\partial_{\theta})) =
+            g(\partial_{\theta}f,\partial_{\theta}f) = \|\partial_{theta}f\|^2
+        \]
+    as desired.
+\end{proof}
+
+\subsection*{Part c}
+Show that along the geodesic $f(\rho,0)$ we have
+\[
+\begin{aligned}
+    (\sqrt{g_{22}})_{\rho\rho} = -K(p)\rho + R(\rho)
+\end{aligned}
+\]
+where $R(\rho) = 0 + O(\rho^2)$.
+\\
+\\
+\begin{proof}
+    
 \end{proof}<++>
 
 
