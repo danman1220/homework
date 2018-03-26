@@ -58,9 +58,9 @@
 
 \title{	
 \normalfont \normalsize 
-\textsc{<<CLASS>>} \\ [25pt] % Your university, school and/or department name(s)
+\textsc{Geometry} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\huge <<TITLE>> \\ % The assignment title
+\huge Final Exam \\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
 
@@ -677,8 +677,41 @@ where $R(\rho) = 0 + O(\rho^2)$.
 \\
 \\
 \begin{proof}
-    
-\end{proof}<++>
+    This will follow immediately from the fact that $\partial_{\theta}f$ is a
+    Jacobi field of the geodesic $f(\rho,0)$. However, this is clear from the
+    original motivating definition of a Jacobi field in Do Carmo chapter 5.
+    Namely, for a family of geodesics $t\mapsto \exp_p(tv(s))$ the field
+    $\partial_s\exp_p(tv(s))$ is a Jacobi field along $\exp_p(tv(0))$.
+
+    Thus, we can apply corollary 2.10 from chapter 5 to note that
+    \[
+        \sqrt{g_{22}} = \|\partial_{\theta}f\| =
+        \rho-\frac{1}{6}K(p)\rho^3 + \tilde{R}(\rho)
+    \]
+    with $\tilde{R} = 0 +O(\rho^4)$. 
+
+    Differentiating this result twice with respect to $\rho$ yields the desired
+    result.
+\end{proof}
+
+\subsection*{Part d}
+Show that 
+\[
+    \lim_{\rho\to 0} \frac{(\sqrt{g_{22})_{\rho\rho}}}{\sqrt{g_{22}}} = -K(\rho)
+\]
+\begin{proof}
+    We utilize the same expression for $g_{22}$ as in the last one to calculate
+    \[
+\begin{aligned}
+    \lim_{\rho\to 0} \frac{(\sqrt{g_{22})_{\rho\rho}}}{\sqrt{g_{22}}}
+    &= \lim_{\rho\to 0}\frac{-K(p)\rho + R(\rho)}{\rho-\frac{1}{6}K(p)\rho^3 +
+            \tilde{R}(\rho)}\\
+            &=\lim_{\rho\to 0} \frac{-K(\rho)\rho + R(\rho)}{\rho}\\
+            &=-K(\rho)
+\end{aligned}
+    \]
+    as desired.
+\end{proof}
 
 
 \end{document}

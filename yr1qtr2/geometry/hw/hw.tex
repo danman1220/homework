@@ -49,6 +49,7 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
 
 \newcommand{\Hom}{\text{Hom}}
 
@@ -424,6 +425,357 @@ Show that this is indeed a connection on $M$.
 \end{aligned}
     \]
     and thus $D$ is $C^{\infty}(M)$-linear in $X$.
-\end{proof}<++>
+
+    Linearity in $Y$ follows immediately from the fact that the Lie bracket and
+    $g$ are both scalar linear.
+
+    Finally, we show that this satisfies the Leibniz rule. This is done by
+    direct calculation.
+    \[
+        \begin{aligned}
+            2g(D_X(fY),Z) &= Xg(fY,Z) + fYg(Z,X) - Zg(X,fY)\\
+            &+ g([X,fY],Z) - g([fY,Z],X) - g([X,Z],fY)\\
+            &= (Xf)g(Y,Z) + fXg(Y,Z) + fYg(X,Z) - (Zf)g(X,Y)-fZg(X,Y)\\
+            &+g(f[X,Y] +(Xf)Y,Z) - g(f[Y,Z] -(Zf)g(Y,X) - g([X,Z],fY)\\
+            &= fXg(Y,Z) + fYg(X,Z) - fZg(X,Y)\\
+            &+ fg([X,Y],Z) -fg([Y,Z],X) - fg([X,Z],Y)\\
+            &+(Xf)g(Y,Z) + (Xf)g(Y,Z) - (Zf)g(X,Y) + (Zf)g(X,Y)\\
+            &= 2fg(D_XY,Z) + 2(Xf)g(Y,Z)\\
+            &= 2g((Xf)Y + D_XY,Z)
+        \end{aligned}
+    \]
+    as desired.
+
+    Thus, $D$ is a connection.
+\end{proof}
+
+\section*{Problem 9}
+Construct a one dimensional smooth bump function on $\R$.
+\\
+\\
+\begin{proof}
+    Let
+    \[
+        f(x) =
+        \begin{cases}
+            \exp(\frac{-1}{t}), &t>0\\
+            0 &\text{else}
+        \end{cases}
+    \]
+    and let
+    \[
+        g(x) = \frac{f(x)}{f(x) + f(1-x)}
+    \]
+    which is $1$ for $x\geq 1$ and $0$ for $x\leq 0$. Finally, set
+\[
+    h(x) = g(x+2)g(2-x)
+\]
+which is zero outside of $[-2,2]$ and $1$ inside $[-1,1]$ as desired.
+\end{proof}
+
+\section*{Problem 10}
+Show that the Christoffel symbols for the Levi-Civita connection are
+\[
+    \Gamma_{ij}^k = \frac{1}{2}g^{kl}\left( g_{il,j}+g_{jl,i}-g_{ij,l} \right)
+\]
+
+\begin{proof}
+    Recall that a connection is completely described by the Christoffel symbols
+    as
+    \[
+        \nabla_iv^k = \partial_iv^k + \Gamma_{ij}^kv^j
+    \]
+    and the conditions for a Levi-Civita connection are
+    \[
+        g(\nabla_XY,Z) = \frac{1}{2} \left( Xg(Y,Z) + Yg(Z,X) - Zg(X,Y)
+        + g([X,Y],Z) -g([Y,Z],X) - g([X,Z],Y)\right)
+    \]
+    Setting $X=\partial_i$, $Y=\partial_j$, and $Z=\partial_k$ and noting that
+    $[\partial_i,\partial_j]=0$ for all $i$ and $j$, we see that
+    \[
+        \begin{aligned}
+        g(\nabla_i\partial_j,\partial_k) &= \frac{1}{2}\left(
+            \partial_ig(\partial_j,\partial_k) +
+            \partial_jg(\partial_k,\partial_i) -
+            \partial_kg(\partial_i,\partial_j \right)\\
+            &= \frac{1}{2}\left( 
+            g_{jk,i} + g_{ik,j} - g_{ij,k}\right)\\
+            g_{lk}(\nabla_i\partial_j)^l\partial_k^k 
+            &= \frac{1}{2}\left( 
+            g_{jk,i} + g_{ik,j} - g_{ij,k}\right)\\
+            (\nabla_i\partial_j)^l &= \Gamma_{ij}^l
+            = g^{lk}\frac{1}{2}\left( 
+            g_{jk,i} + g_{ik,j} - g_{ij,k}\right)\\
+        \end{aligned}
+    \]
+    as desired.
+\end{proof}
+
+\section*{Problem 11}
+Prove that
+\[
+    \partial_tg(X,Y) = g(\nabla_tX,Y) + g(X,\nabla_tY)
+\]
+
+\begin{proof}
+    Fix an orthonormal frame $P_i$ at $\gamma(0$ for $\gamma$ the curve we are
+        differentiating against. This frame can be parallel transported along
+        $\gamma$ to form a local orthonormal frame along $\gamma$. Then we have
+        \[
+        X = x^iP_i
+        \]
+        and
+        \[
+        Y = y^P_i
+        \]
+        from which it follows that
+        \[
+            \nabla_tX = \partial_tx^iP_i
+        \]
+        and similar for $Y$. Then
+        \[
+        \begin{aligned}
+            g(\nabla_tX,Y)+g(X,\nabla_tY) &= \sum_i\left( \partial_tx^iy^i +
+            \partial_ty^ix^i \right)\\
+            &=\partial_t(\sum_i x^iy^i)\\
+            &=\partial_tg(X,Y)
+        \end{aligned}
+        \]
+        as desired.
+\end{proof}
+
+\section*{Problem 12}
+Prove that for a smooth map $F:I^{2}\to M$ with first coordinate $t$ and second
+coordinate $s$,
+\[
+    \nabla_t\partial_sF = \nabla_s\partial_tF
+\]
+
+\begin{proof}
+    This proof is given explicitly in Do Carmo Chapter 3 lemma 3.4, and will not
+    be replicated here.
+\end{proof}
+
+\section*{Problem 13}
+Prove that
+\[
+    g((d\exp_p)_{\tilde{\gamma}(t)}(r(t)+n(t)),(d\exp_p)_{\tilde{\gamma}(t)}(r+n))
+    = \|r(t)\|^2
+\]
+if and only if $\tilde{\gamma}(t)$ is radial.
+\\
+\\
+\begin{proof}
+    Recall that the Gauss lemma says that $\exp_p$ is an isometry on its normal
+    ball. Thus, recalling from the notes that
+    \[
+    g((d\exp_p)_{\tilde{\gamma}(t)}(r(t)+n(t)),(d\exp_p)_{\tilde{\gamma}(t)}(r+n))
+    = \|r(t)\|^2 + \|d\exp_p(n(t))\|^2
+    \]
+    we see that equality holds if and only if $\|d\exp_p(n(t))\|=0$. However,
+    since $\exp_p$ is an isometry,
+    \[
+        \|d\exp_p(n(t))\| = \|n(t)\|
+    \]
+    which is zero for all time if and only if $n(t)$ is zero for all time. Thus,
+    equality holds when $\tilde{\gamma}$ is a radial geodesic.
+\end{proof}
+
+\section*{Problem 14}
+Find a counterexample to $\exp_p(B_r(0)) = B_r(p)$ for arbitrary $r$.
+\\
+\\
+\begin{proof}
+    %TODO do this
+\end{proof}
+
+\section*{Problem 15}
+Show that $R_m$ is function linear in the first two components.
+\\
+\\
+\begin{proof}
+    It should be clear my the antisymmetry of $R_m$ in the first two components
+    that we only need to show the first component is function linear, and the
+    second follows immediately.
+
+    So, we compute
+    \[
+\begin{aligned}
+    R(fX,Y)Z &= -\nabla_{fX}\nabla_YZ + \nabla_Y\nabla_{fX}Z + \nabla_{[fX,Y]}Z\\
+    &= -f\nabla_X\nabla_YZ + \nabla_Y(f\nabla_XZ) +\nabla_{f[X,Y] -(Yf)X}Z\\
+    &= -f\nabla_X\nabla_YZ +\nabla_Y(f)\nabla_XZ + f\nabla_Y\nabla_XZ
+    +f\nabla_{[X,Y]}Z - \nabla_{(Yf)X}Z\\
+    &= fR(X,Y)Z + (Yf)\nabla_XZ - (Yf)\nabla_XZ\\
+    &= fR(X,Y)Z
+\end{aligned}
+    \]
+    as desired.
+\end{proof}
+
+\section*{Problem 16}
+Show that in Riemannian normal coordinates at $p$, the christoffel symbols
+vanish at $p$ and the first derivatives of the metric vanish at $p$. 
+\\
+\\
+\begin{proof}
+    We first show the Christoffel symbols at $p$ vanish. So, let $\gamma$ be a
+    geodesic with $\gamma(0)=p$. This is given in normal coordinates as
+    \[
+        \gamma(t) = \exp_p(t(v_1,v_2,\cdots,v_n)) = t(x_1,x_2,\cdots,x_n)
+    \]
+    Now, we know the geodesics are the solution to the geodesic equation
+    \[
+        \partial_t^2\gamma^a(t)
+        +\Gamma_{bc}^a\partial_t\gamma^b(t)\partial_t\gamma^c(t) = 0
+    \]
+    In particular, at zero we know that $\partial_t^2\gamma^a=0$, and so
+    \[
+        \Gamma_{bc}^a\partial_t\gamma^b\partial_t\gamma^c = 0
+    \]
+
+    But $\partial_t\gamma^c = x^c$ and so
+    \[
+        \Gamma_{bc}^ax^bx^c=0
+    \]
+    and this holds for all $x$ sufficiently small. Thus, $\Gamma_{bc}^a=0$ for
+    all $a$, as desired.
+
+    To show the first derivatives of the metric vanish, we use the metric
+    compatibility condition of the connection. Namely,
+    \[
+        \nabla_ig_{jk}=0
+    \]
+    for all $i,j,k$. Thus, since the Christoffel symbols vanish, we know that
+    \[
+    \partial_ig_{jk}=0
+    \]
+    as desired.
+\end{proof}
+
+\section*{Problem 17}
+Show that the induced inner product on two forms is independent of choice of
+orthonormal basis.
+\\
+\\
+\begin{proof}
+    Suppose $\{e^j\}$ is an orthonormal basis, and $\{v^j\}$ is some other
+    orthonormal basis. We just need to show that the matrix taking $e^i\wedge
+    e^j$ to $v^i\wedge v^j$ is orthonormal. So, let $a$ be the matrix such that
+    \[
+        v^i = a^i_je^j
+    \]
+    Then, it is clear through rote calculation that $\langle v^i\wedge
+    v^j, v^k\wedge v^l\rangle$ for $i<j,k<l$ is zero if $i\neq k,j\neq l$ and
+    $1$ otherwise. Thus, the inner product does not depend on choice of
+    orthonormal basis, as desired.
+
+\end{proof}
+
+\section*{Problem 18}
+Prove that in the product manifold $S^1\times S^1$ the curvature tensor $R_m$ is
+identically zero.
+\\
+\\
+\begin{proof}
+    Let $\theta$ parameterize the first $S^1$, and $\phi$ the second. The
+    product metric is then given by
+    \[
+        g = d\theta\otimes d\theta + d\phi\otimes d\phi
+    \]
+    Thus $d\theta,d\phi$ form an orthonormal coframe (and
+    $\partial_{\theta},\partial_{\phi}$ form an orthonormal frame) that is
+    parallel in the neighborhood of some point $p$. Thus, since $R_m$ at $p$ is
+    defined in terms of the covariant derivative around $p$, it follows that
+    $R_m=0$ at $p$. Since this can be done at any $p$, the torus is indeed flat,
+    as desired.
+\end{proof}
+
+\section*{Problem 19}
+Prove that for $f:M\to \tilde{M}$ an isometric immersion, if all geodesics of
+$M$ are also geodesics of $\tilde{M}$, then $f$ is totally geodesic. That is,
+the second fundamental form vanishes.
+\\
+\\
+\begin{proof}
+    Suppose $f$ maps geodesics to geodesics. Then,
+    \[
+        \nabla_t\gamma' = 0 = \tilde{\nabla}_t\gamma'
+    \]
+    However, at a point, there are geodesics
+    in every direction, and so at a point, the covariant derivatives agree.
+    Thus, at every point, $B(X,Y)=0$ (since $\tilde{\nabla}_XY = \nabla_XY
+    +B(X,Y)$) and so $f$ is totally geodesic.
+\end{proof}
+
+\section*{Do Carmo Problem 1.2}
+Introduce a metric on $\R^n/{\Z^n}$ such that projection is a local isometry.
+Show that this torus is isometric to the flat torus.
+\\
+\\
+\begin{proof}
+    Recall that the projection $\pi:\R^n\to\R^n/{\Z^n}$ is a smooth covering
+    map. Furthermore, note that the Euclidean metric $g$ is invariant under the
+    action of $\Z^n$. That is, for an action $f((x_1,\dots,x_n)) =
+    (x_1+m_1,\dots,x_n+m_n)$ we know that
+    \[
+        f^*g = f^*(\sum_idx^i\otimes dx^i) = \sum_id(x^i\circ f)^2
+        = d(x^i+m_i)^2 = x^i\otimes x^i
+    \]
+
+    Thus, we can define the metric as
+    \[
+        \tilde{g}_q(u,v) = g(d(\pi^{-1})_p(u),d(\pi^{-1})_p(v))
+    \]
+    which is clearly well-defined, since a fiber of $\pi^{-1}(p)$ consists of the
+    orbit of $p$ under the action of $\Z^n$, which $g$ is invariant under.
+
+    Consider the diffeomorphism (with $T^n$ parameterized as $\theta_i\in
+    [0,1)$)
+    \[
+        \Phi:T^n\to \R^n/{\Z^n}
+    \]
+    given by $\Phi(\theta_1,\dots,\theta_n) = [(\theta_1,\dots,\theta_n)]$.
+
+    This is clearly a diffeomorphism, since it has an inverse given by taking a
+    point $[x]$ in $\R^n/{Z^n}$ to the element of its orbit in the unit square.
+\end{proof}
+
+\section{Do Carmo Problem 2.7}
+Let $c$ be an arbitrary parallel of latitude on $S^2$, with $V_0$ a tangent
+vector to $S^2$ at some point on $c$. Describe geometrically the parallel
+transport of $V_0$ along $c$.
+\\
+\\
+\begin{proof}
+    We will show that parallel transport along $c$ in $S^2$ is the same as
+    parallel transport along $c$ thought of as a curve in the cone $C$ that lies
+    tangent to $S^2$ at $c$.
+
+    In particular, note that the tangent spaces of $S^2$ and $C$ coincide on
+    $c$. This means that projection of a vector on $c$ in $\R^3$ is the same
+    whether it goes to $TS^2$ or $TC$. Furthermore, since the covariant
+    derivative of a vector on $c$ is equal to the ordinary partial derivative in
+    $\R^3$ followed by projection into the tangent space, it follows that the
+    covariant derivative of $V_0$ along $c$ is the same whether taken in $S^2$
+    or $C$. Thus, since parallel transport is defined in terms of the covariant
+    derivative, the parallel transport of $V_0$ on $S^2$ coincides with the
+    parallel transport of $V_0$ on $C$.
+
+    Now, we note that $C$ is actually flat: by making a suitable radial cut, one
+    may flatten $C$ so that it forms a disk with a slice missing, with the
+    boundary of the disk coinciding with $c$. Here, parallel transport of $V_0$
+    along $c$ is just ordinary translation in $C\subset \R^2$.
+
+    Thus, we have a complete description of the parallel transport of $V_0$
+    along $c$. We form the cone $C$ tangential to $c$, and make a cut so that
+    $C$ can be isometrically embedded as a subset of $\R^2$. Then, identifying
+    $V_0$ with its corresponding tangent vector on $c \subset \partial C$, we
+    apply ordinary translation (parallel transport in $\R^2$) to $V_0$ along
+    $c$. The result is the parallel vector field $V(t)$ along $c$ in $\R^2$,
+    which is identified with the parallel vector field $V(t)\subset TC$.
+    Finally, noting that $TC$ and $TS^2$ coincide on $c$, we see that
+    $V(t)\subset TS^2$ is the parallel vector field of $V_0$ on $c$.
+\end{proof}
+
 
 \end{document}
