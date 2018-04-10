@@ -1,0 +1,322 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\im}{\textrm{im}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Homework 1 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+
+\section*{Problem A}
+Let $V$ be the real vector space $\text{Set}(\R,\R)$ of all functions from $\R$
+to itself, and let $K = \{f\in V\ |\ \im(f)\subset[0,1]\}$. Prove that $K$ is
+convex and find all extreme points and finite-dimensional faces.
+\\
+\\
+\begin{proof}
+    To start with, we show that $K$ is convex. Let $f,g\in K$ be arbitrary. We
+    will show that the function $h=\lambda f + (1-\lambda)g$ is in $K$ for all
+    $\lambda\in [0,1]$. This is clear, however, since for all $x\in \R$,
+    \[
+        \begin{aligned}
+        h(x) &=\lambda f(x) + (1-\lambda)g(x)\\
+        &\leq \lambda(1)+ (1-\lambda)(1)\\
+        &= 1\\
+        \\
+        h(x) &=\lambda f(x) + (1-\lambda)g(x)\\
+        &\geq \lambda (0) + (1-\lambda)(0)\\
+        &=0
+    \end{aligned}
+    \]
+    and so $\im(h)\subset [0,1]$ as desired.
+
+    Next, we wish to find the finite dimensional faces of $K$. I assert that the
+    finite dimensional faces of $K$ are defined as follows. First, partition
+    $\R$ into three sets $A,N,P$ such that $\|A\|<\infty$. Then, define a face
+    \[
+        F = \{f\in K\ |\ f^{-1}(\{0\})\supset N, f^{-1}(\{1\})\supset P\}
+    \]
+
+    To see that this is a face, we have to check that it is convex, and that it
+    contains its linear interpolations.
+
+    So, let $f,g\in F$, and let $\lambda\in [0,1]$. We need to show that
+    \[
+        h(x) = \lambda f(x) + (1-\lambda)g(x)
+    \]
+    is in $F$. Clearly $h\in K$ as a convex linear combination of elements of
+    $K$, so we only need to examine two cases: $x\in N$ and $x\in P$.
+
+    If $x\in N$, then
+    \[
+        h(x) = \lambda (0) + (1-\lambda)(0) = 0
+    \]
+    and so $h^{-1}(\{0\})\supset N$.
+
+    If $x\in P$, then
+    \[
+        h(x) = \lambda(1) _ (1-\lambda)(1) = 1
+    \]
+    and so $h^{-1}(\{1\})\supset P$.
+
+    Finally, we show that $F$ contains all its linear interpolations. That is,
+    for any $h\in F$, if there exists $f,g\in K$ and $t\in (0,1)$ with
+    $h=tf+(1-t)g$, then $f,g\in F$ as well.
+    So, suppose $h\in F$ and $f,g$ and $t$ are as described. We examine again
+    two cases.
+
+    If $x\in N$, then $h(x)=0$ and so
+    \[
+        0=tf(x)+(1-t)g(x)
+    \]
+    but $t\in (0,1)$ and $f,g\geq 0$, so it must be that $f(x) = g(x) = 0$ as
+    desired. Thus, $f^{-1}(\{0\})\supset N$ (and similarly for $g$).
+
+    If $x\in P$, then $h(x) = 1$ and so
+    \[
+        1= tf(x) + (1-t)g(x)
+    \]
+    but $t\in(0,1)$ and $f(x),g(x)\leq 1$, so it must be that $f(x)=g(x)=1$ as
+    desired. Thus $f^{-1}(\{1\})\supset P$ (and similarly for $g$).
+
+    Thus, we have shown that the set $F$ defined this way is a face. Next, we
+    show it is finite-dimensional. In particular, we show that the dimension of
+    $F$ is $\|A\|$.
+
+    Recall that the dimension of a face is defined as the dimension of
+    $\text{span}\{g-f\ |\ g\in F\}$ for some fixed $f\in F$. 
+    So, let $f = \chi_P$. I assert that the span of $\{g-f\ |\ g\in F\}$ has a
+    basis given by $g_i = \chi_{\{a_i\}}$ for $a_i\in A$.
+
+    First, observe that $\{g_i\}$ is clearly a linearly independent set. Next,
+    we observe that any function of the form $g-f$ for $g\in F$ can be written
+    as a finite linear combination of the $g_i$ basis functions. This is clear,
+    since for any $g\in F$, we know that
+    \[
+        (g-f)(x) =
+        \begin{cases}
+            f(x), &x\in A\\
+            0, &x\not\in A
+        \end{cases}
+    \]
+    and so
+    \[
+        (g-f)(x) = \sum_{a_i\in A}f(a_i)g_i(x)
+    \]
+    as desired.
+
+    I now assert that this describes all the finite-dimensional faces. To see
+    this, let $G$ be a face that cannot be described using the construction
+    above. In particular, there is some $g\in G$ and some subset $E\subset\R$
+    with $\|E\|=\infty$ and $g(E)\in (0,1)$. Since $G$ is a face, this means
+    that $G$ contains all functions which agree with $g$ outside $E$.
+
+    Now, fix
+    \[
+        f(x) =
+        \begin{cases}
+            g(x), &x\not\in E\\
+            0, &x\in E
+        \end{cases}
+    \]
+    Then, for every $e\in E$, the function $h_e = \chi_{\{e\}}$ is in $\{h-f\ |\
+    h\in G\}$. Moreover, the collection $\{h_e\}$ is clearly linearly
+    independent. Thus, we have found an infinite linearly independent subset of
+    $\{h-f\ |\ h\in G\}$, and so $G$ is infinite dimensional.
+
+    Finally, we observe that the extreme points of $K$ are simply the faces
+    defined as above with $A=\emptyset$. That is, the extreme points of $K$ are
+    the functions $f\in K$ with $f(\R)\in\partial[0,1]$.
+\end{proof}
+
+\section*{Problem B}
+Do the same, replacing the domain $\R$ with $\N$.
+\\
+\\
+\begin{proof}
+    Note that the construction for part $A$ generalizes to functions from
+    arbitrary sets into $\R$, and so the finite-dimensional faces and extreme
+    points are described in exactly the same way.
+\end{proof}
+
+\newpage
+
+\section*{Part C}
+Let $X$ be the real vector space $\text{Set}(\N,\C)$ and let $E=\{f\in X\ |\
+|f|(\N)\in[0,1]\}$. Prove $E$ is convex, and find all extreme points and
+finite-dimensional faces.
+\\
+\\
+\begin{proof}
+    Convexity of $E$ follows almost immediately from the fact that the unit disk
+    is convex. That is, for $f,g\in E$ and $\lambda\in [0,1]$, we know that
+    \[
+\begin{aligned}
+        \|\lambda f(x) + (1-\lambda)g(x)\|
+        &\leq \lambda \|f(x)\| + (1-\lambda)\|g(x)\|\\
+        &\leq \lambda(1) + (1-\lambda)(1)\\
+        &=1
+\end{aligned}
+    \]
+    as desired.
+
+    Let a face $F$ be defined as follows. Partition $\N$ into two sets $A,P$
+    with $\|A\|<\infty$. Then, fix a function $g_0:\N\to \partial\mathbb{D}$ and
+    define
+    \[
+        F = \{f\in E\ |\ f(x)=g_0(x), x\in P\}
+    \]
+    I assert that $F$ is a face. To see this, note that $F$ is clearly convex,
+    since for any $f,g\in F$ and $\lambda\in[0,1]$ the function
+    \[
+        h(x) = \lambda f(x) + (1-\lambda)g(x)
+    \]
+    is such that for any $x\in P$
+    \[
+        \begin{aligned}
+        h(x) &= \lambda f(x) + (1-\lambda)g(x)\\
+        &= (\lambda + 1-\lambda)g_0(x)\\
+        &=g_0(x)
+    \end{aligned}
+    \]
+    as desired.
+
+    Next, we show $E$ contains things that linearly interpolate to it. Suppose
+    $h\in F$ with $f,g\in E$ and $t\in (0,1)$ with $h=tf+(1-t)g$. Then, we know
+    that for $x\in P$, $h(x)=g_0(x)$ is in $\partial\mathbb{D}$. In particular,
+    $g_0(x)$ is an extreme point, which forces $f(x)=g(x)=g_0(x)$ as desired.
+
+    Thus, $F$ is a face. Next, we observe it is finite-dimensional. To see this,
+    we fix $f\in F$ as
+    \[
+        f(x) = 
+        \begin{cases}
+            g_0(x), &x\in P\\
+            0, &x\not\in P
+        \end{cases}
+    \]
+    and note that the functions
+    \[
+        g_i(x) =
+        \begin{cases}
+            1, &x=a_i\\
+            0 &x\neq a_i
+        \end{cases}
+    \]
+    for each $a_i\in A$ form the set $\{g_i, ig_i\}$ of linearly independent
+    functions that span the set
+    \[
+        \text{span}(\{g-f\ |\ g\in F\})
+    \]
+    Thus, $F$ has dimension $2\|A\|$ as desired.
+
+    By a similar argument to the one used in part A, any face not defined this
+    way must be infinite-dimensional. Finally, we note the extreme points are
+    found by setting $A=\emptyset$.
+\end{proof}
+
+\newpage
+
+\section*{Problem D}
+Let $Y$ be the real vector space $\text{Top}([0,1],\R)$ and let $D=\{f\in Y\ |\
+f([0,1])\subset [0,1]\}$. Prove that $D$ is convex, and find all extreme
+points.
+\\
+\\
+\begin{proof}
+    We begin by proving that $D$ is convex. So, let $f,g\in D$, and let
+    $\lambda\in[0,1]$. Then, we know from part A that $h(x) = \lambda
+    f(x)+(1-\lambda)g(x)$ is such that $h([0,1])\subset [0,1]$. Furthermore,
+    since $h$ is a linear combination of continuous functions, it is continuous
+    as well. Thus, $D$ is convex.
+
+    I assert that the only extreme points of $D$ are the constant functions
+    $f_1(x) = 1$ and $f_0(x) = 0$. Now, these are clearly extreme points, since
+    $1$ and $0$ are extreme points of $[0,1]$. That is, if $f,g$ are such that
+    for some $t\in (0,1)$, $f_1(x)=1 = tf(x) + (1-t)g(x)$, then $f(x) = g(x) =
+    1$ for all $x$ (and similarly for $f_0$).
+
+    Now, suppose $f\in D$ with $f$ not equal to the constant functions $f_0$ and
+    $f_1$. Then, there is some $x$ for which $f(x)\neq 1$ and $f(x)\neq 0$.
+    Furthermore, by continuity there is some interval $(a,b)$ around $x$ for
+    which $f$ is not $1$ or $0$. Clearly, there exists functions $g,h\in D$
+    and $f(x) = tg(x) + (1-t)h(x)$, with $g,h\neq f$. Thus, $f$ is not an
+    extreme point, as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem E}
+Let $U$ be the real vector space $\text{Top}([0,1],\C)$ and let $F = \{f\in U\
+|\ |f|([0,1])\subset [0,1]\}$. Prove $F$ is convex, and find all extreme points.
+
+\end{document}
