@@ -210,7 +210,7 @@ Do the same, replacing the domain $\R$ with $\N$.
 
 \newpage
 
-\section*{Part C}
+\section*{Problem C}
 Let $X$ be the real vector space $\text{Set}(\N,\C)$ and let $E=\{f\in X\ |\
 |f|(\N)\in[0,1]\}$. Prove $E$ is convex, and find all extreme points and
 finite-dimensional faces.
@@ -309,7 +309,21 @@ points.
     $f_1$. Then, there is some $x$ for which $f(x)\neq 1$ and $f(x)\neq 0$.
     Furthermore, by continuity there is some interval $(a,b)$ around $x$ for
     which $f$ is not $1$ or $0$. Clearly, there exists functions $g,h\in D$
-    and $f(x) = tg(x) + (1-t)h(x)$, with $g,h\neq f$. Thus, $f$ is not an
+    and $f(x) = tg(x) + (1-t)h(x)$, with $g,h\neq f$ (take, for example,
+        functions $g$ and $h$ that agree with $f$ outside $(a,b)$, and vary an
+        equal distance away from $f$ in the positive and negative directions.
+        Perhaps one could take $\varepsilon$ such that $f(x)\pm \varepsilon\in
+        (0,1)$ for all $x\in (a,b)$, and take 
+        \[
+            g(x) = f(x)+\varepsilon\sin(\frac{\pi}{b-a}x)
+        \]
+        and 
+        \[
+            h(x) = f(x)-\varepsilon\sin(\frac{\pi}{b-a}x)
+        \]
+    for $x\in (a,b)$).
+    
+    Thus, $f$ is not an
     extreme point, as desired.
 \end{proof}
 
@@ -318,5 +332,40 @@ points.
 \section*{Problem E}
 Let $U$ be the real vector space $\text{Top}([0,1],\C)$ and let $F = \{f\in U\
 |\ |f|([0,1])\subset [0,1]\}$. Prove $F$ is convex, and find all extreme points.
+\\
+\\
+\begin{proof}
+    The fact that $F$ is convex follows from the triangle inequality. That is,
+    for any $f,g\in F$ and $\lambda\in [0,1]$ we know that for $h(x) = \lambda
+    f(x) + (1-\lambda)g(x)$ we have
+    \[
+\begin{aligned}
+    \|h(x)\| &= \|\lambda f(x) + (1-\lambda)g(x)\|\\
+    &\leq \lambda\|f(x)\| + (1-\lambda)\|g(x)\|\\
+    &\leq \lambda (1) + (1-\lambda)(1)\\
+    &=1
+\end{aligned}
+    \]
+    as desired. Furthermore, $h$ is indeed continuous since it is a linear
+    combination of continuous functions.
+
+    Furthermore, I assert that the extreme points are the functions in $F$ whose
+    image lies entirely in $\partial\mathbb{D}$. To see these are extreme
+    points, observe that if $h\in F$ is such that the image of $h$ lies inside
+    $\partial\mathbb{D}$, then for each $x\in[0,1]$, $h(x)$ is an extreme point
+    of $\mathbb{D}$. Thus, if
+    \[
+        h(x) = tf(x) + (1-t)g(x)
+    \]
+    for some $f,g\in F$ and $t\in (0,1)$, then $f(x)=g(x)=h(x)$ (since $h(x)$ is
+    an extreme point). Thus, $h$ is an extreme point of $F$.
+
+    Furthermore, these exhaust the extreme points. To see this, suppose $h$ is
+    such that $h(x_0)\not\in\partial\mathbb{D}$ for some $x_0$. By continuity, we
+    know that $h(x)\not\in\partial\mathbb{D}$ for all $x$ in some interval
+    $(a,b)$ around $x_0$. Thus, by a similar construction to the one in part D,
+    we can find $f$ and $g$ in $F$ which linearly interpolate to $h$. Thus, $h$
+    cannot be an extreme point.
+\end{proof}
 
 \end{document}
