@@ -160,4 +160,135 @@ another. Thus, $g,h\in K$. Furthermore, for all $i\in \N$, $i\neq n_1,n_2$,
     point.
 \end{proof}
 
+\section*{Problem 3}
+Prove or disprove the following:
+\subsection*{Part A}
+$L^1(X,\mathbb{M},\mu)$ is an algebra under pointwise multiplication over $\C$,
+where $(X,\mathbb{M},\mu)$ is a measure space.
+\\
+\\
+\begin{proof}
+    This is not true in general. Take $L^1([0,1],\lambda^1)$, and let $f(x) =
+    g(x) = \frac{1}{\sqrt{x}}$. We know that
+    \[
+        \int_{[0,1]}\frac{1}{\sqrt{x}}d\lambda^1(x) = 2
+    \]
+    and so $f,g\in L^1([0,1],\lambda^1)$. However, their pointwise product is
+    \[
+        f(x)g(x) = \frac{1}{x}
+    \]
+    with
+    \[
+        \int_{[0,1]}|f(x)g(x)|d\lambda^1(x) =
+        \int_{[0,1]}\frac{1}{x}d\lambda^1(x) = \infty
+    \]
+    and so $f(x)g(x)$ is not in $L^1([0,1],\lambda^1)$ and thus
+    $L^1([0,1],\lambda^1)$ is not closed under products, and is not an algebra.
+\end{proof}
+
+\subsection*{Part B}
+Same question for the subspace of bounded functions in $L^1(X,\mathbb{M},\mu)$.
+\\
+\\
+\begin{proof}
+    Let $V$ be the subspace of bounded functions in $L^1(X,\mathbb{M},\mu)$. I
+    assert that this is an algebra. First, we observe that this subspace is
+    indeed a subspace of $L^1(X,\mathbb{M},\mu)$, and is thus closed under
+    addition and scalar multiplication. Thus, to prove it is an algebra, we just
+    need to show it is closed under products.
+
+    So, let $f,g\in V$. We first show $f(x)g(x)$ is in $L^1(X,\mathbb{M},\mu)$,
+    then we show it is bounded.
+
+    To see that $f(x)g(x)\in L^1(X,\mathbb{M},\mu)$, we use Holder's inequality
+    to assert that
+    \[
+        \|fg\|_1 \leq \|f\|_1\|g\|_{\infty} < \infty
+    \]
+    since $\|f\|_1<\infty$ and $\|g\|_{\infty}<\infty$. Thus, $fg\in
+    L^1(X,\mathbb{M},\mu)$.
+
+    Finally, we observe that $fg$ is bounded, since both $f$ and $g$ are
+    individually bounded. In particular, we know that (denoting the bound on $f$
+    as $\|f\|_B$)
+    \[
+        \|fg\|_B \leq \|f\|_B\|g\|_B
+    \]
+    since
+    \[
+        |f(x)g(x)| \leq |\|f\|_Bg(x)|\leq \|f\|_B\|g\|_B
+    \]
+    for each $x$. Thus, $\|f\|_B\|g\|_B$ is an upper bound on $fg$ as desired.
+\end{proof}
+
+
+\section*{Problem 4}
+Prove that the set $M_1^+$ of all positive self-adjoint $n\times n$ complex
+matrices between $0$ and $1$ is convex, and its extreme points are the
+projections.
+\\
+\\
+\begin{proof}
+    We first show this set is convex. To do so, let $A,B\in M_1^+$ and consider
+    \[
+        C = \lambda A + (1-\lambda)B
+    \]
+    for $\lambda\in [0,1]$. First, observe that $C$ is self-adjoint, since
+    \[
+        C^* = \lambda A^* + (1-\lambda)B^* = \lambda A + (1-\lambda)B = C
+    \]
+    Furthermore, $C$ is positive, since
+    \[
+        \begin{aligned}
+        \langle C\eta,\eta\rangle &= \lambda\langle A\eta,\eta\rangle +
+        (1-\lambda)\langle B\eta,\eta\rangle\\
+        &\geq 0
+    \]
+    since both $A$ and $B$ are positive, and $\lambda, (1-\lambda)\geq0$.
+
+    Finally, we note that $C\leq 1$, since 
+    \[
+\begin{aligned}
+    \langle (I-C)\eta,\eta\rangle &= \langle (I - (\lambda A +
+    (1-\lambda)B))\eta,\eta\rangle\\
+    &= \langle ((\lambda + (1-\lambda))I - (\lambda A +
+    (1-\lambda)B))\eta,\eta\rangle\\
+    &= \lambda \langle (I-A)\eta,\eta\rangle + (1-\lambda)\langle
+    (I-B)\eta,\eta\rangle\\
+    &\geq 0
+\end{aligned}
+    \]
+    Where we used the fact that $A,B\leq 1$, and so $I-A$ and $I-B$ are
+    positive.
+
+    Next, we assert that the projections are the extreme points. For this, we
+    first observe that the property of being an extreme point is
+    basis-independent. This follows from the fact that the quadratic form
+    $\langle A\eta,\eta\rangle$ is basis-independent for any $A$ (since this can
+        be written as 
+        \[
+            \langle A\eta,\eta\rangle = A^i_j\eta^j\eta_i
+        \]
+    which is clearly generally covariant), and the property of being
+    self-adjoint is also basis-independent. 
+    Thus, $M_1^+$ is invariant under changes of basis. Furthermore, suppose $C$
+    is such that $C= tA+(1-t)B$ for $A,B\in M_1^+$ and $t\in (01,)$. Then, for
+    any change of basis $S$, we have
+    \[
+        SCS^{-1} = tSAS^{-1} + (1-t)SBS^{-1}
+    \]
+    and so if $C$ is not an extreme point (since it is expressible as a linear
+    interpolation of $A$ and $B$), then $SCS^{-1}$ is also not an extreme point
+    (since it is expressible as a linear interpolation of $SAS^{-1}$ and
+    $SBS^{-1}$, both in $M_1^+$). The same argument runs in reverse, and so the
+    property of being an extreme point is basis-independent, as desired.
+
+    We first show that the projections are extreme points. To see this, let $P$
+    be a projection, expressible in a basis as
+    \[
+        P = I\oplus 0
+    \]
+    where $I$ is the identity on the subspace $P$ is projecting to. 
+\end{proof}<++>
+
 \end{document}
