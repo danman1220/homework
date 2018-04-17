@@ -49,6 +49,9 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
 
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
 \newtheorem{lemma}{Lemma}
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
@@ -79,8 +82,101 @@ sup norm.
 \\
 \\
 \begin{proof}
-    %TODO finish
+    I assert that the norm-closed faces of the unit ball in $C([0,1])$ have the
+    following form: Let $V$ be a disjoint union of open subintervals of $[0,1]$,
+    and for each closed subinterval in $V^c$ assign it to the set $N$ or $P$.
+    Then, a face can be defined as
+    \[
+        F = \{f\in B\ |\ f(N) = \{-1\}, f(P)=\{1\}\}
+    \]
+    where $B$ is the unit ball in $C([0,1])$. Note that if $V=[0,1]$, we recover
+    $B$. So, assume from here on out that either $N$ or $P$ (or both) is
+    nonempty.
+
+    First, we prove that sets of this form are faces. To do so, we must prove
+    that $F$ is convex, and that $F$ is ``closed under linear interpolation''.
+
+    We first show that $F$ is convex. Let $f,g\in F$, and consider the function
+    \[
+        h(x) = \lambda f(x) + (1-\lambda)g(x)
+    \]
+    for $\lambda\in[0,1]$,
+    which is a linear combination of continuous functions, and is therefore
+    continuous. Furthermore,
+    \[
+        \sup_x |h(x)|\leq \lambda \sup_x|f(x)| + (1-\lambda)\sup_x|g(x)|
+        \leq 1
+    \]
+    and so $h\in B$. Furthermore, for $x\in N$,
+    \[
+        h(x) = \lambda f(x) + (1-\lambda)g(x) = \lambda(-1) + (1-\lambda)(-1)=-1
+    \]
+    and similarly for $x\in P$,
+    \[
+        h(x) = 1
+    \]
+    Thus, $h\in F$ as desired.
+
+    Next, we show that for $h\in F$, $f,g\in B$ and $t\in (0,1)$ with
+    \[
+        h(x) = tf(x) + (1-t)g(x)
+    \]
+    then $f(x)$ and $g(x)$ are in $F$ as well.
+
+    This follows immediately, since for $x\in N$,
+    \[
+        h(x) = -1 = tf(x) + (1-t)g(x)
+    \]
+    and $f(x),g(x)\in [-1,1]$, which forces $f(x) = g(x) = -1$. Similarly, for
+    $x\in P$, $f(x)=g(x)=1$. Thus, $f,g\in F$ as desired.
+
+    Thus, we have shown that $F$ is a face of $B$. Next, we wish to show that
+    all norm-closed faces of $B$ have this form.
+
+
+    So, let $F$ be an arbitrary norm-closed face of $B$. Define 
+    \[
+        N = \bigcap_{f\in F}f^{-1}(\{-1\})
+    \]
+    and
+    \[
+        P = \bigcap_{f\in F}f^{-1}(\{1\})
+    \]
+    That is, for all $f\in F$, $f(P) = \{1\}$ and $f(N) = \{-1\}$. I assert that
+    $F$ is equal to the set
+    \[
+        \tilde{F} = \{f\in B\ |\ f(N)=\{-1\}, f(P)=\{1\}\}
+    \]
+
+    Clearly, $F\subset \tilde{F}$ by definition of $N$ and $P$. So, all we need
+    to show is that $\tilde{F}\subset F$.
+
+    So, let $g\in\tilde{F}$ be an arbitrary function. We wish to uniformly
+    approximate $g$ with things in $F$, and then use the fact that $F$ is
+    norm-closed to show that $g$ is in $F$. Note first that $g$ is guaranteed to
+    match with any function in $F$ on $N$ and $P$ by construction, so we only
+    have to approximate $g$ on $V= (P\cup N)^c$.
+
+    Now, for each $y\in V$, by definition there is a function $f_y\in F$ with
+    $f_y(U)\in (-1,1)$ for $U$ a neighborhood of $y$. In particular, we can use
+    the fact that $F$ is a face (and closed under linear interpolations) to
+    construct a $\tilde{f}_y$ such that $\tilde{f}_y(y) = g(y)$. In fact, for
+    fixed $\varepsilon>0$, we can find neighborhoods $U_y$ for which
+    $\tilde{f}_y|_{U_y}$ is within $\varepsilon$ of $g|_{U_y}$ in supremum.
+    Taking all such $U_y$ across $[0,1]$ (where trivially $f(y)=g(y)$ for $y\in
+    N\cup P$) we get an open cover of $[0,1]$, which has a finite subcover
+    $\{U_{y_i}\}$.
+
+    For each $\tilde{f}_{y_i}$, change it via linear interpolation on
+    $V\setminus U_{y_i}$ to be within $\varepsilon$ of zero.
+
+    Finally, stitch together the finite altered $\tilde{f}_{y_i}$ to obtain a
+    function $\tilde{f}\in F$ that approximates $g$ within $\varepsilon$ in sup norm.
+    Taking limits of such $\tilde{f}$ yields $g$, and so $g\in F$ as desired.
+
 \end{proof}
+
+\newpage
 
 \section*{Problem 2}
 Characterize all the extreme points of the set
@@ -160,6 +256,7 @@ another. Thus, $g,h\in K$. Furthermore, for all $i\in \N$, $i\neq n_1,n_2$,
     point.
 \end{proof}
 
+\newpage
 \section*{Problem 3}
 Prove or disprove the following:
 \subsection*{Part A}
@@ -222,6 +319,7 @@ Same question for the subspace of bounded functions in $L^1(X,\mathbb{M},\mu)$.
 \end{proof}
 
 
+\newpage
 \section*{Problem 4}
 Prove that the set $M_1^+$ of all positive self-adjoint $n\times n$ complex
 matrices between $0$ and $1$ is convex, and its extreme points are the
@@ -243,6 +341,7 @@ projections.
         \langle C\eta,\eta\rangle &= \lambda\langle A\eta,\eta\rangle +
         (1-\lambda)\langle B\eta,\eta\rangle\\
         &\geq 0
+    \end{aligned}
     \]
     since both $A$ and $B$ are positive, and $\lambda, (1-\lambda)\geq0$.
 
@@ -261,34 +360,80 @@ projections.
     Where we used the fact that $A,B\leq 1$, and so $I-A$ and $I-B$ are
     positive.
 
-    Next, we assert that the projections are the extreme points. For this, we
-    first observe that the property of being an extreme point is
-    basis-independent. This follows from the fact that the quadratic form
-    $\langle A\eta,\eta\rangle$ is basis-independent for any $A$ (since this can
-        be written as 
-        \[
-            \langle A\eta,\eta\rangle = A^i_j\eta^j\eta_i
-        \]
-    which is clearly generally covariant), and the property of being
-    self-adjoint is also basis-independent. 
-    Thus, $M_1^+$ is invariant under changes of basis. Furthermore, suppose $C$
-    is such that $C= tA+(1-t)B$ for $A,B\in M_1^+$ and $t\in (01,)$. Then, for
-    any change of basis $S$, we have
-    \[
-        SCS^{-1} = tSAS^{-1} + (1-t)SBS^{-1}
-    \]
-    and so if $C$ is not an extreme point (since it is expressible as a linear
-    interpolation of $A$ and $B$), then $SCS^{-1}$ is also not an extreme point
-    (since it is expressible as a linear interpolation of $SAS^{-1}$ and
-    $SBS^{-1}$, both in $M_1^+$). The same argument runs in reverse, and so the
-    property of being an extreme point is basis-independent, as desired.
+    Next, we assert that the projections are the extreme points. We begin by
+    asserting that for any $M\in M_1^+$, $\sigma(M)\subset [0,1]$. To see this,
+    note that $M$ being self-adjoint implies that $\sigma(M)$ is real, and since
+    $M$ is positive, $\sigma(M)$ must be positive as well (if this were not the
+        case, then there is some vector $v$ for which $Mv = \lambda v$ with
+        $\lambda<0$, and $\langle Mv,v\rangle = \lambda\|v\|^2<0$ a
+    contradiction).
+    Of course, since $M\leq 1$, this implies that $\sigma(M)\leq 1$ as well (if
+        this were not the case, then there is some vector $v$ with $Mv=\lambda
+        v$ and $\lambda>1$, but then $\langle (I-M)v,v\rangle = \|v\|^2 -
+    \lambda\|v\|^2<0$, a contradiction).
 
-    We first show that the projections are extreme points. To see this, let $P$
-    be a projection, expressible in a basis as
+    Thus, $\sigma(M)\subset [0,1]$ as desired.
+
+    So, suppose $P$ is a projection operator, and $A,B\in M_1^+$, $t\in (0,1)$
+    with $P=tA+(1-t)B$. Suppose $v$ is such that $Pv=v$ and $\|v\|=1$. Then, we
+    have that
     \[
-        P = I\oplus 0
+        \langle Pv,v\rangle = 1 = t\langle Av,v\rangle + (1-t)\langle
+        Bv,v\rangle
     \]
-    where $I$ is the identity on the subspace $P$ is projecting to. 
-\end{proof}<++>
+    Now, since $\langle Av,v\rangle$ and $\langle Bv,v\rangle$ are less than or
+    equal to $1$ (since $A,B\leq 1$), they must be equal to $1$ to satisfy the
+    above equation. However, the only way that $\langle Av,v\rangle=1$ is if
+    $Av=v$. This follows from basic linear algebra: decompose $Av$ into a
+    component parallel to $v$ denoted $\lambda_1v$ and a component orthogonal to
+    $v$ denoted $\lambda_2v_c$. That is,
+    \[
+        Av = \lambda_1v+\lambda_2v_c
+    \]
+    with $\lambda_1^2 + \lambda_2^2 = \|Av\|\leq 1$. But then
+    \[
+        \langle Av,v\rangle = 1 = \lambda_1\langle v,v\rangle + \lambda_2\langle
+        v_c,v\rangle = \lambda_1
+    \]
+    Thus, $\lambda_1=1$ and $\lambda_2=0$, and so $Av=v$. Similarly, $Bv=v$.
+    This argument applies to all $v$ for which $Pv=v$.
+
+    Applying the same argument to $I-P = t(I-A) +(1-t)(I-B)$ we see that if
+    $Pv=0$, then $Av=Bv=0$ as well. Thus, writing a generic vector $x$ as
+    $x= Px + (I-P)x$, we have
+    \[
+        \begin{aligned}
+            Ax &= A(Px + (I-P)x)\\
+            &= Px
+    \end{aligned}
+    \]
+    and similarly for $B$. Thus, $P$ is an extreme point, as desired.
+
+    Finally, we show that these are the only extreme points. To see this, let
+    $M\in M_1^+$ be a matrix that is not a projection. That is, $M$ has at least
+    one eigenvalue in $(0,1)$. 
+
+    So, let
+    \[
+        M = \sum_{i=1}^n \lambda_i|e_j\ra\la e_j|
+    \]
+    be its spectral decomposition, and let $\lambda_1\in(0,1)$. In particular,
+    let $\varepsilon>0$ such that $\lambda_1\pm \varepsilon\in (0,1)$. Then,
+    define 
+    \[
+        A = (\lambda_1+\varepsilon)|e_1\ra\la e_1| +
+    \sum_{i=2}^n\lambda_i|e_i\ra\la e_i|
+    \]
+    and
+    \[
+        B = (\lambda_1-\varepsilon)|e_1\ra\la e_1| +
+    \sum_{i=2}^n\lambda_i|e_i\ra\la e_i|
+    \]
+    which are easily verified to be in $M_1^+$. Then,
+    \[
+        \frac{1}{2}A + \frac{1}{2}B = M
+    \]
+    and thus $M$ cannot be an extreme point.
+\end{proof}
 
 \end{document}
