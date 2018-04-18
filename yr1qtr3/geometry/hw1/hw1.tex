@@ -89,7 +89,70 @@ is compact.
     To show $M$ is compact, we just need to show $M$ is bounded. That is, there
     is some number $N$ such that $d(p,q)<N$ for all $p,q\in M$.
 
-    So, suppose for a contradiction that 
+    Let $\gamma$ be a minimizing geodesic connecting two points $p,q$ in $M$. We
+    calculate the second variation in energy along $\gamma$ in a manner similar
+    to the proof of the Bonnet-Meyers theorem in Do Carmo. In particular, we
+    know
+    \[
+\begin{aligned}
+    \frac{1}{2}E''(0) &= \int_0^1\sin^2(\pi t)((n-1)\pi^2 - (n-1)\ell^2
+    R_{\gamma}(e_n(t)))dt\\
+    &=(n-1)\left[ \frac{\pi^2}{2}- \int_0^1 \ell^2R_{\gamma}(e_n(t))\right]\\
+    &\leq (n-1)\left[ \frac{\pi^2}{2} - \int_0^1\sin^2(\pi s)\ell^2 \partial_s f
+    ds\right]\\
+    &= (n-1)\left[ \frac{\pi^2}{2} - \int_0^1\sin^2(\pi s)\ell^2 (a+ \partial_s
+        f) ds\right]\\
+    &= (n-1)\left[ \frac{\pi^2-\ell^2a}{2} - \int_0^1\sin^2(\pi s)\ell^2\partial_s
+    f ds\right]\\
+    &= (n-1)\left[ \frac{\pi^2-\ell^2a}{2} + \int_0^1\pi\sin(\pi s)\ell^2
+    f ds\right]\\
+    &\leq (n-1)\left[ \frac{\pi^2-\ell^2a}{2} + \int_0^1\pi c|\sin(\pi s)|\ell^2
+    ds\right]\\
+    &= (n-1)\left[ \frac{\pi^2-\ell^2a}{2} + \pi c\ell^2(\frac{2}{\pi}\right]\\
+    &= (n-1)\left[ \frac{\pi^2-\ell^2a}{2} + 2c\ell^2\right]\\
+\end{aligned}
+    \]
+    which is negative for $\ell^2 \geq \frac{\pi^2}{a-4c}$. Since $\gamma$ is
+    assumed to be minimal, this implies that $\ell^2 < \frac{\pi^2}{a-4c}$ and
+    thus $M$ is bounded with the diameter of $M$ less than
+    $\frac{\pi}{\sqrt{a-4c}}$ as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 4}
+Let $M^n$ be an orientable Riemannian manifold with positive curvature, and even
+dimension. Let $\gamma$ be a closed geodesic in $M^n$. Prove that $\gamma$ is
+homotopic to closed curve whose length is strictly less than $\gamma$.
+\\
+\\
+\begin{proof}
+    We first prove the statement assumed in the book: namely, that the parallel
+    transport map along $\gamma$ leaves some vector $v$ orthogonal to
+    $\gamma'(0)$ invariant. To see this, note that the linear transformation
+    \[
+\begin{aligned}
+    A&:T_{\gamma(0)}M\to T_{\gamma(0)}M\\
+    A(v) &= P_{\gamma}(v)
+\end{aligned}
+    \]
+    where $P_{\gamma}(v)$ is the parallel transport of $v$ along $\gamma$ back
+    to itself. In particular, $A(\gamma'(0)) = 0$, and so the subspace of
+    $T_{\gamma(0)}M$ perpendicular to $\gamma'(0)$ is invariant under $A$. Thus,
+    $A$ restricts to a map on the orthogonal complement (of odd dimension). $A$
+    is just parallel transport, so it is an isometry. Furthermore, $A$ preserves
+    orientation (since $M$ is orientable), so $A$ is an orthogonal transformation
+        with determinant $1$ on an odd-dimensional subspace, and thus must have
+        an eigenvalue of $1$. Take $v$ to be the corresponding eigenvector.
+
+    Now, let $V(t)$ be the parallel transport of $v$ along $\gamma$. We
+    calculate $E''(0)$ directly. Using the fact that $\gamma(0)=\gamma(a)$ and
+    for $f$ the variational field corresponding to $V$, $f(0,0)=f(0,a)$, we see
+    \[
+        \begin{aligned}
+            \frac{1}{2}E''(0) &= \int_0^a g(V'.V') - g(R(\gamma',V)\gamma',V)dt
+    \end{aligned}
+    \]
 \end{proof}<++>
 
 \end{document}
