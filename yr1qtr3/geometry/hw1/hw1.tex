@@ -120,7 +120,7 @@ is compact.
 
 \newpage
 
-\section*{Problem 4}
+\section*{Problem 2}
 Let $M^n$ be an orientable Riemannian manifold with positive curvature, and even
 dimension. Let $\gamma$ be a closed geodesic in $M^n$. Prove that $\gamma$ is
 homotopic to closed curve whose length is strictly less than $\gamma$.
@@ -153,6 +153,124 @@ homotopic to closed curve whose length is strictly less than $\gamma$.
             \frac{1}{2}E''(0) &= \int_0^a g(V'.V') - g(R(\gamma',V)\gamma',V)dt
     \end{aligned}
     \]
-\end{proof}<++>
+    However, $V'(t) = \nabla_{\gamma(t)}V(t) = 0$ since $V$ is
+    parallel-transported. Thus,
+    \[
+        \frac{1}{2}E''(0) = -\int_0^a g(R(\gamma',V)\gamma',V)dt
+    \]
+    and since the space has positive curvature, $g(R(\gamma',V)\gamma',V) =
+    K(\gamma',V) >0$ always. Thus,
+    \[
+        \frac{1}{2}E''(0) < 0
+    \]
+    which implies there is another curve near to $\gamma$ with smaller length,
+    as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3}
+Let $\tilde{M}$ be a complete simply-connected Riemannian manifold, with
+curvature $K\leq 0$. Let $\gamma$ be a normalized geodesic, and let $p\in
+\tilde{M}$ be a point which does not belong to $\gamma$. Let $d(s) =
+d(p,\gamma(s))$.
+
+\subsection*{Part a}
+Consider the minimizing geodesic $\sigma_s$ joining $p$ to $\gamma(s)$, and
+consider the variation $h(t,s) = \sigma_s(t)$. Show that
+\[
+    \frac{1}{2}E'(s) = g(\gamma'(s),\sigma_s'(d(s)))
+\]
+and
+\[
+    \frac{1}{2}E''(s_0) >0
+\]
+if $d'(s_0)=0$.
+\\
+\\
+
+\begin{proof}
+    We proceed in the same way Do Carmo does in the proof for the first
+    variation of energy formula. Now, we know that
+    \[
+        \frac{1}{2}E'(s) = g(\partial_sh,\partial_th)|_0^{d(s)} -
+        \int_0^{d(s)}g(\partial_s h,\nabla_t\partial_th)dt
+    \]
+    We calculate that
+    \[
+\begin{aligned}
+    \partial_t h(t,s) &= \sigma_s'(t))\\
+    \partial_s h(d(s),s) &= \gamma'(s)\\
+    \partial_s h(0,s) &= 0
+\end{aligned}
+    \]
+    which follows from the chain rule, the fact that $\sigma_s(d(s)) =
+    \gamma(s)$, and the fact that $\sigma_s(0) = p$. Thus,
+    \[
+        \begin{aligned}
+        \frac{1}{2}E'(s) &= g(\gamma'(s),\sigma_s'(d(s))) -
+        \int_0^{d(s)}g(\partial_s h,\nabla_t\sigma_s'(t))dt\\
+        &= g(\gamma'(s),\sigma_s'(d(s))) -
+        \int_0^{d(s)}g(\partial_s h,0)dt\\
+        &=g(\gamma'(s),\sigma_s'(d(s)))
+    \end{aligned}
+    \]
+    as desired.
+    
+    Next, we examine the second variation of energy. In particular, we calculate
+    \[
+        \begin{aligned}
+            \frac{1}{2}E''(s) &= \partial_s g(\gamma'(s),\sigma_s'(d(s)))\\
+            &= g(\nabla_s\gamma'(s),\sigma_s'(d(s))) +
+            g(\gamma'(s),\nabla_s\sigma_s'(d(s)))\\
+            &= g(0,\sigma_s'(d(s))) +
+            g(\gamma'(s),\nabla_s\sigma_s'(d(s)))\\
+            &=g(\gamma'(s),\nabla_s\sigma_s'(d(s)))\\
+            &= g(\gamma'(s), \gamma'(s))
+        \end{aligned}
+    \]
+    where the last equality is obtained by assuming $d'(s) = 0$. This is always
+    positive, as desired.
+\end{proof}
+
+\subsection*{Part b}
+Show that $s_0$ is a critical point if and only if
+$g(\gamma'(s_0),\sigma_s'(d(s_0))) = 0$, and conclude that $d$ has a unique
+critical point, which is a minimum.
+\\
+\\
+\begin{proof}
+We conclude form the first equation that $s_0$ is a critical point ($E'(s_0)=0$)
+if and only if $g(\gamma'(s_0),\sigma_s'(d(s_0))) = 0$ by reading directly off
+the formula for $E'(s)$.
+
+Furthermore, the second equation tells us that if $s_0$ is a critical point of
+$d$ ($d'(s_0)=0$), then $E''(s_0)$ is positive, and thus the geodesics
+connecting $p$ to points around $\gamma(s_0)$ get longer, and so $d(s_0)$ is a
+local minimum. I assert this is a unique minimum. This, however, follows easily
+from the fact that $d$ has no maxima, since each critical point is a minimum.
+Thus, the critical point for which $d'(s_0)=0$ is unique. 
+\end{proof}
+
+\subsection*{Part c}
+Provide examples where this fails if $M$ is not simply connected, or does not
+have nonpositive curvature.
+\\
+\\
+\begin{proof}
+    Consider the flat torus, which has zero curvature, but is not simply
+    connected. In particular, coordinatize the flat torus as the unit square
+    with the ends identified. Let $\gamma$ be the geodesic running along
+    $(\frac{1}{4},t)$ and $(\frac{3}{4},t)$, and let
+    $p=(\frac{1}{2},\frac{1}{2})$. Then, there are two points on $\gamma$ that
+    are minimally close to $p$, which contradicts the last conclusion of part
+    $b$.
+
+    On the other hand, consider the sphere $S^2$ which has positive curvature.
+    Let $\gamma$ be the equator, and $p$ be the north pole. $p$ is equidistant
+    from every point on $\gamma$, which also contradicts the conclusion in part
+    $b$.
+\end{proof}
+
 
 \end{document}
