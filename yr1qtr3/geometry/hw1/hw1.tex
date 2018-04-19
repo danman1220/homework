@@ -89,7 +89,188 @@ is compact.
     To show $M$ is compact, we just need to show $M$ is bounded. That is, there
     is some number $N$ such that $d(p,q)<N$ for all $p,q\in M$.
 
-    So, suppose for a contradiction that 
-\end{proof}<++>
+    Let $\gamma$ be a minimizing geodesic connecting two points $p,q$ in $M$. We
+    calculate the second variation in energy along $\gamma$ in a manner similar
+    to the proof of the Bonnet-Meyers theorem in Do Carmo. In particular, we
+    know
+    \[
+\begin{aligned}
+    \frac{1}{2}E''(0) &= \int_0^1\sin^2(\pi t)((n-1)\pi^2 - (n-1)\ell^2
+    R_{\gamma}(e_n(t)))dt\\
+    &=(n-1)\left[ \frac{\pi^2}{2}- \int_0^1 \ell^2R_{\gamma}(e_n(t))\right]\\
+    &\leq (n-1)\left[ \frac{\pi^2}{2} - \int_0^1\sin^2(\pi s)\ell^2 \partial_s f
+    ds\right]\\
+    &= (n-1)\left[ \frac{\pi^2}{2} - \int_0^1\sin^2(\pi s)\ell^2 (a+ \partial_s
+        f) ds\right]\\
+    &= (n-1)\left[ \frac{\pi^2-\ell^2a}{2} - \int_0^1\sin^2(\pi s)\ell^2\partial_s
+    f ds\right]\\
+    &= (n-1)\left[ \frac{\pi^2-\ell^2a}{2} + \int_0^1\pi\sin(\pi s)\ell^2
+    f ds\right]\\
+    &\leq (n-1)\left[ \frac{\pi^2-\ell^2a}{2} + \int_0^1\pi c|\sin(\pi s)|\ell^2
+    ds\right]\\
+    &= (n-1)\left[ \frac{\pi^2-\ell^2a}{2} + \pi c\ell^2(\frac{2}{\pi}\right]\\
+    &= (n-1)\left[ \frac{\pi^2-\ell^2a}{2} + 2c\ell^2\right]\\
+\end{aligned}
+    \]
+    which is negative for $\ell^2 \geq \frac{\pi^2}{a-4c}$. Since $\gamma$ is
+    assumed to be minimal, this implies that $\ell^2 < \frac{\pi^2}{a-4c}$ and
+    thus $M$ is bounded with the diameter of $M$ less than
+    $\frac{\pi}{\sqrt{a-4c}}$ as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 2}
+Let $M^n$ be an orientable Riemannian manifold with positive curvature, and even
+dimension. Let $\gamma$ be a closed geodesic in $M^n$. Prove that $\gamma$ is
+homotopic to closed curve whose length is strictly less than $\gamma$.
+\\
+\\
+\begin{proof}
+    We first prove the statement assumed in the book: namely, that the parallel
+    transport map along $\gamma$ leaves some vector $v$ orthogonal to
+    $\gamma'(0)$ invariant. To see this, note that the linear transformation
+    \[
+\begin{aligned}
+    A&:T_{\gamma(0)}M\to T_{\gamma(0)}M\\
+    A(v) &= P_{\gamma}(v)
+\end{aligned}
+    \]
+    where $P_{\gamma}(v)$ is the parallel transport of $v$ along $\gamma$ back
+    to itself. In particular, $A(\gamma'(0)) = 0$, and so the subspace of
+    $T_{\gamma(0)}M$ perpendicular to $\gamma'(0)$ is invariant under $A$. Thus,
+    $A$ restricts to a map on the orthogonal complement (of odd dimension). $A$
+    is just parallel transport, so it is an isometry. Furthermore, $A$ preserves
+    orientation (since $M$ is orientable), so $A$ is an orthogonal transformation
+        with determinant $1$ on an odd-dimensional subspace, and thus must have
+        an eigenvalue of $1$. Take $v$ to be the corresponding eigenvector.
+
+    Now, let $V(t)$ be the parallel transport of $v$ along $\gamma$. We
+    calculate $E''(0)$ directly. Using the fact that $\gamma(0)=\gamma(a)$ and
+    for $f$ the variational field corresponding to $V$, $f(0,0)=f(0,a)$, we see
+    \[
+        \begin{aligned}
+            \frac{1}{2}E''(0) &= \int_0^a g(V'.V') - g(R(\gamma',V)\gamma',V)dt
+    \end{aligned}
+    \]
+    However, $V'(t) = \nabla_{\gamma(t)}V(t) = 0$ since $V$ is
+    parallel-transported. Thus,
+    \[
+        \frac{1}{2}E''(0) = -\int_0^a g(R(\gamma',V)\gamma',V)dt
+    \]
+    and since the space has positive curvature, $g(R(\gamma',V)\gamma',V) =
+    K(\gamma',V) >0$ always. Thus,
+    \[
+        \frac{1}{2}E''(0) < 0
+    \]
+    which implies there is another curve near to $\gamma$ with smaller length,
+    as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3}
+Let $\tilde{M}$ be a complete simply-connected Riemannian manifold, with
+curvature $K\leq 0$. Let $\gamma$ be a normalized geodesic, and let $p\in
+\tilde{M}$ be a point which does not belong to $\gamma$. Let $d(s) =
+d(p,\gamma(s))$.
+
+\subsection*{Part a}
+Consider the minimizing geodesic $\sigma_s$ joining $p$ to $\gamma(s)$, and
+consider the variation $h(t,s) = \sigma_s(t)$. Show that
+\[
+    \frac{1}{2}E'(s) = g(\gamma'(s),\sigma_s'(d(s)))
+\]
+and
+\[
+    \frac{1}{2}E''(s_0) >0
+\]
+if $d'(s_0)=0$.
+\\
+\\
+
+\begin{proof}
+    We proceed in the same way Do Carmo does in the proof for the first
+    variation of energy formula. Now, we know that
+    \[
+        \frac{1}{2}E'(s) = g(\partial_sh,\partial_th)|_0^{d(s)} -
+        \int_0^{d(s)}g(\partial_s h,\nabla_t\partial_th)dt
+    \]
+    We calculate that
+    \[
+\begin{aligned}
+    \partial_t h(t,s) &= \sigma_s'(t))\\
+    \partial_s h(d(s),s) &= \gamma'(s)\\
+    \partial_s h(0,s) &= 0
+\end{aligned}
+    \]
+    which follows from the chain rule, the fact that $\sigma_s(d(s)) =
+    \gamma(s)$, and the fact that $\sigma_s(0) = p$. Thus,
+    \[
+        \begin{aligned}
+        \frac{1}{2}E'(s) &= g(\gamma'(s),\sigma_s'(d(s))) -
+        \int_0^{d(s)}g(\partial_s h,\nabla_t\sigma_s'(t))dt\\
+        &= g(\gamma'(s),\sigma_s'(d(s))) -
+        \int_0^{d(s)}g(\partial_s h,0)dt\\
+        &=g(\gamma'(s),\sigma_s'(d(s)))
+    \end{aligned}
+    \]
+    as desired.
+    
+    Next, we examine the second variation of energy. In particular, we calculate
+    \[
+        \begin{aligned}
+            \frac{1}{2}E''(s) &= \partial_s g(\gamma'(s),\sigma_s'(d(s)))\\
+            &= g(\nabla_s\gamma'(s),\sigma_s'(d(s))) +
+            g(\gamma'(s),\nabla_s\sigma_s'(d(s)))\\
+            &= g(0,\sigma_s'(d(s))) +
+            g(\gamma'(s),\nabla_s\sigma_s'(d(s)))\\
+            &=g(\gamma'(s),\nabla_s\sigma_s'(d(s)))\\
+            &= g(\gamma'(s), \gamma'(s))
+        \end{aligned}
+    \]
+    where the last equality is obtained by assuming $d'(s) = 0$. This is always
+    positive, as desired.
+\end{proof}
+
+\subsection*{Part b}
+Show that $s_0$ is a critical point if and only if
+$g(\gamma'(s_0),\sigma_s'(d(s_0))) = 0$, and conclude that $d$ has a unique
+critical point, which is a minimum.
+\\
+\\
+\begin{proof}
+We conclude form the first equation that $s_0$ is a critical point ($E'(s_0)=0$)
+if and only if $g(\gamma'(s_0),\sigma_s'(d(s_0))) = 0$ by reading directly off
+the formula for $E'(s)$.
+
+Furthermore, the second equation tells us that if $s_0$ is a critical point of
+$d$ ($d'(s_0)=0$), then $E''(s_0)$ is positive, and thus the geodesics
+connecting $p$ to points around $\gamma(s_0)$ get longer, and so $d(s_0)$ is a
+local minimum. I assert this is a unique minimum. This, however, follows easily
+from the fact that $d$ has no maxima, since each critical point is a minimum.
+Thus, the critical point for which $d'(s_0)=0$ is unique. 
+\end{proof}
+
+\subsection*{Part c}
+Provide examples where this fails if $M$ is not simply connected, or does not
+have nonpositive curvature.
+\\
+\\
+\begin{proof}
+    Consider the flat torus, which has zero curvature, but is not simply
+    connected. In particular, coordinatize the flat torus as the unit square
+    with the ends identified. Let $\gamma$ be the geodesic running along
+    $(\frac{1}{4},t)$ and $(\frac{3}{4},t)$, and let
+    $p=(\frac{1}{2},\frac{1}{2})$. Then, there are two points on $\gamma$ that
+    are minimally close to $p$, which contradicts the last conclusion of part
+    $b$.
+
+    On the other hand, consider the sphere $S^2$ which has positive curvature.
+    Let $\gamma$ be the equator, and $p$ be the north pole. $p$ is equidistant
+    from every point on $\gamma$, which also contradicts the conclusion in part
+    $b$.
+\end{proof}
+
 
 \end{document}
