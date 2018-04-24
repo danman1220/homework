@@ -1,0 +1,281 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\ev}{\text{ev}}
+\newcommand{\im}{\text{im}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Homework 3 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+Prove that for $X$ a compact metric space, the multiplicative linear functionals
+on $C(X)$ are exactly the point evaluation functionals
+\[
+    \delta_x(f) = f(x)
+\]
+
+\begin{proof}
+    We first establish the following result:
+    \begin{lemma}
+        For every multiplicative linear functional $\phi$ on a unital Banach
+        algebra $\mathscr{A}$, the kernel of $\phi$ is a maximal ideal in
+        $\mathscr{A}$. Conversely, every maximal ideal in $\mathscr{A}$ is the
+        kernel of some multiplicative linear functional.
+    \end{lemma}
+    \begin{proof}
+        Let $\phi$ be a multiplicative linear functional on $\mathscr{A}$. We
+        know that $\ker(\phi)$ is a closed ideal in $\mathscr{A}$, since it is
+        the kernel of an algebra homomorphism. Furthermore, this ideal is
+        maximal. This follows from the fact that $\im(\phi) = \C \cong
+        \mathscr{A}/{\ker(\phi)}$, which has dimension one (here, we used the
+            fact that $\phi\neq 0$, since the zero functional is not
+        multiplicative since it has to send $I$ to $1$).
+
+        That is, we have shown that for $\phi$ a multiplicative linear
+        functional on $\mathscr{A}$, $\ker(\phi)$ is a maximal ideal in
+        $\mathscr{A}$.
+
+        Conversely, suppose $\mathscr{M}$ is a maximal ideal of $\mathscr{A}$.
+        We examine the space $\mathscr{A}/{\mathscr{M}}$. Specifically, we show
+        that for each nonzero $X+\mathscr{M}\in\mathscr{A}/{\mathscr{M}}$,
+        $X+\mathscr{M}$ is invertible. This follows from the fact that the ideal
+        \[
+            \mathscr{J}_X = \{AX+Y\ |\ A\in\mathscr{A},Y\in\mathscr{M}\}
+        \]
+        properly contains
+        \[
+            \mathscr{M} = \{0X+Y\ |\ Y\in\mathscr{M}\}
+        \]
+        and so $\mathscr{J}_X=\mathscr{A}$ by maximality of $\mathscr{M}$. Thus,
+        there is some $A\in\mathscr{A}$ and $Y\in\mathscr{M}$ with
+        \[
+            AX+Y=I
+        \]
+        and so $X+\mathscr{M}$ is invertible. We finally observe that this
+        implies that $\mathscr{A}/{\mathscr{M}}\cong \C$ isometrically. This can
+        be seen directly. For ease of notation, we denote $X:=
+        X+\mathscr{M}\in\mathscr{A}/{\mathscr{M}}$. Now, we know that
+        \[
+            \sigma(X)\neq \emptyset
+        \]
+        However, since each $X\in\mathscr{A}/{\mathscr{M}}$ that is nonzero is
+        invertible, the spectrum can contain at most one element. This is
+        because at most one of
+        \[
+\begin{aligned}
+    X-\lambda_1 I\\
+    X-\lambda_2 I
+\end{aligned}
+        \]
+        is zero, and the other must be invertible. Thus, $\sigma(X)=\{\lambda\}$
+        for some $\lambda\in \C$. The map $\Phi:\mathscr{A}/{\mathscr{M}}\to \C$
+        given by
+        \[
+            \Phi(X) = \lambda\in\sigma(X)
+        \]
+        is easily seen to be a bijective multiplicative linear isometry.
+
+        Putting it all together, let $q:\mathscr{A}\to\mathscr{A}/{\mathscr{M}}$
+        be the canonical quotient map. Then, the map
+        \[
+            \Phi\circ q:\mathscr{A}\to \C
+        \]
+        is a multiplicative linear functional with kernel $\mathscr{M}$, as
+        desired.
+    \end{proof}
+
+    With this lemma, the problem is easy. To characterize the multiplicative
+    linear functionals on $C(X)$, we just need to characterize its maximal
+    ideals. Specifically, we will show that the maximal ideals of $C(X)$ are
+    \[
+        \mathscr{M}_x = \{f\in C(X)\ |\ f(x)=0\}
+    \]
+    That is, $\mathscr{M}_x$ is the set of functions that vanish at $x$.
+
+    We first show that $\mathscr{M}_x$ is maximal (the fact that it is an ideal
+    is clear). To see this, suppose $\mathscr{I}$ is another ideal containing
+    $\mathscr{M}_x$ with $\mathscr{I}\neq \mathscr{M}_x$. Then, there is some
+    $f\in \mathscr{I}$ with $f(x)> 0$. Now, we also know that there is some
+    $g\in C(X)$ with $g^{-1}(\{0\}) = \{x\}$. That is, $g$ vanishes only at $x$.
+    We can also force $g(y)>0$ for all $y\neq x$.
+
+    Thus $f,g\in\mathscr{I}$, and thus so is $f+g$. Furthermore, by construction
+    $f+g\neq 0$, and so $\frac{1}{f+g}$ is well-defined. Thus, $f+g$ has an
+    inverse in $C(X)$, and since $f+g\in\mathscr{I}$, $\mathscr{I}=C(X)$ and
+    $\mathscr{M}_x$ is a maximal ideal, as desired.
+
+    We can also show that these are the only maximal ideals. Suppose
+    $\mathscr{I}$ is a maximal ideal such that for each $x\in X$, there is some
+    $f_x\in \mathscr{I}$ with $f_x(x)=0$. Since each $f_x$ is continuous, there
+    is a neighborhood $U_x$ around $x$ for which $f_x$ is nonzero in $U_x$. This
+    forms an open cover of $X$, which has a finite subcover indexed by $x_i$.
+    Now, take the function
+    \[
+        F = \sum_{i=1}^n (f_{x_i})^2
+    \]
+    which is a finite sum and product of things in $\mathscr{I}$, and is thus in
+    $\mathscr{I}$. However, $F(y)\neq 0$ for all $y\in X$, and so $F(y)$ is
+    invertible. Thus, $\mathscr{I} = C(X)$.
+
+    Thus, all maximal ideals of $C(X)$ are of the form $\mathscr{M}_x$. Each
+    multiplicative linear functional $\phi_x$, then, has kernel $\mathscr{M}_x$
+    and is thus of the form
+    \[
+    \phi_x(f) = f(x)
+    \]
+    as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 2}
+Prove that these functionals are exactly the extreme points of $K$, the positive
+part of the unit ball in $C(X)^*$.
+\\
+\\
+\begin{proof}
+    We first show that these are extreme points of $K$. To see this, suppose
+    $\psi_1,\psi_2\in K$ with
+    \[
+        \ev_x = \phi_x = t\psi_1 + (1-t)\psi_2
+    \]
+    We wish to show $\psi_1 = \psi_2 = \phi_x$.
+    To do so, we invoke the Riesz-Markov theorem to translate into a statement
+    about measures. That is, the statement above is equivalent to
+    \[
+        \delta_x = t\mu_1 + (1-t)\mu_2
+    \]
+    where we know that $\|\mu_1(X)\|=\|\mu_2(X)\|=1$. However, this means that
+    for all $E\subset X$,
+    \[
+        \delta_x(E) = t\mu_1(E) + (1-t)\mu_2(E)
+    \]
+    which, when considering the cases $x\in E$ and $x\not\in E$, we see that
+    $\mu_1=\mu_2=\delta_x$, and thus $\ev_x$ is an extreme point.
+
+    Next, we show that these are all the extreme points. To see this, suppose
+    $\mu\in C(X)^*$ with $\mu\neq \delta_x$ for any $x$. In particular, we know
+    that we can find $S_1,S_2\subset X$ such that $X=S_1\cup S_2$, $S_1\cap
+    S_2=\emptyset$, and $\mu(S_1),\mu(S_2)>0$. Then, we have
+    \[
+        \mu = \frac{\mu(S_1)}{\mu(X)}(\frac{\mu(X)}{\mu(S_1)}\chi_{S_1}\mu) +
+        \frac{\mu(S_2)}{\mu(X)}(\frac{\mu(X)}{\mu(S_2)}\chi_{S_2}\mu)
+    \]
+    where $\frac{\mu(S_1)}{\mu(X)} + \frac{\mu(S_2)}{\mu(X)} = 1$, and each
+    term in the convex linear combination is in $K$. Thus, $\mu$ is not an
+    extreme point, as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3}
+Find all the two-dimensional faces of $K$.
+
+\newpage
+
+\section*{Problem 4}
+Let $B_1^+$ be the set $\{f\in L^1(\R)\ | f(x)\geq 0 \forall x, \int_{\R}f
+=1\}$.
+Find the extreme points of $B_1^+$.
+\\
+\\
+\begin{proof}
+    I claim that there are no extreme points of $B_1^+$. To see this, suppose
+    $f\in B_1^+$. In particular, this means that for some positive-measure set
+    $E$, $f|_E > 0$. Now, split $E$ into two sets $E_1, E_2$ with equal positive
+    measure. Set $\varepsilon>0$ such that $f-\varepsilon >0$ on $E$.
+
+    Define
+    \[
+\begin{aligned}
+    g_{\pm}(x) =
+    \begin{cases}
+        f(x), &x\in E^c\\
+        f(x)\pm\varepsilon, &x\in E_1\\
+        f(x)\mp\varepsilon, &x\in E_2\\
+    \end{cases}
+\end{aligned}
+    \]
+    clearly, $\int g_{\pm} = 1$, and furthermore,
+    \[
+        f(x) = \frac{1}{2}g_+(x) + \frac{1}{2}g_-(x)
+    \]
+    so $f$ is not an extreme point.
+\end{proof}
+
+\newpage
+
+\section*{Problem 5}
+Find the extreme points of $F_1^+$, the set of all positive $n\times n$
+self-adjoint complex matrices with trace $1$.
+
+\end{document}
