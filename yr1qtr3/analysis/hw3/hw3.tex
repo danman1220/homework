@@ -49,6 +49,8 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
 
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
 \newcommand{\ev}{\text{ev}}
 \newcommand{\im}{\text{im}}
 
@@ -227,8 +229,9 @@ part of the unit ball in $C(X)^*$.
     that we can find $S_1,S_2\subset X$ such that $X=S_1\cup S_2$, $S_1\cap
     S_2=\emptyset$, and $\mu(S_1),\mu(S_2)>0$. Then, we have
     \[
-        \mu = \frac{\mu(S_1)}{\mu(X)}(\frac{\mu(X)}{\mu(S_1)}\chi_{S_1}\mu) +
-        \frac{\mu(S_2)}{\mu(X)}(\frac{\mu(X)}{\mu(S_2)}\chi_{S_2}\mu)
+        \mu =
+        \frac{\mu(S_1)}{\mu(X)}\left(\frac{\mu(X)}{\mu(S_1)}\chi_{S_1}\mu\right) +
+        \frac{\mu(S_2)}{\mu(X)}\left(\frac{\mu(X)}{\mu(S_2)}\chi_{S_2}\mu\right)
     \]
     where $\frac{\mu(S_1)}{\mu(X)} + \frac{\mu(S_2)}{\mu(X)} = 1$, and each
     term in the convex linear combination is in $K$. Thus, $\mu$ is not an
@@ -239,6 +242,53 @@ part of the unit ball in $C(X)^*$.
 
 \section*{Problem 3}
 Find all the two-dimensional faces of $K$.
+\\
+\\
+\begin{proof}
+    I assert that the two-dimensional faces of $K$ are the convex linear
+    combinations of any three extreme points.
+
+    First, we observe that
+    \[
+        F = \{a\delta_x + b\delta_y + c\delta_z\ |\ a+b+c=1\}
+    \]
+    is indeed a face. To see this, note that by definition $F$ is convex, and
+    with three degrees of freedom and one constraint, it is two-dimensional.
+    Now, we just need to show it is closed under linear interpolation. So,
+    suppose
+    \[
+        a\delta_x + b\delta_y + c\delta_z = t\phi + (1-t)\psi
+    \]
+    for $\phi,\psi\in K$. By utilizing Riesz-Markov theorem, we know that this
+    equation must hold for the induced measures as well. So, we have that for
+    all measurable $E$,
+    \[
+        a\delta_x(E) + b\delta_y(E) + c\delta_z(E) = t\phi(E) + (1-t)\psi(E)
+    \]
+    Let $E$ be such that $x,y,z\not\in E$. Then,
+    \[
+        0+0+0 = t\phi(E) + (1-t)\psi(E)
+    \]
+    which forces $\phi(E)=\psi(E) = 0$. Finally, observing that since
+    $\phi,\psi\in K$, we must have $|\phi| = |\psi| = 1$ and so $\phi$ and
+    $\psi$ must be linear combinations of $\delta_x,\delta_y,\delta_z$ whose
+    coefficients add up to $1$, and are thus in $F$ as desired.
+    Thus, $F$ is a face.
+
+    Now, we claim that these are the only faces. This follows from the
+    Krein-Milman theorem, which states that a compact and convex set is the
+    convex hull of its extreme points. Now, under the weak-$*$ topology, the
+    unit ball is compact, and since $K$ is a closed subset of the unit ball, it
+    is compact as well. Furthermore, any closed face will also be compact. 
+    
+    So, suppose $F$ is a closed face of $K$. Then, $F$ is a convex hull of its
+    extreme points, which will be some collection of point-mass measures.
+    However, if this collection has $n>3$ measures, the resulting
+    space will be $n-1$ dimensional, which is greater than two. Thus, the only
+    two-dimensional faces of $K$ are the convex hulls of three extreme points of
+    $K$.
+
+\end{proof}
 
 \newpage
 
@@ -277,5 +327,46 @@ Find the extreme points of $B_1^+$.
 \section*{Problem 5}
 Find the extreme points of $F_1^+$, the set of all positive $n\times n$
 self-adjoint complex matrices with trace $1$.
+\\
+\\
+\begin{proof}
+    I assert that all the extreme points of $F_1^+$ are the one-dimensional
+    projection operators.
+
+    First, observe that $F_1^+\subset M_1^+$, where $M_1^+$ from last homework
+    is the set of all positive, self-adjoint $n\times n$ matrices less than $I$.
+    This is clear, since for $M\in F_1^+$, we know that $\sigma(M)\subset[0,1]$
+    since the trace of $M$ (the sum of the eigenvalues) is $1$, and since $M$ is
+    positive, it has all positive eigenvalues. Thus, its eigenvalues are
+    positive and sum to one, and thus must be between zero and one. This is the
+    condition necessary to be in $M_1^+$, as desired.
+
+    Thus, if $M$ is an extreme point of $M_1^+$, and $M\in F_1^+$, then $M$ is
+    an extreme point of $F_1^+$ as well. We noted that the projections are
+    extreme points in $M_1^+$, and specifically the one-dimensional projections
+    are in $F_1^+$. Thus, they are extreme points.
+
+    We next observe that these are the only extreme points. To see this, suppose
+    $M\in F_1^+$ with $M$ not a one-dimensional projection. Since the
+    eigenvalues of $M$ add up to one, and $M$ is not a one-dimensional
+    projection, $M$ must have at least two eigenvalues less than one. So, write
+    $M$ as
+    \[
+        M = \lambda_1|e_1\ra\la e_1| + \lambda_2 |e_2\ra\la e_2| +
+        \sum_{i=3}^n \lambda_i |e_i\ra\la e_i|
+    \]
+    and let $\varepsilon>0$ be such that $0 <\lambda_1\pm \varepsilon <1$ and
+    $0<\lambda_2\pm\varepsilon < 1$. Then, define
+    \[
+        M_{\pm} = (\lambda_1\pm\varepsilon)|e_1\ra\la e_1| +
+        (\lambda_2\mp\varepsilon) |e_2\ra\la e_2| + 
+        \sum_{i=3}^n \lambda_i |e_i\ra\la e_i|
+    \]
+    which are clearly in $F_1^+$. We finally observe that
+    \[
+        M = \frac{1}{2}M_+ + \frac{1}{2}M_-
+    \]
+    and so $M$ is not an extreme point, as desired.
+\end{proof}
 
 \end{document}
