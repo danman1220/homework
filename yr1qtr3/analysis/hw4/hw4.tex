@@ -1,0 +1,247 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Homework 4 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+Let $\{H_{\gamma}\ |\ \gamma\in\Gamma\}$ be a family of Hilbert spaces, and let
+$H$ be the vector space of sections of $\cup_{\gamma\in\Gamma}H_{\gamma}$ over
+$\Gamma$ with
+\[
+\begin{aligned}
+    f\in \Gamma(\cup H_{\gamma},\Gamma)\\
+    \sum_{\gamma\in\Gamma}\|f(\gamma)\|^2 < \infty
+\end{aligned}
+\]
+Show that
+\[
+    \|f\| = \left( \sum_{\gamma\in\Gamma}\|f(\gamma)\|^2
+    \right)^{\frac{1}{2}}
+\]
+is a norm on $H$, and that with this norm $H$ is a Euclidean space. Is $H$
+necessarily a Hilbert space?
+\\
+\\
+\begin{proof}
+    We immediately recognize this construction as the direct integral
+    \[
+        \int_{\Gamma}^{\oplus}H_{\gamma}d\mu
+    \]
+    where $\mu=\mu_c$ is the counting measure on $\Gamma$. This space is defined
+    to be the set of all sections
+    $\Gamma(\coprod_{\gamma\in\Gamma}H_{\gamma},\Gamma)$ over $\Gamma$ with the
+    property that if $f$ is a section, then its composition
+    \[
+        g_{\gamma}(f(\gamma),f(\gamma)) = \|f(\gamma)\|^2\in L^2(\Gamma,\mu_c)
+    \]
+    (with $g_{\gamma}$ the metric on $H_{\gamma}$)
+    is required to be an $L^2$ function. In fact, it is clear that this is the
+    exact scenario described in the hypothesis of the problem.
+    So, for the remainder of this problem, we will let $(\Gamma,\mu)$ be an
+    arbitrary measure space, and prove the more general result that
+    \[
+        H = \int_{\Gamma}^{\oplus}H_{\gamma}d\mu(\gamma)
+    \]
+    is a Hilbert space. Note that in this more general setting, $H$ is actually
+    a set of equivalence classes of sections where $s~t \iff
+    \|s(\gamma)\|_{\gamma} ~ \|t(\gamma)\|_{\gamma}$ as functions in
+    $L^2(\Gamma,\mu)$.
+    That is, $s$ is equivalent to $t$ if and only if $s(\gamma)$ and
+    $t(\gamma)$ differ on a set of Hilbert spaces of measure zero.
+
+    An inner product on the direct integral can be defined as
+    \[
+        \la s|t\ra := \int_{\Gamma}\la s(\gamma)|t(\gamma)\ra d\mu(\gamma)
+    \]
+    where it is understood that $\la s(\gamma)|t(\gamma)\ra =
+    g_{\gamma}(s(\gamma),t(\gamma))$.
+    We need to show that this inner product is indeed a well-defined inner
+    product on $\int_{\Gamma}^{\oplus}H_{\gamma}d\mu$.
+
+
+    We first show that this is well-defined. That is, we need to show that the
+    integral is finite. To see this, let $s,t\in H$. In particular, this means
+    that
+    \[
+        \begin{aligned}
+            \|s(\gamma)\|_{\gamma}\in L^2(\Gamma,\mu)\\
+            \|t(\gamma)\|_{\gamma}\in L^2(\Gamma,\mu)
+    \end{aligned}
+    \]
+    We calculate the inner product as
+    \[
+\begin{aligned}
+    |\la s|t\ra| &= |\int_{\Gamma}\la s(\gamma)|t(\gamma)\ra d\mu(\gamma)|\\
+    &\leq \int_{\Gamma}|\la s(\gamma)|t(\gamma)\ra| d\mu(\gamma)\\
+    &\leq \int_{\Gamma}\|s(\gamma)\|_{\gamma}\|t(\gamma)\|_{\gamma}
+    d\mu(\gamma)&\text{ By Cauchy-Schwarz inequality}\\
+    &=\|\left(\|s(\gamma)\|_{\gamma}\right)\left(\|t(\gamma)\|_{\gamma}\right)\|_1
+    &\text{ By definiton of $L^1$ norm}\\
+    &\leq
+    \|\left(\|s(\gamma)\|_{\gamma}\right)\|_2\|\left(\|t(\gamma)\|_{\gamma}\right)\|_2
+    &\text{ By Holder's inequality with $p=q=2$}\\
+    &\leq \infty &\text{ Since $\|s(\gamma)\|_{\gamma}$ and
+    $\|t(\gamma)\|_{\gamma}$ are in $L^2(\Gamma,\mu)$}
+\end{aligned}
+    \]
+    and thus, the proposed inner product is well-defined.
+
+    Next, we show sesquilinearity. We adopt the mathematics convention that the
+    inner product $\la s|t\ra$ is linear in the first term, and conjugate linear
+    in the second term. Let $s,t\in H$, and let $\alpha\in \C$.
+    Then,
+    \[
+        \begin{aligned}
+        \la \alpha s|t\ra &= \int_{\Gamma}\la \alpha
+        s(\gamma)|t(\gamma)\ra d\mu(\gamma)\\
+        &= \int_{\Gamma}\alpha\la s(\gamma)|t(\gamma)\ra d\mu(\gamma)\\
+        &= \alpha\int_{\Gamma}\la s(\gamma)|t(\gamma)\ra d\mu(\gamma)\\
+        &=\alpha\la s|t\ra
+    \end{aligned}
+    \]
+    Furthermore, with $r\in H$ as well, we have
+    \[
+\begin{aligned}
+    \la r+s|t\ra &= \int_{\Gamma}\la r(\gamma)+s(\gamma)|t(\gamma)\ra
+    d\mu(\gamma)\\
+    &= \int_{\Gamma}\la r(\gamma)|t(\gamma)\ra + \la s(\gamma)|t(\gamma)\ra
+    d\mu(\gamma)\\
+    &=\int_{\Gamma}\la r(\gamma)|t(\gamma)\ra d\mu(\gamma) + \int_{\Gamma}\la
+    s(\gamma)|t(\gamma)\ra d\mu(\gamma)\\
+    &=\la r|t\ra + \la s|t\ra
+\end{aligned}
+    \]
+    and so the proposed inner product is linear in the first term. Furthermore,
+    we see that
+    \[
+\begin{aligned}
+    \la s|t\ra &= \int_{\Gamma}\la s(\gamma)|t(\gamma)\ra d\mu(\gamma)\\
+    &= \int_{\Gamma}\overline{\la t(\gamma)|s(\gamma)\ra} d\mu(\gamma)\\
+    &= \overline{\int_{\Gamma}\la t(\gamma)|s(\gamma)\ra d\mu(\gamma)}\\
+    &= \overline{\la t|s\ra}
+\end{aligned}
+    \]
+    and so the proposed inner product is conjugate linear in the second term.
+
+    Finally, we need to show this inner product is positive-definite. That is,
+    we need to show
+    \[
+        \la s|s\ra \geq 0
+    \]
+    with equality if and only if $s=0$.
+    So, let $s\in H$. Trivially, if $s=0$, then
+    \[
+        \la s|s\ra = \int_{\Gamma}\la s(\gamma)|s(\gamma)\ra d\mu(\gamma) =
+        \int_{\Gamma}0 = 0
+    \]
+    So, let $s\neq 0$. Then, in particular, $\|s(\gamma)\|_{\gamma}$ differs
+    from zero on a set $E\subset\Gamma$ of positive measure. Thus,
+    \[
+        \begin{aligned}
+            \la s|s\ra &= \int_{\Gamma} \la s(\gamma)|s(\gamma)\ra
+            d\mu(\gamma)\\
+            &= \int_{\Gamma} \|s(\gamma)\|_{\gamma}^2 d\mu(\gamma)\\
+            &\geq \int_E \|s(\gamma)\|_{\gamma}^2d\mu(\gamma)\\
+            &\geq 0
+    \end{aligned}
+    \]
+    as desired. Thus, this proposed inner product is indeed an inner product on
+    $H$.
+
+    Observe that this completes the first two parts of this problem. We defined
+    \[
+        \|s\|^2 = \la s|s\ra = \int_{\Gamma}\|s(\gamma)\|_{\gamma}^2
+        d\mu(\gamma)
+    \]
+    and setting $\mu = \mu_c$ the counting measure, we get
+    \[
+        \|s\|^2 = \sum_{\gamma\in\Gamma}\|s(\gamma)\|_{\gamma}^2
+    \]
+    which is a norm, since it is induced by an inner product.
+
+    Furthermore, we have defined an inner product on $H$, which makes it a
+    Euclidean space. Now, we just have to show that $H$ is actually a Hilbert
+    space.
+
+
+    We need to show that $H$ is complete with respect to its norm. So, suppose
+    $s_n\in H$ is a sequence of elements (sections) in $H$ such that $\{s_n\}$
+    is a Cauchy sequence.
+
+\end{proof}
+
+\end{document}
