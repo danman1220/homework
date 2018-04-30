@@ -109,9 +109,8 @@ necessarily a Hilbert space?
         g_{\gamma}(f(\gamma),f(\gamma)) = \|f(\gamma)\|^2\in L^2(\Gamma,\mu_c)
     \]
     (with $g_{\gamma}$ the metric on $H_{\gamma}$)
-    is required to be an $L^2$ function. In fact, it is clear that this is the
-    exact scenario described in the hypothesis of the problem.
-    So, for the remainder of this problem, we will let $(\Gamma,\mu)$ be an
+    is required to be an $L^2$ function. 
+    For the remainder of this problem, we will let $(\Gamma,\mu)$ be an
     arbitrary measure space, and prove the more general result that
     \[
         H = \int_{\Gamma}^{\oplus}H_{\gamma}d\mu(\gamma)
@@ -123,9 +122,9 @@ necessarily a Hilbert space?
     That is, $s$ is equivalent to $t$ if and only if $s(\gamma)$ and
     $t(\gamma)$ differ on a set of Hilbert spaces of measure zero.
     
-    Furthermore, for more general measure spaces, we might run into
+    (Furthermore, for more general measure spaces, we might run into
     measurability issues, but since this example is against the counting
-    measure, we will not worry about such technicalities.
+measure, we will not worry about such technicalities.)
 
     An inner product on the direct integral can be defined as
     \[
@@ -221,7 +220,7 @@ necessarily a Hilbert space?
             d\mu(\gamma)\\
             &= \int_{\Gamma} \|s(\gamma)\|_{\gamma}^2 d\mu(\gamma)\\
             &\geq \int_E \|s(\gamma)\|_{\gamma}^2d\mu(\gamma)\\
-            &\geq 0
+            &> 0
     \end{aligned}
     \]
     as desired. Thus, this proposed inner product is indeed an inner product on
@@ -260,10 +259,11 @@ necessarily a Hilbert space?
             \varepsilon
     \end{aligned}
     \]
-    and so each term $\|s_n(\gamma)-s_m(\gamma)\|_{\gamma}^2 < \varepsilon$ as
-    well. Thus, each term is Cauchy, and converges to some limit $s(\gamma)$
-    pointwise (note that this convergence is uniform over $\gamma$). It is
-    quickly verified that $s(\gamma)\in H$, since
+    and so $\mu$-almost every term $\|s_n(\gamma)-s_m(\gamma)\|_{\gamma}^2 <
+    \varepsilon$ as well (modulo some constant proportionality). Thus, each term
+    is Cauchy, and converges to some limit $s(\gamma)$ pointwise $\mu$-a.e.(note
+    that this convergence is uniform over $\gamma$). It is quickly verified that
+    $s(\gamma)\in H$, since
     \[
         \begin{aligned}
         \|s\|^2 &= \int_{\Gamma}\|s(\gamma)\|_{\gamma}^2d\mu(\gamma)\\
@@ -353,7 +353,7 @@ Show that if $T\in B(H)$ is hermitian, then $\exp(iT)$ is unitary.
     of $A$ under the sup norm.
 
     The construction of this isomorphism is done in two steps. First, recall
-    that we have already sown that there is a unique isometric $*$-isomorphism
+    that we have already shown that there is a unique isometric $*$-isomorphism
     between $C^*(A)$ and $C(\mathscr{M}_A)$ the continuous functions on the
     multiplicative linear functionals on $C^*(A)$ given by the Gelfand map $\Gamma$
     defined as
@@ -392,7 +392,7 @@ Show that if $T\in B(H)$ is hermitian, then $\exp(iT)$ is unitary.
     since $\mathscr{M}_A$ is compact (in the weak-$*$ topology, as a closed
     subset of the unit ball) and $\sigma(A)$ is Hausdorff (as a subset of $\C$ a
     Hausdorff space) $\tau$ is a homeomorphism. Thus, it induces an algebra
-    $*$-isomorphism $h$ between $C(\mathscr{M}_A)$ and $C\sigma(A)$ given by
+    $*$-isomorphism $h$ between $C(\mathscr{M}_A)$ and $C(\sigma(A))$ given by
     \[
         h(f) = f\circ\tau^{-1}
     \]
@@ -401,7 +401,7 @@ Show that if $T\in B(H)$ is hermitian, then $\exp(iT)$ is unitary.
     Composing these two yields the desired $*$-isomorphism
     \[
         \begin{aligned}
-    \gamma&:C^*(A)\to C(\sigma(A))
+    \gamma&:C^*(A)\to C(\sigma(A))\\
     \gamma &= h\circ \Gamma
 \end{aligned}
     \]
@@ -475,7 +475,7 @@ operator.
     and thus $\|T-\lambda I\| > \varepsilon$. Secondly, notice that it has dense
     range, since
     \[
-        (T-\lambda I)(\frac{1}{\lambda_n-\lambda}e_n = e_n
+        (T-\lambda I)(\frac{1}{\lambda_n-\lambda})e_n = e_n
     \]
     and $\frac{1}{\lambda_n - \lambda}$ never diverges. Thus, $\lambda$ is not
     in the spectrum of $T$. Therefore, the spectrum of $T$ is precisely the
