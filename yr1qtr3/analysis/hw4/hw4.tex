@@ -122,6 +122,10 @@ necessarily a Hilbert space?
     $L^2(\Gamma,\mu)$.
     That is, $s$ is equivalent to $t$ if and only if $s(\gamma)$ and
     $t(\gamma)$ differ on a set of Hilbert spaces of measure zero.
+    
+    Furthermore, for more general measure spaces, we might run into
+    measurability issues, but since this example is against the counting
+    measure, we will not worry about such technicalities.
 
     An inner product on the direct integral can be defined as
     \[
@@ -240,7 +244,24 @@ necessarily a Hilbert space?
 
     We need to show that $H$ is complete with respect to its norm. So, suppose
     $s_n\in H$ is a sequence of elements (sections) in $H$ such that $\{s_n\}$
-    is a Cauchy sequence.
+    is a Cauchy sequence with respect to the norm.
+
+    In particular, this means that for $\varepsilon>0$ there is an $N$ such that
+    for all $n,m>N$,
+    \[
+        \|s_n-s_m\|^2 < \varepsilon
+    \]
+    which translates to
+    \[
+        \begin{aligned}
+            \|s_n-s_m\|^2 = \int_{\Gamma}\|s_n(\gamma) - s_m(\gamma)\|_{\gamma}^2
+            d\mu(\gamma) <
+            \varepsilon
+    \end{aligned}
+    \]
+    and so each term $\|s_n(\gamma)-s_m(\gamma)\|_{\gamma}^2 < \varepsilon$ as
+    well. Thus, each term is Cauchy, and converges to some limit $s(\gamma)$
+    pointwise. We now wish to show this converges in norm. 
 
 \end{proof}
 
