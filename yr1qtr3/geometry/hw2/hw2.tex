@@ -49,6 +49,11 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
 
+\newcommand{\Hess}{\text{Hess}}
+\newcommand{\tr}{\text{trace}}
+\newcommand{\Ad}{\text{Ad}}
+\newcommand{\Aut}{\text{Aut}}
+
 \newtheorem{lemma}{Lemma}
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
@@ -249,5 +254,144 @@ $K(t)=\tilde{K}(t)$ on $[0,t_1]$.
 \newpage
 
 
+
+
+\section*{Problem 3}
+Prove that if $M$ is complete and the sectional curvature satisfies
+$K\geq\delta>0$, then $M$ is compact and $\text{diam}(M)\leq
+\frac{\pi}{\sqrt{\delta}}$.
+\\
+\\
+\begin{proof}
+    We appeal to (half of) proposition 2.4 in chapter 10 of Do Carmo, which
+    states that if $M$ is such that the sectional curvature $K$ satisfies
+    \[
+        0<\delta\leq K
+    \]
+    then the distance $d$ along two consecutive conjugate points of $\gamma$ a
+    geodesic in $M$ satisfies
+    \[
+        d\leq \frac{\pi}{\sqrt{\delta}}
+    \]
+    
+    So, if $\gamma$ is a geodesic in $M$ with $\gamma(0)=p$ for $p\in M$, then
+    the first conjugate point to $\gamma(0)$ is at most a distance
+    $\frac{\pi}{\sqrt{\delta}}$ away. 
+    
+    So, let $\gamma$ be a minimizing geodesic connecting $p$ and $q$, and
+    suppose for a contradiction that the length of $\gamma$ is greater than
+    $\frac{\pi}{\sqrt{\delta}}$. Then, by the above observation, $\gamma$ has a
+    conjugate point between $p$ and $q$, which contradicts $\gamma$ being a
+    minimal geodesic.
+
+    Thus, the diameter of $M$ is bounded above by $\frac{\pi}{\sqrt{\delta}}$ as
+    desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 4}
+Recall the definition of the Hessian as
+\[
+    \Hess(f)Y = \nabla_Y\text{grad}f
+\]
+\subsection*{Part a}
+Prove that the Laplacian is given as
+\[
+    \Delta f = \tr \Hess f
+\]
+
+\begin{proof}
+    We'll proceed in Einstein index notation. Recall that
+    \[
+        \nabla_YT = Y^a\nabla_aT^{bcd\dots}_{efg\dots}
+    \]
+    and we can raise and lower indices using
+    \[
+        T_a = g_{ab}T^b
+    \]
+    Now, we rewrite the Hessian as
+    \[
+        (\Hess(f)Y)^a = Y^b\nabla_b(df)^a = Y^b\nabla_b(g^{ac}(df)_c)
+    \]
+    (by observing that $(\text{grad}f)^a = g^{ab}(df)_b$)
+    or
+    \[
+        \Hess(f)^a_b = \nabla_b(df)^a
+    \]
+    and the trace is
+    \[
+        \tr\Hess(f) = (\Hess(f))^a_a = \nabla_a(df)^a = \nabla_a(g^{ab}(df)_b)
+    \]
+    We compare this to the Laplacian, defined as
+    \[
+        \Delta f = \text{div grad}f
+    \]
+    which can be expressed in index notation as
+    \[
+        \Delta f = \nabla_a(df)^a
+    \]
+    and equality is immediately observed.
+
+\end{proof}
+
+\subsection*{Part b}
+Prove that
+\[
+    g(\Hess(f)Y,X) = g(Y,\Hess(f)X)
+\]
+\begin{proof}
+    We note that this is equivalent to showing that
+    \[
+        \Hess(f)_{ab} = g_{ac}\Hess(f)^c_b
+    \]
+    is symmetric in its lower indices.
+
+    We proceed with index gymnastics.
+    \[
+        \begin{aligned}
+            \Hess(f)_{ab} &= g_{ac}\nabla_b(df)^c\\
+            &= g_{ac}\nabla_bg^{cd}\nabla_df\\
+            &= g_{ac}g^{cd}\nabla_b\nabla_df\\
+            &= g_{ac}g^{cd}\nabla_b\partial_df\\
+            &= g_{ac}g^{cd}\partial_b\partial_df - \Gamma^e_{bd}\partial_ef\\
+            &= g_{ac}g^{cd}\partial_d\partial_bf - \Gamma^e_{db}\partial_ef\\
+            &= g_{ac}g^{cd}\nabla_d\nabla_bf\\
+            &= \nabla_a\nabla_bf\\
+            &= g_{bc}\nabla_a(df)^c
+            &=\Hess(f)_{ba}
+    \end{aligned}
+    \]
+    as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 5}
+Let $G$ be a Lie group with trivial center. Prove that if $G$ carries a
+bi-invariant metric, then both $G$ and its universal cover are compact.
+\\
+\\
+\begin{proof}
+    Recall from Do Carmo chapter 2 that if $G$ has a bi-invariant metric $g$,
+    then the adjoint representation
+    \[
+        \Ad:G\to\Aut(\mathfrak{g})
+    \]
+    respects the metric. That is,
+    \[
+        \Ad(G)\subset O(\mathfrak{g},g)
+    \]
+    Now, the kernel of $\Ad$ is the center of $G$, and since this is trivial,
+    $G$ injects into $O(\mathfrak{g},g)$. Since $O(n)$ is compact, and $\Ad(G)$
+    is closed, it follows that $\Ad(G)\cong G$ is compact as well.
+
+    Now, since $G$ admits a bi-invariant metric, it follows from Do Carmo
+    chapter 4 exercise 1 that (since $G$ has trivial center) the sectional
+    curvature of $G$ is strictly positive. Then, by corollary 3.3 in chapter 9
+    of Do Carmo, we see that $M$ has a finite fundamental group. Thus, its
+    universal cover is finite-sheeted, and a finite-sheeted cover of a compact
+    space is compact.
+\end{proof}
 
 \end{document}
