@@ -1,0 +1,353 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\Diff}{\text{Diff}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Topology} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Homework 2 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+Suppose $f:X\to Y$ is a submersion. Prove that if $X$ is compact and $Y$ is
+connected, then $f$ is surjective.
+\\
+\\
+\begin{proof}
+    Recall from the earlier homework that $f$ is an open map. Thus, the image
+    $f(X)$ is open. Furthermore, since $X$ is compact, $f(X)$ is compact as
+    well. Since $Y$ is Hausdorff, $f(X)$ is closed, and so $f(X)$ is a nonempty
+    clopen set. Since $Y$ is connected, $f(X)=Y$ as desired.
+\end{proof}<++>
+
+\section*{Problem 2}
+\subsection*{Part a}
+Calculate the Lie algebra of $SO(n)$.
+\\
+\\
+\begin{proof}
+    Consider the smooth function
+    \[
+        \begin{aligned}
+            \Phi:GL(n)\to GL(n)\\
+            \Phi(A) = AA^T
+        \end{aligned}
+    \]
+    Now, $O(n)$ is defined to be $\Phi^{-1}(I)$. We calculate the differential
+    directly. Let $B\in T_A(O(n))$, and let $\gamma:[0,1]\to O(n)$ be
+    \[
+        \gamma(t) = A+tB
+    \]
+    Then,
+    \[
+        \begin{aligned}
+            d\Phi_A(B) &= d\Phi_A(\gamma'(0))\\
+            &=\partial_t(\Phi(\gamma(t)))|_0\\
+            &=\partial_t((A+tB)(A+tB)^T)|_0\\
+            &=\partial_t(AA^T + tAB^T + tBA^T + t^2BB^T)|_0\\
+            &=AB^T + BA^T
+    \end{aligned}
+    \]
+    Now, to show that $I$ is a regular value, we need to show that for all $A\in
+    O(n)$, and for all $C\in T_{\Phi(A)}(GL(n))$, there is some $B\in T_A(O(n))$
+    with $d\Phi(B)=C$.
+
+    Take $B=\frac{1}{2}CA$, we see that
+    \[
+        d\Phi_A(B) = \frac{1}{2}(A(CA)^T + CAA^T) = C
+    \]
+    as desired. Thus, $I$ is a regular value.
+
+    We next appeal to the fact that the tangent space of a level curve is the
+    kernel of the differential. Thus, $T_I(O(n))$ is the set of all matrices for
+    which
+    \[
+        d\Phi_I(B) = B+B^T = 0
+    \]
+    which is exactly $\mathfrak{o}(n)$ the set of all skew-symmetric matrices.
+
+    Now, we will observe that $SO(n)$ is open. Consider the determinant map, a
+    continuous map from $O(n)$ to the two-point set $\{-1,1\}$ with the discrete
+    topology. This defines a separation of $O(n)$ into connected components.
+    Specifically, the inverse image of $1$ is $SO(n)$, and thus $SO(n)$ is both
+    open and closed.
+
+    Thus, since $SO(n)$ is open, $T_I(SO(n)) = T_I(O(n)) = \mathfrak{o}(n)$ as
+    desired.
+\end{proof}
+
+\subsection*{Part b}
+Show $SO(n)$ is compact.
+\\
+\\
+\begin{proof}
+    To show $SO(n)$ is compact, we will show it is a closed subspace of $O(n)$,
+    and show that $O(n)$ is compact. We have already observed before that
+    $SO(n)$ is clopen in $O(n)$, so all we need to show is that $O(n)$ is
+    compact. First, we recall that $O(n)$ is a level set, and thus is closed.
+    Next, we show it is bounded. Recall that in finite-dimensional normed
+    spaces, all norms are equivalent. So, we just need to show $O(n)$ is bounded
+    with respect to some norm.
+
+    Take the operator norm on $M(n)$. Then, for any $A\in O(n)$,
+    \[
+        \|Ax\|^2 = g(Ax,Ax) = g(A^TAx,x) = g(x,x) =\|x\|^2
+    \]
+    and so $\|A\|=1$. Thus, $O(n)$ is bounded by $1$ in operator norm. So,
+    $O(n)$ is compact. Since $SO(n)$ is a closed subgroup of $O(n)$, $SO(n)$ is
+    compact as well, as desired.
+\end{proof}
+
+\section*{Problem 3}
+\subsection*{Part a}
+Let $G$ be a subgroup of $\Diff(M)$, and suppose $p$ is fixed by $G$.
+Show the map
+\[
+    g\mapsto dg_p
+\]
+is a group homomorphism $G\to GL(T_pM)$.
+\\
+\\
+\begin{proof}
+    We just need to show that this map respects the group operation. That is, we
+    need to show that
+    \[
+        d(gh)_p = dg_p\circ dh_p
+    \]
+    but this is just a restatement of the functoriality of the differential,
+    which has already been proven.
+\end{proof}
+
+\subsection*{Part b}
+Find a basis for $\mathfrak{su}(2)$ and hence compute the dimension of $SU(2)$.
+Prove that for $x,y\in\mathfrak{su}(2)$,
+\[
+    \text{trace}(x^*y)
+\]
+is a nondegenerate inner product. Deduce that there is a homomorphism
+\[
+    \pi:SU(2)\to SO(3)
+\]
+
+\begin{proof}
+    We first calculate $\mathfrak{u}(2)$. This is just the level set of $I$
+    under the function
+    \[
+        \Phi(A) = AA^*
+    \]
+    and thus $\mathfrak{u}(2)$ is the kernel of $d\Phi_I$. However, we've
+    already calculated what $d\Phi_I$ does in problem 2, so
+    \[
+        d\Phi_I(A) = A + A^*
+    \]
+    which has kernel $\mathfrak{u}(2) = \{A\in M(2,\C)\ |\ A^*=-A\}$.
+
+    Now, we observe that $SU(2)$ is the level set of $1$ under the determinant
+    map. Now, we observe that
+    \[
+        d(\text{det}_I(A) = \text{tr}(A)
+    \]
+    
+We begin by noting that the determinant can be expressed as
+    \[
+        \det(I+tA) = \sum_{\sigma\in
+        S_n}\epsilon(\sigma)\prod_{i=1}^{n}(I+tA)_i^{\sigma(i)}
+    \]
+    Now, if we single out the linear term in the product by multiplying by $tA$
+    once and then by $I$ the rest of the time, we end up with
+    \[
+        \begin{aligned}
+            \textrm{lin}(\det(I+tA)) &= \sum_{\sigma\in S_n}
+        \epsilon(\sigma)\sum_{i=1}^m(\prod_{j\neq
+        i}I_j^{\sigma(j)})A_i^{\sigma(i)}t\\
+            &= \sum_{i=1}^nA_i^it\\
+            &=t\textrm{tr}(A)
+        \end{aligned}
+    \]
+    and thus, the derivative at zero is $\textrm{tr}(A)$, as desired.
+    Here, the equality from line 1 to line 2 is made by observing that
+    $I_j^{\sigma(j)}$ is nonzero only when $\sigma(j)=j$, or when $\sigma=id$.
+
+    Thus, $\mathfrak{su}(2)$ is the subspace of $\mathfrak{u}(2)$ such that
+    $\text{tr}(A)=0$.
+
+    Next, we compute a basis. Representing an arbitrary matrix as
+    \[
+\begin{bmatrix}
+    a+bi &c+di\\
+    f+gi &h+ki
+\end{bmatrix}
+    \]
+    the trace-free requirement says that $a=-h$ and $b=-k$, and skew-symmetry
+    says that $a=h=0$, $c=-f$ and  $d=g$. Thus, a typical matrix in
+    $\mathfrak{su}(2)$ is
+    \[
+\begin{bmatrix}
+    bi & c+di\\
+    -c+di &-bi
+\end{bmatrix}
+    \]
+    which has basis
+    \[
+        \left\{ 
+            \begin{bmatrix}
+                0&1\\
+                -1&0
+            \end{bmatrix}
+            \begin{bmatrix}
+                i&0\\
+                0&i
+            \end{bmatrix}
+            \begin{bmatrix}
+                0&i\\
+                i&0
+            \end{bmatrix}
+        \right\}
+    \]
+    and thus has dimension $3$.
+    \\
+    \\
+    Next, we show that $\text{trace}(x^*y)$ is an inner product on this space.
+    First, we show this is symmetric. To see this, we calculate
+    \[
+        \text{trace}(x^*y) = \text{trace}(-xy) = \text{trace}(y(-x)) =
+        \text{trace}(-yx) = \text{trace}(y^*x)
+    \]
+    and so this is symmetric. Next, we show it is linear in the first term. This
+    follows directly: let $x,y,z\in \mathfrak{su}(2)$. Then,
+    \[
+        \text{trace}((x+z)^*y) = \text{trace}((-x-z)y) = \text{trace}(x^*y) +
+        \text{trace}(z^*y)
+    \]
+    and for $\alpha\in \R$,
+    \[
+        \text{trace}((\alpha x)^*y) = \text{trace}(\alpha x^*y) =
+        \alpha\text{trace}(x^*y)
+    \]
+    and thus this form is linear in the first term.
+
+    Finally, we need to show that this is a nondegenerate form. For nonzero
+    $x\in \mathfrak{su}(2)$, let
+    \[
+        x=
+\begin{bmatrix}
+    bi & c+di\\
+    -c+di &-bi
+\end{bmatrix}
+    \]
+    Then,
+    \[
+        \text{trace}(x^*x) = 2(b^2+c^2+d^2) \geq 0
+    \]
+    with equality if and only if $x=0$.
+
+    Finally, we deduce that there is a homomorphism
+    \[
+        \pi:SU(2)\to SO(3)
+    \]
+    which is the well-known double cover of $SO(3)$.
+\end{proof}
+
+\newpage
+
+\section*{Problem 4}
+\subsection*{Part a}
+Let $p$ be a homogeneous polynomial. Prove that any $a\neq 0$ is a regular value
+of $p$.
+\\
+\\
+\begin{proof}
+    We calculate the differential directly.
+    \[
+        (dp)_aX^a = X^a\nabla_ap = X^a\partial_ap
+    \]
+    Now, let $\beta\in p^{-1}(a)$. We wish to show $dp_{\beta}$ is surjective.
+    Since its codomain has dimension one, we just need to show it has nontrivial
+    image. So, we see that
+    \[
+        ((dp)_{\beta})_a\beta^a = \beta^a\partial_ap|_{\beta} = ma
+    \]
+    by Euler's identity for homogeneous polynomials. Thus, if $a\neq 0$, then
+    $a$ is a regular value, as desired.
+\end{proof}
+
+\subsection*{Part b}
+Deduce that $SL(n,\R)$ is a Lie group.
+\\
+\\
+\begin{proof}
+    Observe that $SL(n)$ is the inverse image of $1$ under the determinant map.
+    Now, for arbitrary $n\times n$ matrices, the determinant is a homogeneous
+    polynomial of $n^2$ variables (the entries of the matrix), and thus $1$ is a
+    regular value of the determinant. Thus, $SL(n)$ is a submanifold of $GL(n)$,
+    and is a Lie group, as desired.
+\end{proof}
+
+\end{document}
