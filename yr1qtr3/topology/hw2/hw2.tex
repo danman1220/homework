@@ -350,4 +350,50 @@ Deduce that $SL(n,\R)$ is a Lie group.
     and is a Lie group, as desired.
 \end{proof}
 
+
+\newpage
+
+\section*{Problem 5}
+Suppose $f:X\to Y$ is smooth, $X,Y$ are compact with the same dimension, and
+$y\in Y$ is a regular value.
+Show that $f^{-1}(y)$ is a finite set $\{x_i\}$ and that there is an open
+neighborhood $U$ of $y$ for which $f^{-1}(U)$ is a finite disjoint union of open
+sets $\{V_i\}$ such that $V_i$ is a neighborhood of $x_i$ and each $V_i$ is
+mapped diffeomorphically onto $U$.
+\\
+\\
+\begin{proof}
+    We first show $f^{-1}(y)$ is a finite set. Since $y$ is a regular value,
+    $f^{-1}(y)$ is a submanifold of $X$ of dimension $0$ (since it has
+    codimension $\text{dim}(Y) = \text{dim}(X)$). Now, the only submanifolds of
+    dimension zero are discrete sets, so $f^{-1}(y)$ is a closed discrete subset
+    of $X$. However, since $X$ is compact, $f^{-1}(y)$ must be finite (since if
+        $f^{-1}(y)$ were infinite, each point by itself is open, and thus
+        $\{x_i\}$ forms an open cover of $f^{-1}(y)$ with no finite subcover, a
+    contradiction).
+
+    Now, since $df_{x_i}$ is surjective for each $x_i$ (definition of $y$ being
+    a regular value), and $\text{dim}(X) = \text{dim}(Y)$, it follows that
+    $df_{x_i}$ is an isomorphism for each $x_i$. Thus there are neighborhoods
+    $W_i$ around each $x_i$ such that $f|_{W_i}$ is a diffemorphism onto its
+    image. Without loss of generality, we take the $W_i$ to be disjoint from
+    each other; since $X$ is Hausdorff, we can find open sets separating $x_i$
+    and $x_j$ for $i\neq j$, and intersect them with $W_i$ to get disjoint open
+    sets on which $f$ is a diffeomorphism onto.
+
+    Take $U = \bigcap_{x_i}f(W_i)$ an open neighborhood of $y$, and take $V_i =
+    f|_{W_i}^{-1}(U)$. Then, $V_i\subset W_i$ open and so $f$ is a
+    diffeomorphism on $V_i$, with each $V_i$ a neighborhood of $x_i$. Finally,
+    noting that $(\cup V_i)^c$ is closed, and $f$ is a closed map (taking
+compact sets to compact sets), we see that $f((\cup V_i)^c)$ is closed and
+avoids $y$. So, if we let $U' = f((\cup V_i)^c)^c$, we see that $U\cap U'$ is
+the desired neighborhood of $y$ that is evenly covered. Let $V'_i$ be the
+neighborhood of $x_i$ that maps diffeomorphically to $U\cap U'$. Then, by
+construction we have that each $V_i'$ is a neighborhood of $x_i$, all disjoin
+from each other, and furthermore for any $z\in (\cup V_i')^c$, either $z\in
+(\cup V_i^c)$ in which case $f(z)\not\in U\cap U'$, or $z$ is in some $V_i$ but
+not $V_i'$ for some $i$, in which case $f(z)\not\in U\cap U'$ since $f$ is a
+diffeomorphism from $V_i$ to $U$.
+\end{proof}
+
 \end{document}
