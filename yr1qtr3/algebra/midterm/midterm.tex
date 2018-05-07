@@ -1,0 +1,519 @@
+\documentclass[12pt,reqno]{amsart}
+\usepackage{amssymb}
+\usepackage{amscd}
+\usepackage{amsxtra}
+\usepackage[mathscr]{eucal}
+
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{16.5cm}
+\setlength{\topmargin}{0.35cm}
+\setlength{\textheight}{8.5in}
+\renewcommand{\baselinestretch}{1.33}
+\pagestyle{plain}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\im}{\text{im}}
+
+\newtheorem*{defn}{Definition}
+\newtheorem*{lemma}{Lemma}
+
+\begin{document}
+\title[]{Math 115C: Midterm Examination\\May 7, 2018\\Daniel Halmrast}
+\maketitle
+\large
+
+\section*{Problem 1}
+\subsection*{Part a}
+Suppose $p$ is prime, and $H$ is a transitive subgroup of $S_p$ containing a
+transposition. Prove that $H=S_p$.
+\\
+\\
+\begin{proof}
+    We define a relation $\sim$ on the set $\{1,\cdots,p\}$ as
+    \[
+        i\sim j \iff (ij)\in H
+    \]
+    First, observe that $\sim$ is an equivalence relation. Trivially, for every
+    $i\in \{1,\cdots,p\}$, $i\sim i$, since $(ii) = e\in H$. Furthermore, if
+    $i\sim j$, then $(ij)\in H$, and since $(ij)=(ji)$, it follows that $(ji)\in
+    H$ as well, and so $j\sim i$.
+    Finally, observe that if $i\sim j$ and $j\sim k$, then $(ij),(jk)\in H$, and
+    in particular
+    \[
+        (ij)(jk)(ij) = (ik)
+    \]
+    is in $H$ as well. Thus, $i\sim k$. Therefore, $\sim$ is an equivalence
+    relation, and partitions $\{1,\cdots,p\}$ into disjoint nonempty equivalence
+    classes.
+
+    Next, we show that there is only one equivalence class. Suppose for a
+    contradiction that there is more than one equivalence class in
+    $\{1,\cdots,p\}$ under $\sim$.  We show that every equivalence class has the
+    same number of elements.  To do so, we will establish a (set-theoretic)
+    bijection between the equivalence classes.
+
+    Since $H$ contains a transposition, at least one equivalence class contains
+    more than one element. Let $[i]$ be such an equivalence class. We establish
+    a bijection between the elements of $[i]$ and the elements of $[j]$ for
+    $j\not\in [i]$. To do so, let $g\in H$ be such that $g(i)=j$ (which exists
+    since $H$ acts transitively on $\{1,\cdots,p\}$). Let $x\in [i]$ with $x\neq
+    i$. Then,
+    \[
+        g(ix)g^{-1} = (jz)
+    \]
+    for some $z\in \{1,\cdots,p\}$. In particular, since $g,g^{-1},(ix)\in H$,
+    it follows that $(jz)\in H$ as well, and so $z\in[j]$. We define the
+    bijection to be
+    \[
+        \begin{aligned}
+        \Phi:[i]\to [j]\\
+        \Phi(x) = z
+    \end{aligned}
+    \]
+    where $z$ is the element described above. This is indeed a bijection, since
+    it is invertible. In particular, the inverse is given as
+    \[
+\begin{aligned}
+    \Phi^{-1}:[j]\to [i]
+\end{aligned}
+    \]
+    where $z\in [j]$ gets sent to the $x\in [i]$ for which
+    \[
+        g^{-1}(jz)g = (ix)
+    \]
+    This is clearly an inverse, since $\Phi^{-1}\Phi(x)$
+    is given by
+    \[
+        g^{-1}g(ix)g^{-1}g = (ix)
+    \]
+    and so
+    \[
+        \Phi^{-1}\Phi(x) = x
+    \]
+    and similarly $\Phi\Phi^{-1}(x) = x$. Thus, $\Phi$ has a two-sided inverse,
+    and is a bijection.
+
+    Now, since the equivalence classes partition $\{1,\cdots,p\}$, and each has
+    the same size ($n$, say), it follows that $n$ divides $p$. We have already
+    seen that $n>1$ since $H$ contains a transposition, so $n=p$. Thus, there is
+    only one equivalence class. Therefore, $H$ contains all transpositions, and
+    since the transpositions generate $S_p$, $H=S_p$ as desired.
+\end{proof}
+
+\subsection*{Part b}
+Suppose $f\in \Q[x]$ is irreducible over $\Q$ and has prime degree $p$. If $f$
+has exactly $p-2$ real roots and $2$ complex roots, show the Galois group of $f$
+over $\Q$ is $S_p$.
+\\
+\\
+\begin{proof}
+    Let $H$ be the Galois group of $f$. Since $f$ has exactly $p$ roots and is
+    irreducible, $H$ permutes the $p$ roots of $f$, and thus $H$ is a subgroup of
+    $S_p$. Furthermore, $H$ contains the transposition defined by complex
+    conjugation, which transposes the two complex roots. Finally, since $f$
+    is irreducible, $H$ acts transitively on the roots of $f$. Thus, $H$
+    satisfies the criteria of part a, and $H=S_p$ as desired.
+    \\
+    \\
+    To see that $H$ acts transitively on the roots, let $K$ be the splitting
+    field of $f$, so that $H=\text{Gal}(K/\Q)$, and let $\alpha,\beta$ be roots
+    of $f$. Then, there exists a field homomorphism
+    \[
+\begin{aligned}
+    \sigma:\Q(\alpha)\to \Q(\beta)\\
+    \sigma(q)=q &\text{ for }q\in \Q\\
+    \sigma(\alpha)=\beta
+\end{aligned}
+    \]
+    which fixes $\Q$. Since $\alpha$ and $\beta$ both have $f$ as their minimal
+    polynomial, $[\Q(\alpha):\Q] = [\Q(\beta):\Q]$ and so this field
+    homomorphism is indeed an isomorphism by problem 2 part i. Furthermore, this
+    extends to an automorphism of $K$ which fixes $\Q$ and sends $\alpha$ to
+    $\beta$, as desired.
+\end{proof}
+
+\subsection*{Part c}
+Determine the Galois group of $x^5-4x+2$ over $\Q$.
+\\
+\\
+\begin{proof}
+    Let $f(x) = x^5-4x+2$. Observe that its derivative
+    \[
+        f'(x) = 5x^4-4
+    \]
+    has exactly two real roots  $\alpha_{\pm}=\pm(\frac{4}{5})^{\frac{1}{4}}$.
+    Thus, $f$ has at most $3$ real roots.
+
+    Now, $f(-10)<0$, $f(0)>0$, $f(1)<0$, and $f(100)>0$. By the
+    intermediate value theorem, $f$ has at least $3$ real roots. Thus, $f$ has
+    exactly $3$ real roots and $2$ complex roots. 
+    
+    Furthermore, $f$ is irreducible. This is clear by the Eisenstein criterion
+    at $p=2$, since $2$ does not divide $a_5=1$, but $2$ does divide $a_1=4$, and $2^2 =
+    4$ does not divide $a_0 = 2$ (for $a_i$ the coefficient of the $i$th term of
+    $f$).
+
+    Applying the result of part b, we see immediately that the Galois group of
+    $f$ is $S_5$, as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 2}
+Let $K$ be a field.
+
+\subsection*{Part i}
+Let $F$ and $F'$ be two finite extensions of $K$. When the degrees of these two
+extensions are equal, show that every $K$-homomorphism $F\to F'$ is an
+isomorphism.
+\\
+\\
+\begin{proof}
+    Let $\sigma:F\to F'$ be a $K$-homomorphism. That is, $\sigma$ is a field
+    homomorphism that fixes $K\subset F,F'$. In particular, thinking of $F$ and
+    $F'$ as $K$-vector spaces, we see that $\sigma$ is a linear map. 
+    This follows immediately, since for $\alpha\in K$, $x,y\in F$,
+    \[
+        \sigma(\alpha x + y) = \sigma(\alpha)\sigma(x) + \sigma(y) =
+        \alpha\sigma(x) + \sigma(y)
+    \]
+    as desired.
+
+    Since $F$ and $F'$ have the same dimension as $K$-vector spaces, we just
+    need to show $\sigma$ is injective, and $\sigma$ will automatically be
+    bijective with a linear inverse. However, field homomorphisms are always
+    injective, so $\sigma$ is a linear isomorphism between $F$ and $F'$. Thus,
+    $\sigma^{-1}$ is a linear map, and is seen to be a $K$-homomorphism by
+    observing that 
+    \[
+    \sigma^{-1}(xy) = \sigma^{-1}(x)\sigma^{-1}(y)
+    \]
+    for all $x,y\in F'$. Indeed, since
+    \[
+    xy = \sigma(\sigma^{-1}(xy)) = \sigma(\sigma^{-1}(x))\sigma(\sigma^{-1}(y))
+    \]
+    we have that
+    \[
+        \sigma(\sigma^{-1}(xy))=\sigma(\sigma^{-1}(x)\sigma^{-1}(y))
+    \]
+    and
+    since $\sigma$ is bijective,
+    \[
+        \sigma^{-1}(xy) = \sigma^{-1}(x)\sigma^{-1}(y)
+    \]
+    Thus, $\sigma$ is an isomorphism that fixes $K$, as
+    desired.
+\end{proof}
+
+\subsection*{Part ii}
+Give an example, with justification, of two finite extensions $F$ and $F'$ of
+$K$ which have the same degree but are not isomorphic over $K$.
+\\
+\\
+\begin{proof}
+    Let $K=\Q$, and let $F = \Q(\zeta_3)$ with $\zeta_3$ a primitive $3$rd root of
+    unity, and let $F' = \Q(\sqrt[3]{2})$. Then, $F$ is the splitting field of
+    $f(x) = x^3-1$, and $\text{Gal}(F/K)=\Z/{3\Z}$. However, $F'$ is not the
+    splitting field of the minimal polynomial of $\sqrt[3]{2}$, and in
+    particular, there are only two $K$-automorphisms of $F'$: the trivial
+    automorphism, and the automorphism
+    \[
+        \sigma(\sqrt[3]{2}) = -\sqrt[3]{2}
+    \]
+    Thus, $\text{Aut}(F)\neq \text{Aut}(F')$, which implies that $F$ is not
+    isomorphic to $F'$.
+    \\
+    \\
+    To see that $F\not\cong F'$, we observe that if $F\cong F'$ via an
+    isomorphism $\sigma:F\to F'$, then $\text{Aut}(F)\cong\text{Aut}(F')$ as
+    groups.  This is given by the group homomorphism
+    \[
+        \begin{aligned}
+        \Phi:\text{Aut}(F)\to\text{Aut}(F')\\
+        \Phi(g) = \sigma\circ g\circ \sigma^{-1}
+    \end{aligned}
+    \]
+    where we observe that
+    \[
+        \Phi(gh) = \sigma gh\sigma^{-1} = \sigma g\sigma^{-1}\sigma h\sigma^{-1}
+        = \Phi(g)\Phi(h)
+    \]
+    Now, this group homomorphism is invertible by
+    \[
+\begin{aligned}
+    \Phi^{-1}:\text{Aut}(F')\to\text{Aut}(F)\\
+    \Phi^{-1}(g) = \sigma^{-1}\circ g\circ \sigma
+\end{aligned}
+    \]
+    since
+    \[
+        \Phi^{-1}\Phi(g) = \sigma^{-1}\sigma g\sigma^{-1}\sigma = g
+    \]
+    and
+    \[
+        \Phi\Phi^{-1}(g) = \sigma\sigma^{-1}g\sigma\sigma^{-1} = g
+    \]
+    and thus is an isomorphism.
+
+    Thus, since $\text{Aut}(F) = \Z/{3\Z}$ and $\text{Aut}(F') = \Z/{2\Z}$, we
+    see that $F\not\cong F'$, as desired.
+\end{proof}
+
+\subsection*{Part iii}
+let $L$ be a finite extension of $K$. Let $F$ and $F'$ be two finite extensions
+of $L$. Show that if $F$ and $F'$ are isomorphic as extensions of $L$, then they
+are isomorphic as extensions of $K$.
+\\
+\\
+\begin{proof}
+    Let $\sigma:F\to F'$ be an $L$-isomorphism of $F$ and $F'$. In particular,
+    $\sigma$ fixes $K\subset L$. Thus, $\sigma$ is a $K$-isomorphism as well,
+    and $F\cong F'$ as extensions of $K$, as desired.
+\end{proof}
+
+\subsection*{Part iv}
+Prove or disprove the converse.
+\\
+\\
+\begin{proof}
+    We disprove the statement by contradiction.
+
+    Let $K = \Q$, $L=\Q(\sqrt{2})$, $F=\Q(\sqrt[4]{2})$, and $F' =
+    \Q(i\sqrt[4]{2})$. Now, these are all intermediate fields of the extension
+    of $\Q$ to the splitting field of $x^4-2$, namely $\Q(i,\sqrt[4]{2})$. In
+    particular, we know what $\text{Gal}(\Q(i,\sqrt[4]{2})/\Q)$ looks like: it
+    is the dihedral group $D_8$, presented as
+    \[
+        \text{Gal}(\Q(i,\sqrt[4]{2})/\Q) = 
+        \langle \sigma,\tau\ |\sigma^4=1,\tau^2=1,\sigma\tau =
+        \tau\sigma^{-1}\rangle
+    \]
+    where
+    \[
+\begin{aligned}
+    \sigma(\sqrt[4]{2})= i\sqrt[4]{2}\\
+    \tau(i)= -i
+\end{aligned}
+    \]
+    In particular, these are all the automorphisms of the splitting field that
+    fix $\Q$. Thus, any isomorphism from $\Q(\sqrt[4]{2})$ to
+    $\Q(i\sqrt[4]{2})$ must be a restriction of products of these (since any
+        isomorphism of intermediate fields induces an automorphism on the
+    splitting field). In particular, the only ones which send $\Q(\sqrt[4]{2})$
+    to $\Q(i\sqrt[4]{2})$ are $\sigma$, $\tau\sigma$,$\sigma\tau$, and
+    $\tau\sigma^3$. Observe that each of these sends $\sqrt[4]{2}$ to
+    $i\sqrt[4]{2}$. So let $\sigma'$ be any such isomorphism.
+
+    $\sigma'$ does not fix $\Q(\sqrt{2})$. This is evident, since
+    \[
+        \sigma'(\sqrt{2}) = \sigma'(\sqrt[4]{2})\sigma'(\sqrt[4]{2}) =
+        -\sqrt{2}
+    \]
+    and so $\Q(\sqrt[4]{2})$ and $\Q(i\sqrt[4]{2})$ are $\Q$-isomorphic, but not
+    $\Q(\sqrt{2})$-isomorphic.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3}
+Let $F=\C(x,y)$ be the function field in two variables $x$ and $y$. Let $n\geq
+1$, and let $K = \C(x^n+y^n,xy)$.
+\subsection*{Part i}
+Let $K'=K(x^n)$, which is a subfield of $F$. Show that $K'/K$ is a quadratic
+extension.
+\\
+\\
+\begin{proof}
+    Observe that the polynomial
+    \[
+        f(s) = (s-x^n)(s-y^n) = s^2 - (x^n+y^n)s + (xy)^n
+    \]
+    is in $K[s]$. In fact, it is the minimal polynomial for $x^n$ (since neither
+    $x^n$ nor $y^n$ are in $K$), and is
+    quadratic. Thus, $K'/K$ is quadratic, as desired.
+\end{proof}
+
+\subsection*{Part ii}
+Show that $F/K'$ is cyclic of order $n$.
+\\
+\\
+\begin{proof}
+    It is clear that $F = K'(x)$, since $y = (xy)(x)^{-1}$, and so $K'(x)$
+    contains $y$. Now, the minimal polynomial for $x$ in $K'$ is
+    \[
+        f(s) = s^n - x^n = x^n(\frac{s^n}{x^n}-1) =
+        x^n\prod_{d|n}\Phi_d(\frac{s}{x})
+    \]
+    where $\Phi_d$ is the $d$th cyclotomic polynomial. This has as its roots
+    $x\zeta_n^k$ where $\zeta_n$ is a primitive $n$th root of unity, and
+    $0\leq k < n$. Clearly, this is irreducible, since if $f(s) = g(s)h(s)$,
+    then
+    \[
+        g(s) = \prod_{i\in S}(s-x\zeta_n^i)
+    \]
+    where $S\subsetneq \{1,\cdots,n\}$. However, expanding this shows that each
+    coefficient (except the first and last) contains a power of $x$ less than
+    $n$, which is not in $K'$. So, $g(s)\not\in K'[s]$, and $f(s)$ must be
+    irreducible.
+
+    Thus, the degree of the extension $F/K'$ is $n$. Furthermore, the
+    automorphism
+    \[
+\begin{aligned}
+    \sigma:F\to F\\
+    \sigma(x) = x\zeta_n
+    \sigma(y) = y\zeta_n
+\end{aligned}
+    \]
+    fixes $K'$, since $\sigma(x^n) = (\sigma(x))^n = x$, and has order $n$.
+    Thus, it exhausts the Galois group of $F/K'$, and so
+    \[
+    \text{Gal}(F/K') = \langle \sigma\rangle
+    \]
+    as desired.
+\end{proof}
+
+\subsection*{Part iii}
+Show $F/K$ is Galois, and determine its Galois group.
+\\
+\\
+\begin{proof}
+    In order to show $F/K$ is Galois, we will show that $F$ splits
+    a polynomial in $K[s]$. Namely, consider
+    \[
+        f(s) = (s^n-x^n)(s^n-y^n) = s^{2n}-(x^n+y^n)s^n + (xy)^n
+    \]
+    which is clearly in $K[s]$. In particular, this splits in $F$ with roots
+    $x\zeta_n^k$ and $y\zeta_n^k$ for $0\leq k <n$. Thus, $F/K$ is Galois of
+    degree at most $2n$. By considering the intermediate field $K'\neq F$, we
+    see that $[F:K] = [F:K'][K':K] \geq 2n$. Thus, $[F:K]=2n$. 
+
+    Observe that we have the following $K$-automorphisms of $F$
+    \[
+        \begin{aligned}
+            \sigma(x) = x\zeta_n\\
+            \sigma(y) = y\zeta_n\\
+            \tau(x) = y\\
+            \tau(y) = x
+        \end{aligned}
+    \]
+    with $\sigma^n=1$ and $\tau^2 = 1$. This forms an Abelian
+    group, since
+    \[
+        \begin{aligned}
+    \sigma\tau(x) = y\zeta_n = \tau\sigma(x)\\
+    \sigma\tau(y) = x\zeta_n = \tau\sigma(y)
+\end{aligned}
+    \]
+    Clearly, this group is $\Z/{2\Z}\times \Z/{n\Z}$.
+
+\end{proof}
+
+\newpage
+
+\section{Problem 4}
+Let $p$ be a prime number, and let $K$ denote a finite extension of $\F_p$.
+Recall that $\text{Gal}(K/\F_p)$ is generated by the Frobenius automorphism
+$\sigma(t) = t^p$.
+\subsection*{Part a}
+If $h(z) = \frac{-1}{1+z}$, for $z\in K$, $z\neq 0,-1$, show that $h^3(z) = z$.
+Hence, show that $f(x) = x^{p+1} + x^p + 1$ can only have irreducible factors of
+degree three or one.
+\\
+\\
+\begin{proof}
+    Observe first that
+    \[
+\begin{aligned}
+    h^2(z) &= \frac{-1}{1+\frac{-1}{1+z}}\\
+    &=\frac{-1(1+z)}{(1+\frac{-1}{1+z})(1+z)}\\
+    &= \frac{-(1+z)}{z}\\
+    h^3(z) &= \frac{-1}{1+\frac{-(1+z)}{z}}\\
+    &= \frac{-1(z)}{(1+\frac{-(1+z)}{z})(z)}\\
+    &=\frac{-z}{-1} = z
+\end{aligned}
+    \]
+    as desired.
+
+    Now, we consider $f(x) = x^{p+1} + x^p + 1$. Rewriting this, we see that for
+    $x\neq 0,-1$,
+    \[
+        \begin{aligned}
+        f(x) &= x\sigma(x) + \sigma(x) + 1\\
+        &=(x+1)\sigma(x) + 1\\
+        &=(x+1)(\sigma(x) - \frac{-1}{1+x})\\
+        &=(x+1)(\sigma(x) - h(x))
+    \end{aligned}
+    \]
+    Thus, if $\alpha\neq 0,-1$ is a root of $f$, then $\sigma(\alpha) =
+    h(\alpha)$. So, for $\alpha$ not in $\F_p$, the extension
+    $\F_p(\alpha)/\F_p$ has Galois group generated by $\sigma(t)$. But on the
+    roots of $f$, $\sigma(t) = h(t)$ has order $3$, and so the Galois group of
+    $\F_p(\alpha)/\F_p$ has order $3$. Therefore, the minimal polynomial for
+    $\alpha$ has degree $3$, and so the irreducible factors of $f$ are either
+    linear (if $\alpha\in \F_p$) or of degree $3$ (the minimal polynomial for
+        $\alpha$).
+\end{proof}
+
+\subsection*{Part b}
+Show further that $f$ has at most two linear factors over $\F_p$, and that if
+$p\neq 2$, $f$ has such factors if and only if $-3$ is a square in $\F_p$.
+\\
+\\
+\begin{proof}
+    We observe that
+    \[
+        h(z) = \frac{-1}{1+z}
+    \]
+    is the identity only at $\alpha_{\pm}=\frac{-1\pm\sqrt{-3}}{2}$ (which is
+    obtained by solving the quadratic $z=\frac{-1}{1+z}$). In particular, this
+    means that if $\beta\neq \alpha_{\pm}$ is a root of $f$, then the extension
+    $\F_p(\beta)/{\F_p}$ is strictly a degree three extension with Galois group
+    generated by $h$. Thus, $f$ can have at most two linear factors,
+    specifically $\alpha_{\pm}$.
+
+    Now, if $p=2$, then $2=0$, and so $\alpha_{\pm}\not\in \F_2$, since it would
+    require dividing by zero. However, if $p\neq 2$, and $-3$ is a square in
+    $\F_p$, then $\alpha_{\pm}\in\F_p$, and so
+    \[
+        \begin{aligned}
+        f(\alpha_{\pm}) &= (\alpha_{\pm}+1)(\sigma(\alpha_{\pm}) -
+        h(\alpha_{\pm}))\\
+        &=(\alpha_{\pm}+1)(\alpha_{\pm} - \alpha_{\pm}) = 0
+    \end{aligned}
+    \]
+    where we have used the fact that $\sigma(\alpha)=\alpha$ for
+    $\alpha\in\F_p$. Thus, $f$ has $\alpha_{\pm}$ as two of its roots, and these
+    roots are in $\F_p$, so $f$ has two linear factors.
+
+    Conversely, if $-3$ is not a square in $\F_p$, then
+    $\alpha_{\pm}\not\in\F_p$. Therefore, $f$ does not have $\alpha_{\pm}$ as
+    linear factors over $\F_p$. Since these are the only possible linear factors of $f$, $f$
+    must not have any linear factors, as desired.
+\end{proof}
+
+\subsection*{Part c}
+Deduce that $-3$ is a square in $\F_p$ for primes $p=3n+1$ but not for primes
+$p=3n+2$.
+\\
+\\
+\begin{proof}
+    Clearly, $f$ has degree $p+1$. Thus, if $p=3n+1$, $f$ has $3n+2$ roots.
+    Since the irreducible factors of $f$ are of degree $3$ or $1$, there must be
+    exactly two linear factors of $f$. Thus, $-3$ is a square in $\F_{3n+1}$.
+
+    However, for $p=3n+2$, $f$ has degree $3(n+1)$, and thus has $3(n+1)$ roots.
+    Since the irreducible factors of $f$ are of degree $3$ or $1$, with at most
+    two factors being linear, all irreducible factors must be of degree $3$, and
+    therefore $-3$ is not a square in $\F_{3n+2}$.
+\end{proof}
+
+\end{document}
