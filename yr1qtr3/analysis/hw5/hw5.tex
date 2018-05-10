@@ -129,8 +129,67 @@ $P_FP_E=P_EP_F$.
         E^{\perp}\cap F^{\perp}
     \]
 
-    To see this, suppose first that $P_E$ and $P_F$ commute. Then,
-\end{proof}<++>
+    To see this, suppose first that $P_E$ and $P_F$ commute. Then, consider the
+    Abelian von Neumann algebra $W^*(P_E,P_F,I)$. Like before, we use the Borel
+    functional calculus to identify $W^*(P_E,P_F,I)$ with $L^{\infty}(X,\mu)$
+    acting on $\tilde{H} = \int_X^{\oplus}H(x)d\mu(x)$, which is unitarily
+    equivalent to $H$ (in the sense that there is a unitary transformation $U$
+    such that $\tilde{H}=UH$ and $UW^*(P_E,P_F,I)U^*=L^{\infty}(X,\mu)$).
 
+    Under this identification, $P_E\mapsto M_{\chi_S}$, and $P_F\mapsto
+    M_{\chi_{S'}}$ for some measurable subsets $S,S'\subset X$. In particular,
+    this decomposes $\tilde{H}$ into four orthogonal components
+    \[
+        \begin{aligned}
+            \tilde{H} &= \int_X^{\oplus}H(x)d\mu(x)\\
+            &= \int_{S\cap S'}^{\oplus}H(x)d\mu(x)\oplus 
+            \int_{S\cap S'^c}^{\oplus}H(x)d\mu(x)\oplus
+            \int_{S'\cap S^c}^{\oplus}H(x)d\mu(x)\oplus
+            \int_{S^c\cap S'^c}^{\oplus}H(x)d\mu(x)
+        \end{aligned}
+    \]
+    which translates into the decomposition on $H$ as
+    \[
+        H = E\cap F\oplus E\cap F^{\perp}\oplus E^{\perp}\cap F\oplus
+        E^{\perp}\cap F^{\perp}
+    \]
+    as desired.
+    \\
+    \\
+    Conversely, suppose $H$ can be decomposed this way. Then, let $v\in H$ be
+    decomposed as 
+    \[
+        v= v_1 + v_2 + v_3 + v_4
+    \]
+    where $v_1\in E\cap F$, $v_2\in E\cap F^{\perp}$, $v_3\in E^{\perp}\cap F$
+    and $v_4\in E^{\perp}\cap F^{\perp}$.
+
+    We compute the effect of $P_EP_F$ and $P_FP_E$ directly.
+    \[
+\begin{aligned}
+    P_EP_F(v) &= P_EP_F(v_1+v_2+v_3+v_4)\\
+    &= P_E(v_1 + v_3)\\
+    &= v_1\\
+    P_FP_E(v) &= P_FP_E(v_1+v_2+v_3+v_4)\\
+    &=P_F(v_1+v_2)\\
+    &=v_1
+\end{aligned}
+    \]
+    and thus $P_EP_F=P_FP_E$ as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3}
+Let $E,F$ be closed subspaces of a Hilbert space $H$. An operator $U$ is said to
+be a partial isometry from $E$ to $F$ if $U|_E$ is an isometry onto $F$, and
+$U|_{E^{\perp}}=0$.
+Prove that $U$ is a partial isometry $\iff$ $U^*U$ is a projection $\iff$ $UU^*$
+is a projection.
+\\
+\\
+\begin{proof}
+    
+\end{proof}<++>
 
 \end{document}
