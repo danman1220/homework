@@ -189,7 +189,84 @@ is a projection.
 \\
 \\
 \begin{proof}
-    
-\end{proof}<++>
+    Suppose first that $U$ is a partial isometry from $E$ to $F$. I assert that
+    $U^*U = P_E$. To see this, suppose $e\in E$, $v\in H$ and let $v=e'+v'$
+    where $e'\in E$ and $v'\in E^{\perp}$. Then,
+    \[
+        \begin{aligned}
+            \langle U^*Ue|v\rangle &= \langle U^*Ue|e'+v'\rangle\\
+            &= \langle Ue|Ue'\rangle + \langle Ue|Uv'\rangle\\
+            &= \langle e|e'\rangle + 0\\
+            \implies \langle U^*Ue-e|v\rangle&=0
+        \end{aligned}
+    \]
+    and since this holds for all $v\in H$, $U^*Ue-e=0$ and thus $U^*Ue=e$ and
+    $U^*U$ is the identity on $E$.
+
+    Furthermore, for $v'\in E^{\perp}$,
+    \[
+        U^*Uv'=U^*(0) = 0
+    \]
+    and so $U^*U$ is the zero map on $E^{\perp}$. Thus, $U^*U$ agrees with $P_E$
+    at all points, so $U^*U=P_E$ as desired.
+    \\
+    \\
+    Conversely, suppose $U^*U$ is a projection $P_E$ for some closed subspace
+    $E$. Define $F=U(E)$. We will first show that $U$ is an isometry of $E$ onto
+    $F$. To see this, suppose $e,e'\in E$. We calculate directly
+    \[
+\begin{aligned}
+    \langle Ue|Ue'\rangle &= \langle U^*Ue|e'\rangle\\
+    &=\langle P_Ee|e'\rangle\\
+    &=\langle e|e'\rangle
+\end{aligned}
+    \]
+    and thus $U$ is an isometry from $E$ to $F$. Note that this immediately
+    implies that $F$ is a closed subspace. Finally, we show that
+    $U|_{E^{\perp}}=0$. Let $v'\in E^{\perp}$, Then,
+    \[
+\begin{aligned}
+    \|Uv'\| &=\langle Uv'|Uv'\rangle\\
+    &=\langle U^*Uv'|v'\rangle\\
+    &=\langle 0|v'\rangle = 0
+\end{aligned}
+    \]
+    and so $U^*U|_{E^{\perp}}=0$ as desired. Thus, $U$ is a partial isometry.
+    \\
+    \\
+    Finally, we show that if $U$ is a partial isometry, then $U^*$ is a partial
+    isometry, which will complete the proof. So, suppose $U$ is a partial
+    isometry. We will show that $U^*$ is a partial isometry from $F$ to $E$.
+    First, we check that $U^*|_F$ is an isometry. Now, for each $f\in F$, there
+    is some $e\in E$ with $Ue=f$. Thus, for $e,e'\in E$, $f,f'\in F$ with
+    $Ue=f,Ue'=f'$,
+    \[
+        \begin{aligned}
+            \langle U^*f|U^*f'\rangle &= \langle U^*Ue|U^*Ue\rangle\\
+            &=\langle P_Ee|P_Ee'\rangle\\
+            &=\langle e|e'\rangle\\
+            &=\langle Ue|Ue'\rangle\\
+            &=\langle f|f'\rangle
+        \end{aligned}
+    \]
+    and so $U^*$ is an isometry from $F$ to $E$.
+    Finally, we show that $U^*|_{F^{\perp}}=0$. This is immediate, since
+    \[
+        \begin{aligned}
+            \ker U^* = U(H)^{\perp} = F^{\perp}
+        \end{aligned}
+    \]
+    where we used the identity $\ker A^* = A(H)^{\perp}$ for all bounded
+    operators $A$. 
+
+    Note that this completes the proof. If $U$ is a partial isometry, then $U^*$
+    is a partial isometry, which implies that $U^{**}U^*=UU^*$ is a projection.
+    Similarly, if $UU^*=U^{**}U^*$ is a projection, then $U^*$ is a partial
+    isometry, and thus $U^{**}=U$ is a partial isometry as well.
+\end{proof}
+
+\newpage
+
+\section*{Problem 4}
 
 \end{document}
