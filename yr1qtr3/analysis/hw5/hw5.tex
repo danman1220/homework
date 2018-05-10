@@ -48,7 +48,6 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
-\newcommand{\Z}{\mathbb{Z}}
 
 \newtheorem{lemma}{Lemma}
 %----------------------------------------------------------------------------------------
@@ -59,9 +58,9 @@
 
 \title{	
 \normalfont \normalsize 
-\textsc{<<CLASS>>} \\ [25pt] % Your university, school and/or department name(s)
+\textsc{Analysis} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
-\huge <<TITLE>> \\ % The assignment title
+\huge Homework 5 \\ % The assignment title
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
 
@@ -74,4 +73,64 @@
 \maketitle % Print the title
 
 % Problems
+\section*{Problem 1}
+Let $E,F$ be closed subspaces of a Hilbert space. Prove that $P_EP_F=P_E$ if and
+only if $E\subseteq F$.
+\\
+\\
+\begin{proof}
+    Suppose first that $P_EP_F=P_E$. Then, in particular,
+    \[
+        P_E^* = (P_EP_F)^* = P_F^*P_E^* = P_FP_E = P_E
+    \]
+    by self-adjointness of projections. Thus, $P_EP_F=P_FP_E=P_E$, and the
+    projections commute. Thus, the von Neumann algebra $W^*(P_E,P_F,I)$ is
+    Abelian, and is isometrically $*$-isomorphic to $L^{\infty}(X,\mu)$ for some
+    measure space $(X,\mu)$. In particular, the projections $P_E,P_F$ get sent
+    to self-adjoint idempotents $P_E\mapsto M_{\chi_S}$ and $P_F\mapsto
+    M_{\chi_{S'}}$ for some measurable subsets $S,S'\subset X$.
+
+    Now, the requirement $P_FP_E=P_E$ corresponds to the requirement
+    \[
+        M_{\chi_{S'}}M_{\chi_S}=M_{\chi_S}
+    \]
+    which means that $S\subset S'$. This, in turn, implies that $E\subset F$.
+
+    Indeed, $E$ is the subspace of $H$ on which $P_E$ is the identity, which
+    corresponds to the subspace
+    \[
+        \tilde{E} = \int_S^{\oplus}H(x)d\mu(x)
+    \]
+    on which $M_{\chi_S}$ is the identity. Similarly,
+    \[
+        \tilde{F} = \int_{S'}^{\oplus}H(x)d\mu(x)
+    \]
+    Clearly, $\tilde{E}\subset \tilde{F}$ (since $S\subset S'$) and so $E\subset
+    F$ as well.
+    \\
+    \\
+    For the converse direction, assume that $E\subset F$. Then, on $F$, $P_F =
+    I_F$, and $P_FP_E = I_FP_E = P_E$. Furthermore, on $F^{\perp}$, $P_FP_E = 0
+    = P_E$. Thus, on all of $H=F\oplus F^{\perp}$, $P_FP_E=P_E$ as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 2}
+Characterize the closed subspaces $E,F$ of a Hilbert space $H$ satisfy
+$P_FP_E=P_EP_F$.
+\\
+\\
+\begin{proof}
+    I assert that $P_E$ and $P_F$ commute if and only if $H$ can be decomposed
+    into the four orthogonal components
+    \[
+        H = E\cap F\oplus E\cap F^{\perp}\oplus E^{\perp}\cap F\oplus
+        E^{\perp}\cap F^{\perp}
+    \]
+
+    To see this, suppose first that $P_E$ and $P_F$ commute. Then,
+\end{proof}<++>
+
+
 \end{document}
