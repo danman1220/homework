@@ -49,6 +49,8 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
 
+\newcommand{\tr}{\textrm{tr}}
+
 \newtheorem{lemma}{Lemma}
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
@@ -268,5 +270,177 @@ is a projection.
 \newpage
 
 \section*{Problem 4}
+Prove that the subspace of self-adjoint operators on $B(\C^2)$ is a subset of
+the linear subspace spanned (over $\R$) by $I$ and the three Pauli matrices
+\[
+\sigma_1 =
+\begin{bmatrix}
+    1&0\\
+    0&-1
+\end{bmatrix}
+,\ 
+\sigma_2 = 
+\begin{bmatrix}
+    0&1\\
+    1&0
+\end{bmatrix}
+,\ 
+\sigma_3 = 
+\begin{bmatrix}
+    0&i\\
+    -i&0
+\end{bmatrix}
+\]
+
+and prove that the span of $\{\sigma_i\}_{i=1}^3$ is isometrically isomorphic to
+a three-dimensional real Hilbert space under the operator norm.
+\\
+\\
+\begin{proof}
+    We observe first that for any $T\in B(\C^2)$ self-adjoint, we have the
+    condition
+    \[
+        T^i_j = \overline{T^j_i}
+    \]
+    In particular,
+    \[
+        \begin{aligned}
+            T^1_1 = \overline{T^1_1}\\
+            T^2_2 = \overline{T^2_2}\\
+        \end{aligned}
+    \]
+    and so $T^i_i$ is real. Furthermore, we have the relation
+    \[
+        T^1_2 = \overline{T^2_1}
+    \]
+    Finally, we observe that we can decompose $T$ into a scalar part and a
+    trace-free part by
+    \[
+\begin{aligned}
+    C = T-\tr(T)I\\
+    T = \tr(T)I + C\\
+\end{aligned}
+    \]
+
+    Now we are ready to show that $T$ is a linear combination of $I$ and the
+    Pauli matrices. In particular, we will show that $C$ is a linear combination
+    of the Pauli matrices.
+
+    For $C$, we have the relations
+    \[
+        \begin{aligned}
+        C^1_1 = -C^2_2\\
+        C^1_2 = \overline{C^2_1}
+    \end{aligned}
+    \]
+    as well as the requirement that $C^1_1$ is real. Thus, we have three degrees
+    of freedom. That is,
+    \[
+        C = 
+        \begin{bmatrix}
+            \alpha &\beta+\gamma i\\
+            \beta-\gamma i&-\alpha
+        \end{bmatrix}
+    \]
+    which decomposes as
+    \[
+        C = \alpha\sigma_1 + \beta\sigma_2 +\gamma\sigma_3
+    \]
+    and so
+    \[
+        T = \tr(T)I + C
+    \]
+    is a linear combination of $I$ and $\{\sigma_i\}_{i=1}^3$ as desired.
+    \\
+    \\
+    Next, we show that the span of $\{\sigma_i\}_{i=1}^3$ under the operator
+    norm is isometrically isomorphic to $\R^3$. To do so, we will show that the
+    operator norm coincides with the pullback metric from $\R^3$. Specifically,
+    we define a linear isomorphism
+    \[
+        \begin{aligned}
+        \Phi:\langle \sigma_i\rangle_{i=1}^3\to \R^3\\
+        \Phi(\sigma_i) = e_i
+    \end{aligned}
+    \]
+    where $\{e_i\}$ is an orthonormal basis for $\R^3$ with its usual inner
+    product. In particular, if we denote the inner product of $\R^3$ as $\eta$,
+    we can define $\Phi^*(\eta)$ by
+    \[
+        \Phi^*(\eta)(u,v) = \eta(\Phi(u),\Phi(v))
+    \]
+    In order to show that this metric coincides with the operator norm, we have
+    to show that
+    \[
+        \|\alpha\sigma_1+\beta\sigma_2+\gamma\sigma_3\|^2 =
+        \Phi^*(\eta)(\alpha\sigma_1+\beta\sigma_2+\gamma\sigma_3,
+        \alpha\sigma_1+\beta\sigma_2+\gamma\sigma_3) = \alpha^2+\beta^2+\gamma^2
+    \]
+    Now, since $\sigma_i$ are all self-adjoint, any (real) linear combination of
+    them will be as well. Thus,
+    \[
+    \|\alpha\sigma_1+\beta\sigma_2+\gamma\sigma_3\|^2 =
+\|(\alpha\sigma_1+\beta\sigma_2+\gamma\sigma_3)^2\|
+    \]
+    We compute the right-hand side directly
+    \[
+\begin{aligned}
+    (\alpha\sigma_1+\beta\sigma_2+\gamma\sigma_3)^2 &=
+    \alpha^2\sigma_1^2 + \beta^2\sigma_2^2  + \gamma\sigma_3^2 +
+    \alpha\beta\{\sigma_1,\sigma_2\} + \alpha\gamma\{\sigma_1,\sigma_3\} +
+    \beta\gamma\{\sigma_2,\sigma_3\}
+\end{aligned}
+    \]
+    where $\{\sigma_i,\sigma_j\}$ is the anticommutator of $\sigma_i$ and
+    $\sigma_j$. Now, it is well-known that the Pauli matrices satisfy the
+    commutation relations
+    \[
+        [\sigma_i,\sigma_j]=2\varepsilon_{ijk}\sigma_k
+    \]
+    as well as the relation
+    \[
+        \sigma_i^2 = I
+    \]
+    (where $\varepsilon_{ijk}$ is the levi-civita symbol) which forces
+    \[
+        \sigma_i\sigma_j = \varepsilon_{ijk}\sigma_k + \delta_{ij}
+    \]
+    and so
+    \[
+        \begin{aligned}
+        \{\sigma_i,\sigma_j\} &= \sigma_i\sigma_j + \sigma_j\sigma_i\\
+        &= \varepsilon_{ijk}\sigma_k + \delta_{ij} + \varepsilon_{jik}\sigma_k +
+        \delta_{ji}\\
+        &= \varepsilon_{ijk}\sigma_k - \varepsilon_{ijk}\sigma_k +
+        2\delta_{ij}\\
+        &= 2\delta_{ij}
+    \end{aligned}
+    \]
+
+    Thus,
+    \[
+\begin{aligned}
+    (\alpha\sigma_1+\beta\sigma_2+\gamma\sigma_3)^2 &=
+    \alpha^2\sigma_1^2 + \beta^2\sigma_2^2  + \gamma\sigma_3^2 +
+    \alpha\beta\{\sigma_1,\sigma_2\} + \alpha\gamma\{\sigma_1,\sigma_3\} +
+    \beta\gamma\{\sigma_2,\sigma_3\}\\
+    &= 
+    \alpha^2\sigma_1^2 + \beta^2\sigma_2^2  + \gamma\sigma_3^2\\
+    &=(\alpha^2+\beta^2+\gamma^2)I
+\end{aligned}
+    \]
+    and so
+    \[
+    \|\alpha\sigma_1 + \beta^2\sigma_2 + \gamma\sigma_3\|^2 =
+    \|(\alpha^2+\beta^2+\gamma^2)I\| = (\alpha^2+\beta^2+\gamma^2)\|I\|
+    =(\alpha^2+\beta^2+\gamma^2)
+    \]
+    as desired. Thus, the pullback metric coincides with the operator norm, and
+    $\Phi$ is a linear isometric isomorphism, as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 5}<++>
 
 \end{document}
