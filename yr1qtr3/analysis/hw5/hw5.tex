@@ -395,7 +395,7 @@ a three-dimensional real Hilbert space under the operator norm.
     $\sigma_j$. Now, it is well-known that the Pauli matrices satisfy the
     commutation relations
     \[
-        [\sigma_i,\sigma_j]=2\varepsilon_{ijk}\sigma_k
+        [\sigma_i,\sigma_j]=2i\varepsilon_{ijk}\sigma_k
     \]
     as well as the relation
     \[
@@ -403,15 +403,15 @@ a three-dimensional real Hilbert space under the operator norm.
     \]
     (where $\varepsilon_{ijk}$ is the levi-civita symbol) which forces
     \[
-        \sigma_i\sigma_j = \varepsilon_{ijk}\sigma_k + \delta_{ij}
+        \sigma_i\sigma_j = i\varepsilon_{ijk}\sigma_k + \delta_{ij}
     \]
     and so
     \[
         \begin{aligned}
         \{\sigma_i,\sigma_j\} &= \sigma_i\sigma_j + \sigma_j\sigma_i\\
-        &= \varepsilon_{ijk}\sigma_k + \delta_{ij} + \varepsilon_{jik}\sigma_k +
+        &= i\varepsilon_{ijk}\sigma_k + \delta_{ij} + i\varepsilon_{jik}\sigma_k +
         \delta_{ji}\\
-        &= \varepsilon_{ijk}\sigma_k - \varepsilon_{ijk}\sigma_k +
+        &= i\varepsilon_{ijk}\sigma_k - i\varepsilon_{ijk}\sigma_k +
         2\delta_{ij}\\
         &= 2\delta_{ij}
     \end{aligned}
