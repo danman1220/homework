@@ -620,4 +620,34 @@ lies in $\mathscr{A}$.
     $T^{-1}$ is in $C^*(T)\subset\mathscr{A}$, as desired.
 \end{proof}
 
+\newpage
+
+\section*{Problem 9}
+Let $H$ be a separable Hilbert space, and let $\mathscr{M}\subset B(H)$ be a von
+Neumann algebra containing $T$ a self-adjoint operator. Let $E=\overline{T(H)}$.
+Prove that $P_E\in \mathscr{M}$.
+\\
+\\
+\begin{proof}
+    Recall that $W^*(T)$ is the minimal unital von Neumann algebra containing $T$.
+    Thus, $W^*(T)\subset \mathscr{M}$. We will show that $P_E\in W^*(T)$.
+
+    Recall that the spectral theorem for self-adjoint operators gives us a
+    projection-valued measure on the spectrum $\sigma(T)$. Now, if $T$ has
+    trivial kernel, then $E=H$, and $P_E=I$, which is always in $W^*(T)$ by
+    definition. If $T$ has a kernel, then $o\in\sigma(T)$, and in particular
+    (letting $F$ be the projection-valued measure associated to $T$)
+    \[
+        F(\{0\}) = P_{\ker(T)}
+    \]
+    since $0$ is in the point spectrum of $T$, and the projection-valued measure
+    on singletons in the point spectrum yields the projection onto the
+    associated eigenspace. Thus,
+    \[
+        1-P_{\ker(T)} = F(\chi_{\sigma(T)\setminus\{0\}})
+    \]
+    is projection onto $\ker(T)^{\perp} = \overline{T(H)}$ and is in $W^*(T)$ as
+    desired.
+\end{proof}
+
 \end{document}
