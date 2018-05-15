@@ -441,6 +441,183 @@ a three-dimensional real Hilbert space under the operator norm.
 
 \newpage
 
-\section*{Problem 5}<++>
+\section*{Problem 5}
+Let $H$ be a separable Hilbert space. Prove $T^*T$ is positive for all $T\in
+B(H)$. Prove that every positive operator is equal to $T^*T$ for some $T\in
+B(H)$. Can we ensure $T$ is self-adjoint?
+\\
+\\
+\begin{proof}
+    First, we show $T^*T$ is positive. That is, we need to show that
+    \[
+\langle T^*T\eta|\eta\rangle\geq 0\forall \eta\in H
+    \]
+    This follows immediately, since
+    \[
+        \begin{aligned}
+            \langle T^*T\eta|\eta\rangle &= \langle T\eta|T\eta\rangle\\
+            &= \|T\eta\|^2 \geq 0
+        \end{aligned}
+    \]
+    and thus $T^*T$ is positive.
+    \\
+    \\
+    Next, we show that every positive operator can be written this way. In
+    particular, let $A$ be a positive operator. We know that $\sigma(A)\subset
+    [0,\infty)$, since $A$ is positive. Therefore, the square root function is
+    defined on $\sigma(A)$. Through the continuous functional calculus, we can
+    define
+    \[
+        \sqrt{A} = \int_{\sigma(A)}\sqrt{z}dE(z)
+    \]
+    for $E$ the projection-valued measure associated to $A$ (so that $A
+    =\int_{\sigma(A)}zdE(z)$). This satisfies
+    \[
+        \begin{aligned}
+        \sqrt{A}\sqrt{A} &=
+        \int_{\sigma(A)}\sqrt{z}dE(z)\int_{\sigma(A)}\sqrt{z}dE(z)\\
+        &= \int_{\sigma(A)}\sqrt{z}\sqrt{z}dE(z)\\
+        &=\int_{\sigma(A)}zdE(z) = A
+    \end{aligned}
+    \]
+    and so by setting $T=T^*=\sqrt{A}$ we achieve the desired result.
+\end{proof}
+
+\newpage
+
+\section*{Problem 6}
+Let $H$ be a separable Hilbert space, and let $T\in B(H)$ be self-adjoint.
+Suppose $\sigma(T) = [-\varepsilon,\varepsilon]\cup
+[1-\varepsilon,1+\varepsilon]$. Prove there is a projection $P$ for which
+$\|T-P\|\leq \varepsilon$.
+\\
+\\
+\begin{proof}
+    Let $E$ be the projection-valued measure associated to $T$, so that
+    \[
+\begin{aligned}
+    T &= \int_{\sigma(T)}zdE(z)\\
+    I &= \int_{\sigma(T)}dE(z)
+\end{aligned}
+    \]
+    and define
+    \[
+        P = \int_{\sigma(T)}\chi_{[1-\varepsilon,1+\varepsilon]}(z)dE(z)
+        = E([1-\varepsilon,1+\varepsilon])
+    \]
+    which is a projection. Then,
+    \[
+        \begin{aligned}
+            T-P &=
+            \int_{\sigma(T)}(z-\chi_{[1-\varepsilon,1+\varepsilon]}(z))dE(z)\\
+        \end{aligned}
+    \]
+    Let $f=z-\chi_{[1-\varepsilon,1+\varepsilon]}(z)$, defined on $\sigma(T)$.
+    Now, $\|f\|_{\infty} = \varepsilon$, and so
+    \[
+        \begin{aligned}
+        \|T-P\|^2 &= \sup_{h\in H,\|h\|=1}\langle \int fdE h|\int fdE h\rangle\\
+        &=\sup_{h\in H,\|h\|=1}\langle\int \bar{f}dE\int fdE h|h\rangle\\
+        &=\sup_{h\in H,\|h\|=1}\langle \int |f|^2dE h|h\rangle\\
+        &=\sup_{h\in H,\|h\|=1}\int |f|^2d\mu_{h,h}\\
+        &\leq \sup_{h\in H,\|h\|=1}\||f|^2\|_{\infty}\int d\mu_{h,h}\\
+        &\leq \sup_{h\in H,\|h\|=1}\||f|\|^2_{\infty}\int d\mu_{h,h}\\
+        &= \sup_{h\in H,\|h\|=1}\||f|\|^2_{\infty}\|h\|^2 = \||f|\|^2_{\infty}
+    \end{aligned}
+    \]
+    where $\mu_{h,g}$ is the induced (complex) measure defined as
+    \[
+        \mu_{h,g}(S) = \langle E(S)h|g\rangle
+    \]
+    Thus,
+    \[
+        \|T-P\|\leq \|f\|_{\infty} = \varepsilon
+    \]
+    as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 7}
+Let $H$ be a separable complex Hilbert space, $T\in B(H)$ self-adjoint, and
+suppose $T$ is invertible. Find a continuous path (with respect to the norm
+topology) from $T$ to $I$ that stays in $GL(H)\subset B(H)$ the invertible
+elements of $B(H)$. Can we also ensure the path stays in the self-adjoint subset
+of $GL(H)$?
+\\
+\\
+\begin{proof}
+    Recall that every operator $T\in B(H)$, $T$ has a polar decomposition
+    \[
+        T=PU
+    \]
+    where $P$ is positive and $U$ is a partial isometry. Furthermore, if $T$ is
+    invertible, then $U$ is unitary. So, let $T$ be decomposed as such.
+    Furthermore, we write
+    \[
+        \begin{aligned}
+            P=\exp(Q)\\
+            U=\exp(iH)
+        \end{aligned}
+    \]
+    for self-adjoint $Q$ and $H$ ($Q$ is just $\log(P)$, and $H$ is guaranteed
+    to exist for unitary operators as the generator for $U$).
+
+    Now, we can write
+    \[
+        T = \exp(Q+iH)
+    \]
+    and define a one-parameter group of operators
+    \[
+        T_t = \exp(t(Q+iH))
+    \]
+    with the property that $T_0 = I$, $T_1=T$, and $T_tT_{-t}=I$ for all $t$.
+    Thus, this one-parameter group is a subset of $GL(H)$, and has endpoints at
+    $I$ and $T$, as desired. Furthermore, it is continuous in $T$, since
+    \[
+        T_t = \exp(tQ)\exp(tiH)
+    \]
+    and $\exp(tQ),\exp(tiH)$ are both continuous with respect to $t$, so their
+    product is as well.
+
+    Now, we cannot guarantee that any path will stay in the self-adjoint subset
+    of $GL(H)$. Take for a counterexample $B(H)=H=\C$, $T=-1$. The self-adjoint
+    invertible operators in $\C$ are $\R\setminus\{0\}$, which has two path
+    components. $-1$ and $1$ are not in the same path-component, so there cannot
+    be a path that joins them in the self-adjoint subset of $\C$.
+\end{proof}
+
+\newpage
+
+\section*{Problem 8}
+Let $H$ be a separable Hilbert space, and $\mathscr{A}\subset B(H)$ a $C^*$
+algebra containing $T$ a self-adjoint invertible operator. Prove that $T^{-1}$
+lies in $\mathscr{A}$.
+\\
+\\
+\begin{proof}
+    Recall that $C^*(T)$ is the minimal unital $C^*$ algebra containing $T$.
+    In particular, $C^*(T)\subset \mathscr{A}$. So, we will show that
+    $T^{-1}\in\mathscr{A}$.
+
+    Recall that the continuous functional calculus gives us a isometric
+    $*$-isomorphism (say, $\gamma$) between $C^*(T)$ and $C(\sigma(T))$ in the
+    sup norm. In particular, since $T$ is invertible, $0\not\in\sigma(T)$, and
+    so the function $f(z) = z^{-1}$ is well-defined. Furthermore, we know that
+    \[
+        \gamma(T)=z
+    \]
+    and so
+    \[
+\begin{aligned}
+    I &= \gamma^{-1}(1)\\
+    &= \gamma^{-1}(zz^{-1})\\
+    &= \gamma^{-1}(z)\gamma^{-1}(z^{-1})\\
+    &= T\gamma^{-1}(z^{-1})
+\end{aligned}
+    \]
+    and thus $\gamma^{-1}(z^{-1})$ is the inverse of $T$, as desired. Thus,
+    $T^{-1}$ is in $C^*(T)\subset\mathscr{A}$, as desired.
+\end{proof}
 
 \end{document}
