@@ -1,0 +1,248 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Geometry} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Homework 3 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+Prove the following inequality. Let $f:[0,\pi]\to\R$ be a real $C^2$ function
+such that $f(0)=f(\pi)=0$. Then
+\[
+    \int_0^{\pi}f^2dt \leq\int_{0}^{\pi}(f')^2dt
+\]
+with equality if and only if $f(t) = c\sin(t)$.
+\\
+\\
+\begin{proof}
+    Let $\gamma$ be a normalized geodesic joint the antipodal points $p,-p$ of
+    $S^2$. Let $v(t)$ be a parallel field along $\gamma$ with $g(v,\gamma')=0$,
+    $\|v\|=1$. Let $V = fv$. We calculate
+    \[
+        \begin{aligned}
+            I_{\pi}(V,V) &= \int_{0}^{\pi}g(V',V')
+            -g(R(\gamma',V)\gamma',V)dt\\
+            &= \int_0^{\pi}g(f'v,f'v) - f^2K(\gamma',v)dt\\
+            &=\int_0^{\pi}(f')^2\|v\|^2 - f^2(1)dt\\
+            &=\int_0^{\pi}(f')^2dt - \int_0^{\pi}f^2dt
+            &\geq 0
+        \end{aligned}
+    \]
+    where the last line follows from the Morse index theorem. This establishes
+    the inequality.
+
+    Note that equality holds if and only if $I_{\pi}(V,V)=0$, which implies that
+    $V$ is a Jacobi field. Thus, it must satisfy the Jacobi equation
+    \[
+        f''(t) + K(\gamma',v)f(t) = 0
+    \]
+    which, on $S^2$, is just
+    \[
+        f''(t) + f(t) = 0
+    \]
+    with Dirichlet boundary conditions. This is solved only when $f(t) =
+    c\sin(t)$ for some constant $c$, as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 2}
+Let $M^2$ be a complete simply connected $2$-dimensional Riemannian manifold.
+Suppose that for each point $p\in M$, the locus $C(p)$ of first conjugate points
+to $p$ reduces to a unique $q\neq p$ and that $d(p,C(p))=\pi$. Prove that if the
+sectional curvature $K$ of $M$ satisfies $K\leq 1$, then $M$ is isometric to the
+sphere $S^2$ with $K=1$.
+\\
+\\
+\begin{proof}
+    Let $J$ be a Jacobi field along a normalized geodesic $\gamma$ joining $p$
+    to $q$ with $J(0)=J(\pi)=0$ and $g(J,\gamma')=0$. Let $\{e_i,\gamma'\}$ be
+    an orthonormal parallel frame to $\gamma$, and write
+    \[
+        J = a^ie_i
+    \]
+    Define $K(t) = K(\gamma',J)$. We calculate
+    \[
+\begin{aligned}
+    0 = I_{\pi}(J,J) &= -\int_0^{\pi}g(J'' + R(\gamma',J)\gamma',J)dt\\
+    &= -\int_0^{\pi}g(J'',J)dt -\int_0^{\pi}K(t)\|J\|^2dt\\
+    &= -\int_0^{\pi}a''^ia_idt - \int_0^{\pi}K(t)a^ia_idt\\
+    &= \int_0^{\pi}a'^ia'_idt - \int_0^{\pi}K(t)a^ia_idt &\text{using
+    integration by parts}\\
+    &\geq \int_0^{\pi}a^ia_idt - \int_0^{\pi}K(t)a^ia_idt &\text{by problem 1}\\
+    &=\int_0^{\pi}a^ia_i(1-K(t))dt\geq 0
+\end{aligned}
+    \]
+    and thus $K(t)=1$ for all $t$, and $M$ is actually $S^2$.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3}
+Let $a:\R\to\R$ be a differentiable function with $a(t)\geq 0$ for all $t$, and
+$a(0)>0$. Prove that the solution to the differential equation
+\[
+    (\partial_t^2 + a)\phi = 0
+\]
+with initial conditions $\phi(0)=1,\phi'(0)=0$ has at least one positive zero
+and one negative zero.
+\\
+\\
+\begin{proof}
+    Letting $b(t) = \sqrt{a(t)}$, we see that this differential equation factors
+    as
+    \[
+        (\partial_t^2 + b^2)\phi = (\partial_t +ib)(\partial_t-ib)\phi=0
+    \]
+    we solve each first-order equation $\partial_t\phi \pm ib(t)\phi = 0$ to
+    obtain the general solution
+    \[
+        \phi(t) = C_1\cos(B(t)) + iC_2\sin(B(t))
+    \]
+    where $B(t) = \int_0^tb(t')dt'$. Imposing the boundary conditions (and
+    noting that $B'(t)=b(t)$), we see that $C_1 = 1, C_2 =0$. Thus, the solution
+    is
+    \[
+        \phi(t) = \cos(B(t))
+    \]
+    and since $\cos$ is even, we also have that
+    \[
+        \phi(-t) = \cos(\int_0^{-t}b(t')dt') = \cos(\int_{-t}^0b(t')dt')
+    \]
+    and since $b(t)$ is a non-negative continuous function with $b(0)>0$, it
+    follows that $\phi(t)$ and $\phi(-t)$ both have positive zeroes, as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 4}
+Suppose $M^n$ is a complete Riemannian manifold with sectional curvature
+strictly positive, and let $\gamma:(-\infty,\infty)\to M$ be a normalized
+geodesic in $M$. Show that there exists $t_0\in \R$ for which
+$\gamma([-t_o,t_o])$ has index greater or equal to $n-1$.
+\\
+\\
+\begin{proof}
+    Let $Y$ be a parallel field along $\gamma$ with $g(\gamma',Y)=0$ and
+    $\|Y\|=1$. Set
+    \[
+        \phi_Y = g(R(\gamma',Y)\gamma',Y)
+    \]
+    and
+    \[
+        K(t) = \inf_Y\phi_Y(t)
+    \]
+    and let $a:\R\to\R$ be a differentiable function such that $0\leq a(t)\leq
+    K(t)$ with $0<a(0)<K(0)$. Let $\phi$ be the solution to $\phi'' + a\phi = 0$
+    with $\phi(0)=1,\phi'(0)=0$, with $-t_1,t_2$ the two zeroes of $\phi$ found
+    in the previous problem. We consider the field $X = \phi Y$, and calculate
+    \[
+        \begin{aligned}
+            I_{[-t_1,t_2]}(X,X) &= -\int_{-t_1}^{t_2}g(X'' +
+            R(\gamma',X)\gamma',X)dt\\
+            &= -\int_{-t_1}^{t_2}g(\phi''Y,\phi Y)dt - \int_{t_1}^{t_2}g(\phi
+            R(\gamma',Y)\gamma',\phi Y)\\
+            &= -\int_{-t_1}^{t_2}g(\phi''Y,\phi Y)dt -
+            \int_{t_1}^{t_2}\phi^2\phi_Ydt\\
+            &\leq -\int_{-t-1}^{t_2}g(\phi''Y,\phi Y)dt -
+            \int_{-t_1}^{t_2}K(t)\phi^2(t)dt\\
+            &=-\int_{-t_1}^{t_2}\phi(\phi'' + K(t)\phi)dt\\
+            &<-\int_{-t_1}^{t_2}\phi(\phi'' + a(t)\phi)dt\\
+            &=0
+        \end{aligned}
+    \]
+    Thus, for all $Y$ perpendicular to $\gamma'$ (an $n-1$ dimensional subspace)
+    the form $I_{[-t_1,t_2]}(Y,Y)$ is negative-definite, and so the index is
+    greater than or equal to $n-1$. In particular, this holds (as the index is
+    strictly increasing) for $[-t_0,t_0]$ for $t_0 = \max(t_1,t_2)$.
+\end{proof}
+
+\newpage
+
+\section*{Problem 5}
+Show that if the sectional curvature $K$ of $M$ is strictly positive, $M$ does
+not have any lines. Show by example this is false if $K\geq 0$.
+\\
+\\
+\begin{proof}
+    The previous problem asserts that for any geodesic in $M$, there is a
+    segment $[-t_0,t_0]$ on which it has index greater than zero. In particular,
+    this means that $\gamma(-t_0)$ has a conjugate point. Thus, $\gamma$ does
+    not minimize the length between $-t_0$ and points past its conjugate point,
+    so $\gamma$ is not a line, as desired.
+
+    For a counterexample with $K\geq 0$, take $\R^n$, where the geodesics are
+    just straight lines. These trivially minimize distance between points, and
+    so any maximally extended geodesic in $\R^n$ is a line.
+\end{proof}
+
+\end{document}
