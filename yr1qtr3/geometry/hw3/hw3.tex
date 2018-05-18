@@ -142,7 +142,24 @@ sphere $S^2$ with $K=1$.
     &=\int_0^{\pi}a^ia_i(1-K(t))dt\geq 0
 \end{aligned}
     \]
-    and thus $K(t)=1$ for all $t$, and $M$ is actually $S^2$.
+    and thus $K(t)=1$ for all $t$.
+
+    Next, we show that every point in $M$ is an interior point for some geodesic
+    of the form above.
+    To that end, let $p\in M$, and let $v\in T_pM$, $\|v\|=1$. Define
+    $\gamma:[0,\pi]\to M$ as the unique normalized geodesic with
+    $\gamma(\frac{\pi}{2})=p$ and $\gamma'(\frac{\pi}{2})=v$. Now, let $\sigma$
+    be a geodesic from $\gamma(0)$ to some conjugate point $q$, concatenated
+    with the minimizing geodesic from $q$ to $\gamma(\pi)$. That is, we've
+    formed the triangle from $\gamma(0)$ to $\gamma(\pi)$ and $q$. $\sigma$ has
+    a Jacobi field on it that vanishes at $\gamma(0)$ and $q$. Furthermore,
+    since $M$ is simply connected, there is a homotopy between $\sigma$ and
+    $\gamma$. Pushing the Jacobi field from $\sigma$ to $\gamma$ along the
+    homotopy parallel transport, we construct a Jacobi field on $\gamma$
+    vanishing at $\gamma(0)$ and some other point $\gamma(t)$. Since the
+    conjugate locus of $\gamma(0)$ is a distance $\pi$ away, it must be that
+    $t=\pi$, and $\gamma(0)$ is conjugate to $\gamma(\pi)$, which has $p$ as an
+    interior point, as desired.
 \end{proof}
 
 \newpage
@@ -158,28 +175,32 @@ and one negative zero.
 \\
 \\
 \begin{proof}
-    Letting $b(t) = \sqrt{a(t)}$, we see that this differential equation factors
-    as
+    We first prove that $\phi$ has a positive zero. To see this, suppose for a
+    contradiction that $\phi(t)>0$ for all $t>0$. From this, it follows that
     \[
-        (\partial_t^2 + b^2)\phi = (\partial_t +ib)(\partial_t-ib)\phi=0
+        \phi'' = -a\phi \leq 0
     \]
-    we solve each first-order equation $\partial_t\phi \pm ib(t)\phi = 0$ to
-    obtain the general solution
+    with $\phi''(0)<0$. Thus, there is some $t_0$ with $\phi'(t_0)<0$. Let
+    $f(t) = (t-t_0)\phi'(t_0) + \phi(t_0)$ be the tangent line to $\phi$ at
+    $t_0$. I assert that $\phi(t)\leq f(t)$ for all $t>t_0$.
+
+    Suppose that there existed some $t_1$ for which $\phi(t_1)>f(t_1)$. In
+    particular, this means that the slope of the secant line
     \[
-        \phi(t) = C_1\cos(B(t)) + iC_2\sin(B(t))
+        M = \frac{\phi(t_1)-\phi(t_0)}{t_1-t_0}
     \]
-    where $B(t) = \int_0^tb(t')dt'$. Imposing the boundary conditions (and
-    noting that $B'(t)=b(t)$), we see that $C_1 = 1, C_2 =0$. Thus, the solution
-    is
+    is such that $M>\phi'(t_0)$. By the mean value theorem, there is some $c$
+    for which $\phi'(c)=M$ with $c\in[t_0,t_1]$. However, this implies that
     \[
-        \phi(t) = \cos(B(t))
+        \frac{\phi'(c)-\phi'(t_0)}{c-t_0}>0
     \]
-    and since $\cos$ is even, we also have that
-    \[
-        \phi(-t) = \cos(\int_0^{-t}b(t')dt') = \cos(\int_{-t}^0b(t')dt')
-    \]
-    and since $b(t)$ is a non-negative continuous function with $b(0)>0$, it
-    follows that $\phi(t)$ and $\phi(-t)$ both have positive zeroes, as desired.
+    and so by the mean value theorem (again) there is some $d\in[t_0,c]$ for
+    which $\phi''(d)>0$. This contradicts our original assumption, so $\phi$
+    must be bounded above by $f$. However, $f$ has a positive zero, so it must
+    be that $\phi$ has at least one positive zero as well.
+
+    Arguing by a symmetric argument for points below zero, we see that $\phi$
+    has at least one negative zero as well.
 \end{proof}
 
 \newpage
