@@ -4,7 +4,7 @@
 #----------------------------------------------------------------------------
 
 VERSION=0.1
-USAGE="Usage: create_homework -c [class] -d [directory name] -t [hw title] -n [problem count]"
+USAGE="Usage: create_homework -q [quarter dir] -c [class] -d [directory name] -t [hw title] -n [problem count]"
 
 if [ $# == 0 ] ; then
     echo $USAGE
@@ -18,10 +18,15 @@ do
 key="$1"
 
 case $key in
+    -q)
+    QTR=$2
+    shift       # shift past the argument
+    shift       # shift past the value
+    ;;
     -c)
     CLASS=$2
-    shift   # shift past the argument
-    shift   # shift past the value
+    shift
+    shift
     ;;
     -d)
     HWDIR=$2
@@ -45,37 +50,37 @@ case $key in
 esac
 done
 
-if [ ! -d $CLASS ]; then
+if [ ! -d $QTR/$CLASS ]; then
     echo "Error: $CLASS directory does not exist. Please create it first"
     exit 1;
 fi
 
-if [ -d $CLASS/$HWDIR ]; then
+if [ -d $QTR/$CLASS/$HWDIR ]; then
     echo "Error: directory $CLASS/$HWDIR already exists! Please specify a new directory"
     exit 1;
 fi
  
 #debugging   
-#echo "Class $CLASS title $TITLE num $NUMPROBS"
+echo "Quarter $QTR Class $CLASS title $TITLE num $NUMPROBS"
 
 # creating the directory -----------------------------------------------------
 
-mkdir $CLASS/$HWDIR
+mkdir $QTR/$CLASS/$HWDIR
 
 # copy template in -----------------------------------------------------------
 
-cp template.tex $CLASS/$HWDIR/$HWDIR.tex
+cp template.tex $QTR/$CLASS/$HWDIR/$HWDIR.tex
 
 # modify the template with the specified parameters --------------------------
 
-sed -i "s/<<CLASS>>/$CLASS/g" $CLASS/$HWDIR/$HWDIR.tex
-sed -i "s/<<TITLE>>/$TITLE/g" $CLASS/$HWDIR/$HWDIR.tex
+sed -i "s/<<CLASS>>/$CLASS/g" $QTR/$CLASS/$HWDIR/$HWDIR.tex
+sed -i "s/<<TITLE>>/$TITLE/g" $QTR/$CLASS/$HWDIR/$HWDIR.tex
 
 # build the problem template string ------------------------------------------
 
 for i in {1..$NUMPROBS}; do
-    cat problem-template.tex >> $CLASS/$HWDIR/$HWDIR.tex
+    cat problem-template.tex >> $QTR/$CLASS/$HWDIR/$HWDIR.tex
 done
 
 
-cat "\end{document}" >> $CLASS/$HWDIR/$HWDIR.tex
+echo "\end{document}" >> $QTR/$CLASS/$HWDIR/$HWDIR.tex

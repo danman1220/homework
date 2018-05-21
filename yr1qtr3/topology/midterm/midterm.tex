@@ -1,0 +1,255 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Topology} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Midterm \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+Define carefully what it means for a map $f:X\to Y$ to be transverse to a
+submanifold $Z$ of $Y$.
+
+Suppose that $X$ and $Z$ are smooth and transverse submanifolds of $Y$. Prove
+that if $y\in X\cap Z$ then
+\[
+    T_y(X\cap Z) = T_y(X)\cap T_y(Z)
+\]
+
+\begin{proof}
+    We begin by defining transversality. Suppose $f:X\to Y$ is a smooth map, and
+    $Z\subset Y$ a submanifold of $Y$. We say that $f$ is transverse to $Z$ if
+    \[
+        T_{f(x)}(Y) = T_f(x)(Z) + df_x(T_x(X))
+    \]
+    for all $x\in f^{-1}(Z)$. That is, the tangent space at $f(x)$ in $Y$ is
+    spanned by the tangent space of $Z$ and the push-forward of the tangent
+    space of $X$.
+    \\
+    \\
+    Now, suppose $X$ and $Z$ are smooth and transverse submanifolds of $Y$. That
+    is, $T_y(Y) = T_y(X)+T_y(Z)$ for all $y\in X\cap Z$. Suppose first that
+    $v\in T_y(X\cap Z)$. In particular, this means there is a curve
+    $\gamma_v:I\to X\cap Z$ with $\gamma_v(0)=y$ and $\gamma_v'(0)=v$. Clearly,
+    $\gamma_v$ is also a curve in $X$ and in $Z$, and so $v\in T_y(X)$ and $v\in
+    T_y(Z)$ as desired. Thus, $T_y(X\cap Z)\subset T_y(X)\cap T_y(Z)$. Call this
+    inclusion $\Phi$. Clearly, $\Phi$ is injective. Thus, all we need to show is
+    that $\dim(T_y(X)\cap T_y(Z)) = \dim(T_y(X\cap Z))$ to establish equality.
+
+    So, let $(U,\phi)$ be a slice chart of $Z$ at $y$. That is, $U$ is a
+    neighborhood of $Y$, and $\phi:U\to\R^n$ is a coordinate chart such that
+    $\phi(Z)\subset \R^k\times \{0\}^{n-k}$. In particular, we consider the
+    augmented ``height'' function $\psi:U\to \R^{n-k}$ for which $\psi(Z) =
+    \{0\}$. Thus, $Z=\psi^{-1}(\{0\})$. Let $i$ be the inclusion of $X$ into
+    $Y$, and observe that $X\cap Z = (\psi\circ i)^{-1}(\{0\})$. We will show
+    that $\{0\}$ is a regular value for $\psi\circ i$.
+
+    To that end, we wish to show that $d(\psi\circ i)_y$ is surjective. So, let
+    $v\in\R^{n-k}$. Now, since $\psi$ is part of a coordinate chart, $d\psi_y$ is
+    surjective, and its kernel is $T_y(Z)$. Write a generic element of the fiber
+    of $v$ as $w + v_z$ for $v_z\in T_y(Z)$. Since this is in $Y$, and $X$ and
+    $Z$ are transverse, $w+v_z = v_x+v_z'$ for some $v_x\in T_y(X)$ and $v_z'\in
+    T_y(Z)$. Absorbing $v_z'$ into $v_z$, we see that $w+v_z = v_x$. So,
+    thinking of $v_x$ as an element of $T_y(X)$, we see that
+    \[
+        d(\psi\circ i)_y(v_x) = d\psi_{i(y)}\circ di_y(v_x) = d\psi_y(v_x) = v
+    \]
+    and so $d(\psi\circ i)$ is surjective as desired.
+
+    Thus, the codimension of $X\cap Z$ in $X$ is $n-k$, which is the codimension
+    of $Z$ in $Y$. That is,
+    \[
+        \dim(T_y(X)) - \dim(T_y(X\cap Z)) = \dim(T_y(Y))-\dim(T_y(Z))
+    \]
+    or
+    \[
+        \dim(T_y(X\cap Z)) = \dim(T_y(X)) + \dim(T_y(Z))-\dim(T_y(Y))
+    \]
+
+    However, since $T_y(Y) = T_y(X) + T_y(Z)$, we know that
+    \[
+    \dim(T_y(Y)) = \dim(T_y(X)) + \dim(T_y(Z))-\dim(T_y(X)\cap T_y(Z))
+    \]
+    or
+    \[
+        \dim(T_y(X)\cap T_y(Z)) = \dim(T_y(X)) + \dim (T_y(Z)) - \dim(T_y(Y))
+    \]
+    and so
+    \[
+        \dim(T_y(X\cap Z)) = \dim(T_y(X)\cap T_y(Z))
+    \]
+    and since the inclusion $\Phi:T_y(X\cap Z)\to T_y(X)\cap T_y(Z)$ is
+    injective, the spaces are equal, as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 2}
+Suppose $f:X\to Y$ is a smooth map between compact manifolds of the same
+dimension. Suppose $y\in Y$ is a regular value of $f$.
+
+\subsection*{Part i}
+Prove that $f^{-1}(\{y\})$ is a finite set.
+\\
+\\
+\begin{proof}
+    Since $y$ is a regular value, we know that $f^{-1}(\{y\})$ is a submanifold
+    of $X$ with dimension
+    \[
+        \dim(f^{-1}(\{y\}) = \dim(X)-\dim(Y) = 0
+    \]
+    Since the only manifolds of dimension zero are countable discrete sets,
+    $f^{-1}(\{y\})$ is an (at most) countable collection of points with the
+    discrete topology. Since $Y$ is compact, this automatically implies that
+    $f^{-1}(\{y\})$ is finite. This follows from the fact that every infinite
+    set in a compact space has an accumulation point, and discrete sets have no
+    accumulation points.
+\end{proof}
+
+\subsection*{Part ii}
+%TODO this problem sucks
+
+\newpage
+
+\section*{Problem 3}
+Show that the set of rank 1 matrices in $M(2,\R)$ is a 3-dimensional submanifold
+of $M(2,\R)$.
+\\
+\\
+\begin{proof}
+    A $2\times 2$ rank-1 matrix is a nonzero matrix with nontrivial kernel. This
+    set is exactly specified as the set of all nonzero $2\times 2$ matrices with
+    determinant zero. That is, letting $R$ denote the set of rank-1 matrices,
+    \[
+        R = {\det}^{-1}(0)\setminus \{0\}
+    \]
+    In particular, since $M(2,\R)\setminus\{0\}$ is an open subset of $M(2,\R)$,
+    it is a manifold, and so we only need to consider ${\det}^{-1}(\{0\})$ in
+    $M(2,\R)\setminus\{0\}$. To show this is a manifold, we will show it is a
+    submanifold of $M(2,\R)\setminus\{0\}$ by showing $0$ is a regular value of
+    $\det$.
+
+    To show this, we need to show that for every nonzero matrix
+    $A\in{\det}^{-1}(\{0\})$, $d(\det)_A$ is surjective. Since the codomain of
+    $\det$ is $\R$, it suffices to show that there is at least one vector in
+    $T_A(R(2,\R)\setminus\{0\})$ which does not map to zero.
+
+    Observe first that $A$ is always of the form
+    \[
+        A =
+        \begin{bmatrix}
+            a &\lambda a\\
+            b &\lambda b
+        \end{bmatrix}
+    \]
+    for real numbers $a,b,\lambda$ such that they are not all identically zero
+    (I suppose this is up to a similarity transformation, but the determinant is
+    invariant under similarity transformations, so we won't worry about it).
+
+    Let $\gamma(t) = A +tI$ so that $\gamma(0)=A$ and $\gamma'(0)=I$. We will
+    show that $d(\det)_A(I) \neq 0$. We calculate
+    \[
+        \begin{aligned}
+            d(\det)_A(I) &= \partial_t(\det(\gamma(t)))|_0\\
+            &=\partial_t(\det(A+tI))|_0\\
+            &=\partial_t\left(\det\left(
+                    \begin{bmatrix}
+                        a &\lambda a\\
+                        b &\lambda b
+                    \end{bmatrix}
+                    + t
+                    \begin{bmatrix}
+                        1&0\\
+                        0&1
+            \end{bmatrix}\right)\right)|_0\\
+            &=\partial_t\left( (a+t)(\lambda b+t)-\lambda ab \right)|_0\\
+            &=\partial_t\left( t^2 + at + \lambda bt + \lambda ab - \lambda ab
+            \right)|_0\\
+            &= a+\lambda b
+        \end{aligned}
+    \]
+    Thus for all $A = \begin{bmatrix}a&\lambda a\\b&\lambda b\end{bmatrix}$ with
+    $a\neq -\lambda b$, $d(\det)_A(I)\neq 0$.
+
+    Defining $B=\begin{bmatrix}-1&0\\0&1\end{bmatrix}$, and repeating the
+    calculation for $d(\det)_A(B)$, we see
+    that $d(\det)_A(B) = a - \lambda b$ which is nonzero for $a\neq \lambda b$.
+
+    Finally, defining $C = \begin{bmatrix}0&1\\1&0\end{bmatrix}$, we calculate
+    $d(\det)_A(C) = -b-\lambda a$, which is nonzero when $b\neq -\lambda a$.
+    This exhausts all possible forms for $A$, and so the determinant is
+    surjective at each point $A\in {\det}^{-1}(\{0\})$, as desired.
+
+    In particular, this means that the codimension of $R$ is $1$, making it a 3
+    dimensional submanifold of $M(2,\R)$ as desired.
+\end{proof}
+
+\end{document}
