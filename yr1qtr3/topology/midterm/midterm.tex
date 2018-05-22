@@ -50,6 +50,10 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Z}{\mathbb{Z}}
 
+\newcommand{\tr}{\text{tr}}
+\newcommand{\Ad}{\text{Ad}}
+\newcommand{\Aut}{\text{Aut}}
+
 \newtheorem{lemma}{Lemma}
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
@@ -175,7 +179,53 @@ Prove that $f^{-1}(\{y\})$ is a finite set.
 \end{proof}
 
 \subsection*{Part ii}
-%TODO this problem sucks
+Prove that there is an open neighborhood $U$ of $y$ so that $f^{-1}(U)$ is a
+finite disjoint union of open sets $\{V_i\}$ so that each $V_i$ is a
+neighborhood of $x_i\in f^{-1}(\{y\})$ and each $V_i$ maps diffeomorphically
+onto $U$ by $f$.
+\\
+\\
+\begin{proof}
+    For this proof, we let $\{x_i\}_{i=1}^n$ be the preimage of $y$ under $f$.
+
+    Since $y$ is a regular value for $f$ which maps between spaces of the same
+    dimension, $df_{x_i}$ is an isomorphism for each $x_i$. Thus, by the inverse
+    function theorem, $f$ is a local diffeomorphism at each $x_i$. Choose
+    open neighborhoods $W_i$ of $x_i$ such that $f$ is a diffeomorphism onto its
+    image when restricted to each $W_i$, and such that the open sets
+    $\{W_i\}_{i=1}^n$ are all pairwise disjoint (this can be done, since $X$ is
+    Hausdorff).
+
+    Let $U'=\cap_if(W_i)$ be the intersection of the images of $W_i$ in $Y$.
+    Since each $f(W_i)$ contains $f(x_i)=y$, $y\in U'$, and since $f$ is a
+    diffeomorphism onto its image when restricted to $W_i$, $f$ is an open map
+    on each $W_i$, and thus each $f(W_i)$ is open. Since $U'$ is the finite
+    intersection of open neighborhoods of $y$, $U'$ is an open neighborhood of
+    $y$ itself.
+
+    Now, consider the closed set $C = X\setminus(\cup_i W_i)$ the complement of
+    all the open neighborhoods $W_i$. Since $f$ is a continuous map between
+    compact Hausdorff spaces, it is a closed map (it takes compact sets to
+    compact sets, which are closed in Hausdorff spaces). Thus, $f(C)$ is closed
+    in $Y$. Furthermore, $y\not\in f(C)$ since $f^{-1}(\{y\})\subset \cup_i
+    W_i$. Thus, $Y\setminus f(C)$ is an open neighborhood of $y$. Set
+    $U=(Y\setminus f(C))\cap U'$.
+
+    We are now ready to finish the construction. Since $f$ is a diffeomorphism
+    from each $W_i$ onto its image, we can take $V_i$ to be $f^{-1}|_{W_i}(U)$.
+    In particular, each $V_i\subset W_i$, and so they are all disjoint.
+    Furthermore, $f(V_i) = U$ for each $V_i$, and $f$ is a diffeomorphism of
+    $V_i$ onto $U$.
+
+    Finally, we note that this exhausts the preimage of $U$. Suppose $x\in X$
+    with $x\not\in \cup_iV_i$. If $x\in W_i$ for some $W_i$ with $x\not\in V_i$,
+    then since $f$ is a diffeomorphism restricted to $W_i$, $f(x)\not\in U$ as
+    desired. If $x$ is not in any $W_i$, then $f(x)\not\in U'$ by construction
+    of $U'$, and thus $f(x)\not\in U$. Therefore, the preimage of $U$ is exactly
+    the union $\cup_iV_i$ as desired.
+
+\end{proof}
+
 
 \newpage
 
@@ -210,9 +260,8 @@ of $M(2,\R)$.
             b &\lambda b
         \end{bmatrix}
     \]
-    for real numbers $a,b,\lambda$ such that they are not all identically zero
-    (I suppose this is up to a similarity transformation, but the determinant is
-    invariant under similarity transformations, so we won't worry about it).
+    for real numbers $a,b,\lambda$ such that $a$ and $b$ are not all identically
+    zero.
 
     Let $\gamma(t) = A +tI$ so that $\gamma(0)=A$ and $\gamma'(0)=I$. We will
     show that $d(\det)_A(I) \neq 0$. We calculate
@@ -251,5 +300,130 @@ of $M(2,\R)$.
     In particular, this means that the codimension of $R$ is $1$, making it a 3
     dimensional submanifold of $M(2,\R)$ as desired.
 \end{proof}
+
+\newpage
+
+\section*{Problem 4}
+Describe the ingredients used in proving there is a surjective homomorphism
+\[
+    \pi:SU(2)\to SO(3)
+\]
+
+\begin{proof}
+    This will be a sketch of the construction of the double cover of $SO(3)$ by
+    $SU(2)$.
+
+    First, we show $SU(2)$ is a Lie group. This is done in two stages: first by
+    showing $U(2)\subset GL(2,\C)$ is a Lie group, then showing that
+    $SU(2)\subset U(2)$ is a Lie group.
+
+    First, observe that $GL(2,\C)$ is a Lie group. It is a manifold, since it is
+    an open subset of $M(2,\C)\cong \C^4$, and it is easily verified that the
+    group operation of matrix multiplication is smooth with respect to this
+    structure. Now, we consider the map
+    \[
+\begin{aligned}
+    \Phi:GL(2,\C)\to GL(2,\C)\\
+    \Phi(A) = AA^*
+\end{aligned}
+    \]
+    and note that $U(2) = \Phi^{-1}(\{I\})$. Verifying that $I$ is a regular
+    value for $\Phi$, we see that $U(2)$ is an (embedded) submanifold of
+    $GL(2,\C)$ and is thus a Lie subgroup of $GL(2,\C)$.
+
+    Secondly, observe that $SU(2) = {\det}^{-1}(1)$ with $\det$ the determinant
+    map from $U(2)$ to $\C$. Verifying that $1$ is a regular value for $\det$,
+    we see that $SU(2)$ is an embedded submanifold of $U(2)$, and is thus a Lie
+    subgroup, as desired.
+
+    Next, we show that the associated Lie algebra $\mathfrak{su}(2)$ has an
+    inner product which makes it isometrically isomorphic to $\R^3$. First, we
+    note that 
+    \[
+        \mathfrak{su}(2) = \{A\in M(2,\C)\ |\ A + A^* = 0, \tr(A)=0\}
+    \]
+    That is, $\mathfrak{su}(2)$ is the set of all antisymmetric trace-free
+    matrices. This space is spanned by the Pauli matrices
+    \[
+        \sigma_1 = 
+        \begin{bmatrix}
+            1&0\\
+            0&-1
+        \end{bmatrix}
+        ,\ 
+        \sigma_2 =
+        \begin{bmatrix}
+            0&i\\
+            -i&0
+        \end{bmatrix}
+        ,\ 
+        \sigma_3 =
+        \begin{bmatrix}
+            0&1\\
+            1&0
+        \end{bmatrix}
+    \]
+    which have the algebraic properties
+    \[
+        \sigma_i\sigma_j = i\varepsilon_{ijk}\sigma_k + \delta_{ij}
+    \]
+    (where $\varepsilon_{ijk}$ is the Levi-Civita symbol).
+
+    Furthermore, an inner product can be given to $\mathfrak{su}(2)$ by
+    \[
+    g(x,y) = \tr(x^*y)
+    \]
+    Under this inner product, we have the relations
+    \[
+        g(\sigma_i,\sigma_i) = \tr(\sigma_i^2) = \tr(I) = 2
+    \]
+    and for $i\neq j$
+    \[
+        g(\sigma_i,\sigma_j) = \tr(-\sigma_i\sigma_j) =
+        \tr(\varepsilon_{ijk}\sigma_k) = 0
+    \]
+    Thus, $\{\frac{1}{2}\sigma_i\}_{i=1}^3$ forms an orthonormal basis for
+    $\mathfrak{su}(2)$, and under the map
+    \[
+\begin{aligned}
+    \Phi:\mathfrak{su}(2)\to \R^3\\
+    \Phi(\frac{1}{2}\sigma_i) = e_i
+\end{aligned}
+    \]
+    we have the desired isometric isomorphism of $\mathfrak{su}(2)$ with $\R^3$.
+
+    Finally, we note that $SU(2)$ has a natural representation on
+    $\mathfrak{su}(2)$ given by the adjoint representation. In the particular
+    case of a matrix Lie group, this is given by
+    \[
+        \begin{aligned}
+            \Ad:&SU(2)\to \Aut(\mathfrak{su}(2))\cong GL(3,\R)\\
+            \Ad(U) &= x\mapsto UxU^*
+        \end{aligned}
+    \]
+    
+    We verify that $\Ad(U)$ preserves inner products, by noting that
+    \[
+        \begin{aligned}
+            g(\Ad(U)(x),\Ad(U)(y)) &= \tr((\Ad(U)(x))^*\Ad(U)(y))\\
+            &= \tr((UxU^*)^*UyU^*)\\
+            &= \tr(Ux^*U^*UyU^*)\\
+            &= \tr(Ux^*yU^*)\\
+            &= \tr(x^*y) = g(x,y)
+        \end{aligned}
+    \]
+    and so $\Ad$ maps $SU(2)$ into $O(3)$. We verify that $\Ad(U)$ is
+    orientation-preserving, so $\det(\Ad(U)) = 1$, and $\Ad$ maps $SU(2)$ into
+    $SO(3)$.
+
+    Finally, to show $\Ad$ is surjective onto $SO(3)$, we argue that every
+    rotation in $SO(3)$ is given by $\Ad(U)$ for some $U\in SU(2)$. This is
+    typically done by identifying $SU(2)$ with the unit quaternions, and $\R^3$
+    with the pure imaginary quaternions. Here, a rotation in $\R^3$ is given by
+    conjugation by a unit quaternion, and so each element of $SO(3)$ is
+    $\Ad(U)$ for some $U\in SU(2)$, and $\Ad$ is surjective.
+
+\end{proof}
+
 
 \end{document}
