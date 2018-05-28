@@ -1,16 +1,17 @@
 \documentclass[12pt]{article}
 
-\usepackage{amsmath, amsthm}
+\usepackage{amsmath, amsthm, amsfonts}
 \usepackage{mathrsfs}
 
-\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
 
 \theoremstyle{definition}
 
 \newtheorem{example}{Example}
 
 \begin{document}
-\section*{A Counterexample to Chuck's Conjecture}
+\section*{Some Counterexamples to Chuck's Conjecture}
 
 Perhaps the simplest counterexample to Chuck's Conjecture is the following:
 
@@ -22,7 +23,7 @@ Perhaps the simplest counterexample to Chuck's Conjecture is the following:
     \[
         \begin{aligned}
             \nu(\{x\}) = 0.05\\
-            \nu(A) = \frac{0.9}{0.95}\mu(A)
+            \nu(A) = \frac{0.95}{0.9}\mu(A)
         \end{aligned}
     \]
     for all $A\in\mathscr{B}(X)$ measurable subsets of $X$ with $x\not\in A$.
@@ -56,66 +57,90 @@ Perhaps the simplest counterexample to Chuck's Conjecture is the following:
 
     By definition of $\nu$, we have that
     \[
-        \nu(A) = \frac{0.9}{0.95}\mu(A) = \frac{0.9}{0.95}(0.4) \approx 0.38\neq
+        \nu(A) = \frac{0.95}{0.9}\mu(A) = \frac{0.95}{0.9}(0.4) \approx 0.42\neq
         0.45
     \]
     so no such perfect sharing can exist for these two measures.
 
 \end{example}
 
-The previous example generalizes easily to measures with a finite number of
-atoms.
-
+The previous example generalizes easily to arbitrary measures which satisfy the
+hypotheses.
 \begin{example}
-    let $X$ be as before, and let $\mu$ be a probability measure on $X$ with
-    finitely many atoms $P = \{x_i\}_{i=1}^n$ which satisfies the hypotheses of
-    the conjecture. Let $c=\mu(P)$, observing that $c<\frac{1}{2}$. Define $\nu$
-    a second probability measure on $X$ with
+    Let $X$ be as before, and let $\mu$ be a probability measure on $X$ which
+    satisfies the hypotheses for the conjecture, with atoms
+    $P=\{x_i\}_{i=1}^{\infty}$ and $\mu(P)<\frac{1}{2}$. 
+    
+    Fix $\varepsilon$ so that $0<\varepsilon<0.1$, and that $\mu(P) + \varepsilon <
+    \frac{1}{2}$. Fix some $x\in P^c$, and define $\nu$ another probability
+    measure on $X$ as 
     \[
-        \nu(\{x_i\}) = \frac{1}{2}\mu(\{x_i\})
+        \nu(S) = (1-\varepsilon)\mu(S) + \varepsilon \delta_x(S)
     \]
-    so that $\nu(P) = \frac{c}{2}$. Then, for all $A\in\mathscr{B}(X)$ with
-    $A\cap P = \emptyset$, define
-    \[
-        \nu(A) = \frac{1-\frac{c}{2}}{1-c}\mu(A)
-    \]
-    so that $\nu$ is a constant proportion of $\mu$ on $X\setminus P$, and
-    $\nu(X) = 1$. Again, there is no perfect sharing set on $X$ with respect to
-    these two measures.
+    for all measurable subsets $S$,
+    so that $\nu(X) = 1$. This satisfies the hypotheses for the conjecture, but
+    does not allow a perfect sharing.
 
-    Suppose such a perfect sharing $S$ existed, and without loss of generality
-    suppose $P\cap S\neq \emptyset$. Like before, we set $A=S\setminus P$, and
-    calculate
+    To see this, suppose $S$ is a perfect sharing set of $X$, and without loss
+    of generality let $x\in S$, and let $A=S\setminus\{x\}$. Then, we have that
     \[
-        \frac{1}{2} = \mu(S) = \mu(A) + \mu(P) = \mu(A) + c
+        \frac{1}{2} = \mu(S) = \mu(A) + \mu(\{x\}) = \mu(A)
+    \]
+    and so 
+    \[
+        \mu(A) = \frac{1}{2}
+    \]
+
+    Similarly, for $\nu$ we calculate
+    \[
+        \frac{1}{2} = \nu(S) = \nu(A) + \nu(\{x\}) = \nu(A) + \varepsilon
     \]
     and so
     \[
-        \mu(A) = \frac{1}{2} - c
+        \nu(A) = \frac{1}{2} - \varepsilon
     \]
 
-    However, we calculate
+    However, we defined $\nu(A)$ to be
     \[
-        \frac{1}{2} = \nu(S) = \nu(A) - \nu(P) = \nu(A) - \frac{c}{2}
+        \nu(A) = (1-\varepsilon)\mu(A) + \varepsilon\delta_x(A) =
+        (1-\varepsilon)\mu(A) = \frac{1}{2} - \frac{\varepsilon}{2}\neq
+        \frac{1}{2}-\varepsilon
     \]
-    and so it must be that
-    \[
-        \nu(A) = \frac{1-c}{2}
-    \]
-    
-    But by definition of $\nu$, we have
-    \[
-        \nu(A) = \frac{1-\frac{c}{2}}{1-c}\mu(A) =
-        \frac{1-\frac{c}{2}}{1-c}(\frac{1}{2}-c) =
-        \frac{(2-c)(1-2c)}{4(1-c)}
-    \]
-    which can only be equal to $\frac{1-c}{2}$ for $c=0$. So, for positive $c$
-    (which corresponds to $\mu$ having positive-mass singletons) there is no
-    perfect sharing between $\mu$ and $\nu$.
+    and so such a sharing cannot exist.
 \end{example}
 
+Finally, we consider a specific counterexample with infinitely many atoms in one
+measure that are not in the other.
 
+\begin{example}
+    This example comes from Ethan Robinett.
 
+    Let $\lambda$ be the Lebesgue measure on $I^2$. Let $f:\Q^2\cap
+    I^2\to\N_{\geq 2}$ be a bijection of the rational points in $I^2$ to the
+    natural numbers above 1. Define
+    $c = \sum_{i=2}^{\infty}\frac{2}{10^i} = 0.0\bar{2}$, and for any Lebesgue
+    measurable set $S\subset I^2$, define
+    \[
+        \mu(S) = (1-c)\lambda(S) + \sum_{q\in \Q^2\cap S}\frac{2}{10^{f(q)}}
+    \]
+    Now, clearly $\mu$ is also a Lebesgue measure on $I^2$ with each element of
+    $\Q^2\cap I^2$ an atom for $\mu$. Furthermore, each atom $q$ has mass
+    $\frac{2}{10^{f(q)}}<0.1$, and the total mass of the atoms is $\mu(\Q^2) =
+    c < 0.5$. Thus, $\mu$ also satisfies the hypotheses for the conjecture.
+    However, there is no perfect sharing between $\mu$ and $\lambda$.
 
+    Suppose there was a perfect sharing set $S$. Then, we would have
+    \[
+        \frac{1}{2} = \mu(S) = (1-c)\frac{1}{2} + \sum_{q\in \Q^2\cap
+        S}\frac{2}{10^{f(q)}}
+    \]
+    which forces
+    \[
+        \sum_{q\in\Q^2\cap S}\frac{2}{10^{f(q)}} = \frac{c}{2} = 0.0\bar{1}
+    \]
+    which cannot be attained, since the decimal expansion of the left-hand side
+    is made up of only $0$ and $2$, whereas the right-hand side has only $0$ and
+    $1$ in its expansion. Thus, no such perfect sharing can exist.
+\end{example}
 
 \end{document}
