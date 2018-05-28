@@ -1,0 +1,121 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amsthm}
+\usepackage{mathrsfs}
+
+\newcommand{\R}{\mathbb{R}}
+
+\theoremstyle{definition}
+
+\newtheorem{example}{Example}
+
+\begin{document}
+\section*{A Counterexample to Chuck's Conjecture}
+
+Perhaps the simplest counterexample to Chuck's Conjecture is the following:
+
+\begin{example}
+    Let $X$ be a compact metric space, equipped with the Borel $\sigma$-algebra,
+    and fix $x\in X$. Suppose $\mu$ is a probability measure on
+    $(X,\mathscr{B}(X))$ for which $\{x\}$ is the only atom, with
+    $\mu(\{x\})=0.1$. We define a second measure $\nu$ on $X$ as
+    \[
+        \begin{aligned}
+            \nu(\{x\}) = 0.05\\
+            \nu(A) = \frac{0.9}{0.95}\mu(A)
+        \end{aligned}
+    \]
+    for all $A\in\mathscr{B}(X)$ measurable subsets of $X$ with $x\not\in A$.
+    For example, we can set $X=I$, $\mu = 0.9\lambda^1 + 0.1\delta_x$ and $\nu =
+    0.95\lambda^1 + 0.05\delta_x$ so that $\mu(X)=\nu(X)=1$. 
+
+    With such measures $\mu$ and $\nu$, there is no perfect sharing. That is,
+    there is no measurable subset $S\in\mathscr{B}(X)$ with
+    $\mu(S)=\nu(S)=\frac{1}{2}$. 
+
+    To see this, suppose there did exist a perfect sharing set $S$, and without
+    loss of generality take $x\in S$ (if $x\not\in S$, we consider $S^c$ which
+    is also a perfect sharing set containing $x$). Now, let $A=S\setminus\{x\}$.
+    Then,
+    \[
+        \frac{1}{2} = \mu(S) = \mu(A) + \mu(\{x\}) = \mu(A) + 0.1
+    \]
+    and so
+    \[
+        \mu(A) = 0.4
+    \]
+
+    However, we also know that
+    \[
+        \frac{1}{2} = \nu(S) = \nu(A) + \nu(\{x\}) = \nu(A) + 0.05
+    \]
+    and so it must be that
+    \[
+        \nu(A) = 0.45
+    \]
+
+    By definition of $\nu$, we have that
+    \[
+        \nu(A) = \frac{0.9}{0.95}\mu(A) = \frac{0.9}{0.95}(0.4) \approx 0.38\neq
+        0.45
+    \]
+    so no such perfect sharing can exist for these two measures.
+
+\end{example}
+
+The previous example generalizes easily to measures with a finite number of
+atoms.
+
+\begin{example}
+    let $X$ be as before, and let $\mu$ be a probability measure on $X$ with
+    finitely many atoms $P = \{x_i\}_{i=1}^n$ which satisfies the hypotheses of
+    the conjecture. Let $c=\mu(P)$, observing that $c<\frac{1}{2}$. Define $\nu$
+    a second probability measure on $X$ with
+    \[
+        \nu(\{x_i\}) = \frac{1}{2}\mu(\{x_i\})
+    \]
+    so that $\nu(P) = \frac{c}{2}$. Then, for all $A\in\mathscr{B}(X)$ with
+    $A\cap P = \emptyset$, define
+    \[
+        \nu(A) = \frac{1-\frac{c}{2}}{1-c}\mu(A)
+    \]
+    so that $\nu$ is a constant proportion of $\mu$ on $X\setminus P$, and
+    $\nu(X) = 1$. Again, there is no perfect sharing set on $X$ with respect to
+    these two measures.
+
+    Suppose such a perfect sharing $S$ existed, and without loss of generality
+    suppose $P\cap S\neq \emptyset$. Like before, we set $A=S\setminus P$, and
+    calculate
+    \[
+        \frac{1}{2} = \mu(S) = \mu(A) + \mu(P) = \mu(A) + c
+    \]
+    and so
+    \[
+        \mu(A) = \frac{1}{2} - c
+    \]
+
+    However, we calculate
+    \[
+        \frac{1}{2} = \nu(S) = \nu(A) - \nu(P) = \nu(A) - \frac{c}{2}
+    \]
+    and so it must be that
+    \[
+        \nu(A) = \frac{1-c}{2}
+    \]
+    
+    But by definition of $\nu$, we have
+    \[
+        \nu(A) = \frac{1-\frac{c}{2}}{1-c}\mu(A) =
+        \frac{1-\frac{c}{2}}{1-c}(\frac{1}{2}-c) =
+        \frac{(2-c)(1-2c)}{4(1-c)}
+    \]
+    which can only be equal to $\frac{1-c}{2}$ for $c=0$. So, for positive $c$
+    (which corresponds to $\mu$ having positive-mass singletons) there is no
+    perfect sharing between $\mu$ and $\nu$.
+\end{example}
+
+
+
+
+
+\end{document}
