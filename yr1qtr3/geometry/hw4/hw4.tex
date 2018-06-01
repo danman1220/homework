@@ -1,0 +1,194 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{geometry} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Homework 4 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+Find the cut locus of a general flat torus.
+
+\newpage
+
+\section*{Problem 2}
+Let $M$ be a complete Riemannian manifold. Prove that $M$ is compact if and only
+if there exists a point $p\in M$ such that every geodesic starting from $p$ has
+a cut point.
+\\
+\\
+\begin{proof}
+    ($\implies$)
+    
+    Suppose first that $M$ is compact. In particular, we know that the diameter
+    $d(M)$ of $M$ is finite. Suppose for a contradiction that every point $p$ in
+    $M$ has some unit speed geodesic $\gamma$ starting at $p$ with no cut
+    point. This means that $\gamma$ minimizes the distance from $p$ to
+    $\gamma(t)$ for all $t$. So, $d(p,\gamma(d(M)+1)) = d(M)+1$, which
+    contradicts $d(M)$ being the diameter of $M$. Thus, there exists a point in
+    $M$ for which every geodesic starting at that point has a cut point.
+    \\
+    \\
+    ($\impliedby$)
+
+    This proof comes from Do Carmo, chapter 13 corollary 2.11.
+
+    Suppose $M$ is such that there is a point $p\in M$ with every geodesic
+    starting from $p$ having a cut point. Since $M$ is complete, we know that
+    \[
+        M = \bigcup_{\gamma}\{\gamma(t):\ t\leq f(p,\gamma'(0))\}
+    \]
+    where the union is taken over all geodesics $\gamma$ starting at $p$, and
+    $f$ is the function which takes a geodesic $\gamma$ starting at a point, and
+    returns the first $t_0$ for which $\gamma(t_0)$ is the cut point of
+    $\gamma(0)$. This follows, since $M$ being complete implies that there
+    exists a minimizing geodesic from $p$ to $q$ for each pair of points $p,q\in
+    M$.
+
+    Now, since $f$ is continuous, and each geodesic starting at $p$ has a cut
+    point, it follows that $f$ is bounded. Therefore, $M$ is bounded, and thus
+    $M$ is compact, as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3}
+Prove that for every compact, even-dimensional manifold $M$ with sectional
+curvature $0<M\leq 1$, the injectivity radius $i(M)\geq \frac{\pi}{2}$.
+\\
+\\
+\begin{proof}
+    Suppose first $M$ is orientable. Then, by proposition 3.4 of chapter 13 of
+    Do Carmo, we know that $i(M)\geq \pi$, and we are done.
+
+    So, suppose instead $M$ is not orientable. We know from problem 12 of
+    chapter 0 of Do Carmo that there exists an orientable double cover of $M$.
+    Call such a cover $(\tilde{M},p)$. Now, since $p$ is a local isometry, the
+    sectional curvature of $\tilde{M}$ is equal to the sectional curvature of
+    $M$. Thus, $\tilde{M}$ satisfies the hypotheses for proposition 3.4 of
+    chapter 13, and $i(\tilde{M})\geq \pi$.
+
+    Now, we will show that this implies that $i(M)\geq \frac{\pi}{2}$. Suppose
+    for a contradiction there existed a point $q\in M$ with a geodesic $\gamma$
+    starting at $q$ (with unit speed) so that $\gamma(t_0)$ is a cut point of
+    $q$ with $t_0<\frac{\pi}{2}$.
+
+    Suppose first that $\gamma(t_0)$ is conjugate to $q$. Let $J$ be the Jacobi
+    field which vanishes at $\gamma(0)$ and $\gamma(t_0)$ and is not everywhere
+    zero. Now, fix $y_0\in p^{-1}(q)$ the basepoint of $\tilde{M}$, and lift
+    $\gamma$ along $p$ to a geodesic $\tilde{\gamma}$ in $\tilde{M}$ starting at
+    $y_0$. Since $p$ is a local isometry, $J$ also lifts along $p$ to a Jacobi
+    field along $\tilde{\gamma}$ which vanishes at the endpoints. But this
+    implies that $\tilde{\gamma}(0)$ and $\tilde{\gamma}(t_0)$ are conjugate to
+    each other, which cannot happen since
+    \[
+        d(\tilde{\gamma}(0),\tilde{\gamma}(t_0))\leq t_0<\pi
+    \]
+
+    So, suppose instead there are two geodesics $\gamma,\sigma$ with
+    $\gamma(0)=\sigma(0)=q$ and $\gamma(t_0)=\sigma(t_0)$. This forms a closed
+    geodesic loop $\delta$ with $\ell(\delta) = 2t_0 < \pi$. This loop lifts to
+    a geodesic $\tilde{\delta}$ in $\tilde{M}$. Now, either $\tilde{\delta}$ is
+    a closed loop, or $\tilde{\delta}(0)=y_0$ and $\tilde{\delta}(2t_0) = y_1$
+    with $y_1$ the other preimage of $q$.
+
+    If $\tilde{\delta}$ is a loop, then it is the concatenation of
+    $\tilde{\gamma}$ and $\tilde{\sigma}$, each of which have length $t_0$ and
+    connect $y_0$ to $\tilde{\gamma}(t_0)$. Thus, $\tilde{\gamma}(t)$ is in
+    the cut locus of $y_0$ for some $t\in (0,t_0]$, which is a contradiction
+    since $d(y_0,\tilde{\gamma}(t))\leq t_0<\pi$.
+
+    Suppose instead that $\tilde{\delta}$ is a path from $y_0$ to $y_1$. Now,
+    let $x_0,x_1\in \tilde{M}$ be the preimages of $\gamma(t_0)$ in
+    $\tilde{M}$. Since $\delta$ passes through $\gamma(t_0)$ exactly once,
+    $\tilde{\delta}$ passes through $x_0$ and not $x_1$ (without loss of
+    generality in labeling).
+
+    However, consider a different lift of $\delta$ (say, $\hat{\delta}$) where
+    $\delta(t_0)$ gets lifted to $x_1$ instead of $x_0$. This defines a path
+    $\hat{\delta}$ in $\tilde{M}$ which does not pass through $x_0$, but does
+    pass through $x_1$. Furthermore, $\hat{\delta}$ has $y_0$ and $y_1$ as its
+    endpoints (if it were a loop, we could use the same argument as in the
+    previous paragraph to establish a contradiction). Thus, there are two
+    geodesics $\tilde{\delta}$ and $\hat{\delta}$ from $y_0$ to $y_1$ which are
+    distinct, but have the same length $\ell(\tilde{\delta}) =
+    \ell(\hat{\delta}) = 2t_0$. This implies that there is a $t\in (0,2t_0]$ for
+    which $\tilde{\delta}(t)$ is a cut point for $y_0$. This is clearly a
+    contradiction, since
+    \[
+        d(y_0,\tilde{\delta}(t))\leq t \leq 2t_0<\pi
+    \]
+    and $i(\tilde{M})\geq \pi$.
+
+    Thus, $i(M)\geq \frac{\pi}{2}$ as desired.
+\end{proof}
+
+\end{document}
