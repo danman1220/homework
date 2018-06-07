@@ -24,6 +24,7 @@
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
 \usepackage{mathrsfs}
+\usepackage{bbm}
 
 \usepackage[margin=1in]{geometry}
 
@@ -49,6 +50,8 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\ev}{\textrm{ev}}
 
 \newtheorem{lemma}{Lemma}
 %----------------------------------------------------------------------------------------
@@ -80,18 +83,221 @@ $G$. If $G$ is not discrete and $\varepsilon>0$ is fixed, find a compact
 neighborhood $K$ of the identity $0$ with $\mu(K)<\varepsilon$.
 
 \begin{proof}
-    Sketch: the set $\{0\}$ has measure zero (prove!) and so
+    We first observe that $\{0\}$ has measure zero. This follows from the
+    observation that every open set in $G$ has infinitely many points, and that
+    the measure $\mu$ is translation-invariant. First, we show that every open
+    set has infinitely many points.
+
+    Suppose for a contradiction that there is an open set $U\subset G$ with
+    finitely many points $\{x_i\}_{i=1}^n$. Then, since $G$ is Hausdorff, we can
+    choose neighborhoods $V_i$ of $x_1$ such that $V_i\subset U$ and $x_i\not\in
+    V_i$. Taking the intersection of all $V_i$ yields an open set with only
+    $x_1$ in it, which contradicts $G$ being non-discrete (since we could
+        translate the open set $\{x_1\}$ to open sets around any singleton, and
+    so every singleton would be open).
+
+    Now, if $\{0\}$ has positive measure, then every singleton would have
+    positive measure, and since every open set is infinite, each open set would
+    have infinite measure, which cannot happen since $\mu$ is a Borel-regular
+    measure.
+
+    Thus, $\mu(\{0\})=0$. Since $\mu$ is outer-regular, we know that
     \[
-        \mu(\{0\}) = \inf_{0\in U} \mu(U)\to 0
+        \mu(\{0\}) = 0 = \inf_{U\supset \{0\} \text{ open}}\mu(U)
     \]
-    so choose $U$ such that $\mu(U)<\varepsilon$ and take $K\subset U$ compact
-    by local compactness.
+    and so for each $\varepsilon>0$, we can find a $U$ open around $0$ for which
+    $\mu(U)<\varepsilon$.
+
+    Since $\mu$ is also inner-regular with respect to open sets, we know that
+    \[
+        \mu(U) = \sup_{K\subset U \text{ compact}}\mu(K)
+    \]
+    and so we can find a compact neighborhood $K$ of $\{0\}$ with $\mu(K)>0$.
+    Since $K\subset U$, we know $\mu(K)\leq\mu(U)<\varepsilon$ as desired.
 \end{proof}
 
 \newpage
 
 \section*{Problem 2}
+Suppose $G$ is a locally compact abelian group. If $G$ is not discrete,
+$\varepsilon>0$ and $G$ is Lindelof, prove there is an open neighborhood $U$ of
+$0$ for which $U+U=G$ and $\mu(U)<\varepsilon$.
 
+\begin{proof}
+    For ease of notation (and without loss of generality),we will find a
+    neighborhood $U$ of measure less than $2\varepsilon$ instead.
 
+    Let $U_0$ be a neighborhood of $0$ as in the previous problem with
+    $\mu(U)<\varepsilon$. Then we note that
+    \[
+        G = \bigcup_{g\in G} g+U_0
+    \]
+    and so the set $\{g+U_0\}$ is an open cover of $G$. Thus, it has a finite
+    subcover $\{g_i +U_0\}_{i=1}^{\infty}$.
+
+    For each $g_i$, let $U_i$ be constructed as in problem 1 with
+    $\mu(U_i)<\frac{\varepsilon}{2^{i}}$. I assert that the open set $U =
+    U_0\cup\bigcup_{=1}^{\infty}U_i$ is the open neighborhood of $0$ we desire.
+
+    First, notice that
+    \[
+        \begin{aligned}
+            \mu(U)&\leq \mu(U_0) + \sum_{i=1}^{\infty}\mu(U_i)\\
+            &\leq \varepsilon + \sum_{i=1}^{\infty}\frac{\varepsilon}{2^i}\\
+            &= 2\varepsilon
+        \end{aligned}
+    \]
+    as desired. Next, note that from before
+    \[
+        G = \bigcup_{i=1}^{\infty}g_i + U_0
+    \]
+    and so for all $g\in G$, we have that there is some $i$ and some $u\in U_0$
+    for which
+    \[
+        g = g_i + u
+    \]
+    and since $g_i,u\in U$, we have that $g\in U+U$ as desired.
+
+    Thus, $U+U=G$.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3}
+    (For this problem, I collaborated with Ashwin Trisal, Daniel Epelbaum,
+    Aaron Bagheri, Micah Pedrick, and Andre Matrins.)
+
+Suppose $G$ is a locally compact abelian group which is also compact, and let
+$F\subset G$ open such that $F+F=G$. Consider the action of $G$ on $L^2(G)$ by
+\[
+    g(f(x)) = f(g+x)
+\]
+for $g,x\in G, f\in L^2(G)$.
+
+\subsection*{Part a}
+Show that this action is unitary.
+
+\begin{proof}
+    To show this action is unitary, we need to show it is invertible, and that
+    it preserves inner products.
+
+    Observe first that this group action is indeed an action, in the sense that
+    it respects the group operation. This follows immediately from the
+    definition, since
+    \[
+        (g+h)(f(x)) = f(g+h+x) = g\circ h(f(x)))
+    \]
+    So, the action of $g$ is invertible by $-g$, since
+    \[
+        (g+(-g))(f(x)) = 0(f(x)) = f(x)
+    \]
+
+    Now, we need to show that the action of $g$ preserves inner products. So,
+    let $f,h\in L^2(G)$, and let $g\in G$. We calculate
+    \[
+\begin{aligned}
+    \langle g(f),g(h)\rangle &= \int_Gf(g+x)\overline{h(g+x)}d\mu(x)\\
+    &=\int_Gf(x)\overline{h(x)}d\mu(x-g)\\
+    &=\int_Gf(x)\overline{h(x)}d\mu(x) = \langle f,h\rangle
+\end{aligned}
+    \]
+    as desired. Here, we used the fact that the measure is
+    translation-invariant, and so $\mu(x-g)=\mu(x)$.
+\end{proof}
+
+\subsection*{Part b}
+Let $p$ be the projection in $B(L^2(G))$ onto the subspace $L^2(F)$. Let
+\[
+    \begin{aligned}
+        \phi:G\to B(L^2(G))\\
+        g\mapsto p\circ U_g\circ p
+    \end{aligned}
+\]
+where $U_g$ is the unitary operator defined by the action of $g$.
+
+\subsubsection*{Part i}
+is $\phi(G)$ a subgroup of $B(L^2(G))$?
+
+\begin{proof}
+    If $F=G$, then $\phi(g) = U_g$ and $\phi$ is indeed a group homomorphism, so
+    $\phi(G)$ is a subgroup as desired. So, assume $F\neq G$.
+
+    I assert $\phi(G)$ is not a subgroup of $B(L^2(G))$. This follows from the
+    fact that for $g=0$, we have $\phi(0) = p\circ \mathbbm{1}\circ p =p$ is not
+    invertible. Thus, $\phi(G)$ contains a non-invertible element, and cannot be
+    a group.
+\end{proof}
+
+\subsubsection*{Part ii}
+Is $\phi(G)$ compact in any of the topologies studied in class?
+
+\begin{proof}
+    I assert that $\phi(G)$ is compact in the weak operator topology (WOT) as
+    well as the strong operator topology (SOT). 
+
+    To see this, we will prove that $\phi$ is continuous into $B(L^2(G))$ in the
+    SOT.
+
+    Recall that the SOT is the initial topology with respect to the evaluation
+    functions
+    \[
+\begin{aligned}
+    \ev_f:B(L^2(G))\to L^2(G)\\
+    A\mapsto A(f)
+\end{aligned}
+    \]
+    for all $f\in L^2(G)$. So, by the definition of the initial topology, $\phi$
+    is continuous if and only if $\ev_f\circ\phi$ is continuous for all $f$.
+    
+    Now, 
+    \[
+        \ev_f\circ\phi(g) = p\circ U_g\circ p(f)
+    \]
+
+    Consider the function
+    \[
+        \begin{aligned}
+            \varphi_f:G\to L^2(G)\\
+            g\mapsto U_g\circ p(f)\\
+        \end{aligned}
+    \]
+    Now, $p(f)$ is a (fixed) function in $L^2(G)$, and we know that the map
+    $g\mapsto U_g$ is continuous (Rudin's Fourier Analysis on Groups proves
+    thisi, theorem 1.1.5), so $\varphi_f$ is continuous as well.
+
+    Now, $\ev_f\circ\phi = p\circ \varphi_f$ is the composition of continuous
+    functions (as projections are continuous), and so $\ev_f\circ\phi$ is
+    continuous for all $f$. Thus, $\phi$ is continuous in the SOT, and $\phi(G)$
+    as the image of a compact set is compact.
+
+    Since the WOT is strictly weaker than the SOT, this also implies that $\phi$
+    is continuous in the WOT, and so $\phi(G)$ is compact in the WOT as well.
+\end{proof}
+
+\subsubsection*{Part iii}
+Is $\phi$ injective?
+
+\begin{proof}
+
+    Suppose that $F$ is such that for all $g\in G$, there is some $f\in F$ for
+    which $g+f\in F$. Then, I assert $\phi$ is injective.
+
+    To see this, suppose $g_1,g_2\in G$. Now, there is an open set $U\subset F$
+    containing $f$ as specified above (so that $g_1+f\in F$) with $g_1+U\subset
+    F$ and $g_2+U\cap g_1+U = \emptyset$. This follows from $G$ being
+    Hausdorff.
+
+    Now, consider $\chi_U\in L^2(G)$. We have that 
+    \[
+        \begin{aligned}
+            \phi(g_1)(\chi_U) = p\circ U_g(\chi_U) =
+            p(\chi_{g_1+U})=\chi_{F\cap g_1+U}\\
+            phi(g_2)(\chi(U)) = \chi_{F\cap g_2+U}
+        \end{aligned}
+    \]
+    but $g_1+U$ does not intersect $g_2+U$, and $F\cap g_1+U = g_1+U\neq
+    \emptyset$, so $\phi(g_1)\neq \phi(g_2)$ for all $g_1,g_2\in G$, and $\phi$
+    is injective.
+\end{proof}
 
 \end{document}
