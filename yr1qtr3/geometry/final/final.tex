@@ -91,9 +91,12 @@ $p\in M$,
     on $\gamma$ (that is, parameterizing $\gamma$ with $\gamma(0)=q$, let $q' =
     \gamma(\frac{\ell(\gamma)}{2})$).
 
-    We now invoke the Toponogov comparison theorem on the triangle formed by the
-    geodesics $\sigma$ from $p$ to $q$ and $\gamma$ from $q$ to $q'$. We will
-    label the edges of the triangle as:
+    We split this theorem in two cases based on the length of $\gamma$.
+
+    Suppose first that $\ell(\gamma)\geq \pi$. We now invoke the Toponogov
+    comparison theorem on the triangle formed by the geodesics $\sigma$ from $p$
+    to $q$ and $\gamma$ from $q$ to $q'$. We will label the edges of the
+    triangle as:
     \begin{center}
         \begin{tabular}{l|l}
             Side & Label\\
@@ -123,9 +126,64 @@ $p\in M$,
         \end{aligned}
     \]
     Now, since $\tilde{b}>\frac{\pi}{2}$, $\cos(\tilde{b})<0$. Furthermore, we
-    know that $\cos(\tilde{c})<0$ as well, since
-    $\tilde{c}>\frac{\pi}{2}$.
+    know that $\cos(\tilde{c})<0$ as well, since $\tilde{c}>\frac{\pi}{2}$ (by
+        assumption, $\ell(\gamma)\geq \pi$, so
+    $d(q,q')=\frac{\ell(\gamma)}{2}\geq \frac{\pi}{2}$).
 
+    However, since both $\cos(\tilde{b})$ and $\cos(\tilde{c})$ are negative,
+    their product is positive. This implies that $\cos(\tilde{a})$ is positive,
+    and so $\tilde{a}<\frac{\pi}{2}$. By the Toponogov comparison theorem,
+    $a\leq \tilde{a}<\frac{\pi}{2}$. However, this contradicts $q$ being a
+    closest point to $p$, since $d(p,q')\leq a <\frac{\pi}{2}$ but
+    $d(p,q)>\frac{\pi}{2}$. Thus, no such $p$ can exist.
+
+
+\end{proof}
+
+\newpage
+
+\section*{Problem 2}
+Let $M$ be a compact $n$-dimensional manifold of positive sectional curvature,
+and $A$, $B$ two closed totally geodesic submanifolds. Show that $A$ and $B$
+must intersect if $\dim(A) + \dim(B)\geq n$.
+
+\begin{proof}
+    Suppose for a contradiction that $A$ and $B$ do not intersect. Then, I claim
+    there is a point $a\in A$ and $b\in B$ such that $d(a,b) = d(A,B)$ and a
+    geodesic $\gamma$ from $a$ to $b$ which realizes this distance. Furthermore,
+    $\gamma$ is orthogonal to $A$ and $B$.
+
+    To see this, recall that for any closed submanifold $N$ of $M$, and point
+    $p\not\in N$, there exists a point $q\in N$ with $d(p,q) = d(p,N)$ and a
+    minimizing geodesic $\gamma$ from $p$ to $q$ which realizes this distance,
+    and is orthogonal to $N$. Letting $p\in A$ and $N=B$, we define the function
+    $f:A\to \R$ as $f(p) = d(p,B)$. Since $A$ is compact (as a closed subset of
+    $M$ a compact space), this function achieves a minimum. Call the point which
+    achieves such a minimum $a$. Clearly, $a$ and the corresponding close point
+    $b\in B$ are such that $d(a,b) = d(A,B)$, and by construction the minimizing
+    geodesic $\gamma$ is orthogonal to $B$. By symmetry, $\gamma$ is also
+    orthogonal to $A$ as well.
+
+    Now, I assert that the second variation of energy for any orthogonal
+    variational field $V$ with associated variation $h(t,s)$ of $\gamma$ with
+    $h(0,s)\in A$ and $h(l,s)\in B$ is given by
+    \[
+        \frac{1}{2}E''(0) = I_l(V,V) + \langle
+        V(l),S^{(2)}_{\gamma'(l)}V(l)\rangle - \langle V(l),
+        S^{(1)}_{\gamma'(0)}V(l)\rangle
+    \]
+    where $S^{(i)}_{\gamma'}$ is the linear map associated to the second
+    fundamental form of $A,B$ in the direction of $\gamma'$.
+
+    To see this, we calculate directly
+    \[
+        \begin{aligned}
+            \frac{1}{2}E''(0) &= I_l(V,V) + \langle
+            \nabla_sV,\gamma'\rangle(0,l) - \langle
+            \nabla_sV,\gamma'\rangle(0,0)\\
+            &= 
+        \end{aligned}<++>
+    \]
 \end{proof}<++>
 
 \end{document}
