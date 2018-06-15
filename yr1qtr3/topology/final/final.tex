@@ -1,0 +1,146 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\sgn}{\text{sgn}}
+
+\newtheorem{lemma}{Lemma}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Topology} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Final \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+\subsection*{Part i}
+Give the definition of degree for a smooth map $f:A\to B$ between closed
+oriented manifolds of the same dimension.
+
+Show that if $g:B\to C$ is another such map, then
+\[
+    \deg(g\circ f) = \deg(f)\deg(g)
+\]
+
+\begin{proof}
+    We assume here that the manifolds $A$, $B$, and $C$ are all connected.
+
+    Consider a regular value $y\in B$ of $f$. The inverse image $f^{-1}(\{y\})$
+    is a finite set of points (since $A$ is compact, and $f^{-1}(\{y\})$ is of
+    dimension zero). For each point $x\in f^{-1}(\{y\})$, we say the sign of
+    $df_x$ at $x$ (denoted $\sgn(df_x)$) is $+1$ if $df_x$ preserves
+    orientation, and $-1$ if $df_x$ reverses orientation. Then, the degree of
+    $f$ is defined as the sum
+    \[
+        \deg(f) = \sum_{x\in f^{-1}(\{y\})}\sgn(df_x)
+    \]
+    Recall that this definition is well-defined, as it is independent of choice
+    of regular value.
+
+    Now, we turn our attention to the composition $g\circ f$. Recall that $y\in
+    C$ is called a regular value of $g\circ f$ if for every $x\in (g\circ
+    f)^{-1}(\{y\})$, the differential $d(g\circ f)_x$ is surjective. By
+    Sard's theorem, the set of critical values for $g\circ f$ has measure zero,
+    as well as the set of critical values for $g$, in $C$. Therefore, on any
+    chart $(U,\phi)$ in $C$, there must exist a point which is regular for both
+    $g$ and $g\circ f$. To see this, let $R$ denote the set of regular values of
+    $g\circ f$ in $U$, and $R'$ the set of regular values of $g$ in $U$. If $R$
+    and $R'$ were disjoint, then we would have
+    \[
+        \begin{aligned}
+            \mu(R) &= \mu(U) = \mu(R') &\text{By Sard's Theorem}\\
+            \mu(R\cup R') &= \mu(R)+\mu(R')=2\mu(U)>\mu(U)
+        \end{aligned}
+    \]
+    which is a contradiction. From here on out, let $y\in C$ be a regular value
+    of both $f\circ g$ and $g$.
+
+    Now, we will show that for all $x\in (g\circ f)^{-1}(\{y\})$, $f(x)$ is a
+    regular value for $f$. so, let $x$ be as specified.
+     This means that the differential $d(g\circ f)_x
+    = dg_{f(x)}\circ df_x$ is surjective. In particular, since the dimensions of
+    $T_xA$ and $T_yC$ are equal, $d(g\circ f)_x$ is an isomorphism. Furthermore,
+    since $T_{f(x)}B$ also has the same dimension, it must be that $df_x$ and
+    $dg_{f(x)}$ are both isomorphisms as well. This follows from the fact that
+    $dg_{f(x)}\circ df_x$ is surjective, so $dg_{f(x)}$ is surjective onto a
+    space of the same dimension, and hence is an isomorphism. Similarly,
+    $dg_{f(x)}\circ df_x$ is injective, so $df_x$ is injective into a space of
+    the same dimension, and is thus an isomorphism. From all this, we conclude
+    that $df_x$ is surjective for all $x\in (g\circ f)^{-1}(\{y\})$. In
+    particular, since $f^{-1}(\{f(x)\})\subset (g\circ f)^{-1}(\{y\})$, we have
+    that $df_x$ is surjective for all $x$ in the preimage of $f(x)$, and so
+    $f(x)$ is a regular value of $f$.
+
+    Finally, we show that $\deg(g\circ f) = \deg(g)\deg(f)$. Trivially, if $f$
+    is not surjective, then there exists a point $y\in B$ with $f^{-1}(\{y\}) =
+    \emptyset$, and so $y$ is trivially a regular value, and $\deg(f)=0$.
+    Furthermore, if $f$ is not surjective, then $g\circ f$ cannot be surjective
+    either, 
+
+\end{proof}<++>
+
+\end{document}
