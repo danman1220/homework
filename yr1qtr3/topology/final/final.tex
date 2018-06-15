@@ -24,6 +24,7 @@
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
 \usepackage{mathrsfs}
+\usepackage{tikz-cd}
 
 \usepackage[margin=1in]{geometry}
 
@@ -135,12 +136,282 @@ Show that if $g:B\to C$ is another such map, then
     that $df_x$ is surjective for all $x$ in the preimage of $f(x)$, and so
     $f(x)$ is a regular value of $f$.
 
-    Finally, we show that $\deg(g\circ f) = \deg(g)\deg(f)$. Trivially, if $f$
-    is not surjective, then there exists a point $y\in B$ with $f^{-1}(\{y\}) =
-    \emptyset$, and so $y$ is trivially a regular value, and $\deg(f)=0$.
-    Furthermore, if $f$ is not surjective, then $g\circ f$ cannot be surjective
-    either, 
+    Finally, we show that $\deg(g\circ f) = \deg(g)\deg(f)$. Suppose $f$ is
+    surjective. %TODO handle the non-surjective case
+    Then, let $z\in C$ be a regular value of $g\circ f$ and $g$, as before.
+    Now, let $P = (g\circ f)^{-1}(\{y\})$, and partition $P$ into disjoint sets
+    $P_y = \{x\in P:\ f(x)=y\}$ of points which map to the same point by $f$.
+    Then, we compute
+    \[
+        \begin{aligned}
+            \deg(g\circ f) &= \sum_{x\in P}\sgn(d(g\circ f)_x)\\
+            &=\sum_{y\in g^{-1}(\{z\})}\sum_{x\in P_y}\sgn(d(g\circ f)_x)\\
+            &=\sum_{y\in g^{-1}(\{z\})}\sum_{x\in P_y}\sgn(dg_y\circ df_x)\\
+        &=\sum_{y\in g^{-1}(\{z\})}\sum_{x\in P_y}\sgn(dg_y)\sgn(df_x)\\
+        &=\sum_{y\in g^{-1}(\{z\})}\sgn(dg_y)\sum_{x\in P_y}\sgn(df_x)\\
+        &=\sum_{y\in g^{-1}(\{z\})}\sgn(dg_y)\deg(f)\\
+        &=\deg(g)\deg(f)
+        \end{aligned}
+    \]
+    as desired. Here, we used the fact that each $y$ is a regular value for $f$,
+    and $\deg(f)$ is independent of choice of $y$.
+\end{proof}
 
-\end{proof}<++>
+\newpage
+
+\subsection*{Part ii}
+Suppose $f:A\to B$ as in part i has degree $\deg(f)=1$ and that the index
+$[\pi_1(B):f_*\pi_1(A)]<\infty]$. Prove that $f_*:\pi_1(A)\to\pi_1(B)$ is
+surjective.
+
+\begin{proof}
+    Let $(C,p)$ be the covering space associated to the subgroup $H =
+    f_*(\pi_1(A))$ over $B$. That is, $p_*(\pi_1(C)) =H$. Since $H$
+    has finite index, $(C,p)$ is a finite-sheeted covering space, and is thus
+    compact. Furthermore, $C$ can be given a manifold structure from $B$
+    via pulling the differentiable structure back across $p$, and such a
+    structure will be orientable, since $B$ is orientable. 
+
+    Since $f_*(\pi_1(A)) = p_*(\pi_1(C)) =H$, the criteria for lifting $f$ to
+    $C$ is satisfied, and so we have that the diagram
+    \[
+        \begin{tikzcd}
+            &C\arrow{d}{p}\\
+            A\arrow{r}{f}\arrow[dashed]{ur}{\tilde{f}}&B
+        \end{tikzcd}
+    \]
+    commutes. Thus, $f = p\circ \tilde{f}$.
+
+    Now, by construction $p$ preserves orientation, and each point in $B$ is a
+    regular value of $p$ with exactly $n$ points in its preimage, where
+    $n=[\pi_1(B):H]$. Recall this comes from the fact that the number of sheets
+    (sheetedness?) of $(C,P)$ is exactly the index of $p_*(\pi_1(C))=H$ in
+    $\pi_1(B)$. Thus, it follows that $p$ has degree $n$.
+
+    By the first part of this problem, we know that
+    \[
+        1 = \deg(f) = \deg(p\circ \tilde{f}) = \deg(p)\deg(\tilde{f})
+    \]
+    Since the degree of a map is always an integer, it follows that
+    $\deg(p)=\deg(\tilde{f}) = 1$. Thus,
+    \[
+        [\pi_1(B):H]=1
+    \]
+    as desired.
+
+\end{proof}
+
+\newpage
+
+\section*{Problem 2}
+\subsection*{Part i}
+Prove Euler's identity for homogeneous polynomials
+\[
+    \sum_j x_j\partial_jp = mp(x_1,\dots,x_n)
+\]
+
+\begin{proof}
+    Since $p$ is homogeneous, we have that
+    \[
+        p(tx_1,\dots,tx_n) = t^mp(x_1,\dots,x_n)
+    \]
+    Now, if we differentiate the left-hand side with respect to $t$, we get
+    \[
+\begin{aligned}
+    \partial_tp(tx_1,\dots,tx_n) &= \sum_i\frac{\partial tx_i}{\partial
+    t}\frac{\partial p(tx_1,\dots,tx_n)}{\partial tx_i}\\
+    &=\sum_ix_i\frac{\partial p(tx_1,\dots,tx_n)}{\partial tx_i}\\
+\end{aligned}
+    \]
+    Differentiating the right-hand side yields
+    \[
+        \partial_t (t^mp(x_1,\dots,x_n)) = mt^{m-1}p(x_1,\dots,x_n)
+    \]
+    and equating the two and setting $t=1$ yields
+    \[
+        \sum_i x_i\partial_ip(x_1,\dots,x_n) = mp(x_1,\dots,x_n)
+    \]
+    as desired.
+\end{proof}
+
+\subsection*{Part ii}
+Show that $SL(n,\R)$ is a Lie group.
+
+\begin{proof}
+    We know already that $SL(n,\R)$ is a subgroup of $GL(n,\R)$, so all we need
+    to show is that it is a submanifold of $GL(n,\R)$. To do so, we will show it
+    is the level set of a regular value of a smooth function. Specifically, we
+    recall that $SL(n,\R)$ is defined to be the set of all matrices in
+    $GL(n,\R)$ with determinant $1$.
+
+    First, I claim the determinant map $\det:GL(n,\R)\to \R$ is homogeneous. To
+    see this, recall that similar matrices have the same determinant, and that
+    every matrix is similar to a matrix in Jordan form. So, without loss of
+    generality, we will assume our matrices are in Jordan form. Recall that in
+    Jordan form, the determinant is given by the product of the diagonal
+    elements. Thus, for a matrix $A$,
+    \[
+        \det(tA) = \prod_{i=1}^n tA_{ii} = t^n\prod_{i=1}^n A_{ii} = t^n\det(A)
+    \]
+    and if we think of $A$ as a tuple of numbers, we see that the determinant
+    map is a homogeneous polynomial.
+
+    Now, we will show that $1$ is a regular value for this polynomial (call it
+    $p$). For this, we have to show that the differential $dp_x$ at each point
+    $x\in p^{-1}(\{1\})$ is surjective. Since $\R$ is one-dimensional, this
+    amounts to showing that there is some $v\in T_x(GL(n,\R))$ for which
+    $dp_x(v)\neq 0$.
+
+    So, let $x\in p^{-1}(\{1\})$. Since $GL(n,\R)$ has its differential
+    structure from $\R^{n^2}$, $T_x(GL(n,\R))$ can be identified with $M(n,\R)$
+    the set of all real $n\times n$ matrices. In particular, $x\in
+    T_x(GL(n,\R))$. So, we calculate
+    \[
+\begin{aligned}
+    dp_x(x) = x^a(dp_x)_a = x^a\partial_ap|_x = mp(x) = m
+\end{aligned}
+    \]
+    by using Euler's identity from part i, and the fact that $p(x)=1$. Thus,
+    $dp_x(x)$ is nontrivial, and so $dp_x$ is surjective for all $x\in
+    p^{-1}(\{1\})$. Since $SL(n,\R)=p^{-1}(\{1\})$, we see that $SL(n,\R)$ is a
+    submanifold of $GL(n,\R)$ and is thus a Lie subgroup of $GL(n,\R)$ as
+    desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 3}
+\subsection*{Part i}
+Suppose $M$ is simply-connected. Prove it is orientable.
+\\
+\\
+\begin{proof}
+    Suppose for a contradiction that $M$ were not orientable. Then, $M$ would
+    have an oriented double cover $(\tilde{M},\tilde{p})$.
+    However, since $M$ is simply-connected, $M$ is its own universal cover,
+    which would imply that $M$ covers $\tilde{M}$ in such a way that the diagram
+    \[
+\begin{tikzcd}
+    M\arrow{r}{p}\arrow[bend right]{rr}{id} &\tilde{M}\arrow{r}{\tilde{p}} &M
+\end{tikzcd}
+    \]
+    commutes. However, this cannot be, since $\tilde{p}$ is a two-sheeted cover
+    of $M$, and is thus not invertible, so $\tilde{p}\circ p$ cannot be the
+    identity. Thus, $M$ is orientable.
+\end{proof}
+
+\subsection*{Part ii}
+Prove that every Lie group is orientable.
+
+\begin{proof}
+    Let $G$ be a Lie group, with identity $e$. Let $(U,\phi)$ be a coordinate
+    chart around $e$. We define an oriented chart on $G$ as follows. Recall that
+    left multiplication is a smooth diffeomorphism of $G$ to itself, and so for
+    each $g\in G$, we let $(L_g(U),\phi\circ L_g^{-1})$ be a chart around $g$.
+    We check that these charts are compatible. Suppose $g$ and $h$ are elements
+    so that $L_g(U)\cap L_h(U)$ is nonempty. Then, the transition map for the
+    intersection is given as
+    \[
+        \begin{aligned}
+            (\phi\circ L_g^{-1})\circ(\phi\circ L_h^{-1})^{-1}&:U\subset\R^n\to \R^n\\
+            (\phi\circ L_g^{-1})\circ(\phi\circ L_h^{-1})^{-1}
+            &= (\phi\circ L_g^{-1})\circ(L_h\circ \phi^{-1})\\
+            &=\phi\circ L_{g^{-1}h}\circ\phi^{-1}
+        \end{aligned}
+    \]
+    which is smooth, since $L_{g^{-1}h}$ is a smooth diffeomorphism. Finally, I
+    assert that this atlas is oriented. We now calculate the differential of the
+    change of coordinates from $L_g(U)$ to $L_h(U)$ for $x\in L_g(U)\cap
+    L_h(U)$.
+
+    Let $x_i$ be the coordinate functions $x_i:U\to \R$ around the identity.
+    Then, $x_i\circ L_g^{-1}$ are the coordinate functions for $L_g(U)$ around
+    $g$. In particular, $\partial_i$ forms a basis for $T_uG$ for $u\in U$, and
+    $dL_g(\partial_i)$ forms a basis for $T_pG$ for $p\in L_g(U)$. Thus, we
+    calculate in coordinates
+    \[
+        \begin{aligned}
+        d((\phi\circ L_h^{-1})^{-1}\circ (\phi\circ
+        L_g^{-1}))_x(v)
+        &= d(L_h)_{L_{g^{-1}(x)}}\circ d(L_g^{-1})_x(v^idL_g\partial_i)\\
+        &=v^idL_h\partial_i = v
+        \end{aligned}
+    \]
+    and thus the change-of-coordinates map is the identity, which has positive
+    determinant. Thus, this atlas is indeed an orientation on $G$.
+
+\end{proof}
+
+\subsection*{Part iii}
+Show that every Lie group has Euler characteristic zero.
+
+\begin{proof}
+    To show this, we will show that the identity function on $G$ has Lefshetz
+    number zero, which implies automatically that $G$ has Euler characteristic
+    zero.
+
+    To see this, we will construct a smooth function on $G$ with no fixed
+    points that is homotopic to the identity. Consider a nonzero vector $v\in
+    \mathfrak{g}$. This generates a nowhere-vanishing vector field $V$ by
+    \[
+        V(p) = d(L_p)_e(v)
+    \]
+    In particular, this vector field generates a flow
+    \[
+\begin{aligned}
+    \theta:(-\varepsilon,\varepsilon)\times G\to G\\
+\end{aligned}
+    \]
+    which has no fixed points in positive time, since the vector field it was
+    generated from did not vanish anywhere. Now, if we vary
+    $t\in(-\varepsilon,\varepsilon)$, we get a homotopy from $\theta(0,\cdot) =
+    id$ to $\theta(\frac{\varepsilon}{2},\cdot)$, which is the map with no fixed
+    points.
+
+    Thus, the Lefschetz number for $id$ is the Lefschetz number for
+    $\theta_{\frac{\varepsilon}{2}}$, which, since
+    $\theta_{\frac{\varepsilon}{2}}$ has no fixed points, is zero. Thus, since
+    the Lefschetz number of the identity is equal to the Euler characteristic of
+    $G$, it follows that $\chi(G)=0$ as desired.
+\end{proof}
+
+\newpage
+
+\section*{Problem 4}
+Give a sketch of the construction of Pontraygin manifolds. State the three main
+theorems and give an outline of the proof of one of them.
+
+\begin{proof}
+    Let $M$ be a manifold (smooth, compact, orientable), and $f$ a
+    smooth map from $M$ to $S^p$. Choose a regular value $y\in S^p$ for $f$, and
+    define the Pontraygin manifold associated to $f$ as the manifold
+    $f^{-1}(\{y\})$. We define a framing on this manifold as follows. Let
+    $\{v_i\}$ be a basis for $T_yS^p$. Then, the pullback of this basis along
+    $f$ defines a trivialization of the normal bundle to $f^{-1}(\{y\})$ (since
+        the tangent bundle to $f^{-1}(\{y\})$ is the nullspace of $df$, the
+    normal bundle gets mapped isomorphically into $T_yS^p$).
+    
+    The first main result is that the Pontraygin manifolds, in a sense, do not
+    depend on choice of regular value. That is, if $y,z$ are regular values for
+    $f$ and $N_1$ is the Pontraygin
+    manifold from $f$ at $y$, $N_2$ the Pontraygin manifold from $f$ at $z$,
+    then $N_1$ is framed cobordant to $N_2$. 
+
+    The second main result is that if two Pontraygin manifolds $f^{-1}(\{y\})$
+    and $g^{-1}(\{y\})$ are equal, then $f$ is homotopic to $g$.
+
+    I offer a proof sketch of the first result. Let $y,z$ be regular values for
+    $f$ on $S^p$, and let $R_t$ be a one-parameter family of rotations with
+    $R_0=id$ and $R_1$ taking $y$ to $z$. Now, consider the map
+    \[
+        H(t,x) = R_t\circ f(x)
+    \]
+    which has $H(0,x)=f(x)$ and for $p$ such that $f(p) = y$, $H(1,p) = z$. This
+    defines a framed cobordism via $H^{-1}(y)$ from $f^{-1}(y)$ to $(R_1\circ
+    f)^{-1}(y) = f^{-1}(z)$ as desired.
+
+\end{proof}
+
+
 
 \end{document}
