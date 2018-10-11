@@ -111,9 +111,407 @@ We calculate $H|\psi,t\rangle$ directly in three parts. That is:
 For this calculation, we'll use the fact that
 \[
     a(x)\ad(x_1)\dots\ad(x_n) =
-    \sum_{i=1}^n\delta(x-x_i)\ad(x_1)\dots\hat{\ad(x_i)}\dots\ad(x_n) +
+    \sum_{i=1}^n(-1)^{i-1}_{\pm}\delta(x-x_i)\ad(x_1)\dots\hat{\ad(x_i)}\dots\ad(x_n) +
+    (-1)^n_{\pm}
     \ad(x_1)\dots\ad(x_n)a(x)
 \]
-where $\hat{\ad(x_i)}$ indicates that the $i$th creation operator is omitted.
+where $(-1)^n_{\pm}$ indicates the $(-1)^n$ only appears in the fermionic
+calculation, and $\hat{\ad(x_i)}$ indicates that the $i$th creation operator is
+omitted. This is calculated by iterated application of the rule
+\[
+    a(x)\ad(y) = \pm\ad(y)a(x) + \delta(x-y)
+\]
+with a plus sign for bosonic calculations, and a minus sign for fermionic
+calculations.
+
+We can now calculate directly the three components of $H|\psi,t\rangle$ as
+\[
+    \begin{aligned}
+        \int d^3x\ad(x)\frac{-\hbar^2}{2m}\nabla^2a(x)|\psi,t\rangle
+        &= 
+        \int d^3x_1\dots d^3x_n
+        d^3x\ad(x)\frac{-\hbar^2}{2m}\nabla^2a(x)\psi\ad(x_1)\dots\ad(x_n)|0\rangle\\
+        &=
+        \int d^3x_1\dots d^3x_n
+        d^3x\ad(x)\frac{-\hbar^2}{2m}\nabla^2\psi\\
+        &\left( 
+            \sum_{i=1}^n(-1)^{i-1}_{\pm}\delta(x-x_i)\ad(x_1)\dots\hat{\ad(x_i)}\dots\ad(x_n)
+            + (-1)^n_{\pm}
+            \ad(x_1)\dots\ad(x_n)a(x)
+        \right)|0\rangle\\
+        &=
+        \int d^3x_1\dots d^3x_n
+        d^3x\ad(x)\frac{-\hbar^2}{2m}\nabla^2\psi\\
+        &\left( 
+            \sum_{i=1}^n(-1)^{i-1}_{\pm}\delta(x-x_i)\ad(x_1)\dots\hat{\ad(x_i)}\dots\ad(x_n) 
+        \right)|0\rangle\\
+        &=
+        \int d^3x_1\dots d^3x_n
+        \sum_{i=1}^n\ad(x_i)\frac{-\hbar^2}{2m}\nabla_i^2\psi\\
+        &\left( 
+            (-1)^{i-1}_{\pm}\ad(x_1)\dots\hat{\ad(x_i)}\dots\ad(x_n)
+        \right)|0\rangle\\
+        &=
+        \int d^3x_1\dots d^3x_n
+        \sum_{i=1}^n\frac{-\hbar^2}{2m}\nabla_i^2\psi
+        \left( 
+            (-1)^{i-1}_{\pm}\ad(x_i)\ad(x_1)\dots\hat{\ad(x_i)}\dots\ad(x_n)
+        \right)|0\rangle\\
+        &=
+        \int d^3x_1\dots d^3x_n
+        \sum_{i=1}^n\frac{-\hbar^2}{2m}\nabla_i^2\psi
+        \left( 
+            \ad(x_1)\dots\ad(x_i)\dots\ad(x_n)
+        \right)|0\rangle\\
+    \end{aligned}
+\]
+Note that we integrated over $x$, and the $\delta$ factors in the sum mean that
+integrating over $x$ just swaps $x$ with $x_i$. We also used integration by
+parts implicitly to go from line 4 and 5 to line 6 and 7 by shifting over the
+$\nabla^2$ onto $\ad(x)$ before integrating out the $x$, changing it to a
+$\nabla_i^2\ad(x_i)$, then integrating by parts again to move it back to $\psi$.
+Finally, in the fermionic calculation, we note that the factor of
+$(-1)^{i-1}$ disappears when we move $\ad(x_i)$ across to the $i$th position, as
+it will pick up an extra factor of $(-1)^{i-1}$.
+
+We carry the exact same calculations for the second integral, without the
+integration by parts, to find
+\[
+    \begin{aligned}
+        \int d^3x \ad(x)U(x)a(x)|\psi,t\rangle
+        &= \int d^3x_1\dots d^3x_n \sum_{i=1}^nU(x_i)\psi \ad(x_1)\dots\ad(x_n)
+    \end{aligned}
+\]
+
+And finally, we calculate the third integral as 
+\[
+\begin{aligned}
+        \int d^3xd^3yV(x-y)\ad(x)\ad(y)a(y)a(x)|\psi,t\rangle
+        &= \int d^3x_1\dots d^3x_n d^3x d^3y \psi V(x-y)\ad(x)\ad(y)a(y)\\
+        &\left( 
+            \sum_{i=1}^n(-1)^{i-1}_{\pm}\delta(x-x_i)\ad(x_1)\dots\hat{\ad(x_i)}\dots\ad(x_n)
+        \right)|0\rangle\\
+        &= \int d^3x_1\dots d^3x_nd^3y \sum_{i=1}^n\psi V(x_i-y)\ad(x_i)\ad(y)a(y)\\
+        &\left( 
+            (-1)^{i-1}_{\pm}\ad(x_1)\dots\hat{\ad(x_i)}\dots\ad(x_n)
+        \right)|0\rangle\\
+        &= \int d^3x_1\dots d^3x_nd^3y \sum_{i=1}^n\psi V(x_i-y)(-1)_{\pm}\ad(y)\ad(x_i)a(y)\\
+        &\left( 
+            (-1)^{i-1}_{\pm}\ad(x_1)\dots\hat{\ad(x_i)}\dots\ad(x_n)
+        \right)|0\rangle\\
+        &= \int d^3x_1\dots d^3x_nd^3y \sum_{i=1}^n\psi V(x_i-y)\ad(y)(a(y)\ad(x_i) \pm \delta(x_i-y)\\
+        &\left( 
+            (-1)^{i-1}_{\pm}\ad(x_1)\dots\hat{\ad(x_i)}\dots\ad(x_n)
+        \right)|0\rangle\\
+\end{aligned}
+\]
+
+The first calculation was done identical to the other two integrals, and the
+second calculation was done by direct evaluation of the commutators. Now, if we
+integrate out $y$ in the part of the integral with $\delta(x_i-y)$, we get a
+factor of $V(0) = 0$, and so that integral goes to zero. Thus, we have
+\[
+    \begin{aligned}
+        &= \int d^3x_1\dots d^3x_nd^3y \sum_{i=1}^n\psi V(x_i-y)\ad(y)a(y)\ad(x_i)\\
+        &\left( 
+            (-1)^{i-1}_{\pm}\ad(x_1)\dots\hat{\ad(x_i)}\dots\ad(x_n)
+        \right)|0\rangle\\
+        &= \int d^3x_1\dots d^3x_nd^3y \sum_{i=1}^n\psi V(x_i-y)\ad(y)a(y)\\
+        &\left( 
+            \ad(x_1)\dots\ad(x_i)\dots\ad(x_n)
+        \right)|0\rangle\\
+    \end{aligned}
+\]
+We then carry the exact same calculation out for $y$, integrating out the
+factors of $\delta$ to get
+\[
+    \begin{aligned}
+        &= \int d^3x_1\dots d^3x_n\sum_{i=1}^n\sum_{j=1}^n\psi V(x_i-x_j)\\
+        &\left( 
+            \ad(x_1)\dots\ad(x_n)
+        \right)|0\rangle\\
+    \end{aligned}
+\]
+as desired. Thus, since
+\[
+    i\partial_t|\psi,t\rangle = \int d^3x_1\dots d^3x_n i\partial_t\psi
+    \ad(x_1)\dots\ad(x_n)
+\]
+we equate both sides to get
+\[
+    \begin{aligned}
+        &\int d^3x_1\dots d^3x_ni\partial_t\psi \ad(x_1)\dots\ad(x_n)\\
+        &= \int d^3x_1\dots d^3x_n
+        \left(
+ \sum_{i=1}^n \frac{-\hbar^2}{2m}\nabla^2_i + U(x_i) +
+    \sum_{j=1}^n\sum_{i=1}^{j-1}V(x_i-x_j)
+\right)\psi \ad(x_1)\dots\ad(x_n)
+    \end{aligned}
+\]
+Equating integrands yields the desired result. Thus, the abstract Schrodinger
+equation is solved if and only if $\psi$ solves the regular Schrodinger
+equation.
+
+\newpage
+\section*{Problem 2}
+Show that the infinitesimal Lorentz transformations are antisymmetric.
+
+We expand directly using $\Lambda^{\mu}_{\nu} = \delta^{\mu}_{\nu} + \delta
+\omega^{\mu}_{\nu}$ and omitting products of infinitesimals as
+\[
+    \begin{aligned}
+        g_{\mu\nu}\Lambda^{\mu}_{\rho}\Lambda^{\nu}_{\sigma} = g_{\rho\sigma}\\
+        g_{\mu\nu}\left( 
+            \delta^{\mu}_{\rho}\delta^{\nu}_{\sigma} +
+            \delta^{\mu}_{\rho}\delta\omega^{\nu}_{\sigma} +
+            \delta^{\nu}_{\sigma}\delta\omega^{\mu}_{\rho}
+        \right) = g_{\rho\sigma}\\
+        g_{\rho\sigma} + g_{\rho\nu}\delta\omega^{\nu}_{\sigma} +
+        g_{\mu\sigma}\delta\omega^{\mu}_{\rho} = g_{\rho\sigma}\\
+        g_{\rho\sigma} + \delta\omega_{\rho\sigma} + \delta\omega_{\sigma\rho} =
+        g_{\rho\sigma}
+    \end{aligned}
+\]
+and so it must be that $\delta\omega_{\rho\sigma} + \delta\omega_{\sigma\rho} =
+0$ as desired.
+
+
+\newpage
+\section*{Problem 3}
+Derive the commutation relations on momentum creation and annihilation operators
+from the canonical commutation relations.
+
+We know
+\[
+    a(k) = \int d^3x\exp(-ikx)\left( i\partial_t\phi(x) + \omega\phi(x) \right)
+\]
+and
+\[
+    \Pi(x) = \partial_t\phi(x)
+\]
+along with the canonical commutation relations on $\phi$ and $\Pi$.
+
+So, we calculate directly
+\[
+    \begin{aligned}
+        a(k)a(k') &= \int d^3x\exp(-ikx)\left( i\partial_t\phi(x) + \omega\phi(x) \right)
+        \int d^3x\exp(-ik'x)\left( i\partial_t\phi(x) + \omega\phi(x) \right)\\
+        &=\int d^3x d^3x' \exp(-ikx)(i\Pi(x) +
+        \omega\phi(x))\exp(-ik'x')(i\Pi(x') + \omega\phi(x'))\\
+        &=\int d^3x d^3x'\exp(-ikx)\exp(-ik'x')(i\Pi(x)i\Pi(x') +
+            i\Pi(x)\omega'\phi(x') + \omega\phi(x)i\Pi(x') +
+        \omega\omega'\phi(x)\phi(x'))\\
+        &=\int d^3x d^3x'\exp(-ikx)\exp(-ik'x')(i\Pi(x')i\Pi(x) +
+            i\Pi(x')\omega\phi(x) +i\omega\delta(x-x')\\
+            &+ \omega'\phi(x')i\Pi(x) +
+            i\omega'\delta(x-x') +
+        \omega\omega'\phi(x')\phi(x))\\
+        &=a(k')a(k) + \int d^3x d^3x'\exp(-ikx)\exp(-ik'x')(i(\omega+\omega')\delta(x-x'))\\
+        &= a(k')a(k) + \int d^3x \exp(-ikx)\exp(-ik'x)i(\omega+\omega')\\
+        &= a(k')a(k)
+    \end{aligned}
+\]
+where the last integral disappeared because $\exp(i(k+k')x)$ disappears on a
+symmetric domain. The exact same argument is made for $\ad(k)\ad(k')$ just by
+complex conjugation.
+
+Thus, all we have to show is the final commutator. We calculate
+\[
+\begin{aligned}
+    a(k)\ad(k') &= \int d^3x d^3x' \exp(-ikx)\exp(ik'x')(i\Pi(x) +
+    \omega\phi(x))(-i\Pi(x') + \omega'\phi(x'))\\
+    &=\int d^3x d^3x' \exp(-ikx)\exp(ik'x')(i\Pi(x)(-i\Pi(x')) \\
+        &+ i\Pi(x)\omega'\phi(x') + \omega\phi(x)(-i\Pi(x')) +
+            \omega\phi(x)\omega'\phi(x'))\\
+    &=\int d^3x d^3x' \exp(-ikx)\exp(ik'x')(-i\Pi(x')i\Pi(x) \\
+        &+ \omega'\phi(x')i\Pi(x) - i\omega'i\delta(x-x') +
+        (-i\Pi(x'))\omega\phi(x) - i\omega i\delta(x-x') +
+            \omega'\phi(x')\omega\phi(x))\\
+    &=\int d^3x d^3x' \exp(-ikx)\exp(ik'x')(-i\Pi(x')i\Pi(x) \\
+    &+ \omega'\phi(x')i\Pi(x) + \omega'\delta(x-x') +
+    (-i\Pi(x'))\omega\phi(x) + \omega\delta(x-x') +
+        \omega'\phi(x')\omega\phi(x))\\
+        &=\ad(k')a(k) + \int d^3x
+        d^3x'\exp(-ikx)\exp(ik'x')(\omega+\omega')\delta(x-x')\\
+        &=\ad(k')a(k) + \int d^3x \exp(i(k'-k)x)(\omega'+\omega)\\
+        &=\ad(k')a(k) + (2\pi)^32\omega\delta(k-k')
+\end{aligned}
+\]
+as desired.
+
+
+\newpage
+\section*{Problem 4}
+\subsection*{Part A}
+Find an expression for $[\phi(x),P^i]$.
+
+We carry out two expansions here on $a$. First:
+\[
+    \phi(x-a) = \phi(x) - \partial_{\mu}\phi(x)a^{\mu} + O(a^2)
+\]
+and
+\[
+    T(a) = I + iP^{\mu}a_{\mu}
+\]
+
+From the expression for the $T(a)$ action on $\phi(x)$ we know that (by killing
+$O(a^2)$ terms)
+\[
+    \begin{aligned}
+        \phi(x)T(a) &= T(a)\phi(x-a)\\
+        \phi(x)T(a) &= T(a)\left( \phi(x) -\partial_{\mu}\phi(x)a^{\mu}
+        \right)\\
+        \phi(x)(I + iP^{\mu}a_{\mu}) &= (I + iP^{\mu}a_{\mu})\phi(x) - (I +
+        iP^{\mu}a_{\mu})\partial_{\nu}\phi(x)a^{\nu}\\
+        \phi(x)iP^{\mu}a_{\mu} &=iP^{\mu}a_{\mu}\phi(x) -
+        \partial^{\mu}\phi(x)a_{\mu}\\
+        \phi(x)P^{\mu}a_{\mu} &= P^{\mu}a_{\mu}\phi(x) +
+        i\partial^{\mu}\phi(x)a_{\mu}\\
+    \end{aligned}
+\]
+and so
+\[
+    [\phi(x),P^{\mu}] = i\partial^{\mu}\phi(x)
+\]
+as desired.
+
+
+\subsection*{Part B}
+Show the time component of the calculation above is the Heisenberg equation of
+motion.
+
+This follows immediately, noting that $P^0 = H$, and so
+\[
+    [\phi(x),H] = i\partial^0\phi(x) = i\partial_t\phi(x)
+\]
+as desired.
+
+
+\subsection*{Part C}
+Derive the Klein-Gordon equation from the Heisenberg equation for a free
+particle.
+
+We'll use the Hamiltonian
+\[
+    H = \int \tilde{dk}\omega \ad(k)a(k)
+\]
+along with the free-field expression
+\[
+    \phi(x) = \int \tilde{dk}(a(k)\exp(ikx) + \ad(k)\exp(-ikx))
+\]
+as derived in the text. Thus,
+\[
+    \begin{aligned}
+        i\dot{\phi}(x) &= [\phi(x),H]\\
+        &= \phi(x)H - H\phi(x)\\
+        &= \int\tilde{dk}a(k)\exp(ikx) +
+        \ad(k)\exp(-ikx))\int\tilde{dk}\omega\ad(k)a(k)\\
+        &- \int\tilde{dk}\omega\ad{k}a(k)\int\tilde{dk}(a(k)\exp(ikx) +
+        \ad(k)\exp(-ikx))\\
+        &=\int
+        \tilde{dk}\tilde{dk'}\omega\exp(ikx)(a(k)\ad(k')a(k')-\ad(k')a(k')a(k))\\
+            &+\omega\exp(-ikx)(\ad(k)\ad(k')a(k') - \ad(k')a(k')\ad(k))\\
+        &=\int
+        \tilde{dk}\tilde{dk'}\omega\exp(ikx)(a(k)\ad(k')a(k')-\ad(k')a(k)a(k'))\\
+            &+\omega\exp(-ikx)(\ad(k')\ad(k)a(k') - \ad(k')a(k')\ad(k))\\
+        &=\int
+        \tilde{dk}\tilde{dk'}\omega\exp(ikx)(a(k)\ad(k')-\ad(k')a(k))a(k')\\
+        &+\omega\exp(-ikx)\ad(k')(\ad(k)a(k') - a(k')\ad(k))\\
+        &=\int
+        \tilde{dk}\tilde{dk'}\omega\exp(ikx)([a(k),\ad(k')])a(k')\\
+        &+\omega\exp(-ikx)\ad(k')([\ad(k),a(k')])\\
+        &=\int
+        \tilde{dk}\tilde{dk'}\omega\exp(ikx)((2\pi)^32\omega\delta(k-k'))a(k')\\
+        &+\omega\exp(-ikx)\ad(k')(-(2\pi)^3)2\omega\delta(k-k')\\
+        &=\int
+        \tilde{dk}\omega\exp(ikx)((2\pi)^32\omega)a(k)\\
+        &-\omega\exp(-ikx)\ad(k)((2\pi)^3)2\omega\\
+        &=(2\pi)^32\omega^2\left( \int \tilde{dk}(a(k)\exp(ikx) -
+            \ad(k)\exp(-ikx) \right)
+    \end{aligned}
+\]
+and so
+\[
+    \dot{\phi}(x) = (2\pi)^32\omega^2\left( \int \tilde{dk}(-ia(k)\exp(ikx) +
+        i\ad(k)\exp(-ikx) \right)
+\]
+we can carry the exact same calculations out to find that
+\[
+    \begin{aligned}
+        i\ddot{\phi}(x) &= (2\pi)^32\omega^2(
+            \int\tilde{dk}\tilde{dk'}\omega\exp(ikx)([-ia(k),\ad(k')])a(k')\\
+        &+\omega\exp(-ikx)\ad(k')([i\ad(k),a(k')]))\\
+        &=
+        (2\pi)^32\omega^2(
+            \int\tilde{dk}\tilde{dk'}\omega\exp(ikx)(-i(2\pi)^32\omega\delta(k-k'))a(k')\\
+        &+\omega\exp(-ikx)\ad(k')(-i(2\pi)^32\omega\delta(k-k')))\\
+        &=
+        (2\pi)^32\omega^2(
+            \int\tilde{dk}\omega\exp(ikx)(-i(2\pi)^32\omega)a(k)\\
+        &+\omega\exp(-ikx)\ad(k)(-i(2\pi)^32\omega))\\
+        &=-i(2\pi)^64\omega^4\phi(x)
+    \end{aligned}
+\]
+and so
+\[
+    \begin{aligned}
+        \ddot{\phi} &= -(2\pi)^64\omega^4\phi(x)\\
+        &= -(2\pi)^64(k^2 + m^2)^2\phi(x)\\
+        &= -((2\pi)^3)^24(k^4 + m^4 + 2k^2m^2)\phi(x)\\
+    \end{aligned}
+\]
+which (I think) reduces to the Klein-Gordon equation.
+
+
+\subsection*{Part D}
+We compute the commutator directly:
+\[
+    \begin{aligned}
+        \phi(x)\int d^3x' \Pi(x')\nabla\phi(x')
+        &= \int d^3x' \phi(x)\Pi(x')\nabla\phi(x')\\
+        &= \int d^3x' (\Pi(x')\phi(x) + i\delta(x-x'))\nabla\phi(x')\\
+        &= \int d^3x' (\Pi(x')\phi(x)\nabla\phi(x') +
+            i\delta(x-x')\nabla\phi(x'))\\
+            &= \int d^3x'\Pi(x')\nabla\phi(x')\phi(x) + i\nabla\phi(x)\\
+            &=P\phi(x) + i\nabla\phi(x)
+    \end{aligned}
+\]
+and so
+\[
+    [\phi(x),P^i] = i\partial^i\phi(x)
+\]
+as desired.
+
+\subsection*{Part E}
+Express $P$ in terms of momentum state creation and annihilation operators.
+
+We do this directly.
+\[
+    \begin{aligned}
+        P &= \int d^3x\Pi(x)\nabla\phi(x)\\
+        &= \int \tilde{dk}\tilde{dk'}d^3x(-i\omega a(k)\exp(ikx) +
+        i\omega\ad(k)\exp(-ikx))(ik' a(k')\exp(ik'x) -ik' \ad(k')\exp(-ik'x))\\
+        &= \int \tilde{dk}\tilde{dk'}d^3x(\omega k a(k)a(k')\exp(i(k+k')x) -
+            \omega k a(k)\ad(k')\exp(i(k-k')x)\\ 
+            &-\omega k
+        \ad(k)a(k')\exp(i(k'-k)x) + \omega k \ad(k)\ad(k')\exp(-i(k+k')x))\\
+        &= \int \tilde{dk}\tilde{dk'}(\omega k a(k)a(k')(2\pi)^3\delta(k+k') -
+            \omega k a(k)\ad(k')(2\pi)^3\delta(k-k')\\ 
+            &-\omega k
+        \ad(k)a(k')(2\pi)^3\delta(k-k') + \omega k
+    \ad(k)\ad(k')(2\pi)^3\delta(k+k'))\\
+        &= \int \tilde{dk}(\omega k a(k)a(-k)(2\pi)^3 -
+            \omega k a(k)\ad(k)(2\pi)^3\\ 
+            &-\omega k
+        \ad(k)a(k)(2\pi)^3+ \omega k
+    \ad(k)\ad(-k)(2\pi)^3)\\
+        &= \int \tilde{dk}(-
+            \omega k a(k)\ad(k)(2\pi)^3\\ 
+            &-\omega k
+        \ad(k)a(k)(2\pi)^3)\\
+        &=\int \tilde{dk}\omega k(2\pi)^3 (-a(k)\ad(k) + \ad(k)a(k)
+    \end{aligned}
+\]
+
 
 \end{document}
