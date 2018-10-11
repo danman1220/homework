@@ -80,8 +80,8 @@
 Show that multiparticle nonrelativistic quantum can be recovered from QFT.
 Namely, define
 \[
-    H = \int d^3xa(x)\left( \frac{-\hbar^2}{2m}\nabla^2 + U(x)
-    \right)\ad(x)
+    H = \int d^3x\ad(x)\left( \frac{-\hbar^2}{2m}\nabla^2 + U(x)
+    \right)a(x) + \int d^3xd^3yV(x-y)\ad(x)\ad(y)a(y)a(x)
 \]
 and
 \[
@@ -89,7 +89,31 @@ and
     \psi(x_1,\dots,x_n;t)\ad(x_1)\dots\ad(x_n)|0\rangle
 \]
 We will show that $|\psi,t\rangle$ satisfies the abstract Schrodinger equation
-if and only if 
+if and only if $\psi$ satisfies the Schrodinger equation
+\[
+    i\partial_t\psi = H\psi
+\]
+for
+\[
+    H = \sum_{i=1}^n \frac{-\hbar^2}{2m}\nabla^2_i + U(x_i) +
+    \sum_{j=1}^n\sum_{i=1}^{j-1}V(x_i-x_j)
+\]
 
+We calculate $H|\psi,t\rangle$ directly in three parts. That is:
+\[
+    \begin{aligned}
+    H|\psi,t\rangle &= 
+    \int d^3\ad(x)\frac{-\hbar^2}{2m}\nabla^2a(x)|\psi,t\rangle\\
+        &+ \int d^3x \ad(x)U(x)a(x)|\psi,t\rangle\\
+        &+ \int d^3xd^3yV(x-y)\ad(x)\ad(y)a(y)a(x)|\psi,t\rangle\\
+    \end{aligned}
+\]
+For this calculation, we'll use the fact that
+\[
+    a(x)\ad(x_1)\dots\ad(x_n) =
+    \sum_{i=1}^n\delta(x-x_i)\ad(x_1)\dots\hat{\ad(x_i)}\dots\ad(x_n) +
+    \ad(x_1)\dots\ad(x_n)a(x)
+\]
+where $\hat{\ad(x_i)}$ indicates that the $i$th creation operator is omitted.
 
 \end{document}
