@@ -274,6 +274,107 @@ and calculate
         +m^2\varphi^{\dagger}(x)\varphi(x) - \Omega_0\\
     \end{aligned}
 \]
+Which gives the Hamiltonian for the system as
+\[
+    H = \int d^4x \left( \pi^{\dagger}(x)\pi(x)
+        +\partial^{i}\varphi^{\dagger}(x)\partial_{i}\varphi(x)
+        +m^2\varphi^{\dagger}(x)\varphi(x) - \Omega_0 \right)
+\]
+
+\subsection*{Part C}
+\begin{problem}
+    Expanding $\varphi$ as
+    \[
+        \varphi(x) = \int \tilde{d^3k}\left( a(k)\exp(ikx) +
+        b^{\dagger}(k)\exp(-ikx) \right)
+    \]
+    solve for expressions of $a(k)$ and $b(k)$ in terms of $\varphi(x)$,
+    $\varphi^{\dagger}(x)$ and their time derivatives.
+\end{problem}
+
+We'll evaluate the integrals
+\[
+    \begin{aligned}
+        \int d^3x\exp(-ikx)\varphi(x)\\
+        \int d^3x\exp(-ikx)\partial_t\varphi(x)\\
+        \int d^3x\exp(-ikx)\varphi^{\dagger}(x)\\
+        \int d^3x\exp(-ikx)\partial_t\varphi^{\dagger}(x)\\
+    \end{aligned}
+\]
+
+So we first derive an expression for $\partial_t\varphi(x)$ and its conjugate.
+\[
+\begin{aligned}
+    \partial_t\varphi(x) &= \int \tilde{d^3k}\partial_t\left( a(k)\exp(ikx) +
+    b^{\dagger}(k)\exp(-ikx) \right)\\
+    &= \int \tilde{d^3k}\left( a(k)(-i\omega)\exp(ikx) -
+    b^{\dagger}(k)(-i\omega)\exp(-ikx) \right)\\
+    &=\int \tilde{d^3k}(-i\omega)\left( a(k)\exp(ikx) - b^{\dagger}(k)\exp(-ikx) \right)
+\end{aligned}
+\]
+
+And similarly,
+\[
+    \partial_t\varphi^{\dagger}(x) = \int \tilde{d^3k}(-i\omega)\left(
+        b(k)\exp(ikx) - a^{\dagger}(k)\exp(-ikx)
+    \right)
+\]
+
+Now, we can calculate those four integrals. One will be done explicitly, and the
+other three are done using the exact same calculation.
+\[
+    \begin{aligned}
+        \int d^3x\exp(-ikx)\varphi(x) 
+        &=
+        \int d^3x\frac{d^3k'}{(2\pi)^32\omega}\exp(-ikx)\left(
+        a(k')\exp(ik'x) + b^{\dagger}(k')\exp(-ik'x)\right)\\
+        &=
+        \int d^3x\frac{d^3k'}{(2\pi)^32\omega}\left(
+        a(k')\exp(i(k'-k)x) + b^{\dagger}(k')\exp(-i(k'+k)x)\right)\\
+        &=
+        \int d^3x\frac{d^3k'}{(2\pi)^32\omega}(
+        a(k')\exp(i(k'-k)^ix_i + i(\omega'-\omega)t)\\
+        &+ b^{\dagger}(k')\exp(-i(k'+k)^ix_i +
+        -i(\omega'+\omega_t))\\
+        &=
+        \int \frac{d^3k'}{(2\pi)^32\omega}(
+        a(k')(2\pi)^3\delta(k'-k)\exp(i(\omega'-\omega)t)\\
+        &+ b^{\dagger}(k')(2\pi)^3\delta(k'+k)\exp(-i(\omega'+\omega)t))\\
+        &=
+        \frac{1}{2\omega}(
+        a(k) + b^{\dagger}(-k)\exp(-i(2\omega)t))\\
+    \end{aligned}
+\]
+Following the same tactic, we find
+\[
+    \begin{aligned}
+        \int d^3x\exp(-ikx)\varphi(x) 
+        &= \frac{1}{2\omega}(a(k) + b^{\dagger}(-k)\exp(-i(2\omega)t))\\
+        \int d^3x\exp(-ikx)\partial_t\varphi(x)
+        &= \frac{-i}{2}(a(k) - b^{\dagger}(-k)\exp(-i(2\omega)t))\\
+        \int d^3x\exp(-ikx)\varphi^{\dagger}(x)
+        &= \frac{1}{2\omega}(b(k) + a^{\dagger}(-k)\exp(-i(2\omega)t))\\
+        \int d^3x\exp(-ikx)\partial_t\varphi^{\dagger}(x)
+        &= \frac{-i}{2}(b(k) - a^{\dagger}(-k)\exp(-i(2\omega)t))\\
+    \end{aligned}
+\]
+
+So,
+\[
+    a(k) = \int d^3x\exp(-ikx)\left( \omega\varphi(x) + i\partial_t\varphi(x)\right)
+\]
+and
+\[
+    b(k) =\int d^3x\exp(-ikx)\left( \omega\varphi^{\dagger}(x) +
+    i\partial_t\varphi^{\dagger}(x)\right)
+\]
+
+\newpage
+\subsection*{Part D}
+\begin{problem}
+    Derive the commutation relations for $a(k)$ and $b(k)$ and their conjugates.
+\end{problem}
+
 
 
 \end{document}
