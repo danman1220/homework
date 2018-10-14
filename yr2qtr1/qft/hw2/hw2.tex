@@ -1,0 +1,279 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fontsize=11pt]{scrartcl} % 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{mathrsfs}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{sectsty} % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem*{problem}{Problem}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{QFT} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Homework 2 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Daniel Halmrast} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+% Problems
+\section*{Problem 1}
+Recall the $\varphi^4$ Lagrangian is given by
+\[
+    \mathscr{L} = -\frac{1}{2}\partial^{\mu}\varphi\partial_{\mu}\varphi -
+    \frac{1}{2}m^2\varphi^2 - \frac{1}{3!}g\varphi^3 -
+    \frac{1}{4!}\lambda\varphi^4
+\]
+and has an energy-momentum tensor
+\[
+    T^{\mu\nu} = \partial^{\mu}\varphi\partial^{\nu}\varphi +
+    g^{\mu\nu}\mathscr{L}
+\]
+\subsection*{Part A}
+\begin{problem}
+    Derive the equation of motion for $\varphi$ subject to the $\varphi^4$
+    Lagrangian.
+\end{problem}
+
+To calculate the equation of motion for $\varphi$, we just have to find the
+stationary points of
+\[
+    S = \int d^4x\mathscr{L} = \int d^4x
+    \left(\frac{-1}{2}\partial^{\mu}\varphi\partial_{\mu}\varphi -
+    \frac{1}{2}m^2\varphi^2 - \frac{1}{3!}g\varphi^3 -
+\frac{1}{4!}\lambda\varphi^4\right)
+\]
+
+That is, we find when $\delta S=0$. To do so, we calculate
+\[
+    \begin{aligned}
+        \delta S &= \int d^4x \delta \mathscr{L}\\
+        &=\int d^4x 
+        \left(  
+            \frac{-1}{2}\delta(\partial^{\mu}\varphi\partial_{\mu}\varphi) -
+            \frac{1}{2}m^2\delta(\varphi^2) - \frac{1}{3!}g\delta(\varphi^3) -
+            \frac{1}{4!}\lambda\delta(\varphi^4)
+        \right)\\
+        &=\int d^4x 
+        \left(  
+            \frac{-1}{2}(\partial^{\mu}\delta\varphi\partial_{\mu}\varphi +
+            \partial^{\mu}\varphi\partial_{\mu}\delta\varphi) -
+            m^2\varphi\delta\varphi - \frac{1}{2}g\varphi^3\delta\varphi -
+            \frac{1}{3!}\lambda\varphi^3\delta\varphi
+        \right)\\
+        &=\int d^4x 
+        \left(  
+            \partial^2\varphi\delta\varphi -
+            m^2\varphi\delta\varphi - \frac{1}{2}g\varphi^3\delta\varphi -
+            \frac{1}{3!}\lambda\varphi^3\delta\varphi
+        \right)\\
+        &=\int d^4x 
+        \left(  
+            \partial^2\varphi -
+            m^2\varphi - \frac{1}{2}g\varphi^3 -
+            \frac{1}{3!}\lambda\varphi^3
+        \right)\delta\varphi\\
+    \end{aligned}
+\]
+Which is zero for arbitrary variation if $
+\left(  \partial^2\varphi - m^2\varphi - \frac{1}{2}g\varphi^3 - 
+\frac{1}{3!}\lambda\varphi^3 \right)=0$. Thus, this is the equation of motion
+for $\varphi$.
+
+\newpage
+
+\subsection*{Part B}
+
+\begin{problem}
+    Show that the energy-momentum tensor $T^{\mu\nu}$ satisfies
+    $\partial_{\mu}T^{\mu\nu}=0$.
+\end{problem}
+
+This is just an exercise in direct calculation:
+\[
+    \begin{aligned}
+        \partial_{\mu}T^{\mu\nu} &=
+        \partial_{\mu}\left( \partial^{\mu}\varphi\partial^{\nu}\varphi \right)
+        +\partial_{\mu}g^{\mu\nu}\mathscr{L}\\
+        &=
+        \partial_{\mu}\partial^{\mu}\varphi\partial^{\nu}\varphi
+        +\partial^{\mu}\varphi\partial_{\mu}\partial^{\nu}\varphi
+        +\partial^{\nu}
+        \left(\frac{-1}{2}\partial^{\mu}\varphi\partial_{\mu}\varphi -
+        \frac{1}{2}m^2\varphi^2 - \frac{1}{3!}g\varphi^3 -
+        \frac{1}{4!}\lambda\varphi^4\right)\\
+        &=
+        \partial_{\mu}\partial^{\mu}\varphi\partial^{\nu}\varphi
+        +\partial^{\mu}\varphi\partial_{\mu}\partial^{\nu}\varphi
+        -\frac{1}{2}\partial^{\nu}\partial^{\mu}\varphi\partial_{\mu}\varphi 
+        -\frac{1}{2}\partial^{\mu}\varphi\partial^{\nu}\partial_{\mu}\varphi
+        -m^2\varphi\partial^{\nu}\varphi
+        -\frac{1}{2}g\varphi^2\partial^{\nu}\varphi
+        -\frac{1}{3!}\lambda\varphi^3\partial^{\nu}\varphi\\
+        &=
+        \partial_{\mu}\partial^{\mu}\varphi\partial^{\nu}\varphi
+        -m^2\varphi\partial^{\nu}\varphi
+        -\frac{1}{2}g\varphi^2\partial^{\nu}\varphi
+        -\frac{1}{3!}\lambda\varphi^3\partial^{\nu}\varphi\\
+        &=
+        \left(
+            \partial^2\varphi
+            -m^2\varphi
+            -\frac{1}{2}g\varphi^2
+            -\frac{1}{3!}\lambda\varphi^3
+        \right)\partial^{\nu}\varphi
+    \end{aligned}
+\]
+Which is clearly zero if $\varphi$ follows its equation of motion.
+
+
+\newpage
+\section*{Problem 2}
+Consider a complex scalar field $\varphi$ governed by the Lagrangian
+\[
+    \mathscr{L} = -\partial^{\mu}\varphi^{\dagger}\partial_{\mu}\varphi -
+    m^2\varphi^{\dagger}\varphi + \Omega_0
+\]
+\subsection*{Part A}
+\begin{problem}
+    Show $\varphi$ obeys the Klein-Gordon equation.
+\end{problem}
+We calculate the variation in $S = \int d^4x\mathscr{L}$ directly:
+\[
+\begin{aligned}
+    \delta S &= \int d^4x \delta\mathscr{L}\\
+    &=\int d^4x \left(
+    -\delta(\partial^{\mu}\varphi^{\dagger})\partial_{\mu}\varphi
+    -\partial^{\mu}\phi^{\dagger}\delta(\partial_{\mu}\varphi)
+    -m^2\varphi\delta\varphi^{\dagger}
+    -m^2\varphi^{\dagger}\delta\varphi\right)\\
+    &=\int d^4x \left(
+    -\partial^{\mu}\delta\varphi^{\dagger}\partial_{\mu}\varphi
+    -\partial^{\mu}\phi^{\dagger}\partial_{\mu}\delta\varphi
+    -m^2\varphi\delta\varphi^{\dagger}
+    -m^2\varphi^{\dagger}\delta\varphi\right)\\
+    &=\int d^4x \left(
+    \delta\varphi^{\dagger}\partial_{2}\varphi
+    +\partial^{2}\phi^{\dagger}\delta\varphi
+    -m^2\varphi\delta\varphi^{\dagger}
+    -m^2\varphi^{\dagger}\delta\varphi\right)\\
+    &=\int d^4x \left(
+        \left( \partial^2\varphi-m^2\varphi \right)\delta\varphi^{\dagger}
+        +\left( \partial^2\varphi^{\dagger}-m^2\varphi^{\dagger}
+        \right)\delta\varphi
+    \right)\\
+\end{aligned}
+\]
+Which is zero for arbitrary variations when both $\varphi$ and
+$\varphi^{\dagger}$ follow the Klein-Gordon equation.
+
+
+\newpage
+
+\subsection*{Part B}
+\begin{problem}
+    Find the conjugate momenta for $\varphi$ and $\varphi^{\dagger}$, and write down
+    the Hamiltonian in terms of these.
+\end{problem}
+
+We can read off the conjugate momenta easily:
+\[
+    \begin{aligned}
+        \pi(x) &= \frac{\partial\mathscr{L}}{\partial\dot{\varphi}}\\
+        &=
+        \frac{\partial}{\partial\dot{\varphi}}
+        (\partial_{\mu}\varphi^{\dagger}(x)\partial_{\mu}\varphi(x) -
+        m^2\varphi^{\dagger}(x)\varphi(x) + \Omega_0)\\
+        &= \dot{\varphi^{\dagger}}(x)
+    \end{aligned}
+\]
+and similarly
+\[
+    \pi^{\dagger}(x) = \dot{\varphi}(x)
+\]
+We write down the Hamiltonian density as
+\[
+    \mathscr{H} = \pi(x)\dot{\varphi}(x) +
+    \pi^{\dagger}(x)\dot{\varphi^{\dagger}}(x) - \mathscr{L}
+\]
+and calculate
+\[
+    \begin{aligned}
+        \mathscr{H} &= \pi(x)\dot{\varphi}(x)
+        + \pi^{\dagger}(x)\dot{\varphi^{\dagger}}(x) 
+        + \left( \partial^{\mu}\varphi^{\dagger}(x)\partial_{\mu}\varphi(x)
+        + m^2 \varphi^{\dagger}(x)\varphi(x) - \Omega_0\right)\\
+        &=\pi(x)\pi^{\dagger}(x) + \pi^{\dagger}(x)\pi(x)
+        +\partial^{0}\varphi^{\dagger}(x)\partial_{0}\varphi(x)
+        +\partial^{i}\varphi^{\dagger}(x)\partial_{i}\varphi(x)
+        +m^2\varphi^{\dagger}(x)\varphi(x) - \Omega_0\\
+        &=\pi(x)\pi^{\dagger}(x) + \pi^{\dagger}(x)\pi(x)
+        -\pi(x)\pi^{\dagger}(x)
+        +\partial^{i}\varphi^{\dagger}(x)\partial_{i}\varphi(x)
+        +m^2\varphi^{\dagger}(x)\varphi(x) - \Omega_0\\
+        &=\pi^{\dagger}(x)\pi(x)
+        +\partial^{i}\varphi^{\dagger}(x)\partial_{i}\varphi(x)
+        +m^2\varphi^{\dagger}(x)\varphi(x) - \Omega_0\\
+    \end{aligned}
+\]
+
+
+\end{document}
