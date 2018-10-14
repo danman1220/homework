@@ -375,6 +375,29 @@ and
     Derive the commutation relations for $a(k)$ and $b(k)$ and their conjugates.
 \end{problem}
 
+By conjugating, we find that
+\[
+    \begin{aligned}
+        a^{\dagger}(k) &= \int d^3x\exp(ikx)\left( \omega\varphi^{\dagger}(x) -
+        i\partial_t\varphi^{\dagger}(x)\right)\\
+                b^{\dagger}(k) &= \int d^3x\exp(ikx)\left( \omega\varphi(x) -
+                        i\partial_t\varphi(x)\right)
+    \end{aligned}
+\]
 
+So now we can calculate the commutators directly. Let's first rewrite the
+creation and annihilation operators in terms of $\varphi$ and $\pi$ instead:
+\[
+    \begin{aligned}
+        a(k) &= \int d^3x\exp(-ikx)\left( \omega\varphi(x) 
+        + i\pi^{\dagger}(x)\right)\\
+        b(k) &= \int d^3x\exp(-ikx)\left( \omega\varphi^{\dagger}(x)
+            + i\pi(x)\right)\\
+        a^{\dagger}(k) &= \int d^3x\exp(ikx)\left( \omega\varphi^{\dagger}(x) -
+            i\pi(x)\right)\\
+        b^{\dagger}(k) &= \int d^3x\exp(ikx)\left( \omega\varphi(x) -
+        i\pi^{\dagger}(x)\right)
+    \end{aligned}
+\]
 
 \end{document}
