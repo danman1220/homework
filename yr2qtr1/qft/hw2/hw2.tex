@@ -615,4 +615,243 @@ and if we set $\Omega_0$ to cancel with this value, we get
 \]
 as desired.
 
+
+\newpage
+
+\section*{Problem 3}
+\begin{problem}
+    From the previous problem, we have a conserved current
+    \[
+        J^{\mu} = -i\varphi^{\dagger}\partial^{\mu}\varphi +
+        i\varphi\partial^{\mu}\varphi^{\dagger}
+    \]
+
+    Express the charge
+    \[
+        Q = \int d^3x J^{0}
+    \]
+    in terms of $a,b$ and their conjugates.
+\end{problem}
+
+We use the substitutions
+\[
+    \begin{aligned}
+        \varphi(x) &= \int \tilde{dk}\left( a(k)\exp(ikx) +
+        b^{\dagger}(k)\exp(-ikx) \right)\\
+        \varphi^{\dagger}(x) &= \int\tilde{dk}\left( b(k)\exp(ikx) +
+        a^{\dagger}(k)\exp(-ikx) \right)\\
+        \partial^{\mu}\varphi(x) &= \int \tilde{dk}(ik^{\mu})\left(
+            a(k)\exp(ikx) - b^{\dagger}(k)\exp(-ikx) \right)\\
+            \partial^{\mu}\varphi^{\dagger}(x) &= \int\tilde{dk}(ik^{\mu})
+            \left( b(k)\exp(ikx) - a^{\dagger}(k)\exp(-ikx) \right)\\
+    \end{aligned}
+\]
+
+and calculate directly
+\[
+    \begin{aligned}
+        Q &= \int d^3x J^0\\
+        &= \int d^3x\tilde{dk}\tilde{dk'}\\
+        &(
+            (-i)(b(k)\exp(ikx) + a^{\dagger}(k)\exp(-ikx))
+            (i\omega')(a(k')\exp(ik'x) - b^{\dagger}(k')\exp(-ik'x))\\
+            &+(i)(a(k)\exp(ikx) + b^{\dagger}(k)\exp(-ikx))
+            (i\omega')(b(k')\exp(ik'x) - a^{\dagger}(k')\exp(-ik'x))
+        )\\
+        &= \int d^3x\tilde{dk}\tilde{dk'}\\
+        &(
+            \omega'(b(k)\exp(ikx) + a^{\dagger}(k)\exp(-ikx))
+            (a(k')\exp(ik'x) - b^{\dagger}(k')\exp(-ik'x))\\
+            &-(\omega')(a(k)\exp(ikx) + b^{\dagger}(k)\exp(-ikx))
+            (b(k')\exp(ik'x) - a^{\dagger}(k')\exp(-ik'x))
+        )\\
+        &= \int d^3x\tilde{dk}\tilde{dk'}\\
+        &\omega'(
+            \exp(i(k+k')x)(b(k)a(k') - a(k)b(k'))\\
+            &-\exp(i(k-k')x)(b(k)b^{\dagger}(k') - a(k)a^{\dagger}(k'))\\
+            &+\exp(i(k'-k)x)(a^{\dagger}(k)a(k') - b^{\dagger}(k)b(k'))\\
+            &-\exp(-i(k+k')x)(a^{\dagger}(k)b^{\dagger}(k') -
+            b^{\dagger}(k)a^{\dagger}(k'))
+        )
+    \end{aligned}
+\]
+
+Integrating out $d^3x$ yields
+\[
+    \begin{aligned}
+        Q &= \int \tilde{dk}\tilde{dk'}\\
+        &\omega'(2\pi)^3(
+            \delta(k+k')\exp(i(\omega+\omega')t)(b(k)a(k') - a(k)b(k'))\\
+            &-\delta(k-k')\exp(i(\omega-\omega')t)(b(k)b^{\dagger}(k') - a(k)a^{\dagger}(k'))\\
+            &+\delta(k'-k)\exp(i(\omega'-\omega)t)(a^{\dagger}(k)a(k') - b^{\dagger}(k)b(k'))\\
+            &-\delta(-k-k')\exp(-i(\omega+\omega')t)(a^{\dagger}(k)b^{\dagger}(k')
+                -
+            b^{\dagger}(k)a^{\dagger}(k'))
+        )
+    \end{aligned}
+\]
+and finally integrating out $d^3k$ we get
+\[
+    \begin{aligned}
+        Q &= \int \tilde{dk}\\
+        &\frac{1}{2}(
+            \exp(i(2\omega)t)(b(k)a(-k) - a(k)b(-k))\\
+            &-(b(k)b^{\dagger}(k) - a(k)a^{\dagger}(k))\\
+            &+(a^{\dagger}(k)a(k) - b^{\dagger}(k)b(k))\\
+            &-\exp(-i(2\omega)t)(a^{\dagger}(k)b^{\dagger}(-k) -
+            b^{\dagger}(k)a^{\dagger}(-k))
+        )\\
+        &= \int \tilde{dk}
+        \frac{1}{2}(
+            (a(k)a^{\dagger}(k) - b(k)b^{\dagger}(k))
+            +(a^{\dagger}(k)a(k) - b^{\dagger}(k)b(k))
+        )\\
+        &= \int \tilde{dk}
+        (
+            (a^{\dagger}(k)a(k) - b^{\dagger}(k)b(k))
+        )
+    \end{aligned}
+\]
+as desired. We note that this can be expressed with the number operators $N_a$
+and $N_b$ as
+\[
+    Q = N_a - N_b
+\]
+and so $a$ particles and $b$ particles have opposite equal charges.
+
+\newpage
+
+\section*{Problem 4}
+\begin{problem}
+    Consider the Lagrangian
+    \[
+        \mathscr{L} = -\frac{1}{2}\partial^{\mu}A^{\nu}\partial_{\mu}A_{\nu}
+        +\frac{1}{2}k\partial^{\nu}A^{\mu}\partial_{\mu}A_{\nu}
+        -\frac{1}{2}m^2A^{\nu}A_{\nu} + J^{\nu}A_{\nu}
+    \]
+\end{problem}
+\subsection*{Part A}
+\begin{problem}
+    Compute the variation of the action, and find the equation of motion for
+    $A^{\nu}$.
+\end{problem}
+
+We'll compute the variation of the action directly, noting that
+\[
+    \delta(\partial^{\mu}A^{\nu}) = \partial^{\mu}\delta A^{\nu}
+\]
+
+We find
+\[
+    \begin{aligned}
+        \delta S &= \int d^4x\delta\mathscr{L}\\
+        &=\int d^4x
+        (
+            -\frac{1}{2}\delta(\partial^{\mu}A^{\nu}\partial_{\mu}A_{\nu})
+            +\frac{1}{2}k\delta(\partial^{\nu}A^{\mu}\partial_{\mu}A_{\nu})
+            -\frac{1}{2}m^2\delta(A^{\nu}A_{\nu}) + J^{\nu}\delta A_{\nu}
+        )\\
+        &=\int d^4x
+        (
+            -\frac{1}{2}\partial^{\mu}\delta A^{\nu}\partial_{\mu}A_{\nu}
+            -\frac{1}{2}\partial^{\mu}A^{\nu}\partial_{\mu}\delta A_{\nu}\\
+            &+\frac{1}{2}k\partial^{\nu}\delta A^{\mu}\partial_{\mu}A_{\nu}
+            +\frac{1}{2}k\partial^{\nu}A^{\mu}\partial_{\mu}\delta A_{\nu}\\
+            &-\frac{1}{2}m^2\delta A^{\nu}A_{\nu} - \frac{1}{2}m^2A^{\nu}\delta
+            A_{\nu} + J^{\nu}\delta A_{\nu}
+        )
+    \end{aligned}
+\]
+The first two terms combine if we raise/lower indices on the second term, as
+well as the fifth and sixth terms. We do so, and we also interchange the indices
+on the third term to make $\delta A^{\mu}\to \delta A^{\nu}$.
+\[
+    \begin{aligned}
+        \delta S
+        &=\int d^4x
+        (
+            -\partial^{\mu}\delta A^{\nu}\partial_{\mu}A_{\nu}
+            +\frac{1}{2}k\partial^{\mu}\delta A^{\nu}\partial_{\nu}A_{\mu}
+            +\frac{1}{2}k\partial^{\nu}A^{\mu}\partial_{\mu}\delta A_{\nu}
+            -m^2\delta A^{\nu}A_{\nu} + J^{\nu}\delta A_{\nu}
+        )
+    \end{aligned}
+\]
+Now, if we raise/lower indices on the third term, we get
+\[
+    \begin{aligned}
+        \delta S
+        &=\int d^4x
+        (
+            -\partial^{\mu}\delta A^{\nu}\partial_{\mu}A_{\nu}
+            +k\partial^{\mu}\delta A^{\nu}\partial_{\nu}A_{\mu}
+            -m^2\delta A^{\nu}A_{\nu} + J^{\nu}\delta A_{\nu}
+        )
+    \end{aligned}
+\]
+Integrating by parts yields
+\[
+    \begin{aligned}
+        \delta S
+        &=\int d^4x
+        (
+            \delta A^{\nu}\partial^{\mu}\partial_{\mu}A_{\nu}
+            -k\delta A^{\nu}\partial^{\mu}\partial_{\nu}A_{\mu}
+            -m^2\delta A^{\nu}A_{\nu} + J^{\nu}\delta A_{\nu}
+        )\\
+        &=\int d^4x
+        (
+            \partial^2A_{\nu} - k\partial_{\nu}\partial^{\mu}A_{\mu} -
+            m^2A_{\nu} + J_{\nu}
+        )\delta A^{\nu}
+    \end{aligned}
+\]
+Which holds for arbitrary variations if the term in the parentheses is always
+zero. Thus, we have
+\[
+    -\partial^2 A_{\nu} + k\partial_{\nu}\partial^{\mu}A_{\mu} + m^2A_{\nu} =
+    J_{\nu}
+\]
+Multiplying each side by $g^{\nu\rho}$ we get
+\[
+    \begin{aligned}
+        g^{\nu\rho}(-\partial^2 A_{\nu} + m^2A_{\nu}) + 
+        kg^{\nu\rho}\partial_{\nu}\partial^{\mu}A_{\mu} &= g^{\nu\rho}J_{\nu}\\
+        g^{\nu\rho}(-\partial^2 A_{\nu} + m^2A_{\nu}) + 
+        kg^{\mu\rho}\partial_{\mu}\partial^{\nu}A_{\nu} &= J^{\rho}\\
+        \left[ g^{\nu\rho}(-\partial^2  + m^2) + 
+        k\partial^{\rho}\partial^{\nu}\right]A_{\nu} &= J^{\rho}\\
+    \end{aligned}
+\]
+ as desired.
+\newpage
+ \subsection*{Part B}
+ \begin{problem}
+     Find the equation of motion for $\partial_{\mu}A^{\mu}$.
+ \end{problem}
+
+We follow the hint and act on the equation of motion for $A$ with (changing
+$\mu$ with $\rho$)
+$\partial_{\mu}$
+\[
+    \begin{aligned}
+        \partial_{\mu}\left( g^{\nu\mu}(-\partial^2  + m^2)A_{\nu} + 
+        k\partial^{\mu}\partial^{\nu}A_{\nu}\right) &= \partial_{\mu}J^{\mu}\\
+        (-\partial^2 + m^2)\partial^{\nu}A_{\nu} +
+        k\partial_{\mu}\partial^{\mu}\partial^{\nu}A_{\nu} &=
+        \partial_{\mu}J^{\mu}
+    \end{aligned}
+\]
+Where the last equality was obtained by observing that derivatives commute with
+each other and the metric, and $g^{\mu\nu}\partial_{\mu} = \partial^{\nu}$.
+Thus, substituting $\varphi = \partial^{\nu}A_{\nu}$, we get
+\[
+    (-\partial^2 + m^2)\varphi + k\partial^2\varphi = \partial_{\mu}J^{\mu}
+\]
+and if we set $k=1$, we get the equation
+\[
+    m^2\varphi = \partial_{\mu}J^{\mu}
+\]
+as desired.
+
 \end{document}
