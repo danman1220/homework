@@ -495,8 +495,124 @@ substitutions:
             b^{\dagger}(k)\exp(-ikx) \right)\\
         \partial^i\varphi(x) &= \int \tilde{dk}(ik^i)\left( b(k)\exp(ikx) -
             a^{\dagger}(k)\exp(-ikx)\right)\\
+            \partial^i\varphi^{\dagger}(x) &= \int \tilde{dk}(ik^i)\left( a(k)\exp(ikx) -
+            b^{\dagger}(k)\exp(-ikx)\right)\\
     \end{aligned}
 \]
 
+We can now express $H$ as
+\[
+    \begin{aligned}
+        H &= \int d^3x\mathscr{H}\\
+        &=\int d^3x\left( 
+        \pi^{\dagger}(x)\pi(x)
+        +\partial^{i}\varphi^{\dagger}(x)\partial_{i}\varphi(x)
+        +m^2\varphi^{\dagger}(x)\varphi(x) - \Omega_0
+        \right)\\
+        &=\int d^3x\tilde{dk}\tilde{dk'}\\
+            &((-i\omega)\left( 
+                a(k)\exp(ikx) - b^{\dagger}(k)\exp(-ikx)
+            \right)
+            (-i\omega')\left( 
+                b(k')\exp(ik'x) - a^{\dagger}(k')\exp(-ik'x)
+            \right)\\
+            &+(ik^i)\left( 
+                a(k)\exp(ikx) - b^{\dagger}(k)\exp(-ikx)
+            \right)
+            (ik_i')\left( 
+                b(k')\exp(ik'x) - a^{\dagger}(k')\exp(-ik'x)
+            \right)\\
+            &+m^2\left( 
+                a(k)\exp(ikx)+b^{\dagger}(k)\exp(-ikx)
+            \right)
+            \left( 
+                b(k')\exp(ik'x) + a^{\dagger}(k')\exp(-ik'x)
+            \right)
+        )
+    \end{aligned}
+\]
+We collect like terms to get
+\[
+    \begin{aligned}
+        H &=
+        \int d^3x\tilde{dk}\tilde{dk'}\\
+            &(\exp(i(k+k')x)\left( 
+                (-i\omega)a(k)(-i\omega')b(k')
+                +(ik^i)a(k)(ik_i')b(k')
+                +m^2a(k)b(k')
+            \right)\\
+            &+\exp(i(k-k')x)\left( 
+                (-i\omega)a(k)(i\omega')a^{\dagger}(k)
+                +(ik^i)a(k)(-ik_i')a^{\dagger}(k')
+                +m^2a(k)a^{\dagger}(k')
+            \right)\\
+            &+\exp(i(k'-k)x)\left( 
+                (i\omega)b^{\dagger}(k)(-i\omega')b(k')
+                +(-ik^i)b^{\dagger}(k)(ik_i')b(k')
+                +m^2b^{\dagger}(k)b(k')
+            \right)\\
+            &+\exp(-i(k+k')x)\left( 
+                (i\omega)b^{\dagger}(k)(i\omega')a^{\dagger}(k')
+                +(-ik^i)b^{\dagger}(k)(-ik_i')a^{\dagger}(k')
+                +m^2b^{\dagger}(k)a^{\dagger}(k')
+            \right)
+        )
+    \end{aligned}
+\]
+Integrating out the $d^3x$ yields
+\[
+    \begin{aligned}
+        H &=
+        \int \tilde{dk}\tilde{dk'}\\
+        &(2\pi)^3(\delta(k+k')\exp(i(\omega + \omega')t)a(k)b(k')\left( 
+            -\omega\omega' - k^ik_i' + m^2
+            \right)\\
+            &+\delta(k-k')\exp(i(\omega-\omega')t)a(k)a^{\dagger}(k')\left( 
+                \omega\omega' + k^ik_i' + m^2
+            \right)\\
+            &+\delta(k'-k)\exp(i(\omega'-\omega)t)b^{\dagger}(k)b(k')\left( 
+                \omega\omega' + k^ik_i' + m^2
+            \right)\\
+            &+\delta(-k-k')\exp(-i(\omega +
+            \omega')t)b^{\dagger}(k)a^{\dagger}(k')\left( 
+                -\omega\omega' - k^ik_i' + m^2
+            \right)
+    \end{aligned}
+\]
+We then integrate out $dk'$ yielding
+\[
+\begin{aligned}
+    H &= \int \tilde{dk}\frac{1}{2\omega}\\
+    &\exp(2i\omega t)a(k)b(-k)\left( 
+        -\omega^2 + k^2 + m^2
+    \right)\\
+    &+a(k)a^{\dagger}(k)\left( 
+        \omega^2 + k^2 + m^2
+    \right)\\
+    &+b^{\dagger}(k)b(k)\left( 
+        \omega^2 + k^2 + m^2
+    \right)\\
+    &+\exp(-2i\omega t)b^{\dagger}(k)a^{\dagger}(-k)\left( 
+    -\omega^2 + k^2 + m^2
+    \right)
+\end{aligned}
+\]
+Since $\omega^2 = k^2 + m^2$, this simplifies greatly to
+\[
+    H = \int \tilde{dk}\omega\left( a(k)a^{\dagger}(k) + b^{\dagger}(k)b(k) \right)
+\]
+We've omitted the offset factor $\Omega_0$, but it can be safely added in to the
+final result. Of course, if we want the ground state to have zero energy, we
+should move the $a$ operator to the front, yielding
+\[
+    H = \int \tilde{dk}\omega\left( a^{\dagger}(k)a(k) + b^{\dagger}(k)b(k) +
+    (2\pi)^32\omega \delta(0) \right)
+\]
+and if we set $\Omega_0$ to cancel with this value, we get
+\[
+    H = \int \tilde{dk}\omega\left( a^{\dagger}(k)a(k) + b^{\dagger}(k)b(k)
+    \right)
+\]
+as desired.
 
 \end{document}
