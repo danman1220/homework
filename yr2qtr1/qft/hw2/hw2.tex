@@ -404,12 +404,99 @@ Now we can use the canonical commutation relations to derive expressions for
 $[a(k),a^{\dagger}(k')]$ and $[b(k),b^{\dagger}(k')$. We calculate:
 \[
     \begin{aligned}
-        a(k)a^{\dagger}(k') = \int d^3xd^3y\exp(-ikx)\exp(ik'y)\left( 
+        a(k)a^{\dagger}(k') &= \int d^3xd^3y\exp(-ikx)\exp(ik'y)\left( 
             \omega\varphi(x) + i\pi^{\dagger}(x)
         \right)
         \left( 
-        \omega'\varphi^{\dagger}(y) -i\pi(y)\right)
-    \end{aligned}<++>
+        \omega'\varphi^{\dagger}(y) -i\pi(y)\right)\\
+        &= 
+        \int d^3xd^3y\exp(-ikx)\exp(ik'y)\left(
+            \omega\varphi(x)\omega'\varphi^{\dagger}(y)
+            -\omega\varphi(x)i\pi(y)
+            +i\pi^{\dagger}(x)\omega'\varphi^{\dagger}(y)
+            -i\pi^{\dagger}(x)i\pi(y)
+        \right)
+    \end{aligned}
 \]
+At this point, we invoke the rules
+\[
+    \begin{aligned}
+        \left[\varphi(x),\varphi^{\dagger}(y)\right] = \left[
+        \pi(x),\pi^{\dagger}(y) \right]&= 0 &\text{Independence of fields}\\
+        [\varphi(x),\varphi(y)]=[\pi(x),\pi(y)]&=0 &\text{Canonical commutation
+        relation}\\
+        [\varphi(x),\pi(y)] = [\varphi^{\dagger}(x),\pi^{\dagger}(y)] &=
+        i\delta(x-y) &\text{Canonical commutation relation}\\
+    \end{aligned}
+\]
+to commute the $\varphi$ and $\pi$ fields (and their conjugates) past each
+other.
+Thus, we find that
+\[
+    \begin{aligned}
+        a(k)a^{\dagger}(k')
+        &= 
+        \int d^3xd^3y\exp(-ikx)\exp(ik'y)\left(
+            \omega\varphi(x)\omega'\varphi^{\dagger}(y)
+            -\omega\varphi(x)i\pi(y)
+            +i\pi^{\dagger}(x)\omega'\varphi^{\dagger}(y)
+            -i\pi^{\dagger}(x)i\pi(y)
+        \right)\\
+        &= 
+        \int d^3xd^3y\exp(-ikx)\exp(ik'y)\\
+        &(
+            \omega'\varphi^{\dagger}(y)\omega\varphi(x)
+            -(i\pi(y)\omega\varphi(x) + i\omega(i\delta(x-y)))
+            +(\omega'\varphi^{\dagger}(y)i\pi^{\dagger}(x) -
+            i\omega'(i\delta(x-y)))
+            -i\pi(y)i\pi^{\dagger}(x)
+        )\\
+        &= a^{\dagger}(k')a(k) + \int d^3xd^3y\exp(-ikx)\exp(ik'y)
+        (
+            +\omega\delta(x-y) + \omega'\delta(x-y)
+        )\\
+        &= a^{\dagger}(k')a(k) + \int d^3x\exp(-ikx)\exp(ik'x)
+        (\omega + \omega')\\
+        &= a^{\dagger}(k')a(k) + (2\pi)^{3}2\omega\delta(k-k')
+    \end{aligned}
+\]
+and so
+\[
+    \left[ a(k),a^{\dagger}(k') \right] = (2\pi)^{3}2\omega\delta(k-k')
+\]
+
+Carrying out the exact same calculation for $\left[ b(k),b^{\dagger}(k) \right]$,
+we find that (by interchanging $\varphi \leftrightarrow \varphi^{\dagger}$ and
+$\pi\leftrightarrow\pi^{\dagger}$)
+\[
+    \left[ b(k),b^{\dagger}(k') \right] = (2\pi)^{3}2\omega\delta(k-k')
+\]
+as well (since the commutators of $\varphi,\pi$ and their conjugates are
+identical).
+
+\newpage
+\subsection*{Part E}
+\begin{problem}
+    Express the Hamiltonian in terms of $a,a^{\dagger},b,b^{\dagger}$.
+\end{problem}
+
+We just need to substitute the expressions for the creation and annihilation
+operators into the expression for $H$. Namely, we have the following
+substitutions:
+\[
+    \begin{aligned}
+        \varphi(x) &= \int \tilde{dk}\left( a(k)\exp(ikx) +
+            b^{\dagger}(k)\exp(-ikx) \right)\\
+        \varphi^{\dagger}(x) &= \int\tilde{dk}\left( b(k)\exp(ikx) +
+            a^{\dagger}(k)\exp(-ikx) \right)\\
+        \pi(x) &= \int \tilde{dk}(-i\omega)\left( b(k)\exp(ikx) -
+            a^{\dagger}(k)\exp(-ikx) \right)\\
+        \pi^{\dagger}(x) &= \int \tilde{dk}(-i\omega)\left( a(k)\exp(ikx) -
+            b^{\dagger}(k)\exp(-ikx) \right)\\
+        \partial^i\varphi(x) &= \int \tilde{dk}(ik^i)\left( b(k)\exp(ikx) -
+            a^{\dagger}(k)\exp(-ikx)\right)\\
+    \end{aligned}
+\]
+
 
 \end{document}
